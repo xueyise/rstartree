@@ -43,3 +43,23 @@ bool IsContain(RSTRange& range1, RSTRange& range2)
 			return false;
 	return true;
 }
+
+
+void ComputeBoundingRectangle(RSTRange& range1,RSTRange& range2,RSTRange& boundingRange){
+	int size = (int)boundingRange.size();
+	for(int i=0;i<size;i++){
+		boundingRange[i].min = 
+			min(range1[i].min,range2[i].min);
+		boundingRange[i].max =
+			max(range1[i].max,range2[i].max);
+	}
+}
+//compute the volume of the range
+void ComputeVolume(RSTRange& range,double& vol){
+	RSTRange::iterator it = 
+		range.begin();
+	vol = 1;
+	for(;it!=range.end();it++){
+		vol = vol*(it->max-it->min);
+	}
+}

@@ -50,11 +50,18 @@ public:
 	void QuadraticSplit(RSTNode* splitNode);
 	void LinearSplit(RSTNode* splitNode);
 
-	// 选择初始成员
-	void PickSeeds(RSTNode* splitNode);
+	
+	
+	// 为split操作选取种子，采用复杂度为n^2的近似算法
+	void PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& secondSeedIndex);
+	//为split操作选取种子，采用线性复杂度的近似算法
+	void PickSeedsLinear(RSTNode* splitNode);
 
-	// 选择下个成员
-	void PickNext();
+
+	// Split算法中选择下个成员，采用平方复杂度算法
+	void PickNextQudratic();
+	// Split算法中选择下个成员，采用线性复杂度算法
+	void PickNextLinear();
 
 	// 清除R树
 	void DeconstructTree();

@@ -70,3 +70,4 @@ bool IsJoin(RSTRange& range1, RSTRange& range2);
 bool IsContain(RSTRange& range1, RSTRange& range2);
 
 // 返回由区间1扩至区间2所需增加的面积
+
