@@ -21,13 +21,16 @@ public:
 	~RSTRTree();
 
 	// 区域查询
-	bool Search(RSTRange range);
+	void Search(RSTRange& range, RSTDataSet& result, bool isContain);
+	void SearchByInter(RSTRange& range, RSTDataSet& result, RSTNode* node);// 查找与区域相交的元素
+	void SearchByContain(RSTRange& range, RSTDataSet& result, RSTNode* node);// 查找区域内的元素
+	
 	
 	// 插入数据
-	bool InsertNode(RSTData* data);
+	void InsertNode(RSTData* data);
 
 	// 根据数据选择应插入的叶子节点
-	bool ChooseLeaf(RSTData* data);
+	RSTNode* ChooseLeaf(RSTData* data);
 
 	// 插入数据后，调整树，自底向上
 	void AdjustTree(RSTNode* leafNode);

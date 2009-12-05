@@ -40,6 +40,8 @@ public:
 public:
 };
 
+typedef std::vector<RSTData> RSTDataSet;
+
 ///////////////////////////////R树节点定义///////////////////////////////////////////
 
 // R树节点类型
@@ -66,3 +68,5 @@ bool IsJoin(RSTRange& range1, RSTRange& range2);
 
 // 判断区间2是否在区间1中
 bool IsContain(RSTRange& range1, RSTRange& range2);
+
+// 返回由区间1扩至区间2所需增加的面积
