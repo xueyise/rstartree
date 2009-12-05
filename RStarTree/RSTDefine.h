@@ -64,3 +64,5 @@ struct RSTNode
 // 判断两个区间是否相交
 bool IsJoin(RSTRange& range1, RSTRange& range2);
 
+// 判断区间2是否在区间1中
+bool IsContain(RSTRange& range1, RSTRange& range2);
