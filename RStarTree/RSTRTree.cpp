@@ -25,9 +25,9 @@ void RSTRTree::SearchByContain(RSTRange& range, RSTDataSet& result, RSTNode* nod
 		// 非叶子节点情况
 		for (int i = 0; i < node->childNum; i++)
 		{
-			if (IsContain(node->childPointSet[i]->range, range))
+			if (IsContain(node->childNodeSet[i]->range, range))
 			{
-				SearchByContain(range, result, node->childPointSet[i]);
+				SearchByContain(range, result, node->childNodeSet[i]);
 			}
 		}
 	}
@@ -51,9 +51,9 @@ void RSTRTree::SearchByInter(RSTRange& range, RSTDataSet& result, RSTNode* node)
 		// 非叶子节点情况
 		for (int i = 0; i < node->childNum; i++)
 		{
-			if (IsJoin(node->childPointSet[i]->range, range))
+			if (IsJoin(node->childNodeSet[i]->range, range))
 			{
-				SearchByContain(range, result, node->childPointSet[i]);
+				SearchByContain(range, result, node->childNodeSet[i]);
 			}
 		}
 	}
@@ -79,11 +79,23 @@ void RSTRTree::InsertNode(RSTData* data)
 
 RSTNode* RSTRTree::ChooseLeaf(RSTData* data)
 {
+	int i;
 	RSTNode* node = Root;
-	double max = -1;
-	int maxChild;
+	double min = -1;
+	double temp;
+	int minChild;
 	while (node->rstNodeType != Leaf)
 	{
+		for (i = 0; i < node->childNum; i++)
+		{
+			temp = ComputeMinAdditionVolume(node->childNodeSet[i]->range, data->range);
+			if (temp < min || min == -1)
+			{
+				min = temp;
+				minChild = i;
+			}
+		}
+		node = node->childNodeSet[minChild];
 		
 	}
 	return node;

@@ -57,7 +57,7 @@ struct RSTNode
 	RSTNodeType rstNodeType;// 节点类型
 	RSTRange range;// 节点区域范围
 	RSTNode* parent;// 父节点指针
-	RSTNode** childPointSet;// 子节点指针，为指针动态数组，当类型为叶子节点是为NULL
+	RSTNode** childNodeSet;// 子节点指针，为指针动态数组，当类型为叶子节点是为NULL
 	RSTData** rstData;// 指向数据元组，当类型为非叶子节点时为NULL
 };
 
@@ -68,10 +68,6 @@ bool IsJoin(RSTRange& range1, RSTRange& range2);
 
 // 判断区间2是否在区间1中
 bool IsContain(RSTRange& range1, RSTRange& range2);
-
-// 返回由区间1扩至区间2所需增加的面积
-
-
 
 //Range相关函数
 //计算两个Range的包围盒
