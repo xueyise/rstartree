@@ -206,6 +206,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\RSTBasisFunction.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\RSTRTree.cpp"
 				>
 			</File>
