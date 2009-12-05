@@ -55,11 +55,17 @@ void ComputeBoundingRectangle(RSTRange& range1,RSTRange& range2,RSTRange& boundi
 	}
 }
 //compute the volume of the range
-void ComputeVolume(RSTRange& range,double& vol){
+double ComputeVolume(RSTRange& range){
 	RSTRange::iterator it = 
 		range.begin();
-	vol = 1;
+	double vol = 1;
 	for(;it!=range.end();it++){
 		vol = vol*(it->max-it->min);
 	}
+	return vol;
+}
+double ComputeMinAdditionVolume(RSTRange& range1,RSTRange& range2){
+	RSTRange boundingRange;
+	ComputeBoundingRectangle(range1,range2,boundingRange);
+	return ComputeVolume(boundingRange)-ComputeVolume(range1);
 }
