@@ -71,3 +71,10 @@ bool IsContain(RSTRange& range1, RSTRange& range2);
 
 // 返回由区间1扩至区间2所需增加的面积
 
+
+
+//Range相关函数
+//计算两个Range的包围盒
+void ComputeBoundingRectangle(RSTRange& range1,RSTRange& range2,RSTRange& boundingRange);
+//计算Range的大小
+void ComputeVolume(RSTRange& range,double& vol);
