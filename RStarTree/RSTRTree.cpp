@@ -107,6 +107,31 @@ void RSTRTree::AdjustTree(RSTNode* leafNode)
 }
 
 void RSTRTree::PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& secondSeedIndex){
+	//临时变量
+	int N = splitNode->childNum;
+	double d1,d2,difference,tempDiff;
+	double* pVol = new double[N];
+	RSTRange tempBoundingRange;
 	
+	//提前计算每个range的大小
+	for(int i=0;i<N;i++){
+		pVol[i] = ComputeVolume(splitNode->childNodeSet[i]->range);
+	}
 
+	//diffrence的初始值
+	difference =2.22507e-308;
+	
+	for(int i=0;i<N;i++){
+		for(int j=i+1;j<N;j++){
+			if(j==i)continue;
+			ComputeBoundingRectangle(splitNode->childNodeSet[i]->range,splitNode->childNodeSet[j]->range,tempBoundingRange);
+			tempDiff = ComputeVolume(tempBoundingRange)-pVol[i]-pVol[j];
+			if(tempDiff>difference){
+				difference = tempDiff;
+				firstSeedIndex = i;
+				secondSeedIndex = j;
+			}
+		}
+	}
+	delete pVol;
 }
