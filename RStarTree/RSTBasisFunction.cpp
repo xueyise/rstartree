@@ -7,6 +7,25 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+RSTData::RSTData() : dataType(Point), point(NULL), rectangle(NULL)
+{
+
+}
+
+RSTData::~RSTData()
+{
+	if (point)
+	{
+		delete point;
+		point = NULL;
+	}
+	if (rectangle)
+	{
+		delete rectangle;
+		rectangle = NULL;
+	}
+}
+
 // 判断两个区间是否相交
 bool IsJoin(RSTRange& range1, RSTRange& range2)
 {
