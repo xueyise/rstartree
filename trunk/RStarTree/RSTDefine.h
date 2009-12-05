@@ -77,4 +77,6 @@ bool IsContain(RSTRange& range1, RSTRange& range2);
 //计算两个Range的包围盒
 void ComputeBoundingRectangle(RSTRange& range1,RSTRange& range2,RSTRange& boundingRange);
 //计算Range的大小
-void ComputeVolume(RSTRange& range,double& vol);
+double ComputeVolume(RSTRange& range);
+//计算将range2加入到range1后所需要的最小空间
+double ComputeMinAdditionVolume(RSTRange& range1,RSTRange& range2);

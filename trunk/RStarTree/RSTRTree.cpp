@@ -93,3 +93,8 @@ void RSTRTree::AdjustTree(RSTNode* leafNode)
 {
 
 }
+
+void RSTRTree::PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& secondSeedIndex){
+	
+
+}
