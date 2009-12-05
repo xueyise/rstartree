@@ -44,6 +44,9 @@ public:
 	// 删除后，调整树，自底向上
 	void CondenseTree(RSTNode* leafNode);
 
+	// 构建一个空节点
+	RSTNode* ConstructNode(RSTNodeType nodeType);
+
 	// 节点分裂算法
 	void Split(RSTNode* splitNode);
 	void BruteForceSplit(RSTNode* splitNode);
