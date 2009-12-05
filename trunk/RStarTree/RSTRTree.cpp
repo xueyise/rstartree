@@ -109,7 +109,7 @@ void RSTRTree::AdjustTree(RSTNode* leafNode)
 void RSTRTree::PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& secondSeedIndex){
 	//ÁÙÊ±±äÁ¿
 	int N = splitNode->childNum;
-	double d1,d2,difference,tempDiff;
+	double difference,tempDiff;
 	double* pVol = new double[N];
 	RSTRange tempBoundingRange;
 	
