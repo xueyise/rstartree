@@ -135,3 +135,60 @@ void RSTRTree::PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& sec
 	}
 	delete pVol;
 }
+void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
+	//如果子节点个数小于M，则不需要进行分裂操作
+	if(splitNode->childNum<=m)return;
+	//首先选取种子元素
+	int firstSeedIndex=-1,secondSeedIndex = -1;
+	this->PickSeedsQudratic(splitNode,firstSeedIndex,secondSeedIndex);
+	if(-1==firstSeedIndex||-1==secondSeedIndex)return;
+
+	using std::vector;
+	//标识数组，用于标识里面的子节点是否还有效
+	vector<bool> isIn(splitNode->childNum);
+	int size = (int)isIn.size();
+	for(int i=0;i<size;i++)
+		isIn[i] = false;
+	
+	//生成两个新的节点，用于存放后的结果
+	newSplitNode1 = new RSTNode(M);
+	newSplitNode2 = new RSTNode(M);
+	
+	newSplitNode1->childNum = 0;
+	newSplitNode1->parent = splitNode->parent;
+	newSplitNode1->rstNodeType = splitNode->rstNodeType;
+	
+	newSplitNode2->childNum = 0;
+	newSplitNode2->parent = splitNode->parent;
+	newSplitNode2->rstNodeType = splitNode->rstNodeType;
+
+	//将种子子节点加入到两个新节点中
+
+	
+}
+void RSTRTree::PickNextQudratic(RSTNode*& splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2,vector<bool>& isIn,RSTRange& tempBoundingRange,int& index){
+	double diff = -1;
+	double tempDiff;
+	double d1,d2;
+	index = -1;
+
+	for(int i=0;i<splitNode->childNum;i++){
+		if(!isIn[i])continue;
+		//计算将当前range与第一类集合的包围盒	
+		ComputeBoundingRectangle(splitNode->childNodeSet[i]->range,newSplitNode1->range,tempBoundingRange);
+		//计算将当前range添加到第一类集合后所增加的大小
+		d1 = ComputeVolume(tempBoundingRange)-ComputeVolume(newSplitNode1->range);
+		//计算当前range与第二类集合的包围盒
+		ComputeBoundingRectangle(splitNode->childNodeSet[i]->range,newSplitNode2->range,tempBoundingRange);
+		//计算当前range添加到第二类集合后所增加的大小
+		d2 = ComputeVolume(tempBoundingRange)-ComputeVolume(newSplitNode2->range);
+		//计算D1和D2的相差值
+		tempDiff = fabs(d1-d2);
+
+		if(tempDiff>diff){
+			diff = tempDiff;
+			index = i;
+		}
+	}
+
+}
