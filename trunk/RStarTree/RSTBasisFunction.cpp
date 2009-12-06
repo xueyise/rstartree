@@ -50,6 +50,7 @@ bool IsContain(RSTRange& range1, RSTRange& range2)
 
 
 void ComputeBoundingRectangle(RSTRange& range1,RSTRange& range2,RSTRange& boundingRange){
+	boundingRange.resize(range1.size());
 	int size = (int)boundingRange.size();
 	for(int i=0;i<size;i++){
 		boundingRange[i].min = 
@@ -119,6 +120,16 @@ void RSTNode::AddData(RSTData* pData)
 	rstData[childNum] = pData;
 	childNum++;
 }
+
+void RSTNode::UpdateRange(RSTRange& range_)
+{
+	for (int i = 0; i < (int)range.size(); i++)
+	{
+		range[i].min = min(range[i].min, range_[i].min);
+		range[i].max = max(range[i].max, range_[i].max);
+	}
+}
+
 void RSTNode::deleteNode(int indexToDelete){
 	int tailIndex = childNum-1;
 	//如果删除的不是数组中的最后一个元素，做交换，然后再删除
