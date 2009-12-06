@@ -7,6 +7,8 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+///////////////////////////////数据类相关操作///////////////////////////////////////////
+
 RSTData::RSTData() : dataType(Point), point(NULL), rectangle(NULL)
 {
 
@@ -25,6 +27,8 @@ RSTData::~RSTData()
 		rectangle = NULL;
 	}
 }
+
+////////////////////////////////区间相关操作//////////////////////////////////////////
 
 // 判断两个区间是否相交
 bool IsJoin(RSTRange& range1, RSTRange& range2)
@@ -54,6 +58,7 @@ void ComputeBoundingRectangle(RSTRange& range1,RSTRange& range2,RSTRange& boundi
 			max(range1[i].max,range2[i].max);
 	}
 }
+
 //compute the volume of the range
 double ComputeVolume(RSTRange& range){
 	RSTRange::iterator it = 
@@ -64,12 +69,47 @@ double ComputeVolume(RSTRange& range){
 	}
 	return vol;
 }
+
 double ComputeMinAdditionVolume(RSTRange& range1,RSTRange& range2){
 	RSTRange boundingRange;
 	ComputeBoundingRectangle(range1,range2,boundingRange);
 	return ComputeVolume(boundingRange)-ComputeVolume(range1);
 }
-RSTNode::RSTNode(int& M):childNum(0),rstNodeType(RSTNodeType::NonLeafNode),parent(NULL),
-rstData(NULL){
+
+///////////////////////////////节点相关操作///////////////////////////////////////////
+
+RSTNode::RSTNode(int M):childNum(0),rstNodeType(NonLeafNode),parent(NULL),
+rstData(NULL)
+{
 	childNodeSet = new RSTNode*[M];
+}
+
+RSTNode::~RSTNode()
+{
+	if (childNodeSet)
+	{
+		for (int i = 0; i < childNum; i++)
+		{
+			delete childNodeSet[i];
+		}
+		delete[] childNodeSet;
+	}
+	if (rstData)
+	{
+		for (int i = 0; i < childNum; i++)
+		{
+			delete rstData[i];
+		}
+		delete[] rstData;
+	}
+	if (parent)
+	{
+		delete parent;
+	}
+}
+
+void RSTNode::AddNode(RSTNode* childNode)
+{
+	childNodeSet[childNum] = childNode;
+	childNum++;
 }
