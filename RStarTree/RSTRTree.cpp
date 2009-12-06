@@ -158,15 +158,13 @@ void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode
 	newSplitNode1 = new RSTNode(M);
 	newSplitNode2 = new RSTNode(M);
 	
-	newSplitNode1->childNum = 0;
-	newSplitNode1->parent = splitNode->parent;
-	newSplitNode1->rstNodeType = splitNode->rstNodeType;
-	
-	newSplitNode2->childNum = 0;
-	newSplitNode2->parent = splitNode->parent;
-	newSplitNode2->rstNodeType = splitNode->rstNodeType;
-
 	//将种子子节点加入到两个新节点中
+	newSplitNode1->AddChildNode(splitNode->childNodeSet[firstSeedIndex]);
+	newSplitNode2->AddChildNode(splitNode->childNodeSet[secondSeedIndex]);
+	
+	
+
+
 
 	
 }

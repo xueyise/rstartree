@@ -78,7 +78,8 @@ public:
 	void UpdateRange(RSTRange& range);// range为新加入区域
 
 	
-	void deleteNode(int indexToDelete);
+	void deleteNode(int& indexToDelete);
+	void deleteNodeWithoutReleaseMem(int& indexToDelete);
 };
 
 ////////////////////////////////多维区间操作定义//////////////////////////////////////////
