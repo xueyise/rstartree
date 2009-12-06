@@ -140,8 +140,16 @@ void RSTRTree::PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& sec
 	delete pVol;
 }
 void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
+	//
 	//如果子节点个数小于M，则不需要进行分裂操作
 	if(splitNode->childNum<=m)return;
+
+	//临时变量
+	int tempIndex;
+	double d1,d2;
+	RSTRange tempBoundingRange;
+	RSTNode* tempNewNode;
+
 	//首先选取种子元素
 	int firstSeedIndex=-1,secondSeedIndex = -1;
 	this->PickSeedsQudratic(splitNode,firstSeedIndex,secondSeedIndex);
@@ -161,17 +169,61 @@ void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode
 	//将种子子节点加入到两个新节点中
 	newSplitNode1->AddChildNode(splitNode->childNodeSet[firstSeedIndex]);
 	newSplitNode2->AddChildNode(splitNode->childNodeSet[secondSeedIndex]);
+	splitNode->deleteNodeWithoutReleaseMem(firstSeedIndex);
+	splitNode->deleteNodeWithoutReleaseMem(secondSeedIndex);
 	
-	
 
+	while(splitNode->childNum!=0){
+		//首先判断是否剩余子节点个数刚好使得某个分类满足下限
+		if((splitNode->childNum+newSplitNode1->childNum)<=m){
+			for(int i=0;i<splitNode->childNum;i++){
+				newSplitNode1->AddChildNode(splitNode->childNodeSet[i]);
+			}
+			for(int i=splitNode->childNum-1;i>=0;i--){
+				splitNode->deleteNodeWithoutReleaseMem(i);
+			}
+			continue;
+		}	
+		if((splitNode->childNum+newSplitNode2->childNum)<=m){
+			for(int i=0;i<splitNode->childNum;i++){
+				newSplitNode2->AddChildNode(splitNode->childNodeSet[i]);
+			}
+			for(int i=splitNode->childNum-1;i>=0;i--){
+				splitNode->deleteNodeWithoutReleaseMem(i);
+			}
+			continue;
+		}
+		tempIndex = -1;
+		PickNextQudratic(splitNode,newSplitNode1,newSplitNode2,isIn,
+			tempBoundingRange,tempIndex,
+			d1,d2);
+		//得到了有效的index
 
-
+		//首先判断加入到哪个分类中使得MBR增加的面积最小
+		if(d1<d2){
+			tempNewNode = newSplitNode1;
+		}else if(d1>d2){
+			tempNewNode = newSplitNode2;
+		}else if(ComputeVolume(newSplitNode1->range)<ComputeVolume(newSplitNode2->range)){
+			//如果相等则选择MBR最小的那个
+			tempNewNode = newSplitNode1;	
+		}else{
+			tempNewNode=  newSplitNode2;
+		}
+		//加入到对应的分类
+		tempNewNode->AddChildNode(splitNode->childNodeSet[tempIndex]);
+		//将其从原来的node中删除
+		splitNode->deleteNodeWithoutReleaseMem(tempIndex);
+	}
 	
 }
-void RSTRTree::PickNextQudratic(RSTNode*& splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2,vector<bool>& isIn,RSTRange& tempBoundingRange,int& index){
+void RSTRTree::PickNextQudratic(RSTNode*& splitNode,RSTNode*& newSplitNode1,
+								RSTNode*& newSplitNode2,vector<bool>& isIn,
+								RSTRange& tempBoundingRange,int& index,
+								double& d1,double& d2){
 	double diff = -1;
 	double tempDiff;
-	double d1,d2;
+	double tempD1,tempD2;
 	index = -1;
 
 	for(int i=0;i<splitNode->childNum;i++){
@@ -179,17 +231,19 @@ void RSTRTree::PickNextQudratic(RSTNode*& splitNode,RSTNode*& newSplitNode1,RSTN
 		//计算将当前range与第一类集合的包围盒	
 		ComputeBoundingRectangle(splitNode->childNodeSet[i]->range,newSplitNode1->range,tempBoundingRange);
 		//计算将当前range添加到第一类集合后所增加的大小
-		d1 = ComputeVolume(tempBoundingRange)-ComputeVolume(newSplitNode1->range);
+		tempD1 = ComputeVolume(tempBoundingRange)-ComputeVolume(newSplitNode1->range);
 		//计算当前range与第二类集合的包围盒
 		ComputeBoundingRectangle(splitNode->childNodeSet[i]->range,newSplitNode2->range,tempBoundingRange);
 		//计算当前range添加到第二类集合后所增加的大小
-		d2 = ComputeVolume(tempBoundingRange)-ComputeVolume(newSplitNode2->range);
+		tempD2 = ComputeVolume(tempBoundingRange)-ComputeVolume(newSplitNode2->range);
 		//计算D1和D2的相差值
-		tempDiff = fabs(d1-d2);
+		tempDiff = fabs(tempD1-tempD2);
 
 		if(tempDiff>diff){
 			diff = tempDiff;
 			index = i;
+			d1 = tempD1;
+			d2 = tempD2;
 		}
 	}
 
