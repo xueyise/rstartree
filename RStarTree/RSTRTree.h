@@ -56,7 +56,11 @@ public:
 
 
 	// Split算法中选择下个成员，采用平方复杂度算法
-	void PickNextQudratic(RSTNode*& splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2,vector<bool>& isIn,RSTRange& tempBoundingRange,int& index);
+	void PickNextQudratic(RSTNode*& splitNode,RSTNode*& newSplitNode1,
+								RSTNode*& newSplitNode2,vector<bool>& isIn,
+								RSTRange& tempBoundingRange,int& index,
+								double& d1,double& d2);
+
 	// Split算法中选择下个成员，采用线性复杂度算法
 	void PickNextLinear();
 
