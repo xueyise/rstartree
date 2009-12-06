@@ -75,6 +75,10 @@ void RSTRTree::SearchByInter(RSTRange& range, RSTDataSet& result, RSTNode* node)
 void RSTRTree::InsertNode(RSTData* data)
 {
 	RSTNode* insertNode = ChooseLeaf(data);
+	if (insertNode->childNum < M)
+	{
+		insertNode->AddData(data);
+	}
 }
 
 RSTNode* RSTRTree::ChooseLeaf(RSTData* data)
