@@ -69,3 +69,13 @@ double ComputeMinAdditionVolume(RSTRange& range1,RSTRange& range2){
 	ComputeBoundingRectangle(range1,range2,boundingRange);
 	return ComputeVolume(boundingRange)-ComputeVolume(range1);
 }
+RSTNode::RSTNode(int& M):childNum(0),rstNodeType(RSTNodeType::NonLeafNode),parent(NULL),
+rstData(NULL){
+	//int childNum;// 子节点个数	
+	//RSTNodeType rstNodeType;// 节点类型
+	//RSTRange range;// 节点区域范围
+	//RSTNode* parent;// 父节点指针
+	//RSTNode** childNodeSet;// 子节点指针，为指针动态数组，当类型为叶子节点是为NULL
+	//RSTData** rstData;// 指向数据元组，当类型为非叶子节点时为NULL
+	childNodeSet = new RSTNode*[M];
+}
