@@ -108,8 +108,14 @@ RSTNode::~RSTNode()
 	}
 }
 
-void RSTNode::AddNode(RSTNode* childNode)
+void RSTNode::AddChildNode(RSTNode* pChild)
 {
-	childNodeSet[childNum] = childNode;
+	childNodeSet[childNum] = pChild;
+	childNum++;
+}
+
+void RSTNode::AddData(RSTData* pData)
+{
+	rstData[childNum] = pData;
 	childNum++;
 }
