@@ -24,8 +24,7 @@ public:
 	void Search(RSTRange& range, RSTDataSet& result, bool isContain);
 	void SearchByInter(RSTRange& range, RSTDataSet& result, RSTNode* node);// 查找与区域相交的元素
 	void SearchByContain(RSTRange& range, RSTDataSet& result, RSTNode* node);// 查找区域内的元素
-	
-	
+
 	// 插入数据
 	void InsertNode(RSTData* data);
 
@@ -44,17 +43,12 @@ public:
 	// 删除后，调整树，自底向上
 	void CondenseTree(RSTNode* leafNode);
 
-	// 构建一个空节点
-	RSTNode* ConstructNode(RSTNodeType nodeType);
-
 	// 节点分裂算法
 	void Split(RSTNode* splitNode);
 	void BruteForceSplit(RSTNode* splitNode);
 	void QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
 	void LinearSplit(RSTNode* splitNode);
 
-	
-	
 	// 为split操作选取种子，采用复杂度为n^2的近似算法
 	void PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& secondSeedIndex);
 	//为split操作选取种子，采用线性复杂度的近似算法
