@@ -67,15 +67,18 @@ public:
 	RSTData** rstData;// 指向数据元组，当类型为非叶子节点时为NULL
 public:
 	RSTNode(int M = DefaultMValue);
-
-	// 添加子节点，内联函数
-	inline void AddChildNode(RSTNode* pChild);
-	inline void AddData(RSTData* pData);
-
+	
 	~RSTNode();
 
+	// 添加子节点，内联函数
+	void AddChildNode(RSTNode* pChild);
+	void AddData(RSTData* pData);
+
+	// 更新节点区域
+	void UpdateRange(RSTRange& range);// range为新加入区域
+
 	
-	inline void deleteNode(int indexToDelete);
+	void deleteNode(int indexToDelete);
 };
 
 ////////////////////////////////多维区间操作定义//////////////////////////////////////////
