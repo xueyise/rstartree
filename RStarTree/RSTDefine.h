@@ -46,6 +46,9 @@ typedef std::vector<RSTData> RSTDataSet;
 
 ///////////////////////////////R树节点定义///////////////////////////////////////////
 
+#define DefaultMValue 10
+#define DefaultmValue 5
+
 // R树节点类型
 enum RSTNodeType{
 	NonLeafNode,
@@ -63,9 +66,13 @@ public:
 	RSTNode** childNodeSet;// 子节点指针，为指针动态数组，当类型为叶子节点是为NULL
 	RSTData** rstData;// 指向数据元组，当类型为非叶子节点时为NULL
 public:
-	RSTNode(int& M);
+	RSTNode(int M = DefaultMValue);
 	bool AddChildNode(RSTNode* pChild);
 
+	~RSTNode();
+
+	// 添加子节点，内联函数
+	inline void AddNode(RSTNode* childNode);
 };
 
 ////////////////////////////////多维区间操作定义//////////////////////////////////////////
