@@ -50,7 +50,7 @@ public:
 	// 节点分裂算法
 	void Split(RSTNode* splitNode);
 	void BruteForceSplit(RSTNode* splitNode);
-	void QuadraticSplit(RSTNode* splitNode);
+	void QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
 	void LinearSplit(RSTNode* splitNode);
 
 	
@@ -62,7 +62,7 @@ public:
 
 
 	// Split算法中选择下个成员，采用平方复杂度算法
-	void PickNextQudratic();
+	void PickNextQudratic(RSTNode*& splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2,vector<bool>& isIn,RSTRange& tempBoundingRange,int& index);
 	// Split算法中选择下个成员，采用线性复杂度算法
 	void PickNextLinear();
 

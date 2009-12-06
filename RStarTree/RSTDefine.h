@@ -3,6 +3,7 @@
 //////////////////////////////////////////////////////////////////////////
 #include <vector>
 #include<limits>
+using std::vector;
 
 ///////////////////////////////区间结构定义///////////////////////////////////////////
 
@@ -63,6 +64,7 @@ public:
 	RSTData** rstData;// 指向数据元组，当类型为非叶子节点时为NULL
 public:
 	RSTNode(int& M);
+	bool AddChildNode(RSTNode* pChild);
 
 };
 
