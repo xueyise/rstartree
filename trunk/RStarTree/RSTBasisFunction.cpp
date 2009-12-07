@@ -130,6 +130,14 @@ void RSTNode::UpdateRange(RSTRange& range_)
 	}
 }
 
+int RSTNode::GetIndexOfNode(RSTNode* pChild)
+{
+	for (int i = 0; i < this->childNum; i++)
+		if (pChild == this->childNodeSet[i])
+			return i;
+	return -1;
+}
+
 void RSTNode::deleteNode(int& indexToDelete){
 	int tailIndex = childNum-1;
 	//如果删除的不是数组中的最后一个元素，做交换，然后再删除
@@ -141,6 +149,13 @@ void RSTNode::deleteNode(int& indexToDelete){
 	delete childNodeSet[tailIndex];
 	childNum--;
 }
+
+void RSTNode::deleteNode(RSTNode* pChild)
+{
+	int index = GetIndexOfNode(pChild);
+	if (index > 0) deleteNode(index);
+}
+
 void RSTNode::deleteNodeWithoutReleaseMem(int& indexToDelete){
 	
 	int tailIndex = childNum-1;
@@ -151,4 +166,10 @@ void RSTNode::deleteNodeWithoutReleaseMem(int& indexToDelete){
 		childNodeSet[tailIndex] = temp;
 	}
 	childNum--;
+}
+
+void RSTNode::deleteNodeWithoutReleaseMem(RSTNode* pChild)
+{
+	int index = GetIndexOfNode(pChild);
+	if (index > 0) deleteNode(index);
 }
