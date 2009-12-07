@@ -18,8 +18,10 @@ struct RSTInter
 typedef std::vector<RSTInter> RSTRange;
 
 ///////////////////////////////索引数据定义///////////////////////////////////////////
-#define  Point 1
-#define  Rectangle 2
+#define  Point			100
+#define  Rectangle		101
+#define  NonLeafNode	201
+#define  Leaf			202
 
 // 点结构
 typedef std::vector<double> RSTPoint;
@@ -27,12 +29,20 @@ typedef std::vector<double> RSTPoint;
 // 区域面积结构
 typedef RSTRange RSTRectangle;
 
-// 数据类
-class RSTData
+class RSTNode;
+
+class AbstractNode
 {
 public:
-	int dataType;
+	int type;
+	AbstractNode* parent;
 	RSTRange range;
+};
+
+// 数据类
+class RSTData : public AbstractNode
+{
+public:
 	RSTPoint* point;
 	RSTRectangle* rectangle;
 public:
@@ -42,49 +52,39 @@ public:
 public:
 };
 
-typedef std::vector<RSTData> RSTDataSet;
+typedef std::vector<RSTData*> RSTDataSet;
 
 ///////////////////////////////R树节点定义///////////////////////////////////////////
 
 #define DefaultMValue 10
 #define DefaultmValue 5
 
-// R树节点类型
-enum RSTNodeType{
-	NonLeafNode,
-	Leaf,
-};
-
 // 节点定义
-class RSTNode 
+class RSTNode : public AbstractNode
 {
 public:
 	int childNum;// 子节点个数	
-	RSTNodeType rstNodeType;// 节点类型
-	RSTRange range;// 节点区域范围
-	RSTNode* parent;// 父节点指针
-	RSTNode** childNodeSet;// 子节点指针，为指针动态数组，当类型为叶子节点是为NULL
-	RSTData** rstData;// 指向数据元组，当类型为非叶子节点时为NULL
+
+	AbstractNode** childSet;// 子节点指针，为指针动态数组
 public:
 	RSTNode(int M = DefaultMValue);
 	
 	~RSTNode();
 
 	// 添加子节点，内联函数
-	void AddChildNode(RSTNode* pChild);
-	void AddData(RSTData* pData);
+	void AddNode(AbstractNode* pChild);
 
 	// 更新节点区域
 	void UpdateRange(RSTRange& range);// range为新加入区域
 
 	// 判断该子节点在父节点中子节点数组的位置，由父节点调用
-	int GetIndexOfNode(RSTNode* pChild);
+	int GetIndexOfNode(AbstractNode* pChild);
 
 	// 从父节点中删除子节点，由父节点调用
-	void deleteNode(RSTNode* pChild);
+	void deleteNode(AbstractNode* pChild);
 	void deleteNode(int& indexToDelete);
 
-	void deleteNodeWithoutReleaseMem(RSTNode* pChild);
+	void deleteNodeWithoutReleaseMem(AbstractNode* pChild);
 	void deleteNodeWithoutReleaseMem(int& indexToDelete);
 };
 

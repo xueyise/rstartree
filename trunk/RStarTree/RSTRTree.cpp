@@ -20,14 +20,14 @@ void RSTRTree::Search(RSTRange& range, RSTDataSet& result, bool isContain)
 
 void RSTRTree::SearchByContain(RSTRange& range, RSTDataSet& result, RSTNode* node)
 {
-	if (node->rstNodeType != Leaf)
+	if (node->type != Leaf)
 	{
 		// 非叶子节点情况
 		for (int i = 0; i < node->childNum; i++)
 		{
-			if (IsContain(node->childNodeSet[i]->range, range))
+			if (IsContain(node->childSet[i]->range, range))
 			{
-				SearchByContain(range, result, node->childNodeSet[i]);
+				SearchByContain(range, result, (RSTNode*)node->childSet[i]);
 			}
 		}
 	}
@@ -36,9 +36,9 @@ void RSTRTree::SearchByContain(RSTRange& range, RSTDataSet& result, RSTNode* nod
 		// 叶子节点情况
 		for (int i = 0; i < node->childNum; i++)
 		{
-			if (IsContain(node->rstData[i]->range, range))
+			if (IsContain(node->childSet[i]->range, range))
 			{
-				result.push_back(*(node->rstData[i]));
+				result.push_back((RSTData*)(node->childSet[i]));
 			}
 		}
 	}
@@ -46,14 +46,14 @@ void RSTRTree::SearchByContain(RSTRange& range, RSTDataSet& result, RSTNode* nod
 
 void RSTRTree::SearchByInter(RSTRange& range, RSTDataSet& result, RSTNode* node)
 {
-	if (node->rstNodeType != Leaf)
+	if (node->type != Leaf)
 	{
 		// 非叶子节点情况
 		for (int i = 0; i < node->childNum; i++)
 		{
-			if (IsJoin(node->childNodeSet[i]->range, range))
+			if (IsJoin(node->childSet[i]->range, range))
 			{
-				SearchByContain(range, result, node->childNodeSet[i]);
+				SearchByContain(range, result, (RSTNode*)node->childSet[i]);
 			}
 		}
 	}
@@ -62,9 +62,9 @@ void RSTRTree::SearchByInter(RSTRange& range, RSTDataSet& result, RSTNode* node)
 		// 叶子节点情况
 		for (int i = 0; i < node->childNum; i++)
 		{
-			if (IsJoin(node->rstData[i]->range, range))
+			if (IsJoin(node->childSet[i]->range, range))
 			{
-				result.push_back(*(node->rstData[i]));
+				result.push_back((RSTData*)(node->childSet[i]));
 			}
 		}
 	}
@@ -77,7 +77,7 @@ void RSTRTree::InsertNode(RSTData* data)
 	RSTNode* insertNode = ChooseLeaf(data);
 	if (insertNode->childNum < M)
 	{
-		insertNode->AddData(data);
+		insertNode->AddNode((AbstractNode*)data);
 	}
 }
 
@@ -88,19 +88,18 @@ RSTNode* RSTRTree::ChooseLeaf(RSTData* data)
 	double min = -1;
 	double temp;
 	int minChild;
-	while (node->rstNodeType != Leaf)
+	while (node->type != Leaf)
 	{
 		for (i = 0; i < node->childNum; i++)
 		{
-			temp = ComputeMinAdditionVolume(node->childNodeSet[i]->range, data->range);
+			temp = ComputeMinAdditionVolume(node->childSet[i]->range, data->range);
 			if (temp < min || min == -1)
 			{
 				min = temp;
 				minChild = i;
 			}
 		}
-		node = node->childNodeSet[minChild];
-		
+		node = (RSTNode*)node->childSet[minChild];	
 	}
 	return node;
 }
@@ -119,7 +118,7 @@ void RSTRTree::PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& sec
 	
 	//提前计算每个range的大小
 	for(int i=0;i<N;i++){
-		pVol[i] = ComputeVolume(splitNode->childNodeSet[i]->range);
+		pVol[i] = ComputeVolume(splitNode->childSet[i]->range);
 	}
 
 	//diffrence的初始值
@@ -128,7 +127,7 @@ void RSTRTree::PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& sec
 	for(int i=0;i<N;i++){
 		for(int j=i+1;j<N;j++){
 			if(j==i)continue;
-			ComputeBoundingRectangle(splitNode->childNodeSet[i]->range,splitNode->childNodeSet[j]->range,tempBoundingRange);
+			ComputeBoundingRectangle(splitNode->childSet[i]->range,splitNode->childSet[j]->range,tempBoundingRange);
 			tempDiff = ComputeVolume(tempBoundingRange)-pVol[i]-pVol[j];
 			if(tempDiff>difference){
 				difference = tempDiff;
@@ -170,8 +169,8 @@ void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode
 	newSplitNode2 = new RSTNode(M);
 	
 	//将种子子节点加入到两个新节点中
-	newSplitNode1->AddChildNode(splitNode->childNodeSet[firstSeedIndex]);
-	newSplitNode2->AddChildNode(splitNode->childNodeSet[secondSeedIndex]);
+	newSplitNode1->AddNode(splitNode->childSet[firstSeedIndex]);
+	newSplitNode2->AddNode(splitNode->childSet[secondSeedIndex]);
 	splitNode->deleteNodeWithoutReleaseMem(firstSeedIndex);
 	splitNode->deleteNodeWithoutReleaseMem(secondSeedIndex);
 	
@@ -180,7 +179,7 @@ void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode
 		//首先判断是否剩余子节点个数刚好使得某个分类满足下限
 		if((splitNode->childNum+newSplitNode1->childNum)<=m){
 			for(int i=0;i<splitNode->childNum;i++){
-				newSplitNode1->AddChildNode(splitNode->childNodeSet[i]);
+				newSplitNode1->AddNode(splitNode->childSet[i]);
 			}
 			for(int i=splitNode->childNum-1;i>=0;i--){
 				splitNode->deleteNodeWithoutReleaseMem(i);
@@ -189,7 +188,7 @@ void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode
 		}	
 		if((splitNode->childNum+newSplitNode2->childNum)<=m){
 			for(int i=0;i<splitNode->childNum;i++){
-				newSplitNode2->AddChildNode(splitNode->childNodeSet[i]);
+				newSplitNode2->AddNode(splitNode->childSet[i]);
 			}
 			for(int i=splitNode->childNum-1;i>=0;i--){
 				splitNode->deleteNodeWithoutReleaseMem(i);
@@ -214,7 +213,7 @@ void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode
 			tempNewNode=  newSplitNode2;
 		}
 		//加入到对应的分类
-		tempNewNode->AddChildNode(splitNode->childNodeSet[tempIndex]);
+		tempNewNode->AddNode(splitNode->childSet[tempIndex]);
 		//将其从原来的node中删除
 		splitNode->deleteNodeWithoutReleaseMem(tempIndex);
 	}
@@ -232,11 +231,11 @@ void RSTRTree::PickNextQudratic(RSTNode*& splitNode,RSTNode*& newSplitNode1,
 	for(int i=0;i<splitNode->childNum;i++){
 		if(!isIn[i])continue;
 		//计算将当前range与第一类集合的包围盒	
-		ComputeBoundingRectangle(splitNode->childNodeSet[i]->range,newSplitNode1->range,tempBoundingRange);
+		ComputeBoundingRectangle(splitNode->childSet[i]->range,newSplitNode1->range,tempBoundingRange);
 		//计算将当前range添加到第一类集合后所增加的大小
 		tempD1 = ComputeVolume(tempBoundingRange)-ComputeVolume(newSplitNode1->range);
 		//计算当前range与第二类集合的包围盒
-		ComputeBoundingRectangle(splitNode->childNodeSet[i]->range,newSplitNode2->range,tempBoundingRange);
+		ComputeBoundingRectangle(splitNode->childSet[i]->range,newSplitNode2->range,tempBoundingRange);
 		//计算当前range添加到第二类集合后所增加的大小
 		tempD2 = ComputeVolume(tempBoundingRange)-ComputeVolume(newSplitNode2->range);
 		//计算D1和D2的相差值
