@@ -46,6 +46,9 @@ public:
 	// 节点分裂算法
 	void Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
 	void BruteForceSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
+	/////////////////////////////////////////////////////////////////////
+	///////////节点被分裂成两个新节点，原来的节点在函数结束后
+	///////////成为无效节点//////////////////////////////////////////////
 	void QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
 	void LinearSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
 
