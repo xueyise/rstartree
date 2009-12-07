@@ -44,10 +44,10 @@ public:
 	void CondenseTree(RSTNode* leafNode);
 
 	// 节点分裂算法
-	void Split(RSTNode* splitNode);
-	void BruteForceSplit(RSTNode* splitNode);
+	void Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
+	void BruteForceSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
 	void QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
-	void LinearSplit(RSTNode* splitNode);
+	void LinearSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
 
 	// 为split操作选取种子，采用复杂度为n^2的近似算法
 	void PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& secondSeedIndex);
