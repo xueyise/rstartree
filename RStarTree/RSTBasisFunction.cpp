@@ -83,7 +83,7 @@ RSTNode::RSTNode(int M):childNum(0)
 {
 	type = NonLeafNode;
 	parent = NULL;
-	childSet = new AbstractNode*[M];
+	childSet = new AbstractNode*[M + 1];
 }
 
 RSTNode::~RSTNode()
