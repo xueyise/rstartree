@@ -169,7 +169,7 @@ void RSTRTree::Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSpl
 void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
 	//
 	//如果子节点个数小于M，则不需要进行分裂操作
-	if(splitNode->childNum<=m)return;
+	if(splitNode->childNum<=M)return;
 
 	//临时变量
 	int tempIndex;
@@ -183,11 +183,6 @@ void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode
 	if(-1==firstSeedIndex||-1==secondSeedIndex)return;
 
 	using std::vector;
-	//标识数组，用于标识里面的子节点是否还有效
-	vector<bool> isIn(splitNode->childNum);
-	int size = (int)isIn.size();
-	for(int i=0;i<size;i++)
-		isIn[i] = false;
 	
 	//生成两个新的节点，用于存放后的结果
 	newSplitNode1 = new RSTNode(M);
@@ -211,7 +206,7 @@ void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode
 			}
 			continue;
 		}	
-		if((splitNode->childNum+newSplitNode2->childNum)<=m){
+		else if((splitNode->childNum+newSplitNode2->childNum)<=m){
 			for(int i=0;i<splitNode->childNum;i++){
 				newSplitNode2->AddNode(splitNode->childSet[i]);
 			}
@@ -221,7 +216,7 @@ void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode
 			continue;
 		}
 		tempIndex = -1;
-		PickNextQudratic(splitNode,newSplitNode1,newSplitNode2,isIn,
+		PickNextQudratic(splitNode,newSplitNode1,newSplitNode2,
 			tempBoundingRange,tempIndex,
 			d1,d2);
 		//得到了有效的index
@@ -245,8 +240,7 @@ void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode
 	
 }
 void RSTRTree::PickNextQudratic(RSTNode*& splitNode,RSTNode*& newSplitNode1,
-								RSTNode*& newSplitNode2,vector<bool>& isIn,
-								RSTRange& tempBoundingRange,int& index,
+								RSTNode*& newSplitNode2,RSTRange& tempBoundingRange,int& index,
 								double& d1,double& d2){
 	double diff = -1;
 	double tempDiff;
@@ -254,7 +248,6 @@ void RSTRTree::PickNextQudratic(RSTNode*& splitNode,RSTNode*& newSplitNode1,
 	index = -1;
 
 	for(int i=0;i<splitNode->childNum;i++){
-		if(!isIn[i])continue;
 		//计算将当前range与第一类集合的包围盒	
 		ComputeBoundingRectangle(splitNode->childSet[i]->range,newSplitNode1->range,tempBoundingRange);
 		//计算将当前range添加到第一类集合后所增加的大小
