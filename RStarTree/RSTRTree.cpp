@@ -139,6 +139,9 @@ void RSTRTree::PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& sec
 	}
 	delete pVol;
 }
+void RSTRTree::Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
+	QuadraticSplit(splitNode,newSplitNode1,newSplitNode2);
+}
 void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
 	//
 	//如果子节点个数小于M，则不需要进行分裂操作
