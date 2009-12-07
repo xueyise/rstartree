@@ -75,10 +75,8 @@ void RSTRTree::SearchByInter(RSTRange& range, RSTDataSet& result, RSTNode* node)
 void RSTRTree::InsertNode(RSTData* data)
 {
 	RSTNode* insertNode = ChooseLeaf(data);
-	if (insertNode->childNum < M)
-	{
-		insertNode->AddNode((AbstractNode*)data);
-	}
+	insertNode->AddNode((AbstractNode*)data);
+	AdjustTree(insertNode);
 }
 
 RSTNode* RSTRTree::ChooseLeaf(RSTData* data)
@@ -106,7 +104,34 @@ RSTNode* RSTRTree::ChooseLeaf(RSTData* data)
 
 void RSTRTree::AdjustTree(RSTNode* leafNode)
 {
-
+	RSTNode* currentNode = leafNode;
+	RSTNode* parentNode; 
+	RSTNode* splitNode1;
+	RSTNode* splitNode2;
+	while (currentNode != Root)
+	{
+		parentNode = (RSTNode*)currentNode->parent;
+		if (currentNode->childNum > M)
+		{
+			Split(currentNode, splitNode1, splitNode2);
+			parentNode->AddNode(splitNode1);
+			parentNode->AddNode(splitNode2);
+			parentNode->UpdateRange(splitNode1->range);
+			parentNode->UpdateRange(splitNode2->range);
+		}
+		parentNode->UpdateRange(currentNode->range);
+		currentNode = parentNode;
+	}
+	if (currentNode->childNum > M)
+	{
+		RSTNode* newRoot = new RSTNode(M);
+		Split(currentNode, splitNode1, splitNode2);
+		newRoot->AddNode(splitNode1);
+		newRoot->AddNode(splitNode2);
+		newRoot->UpdateRange(splitNode1->range);
+		newRoot->UpdateRange(splitNode2->range);
+		Root = newRoot;
+	}
 }
 
 void RSTRTree::PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& secondSeedIndex){
