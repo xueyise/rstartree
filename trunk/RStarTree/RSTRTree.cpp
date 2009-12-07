@@ -161,6 +161,7 @@ void RSTRTree::PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& sec
 			}
 		}
 	}
+	//ÊÍ·ÅÄÚ´æ
 	delete pVol;
 }
 void RSTRTree::Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
