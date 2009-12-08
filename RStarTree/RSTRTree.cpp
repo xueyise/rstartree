@@ -137,13 +137,14 @@ void RSTRTree::AdjustTree(RSTNode* leafNode)
 	}
 	if (currentNode->childNum > M)
 	{
-		RSTNode* newRoot = new RSTNode(M);
+		RSTNode* newRoot = new RSTNode(NonLeafNode, M);
 		Split(currentNode, splitNode1, splitNode2);
 		newRoot->AddNode(splitNode1);
 		newRoot->AddNode(splitNode2);
 		newRoot->UpdateRange(splitNode1->range);
 		newRoot->UpdateRange(splitNode2->range);
 		Root = newRoot;
+		height++;
 	}
 }
 
