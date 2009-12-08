@@ -132,7 +132,8 @@ void RSTRTree::AdjustTree(RSTNode* leafNode)
 			parentNode->UpdateRange(splitNode1->range);
 			parentNode->UpdateRange(splitNode2->range);
 		}
-		parentNode->UpdateRange(currentNode->range);
+		else
+			parentNode->UpdateRange(currentNode->range);
 		currentNode = parentNode;
 	}
 	if (currentNode->childNum > M)
