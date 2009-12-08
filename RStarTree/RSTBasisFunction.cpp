@@ -126,6 +126,15 @@ void RSTNode::AddNode(AbstractNode* pChild)
 
 void RSTNode::UpdateRange(RSTRange& range_)
 {
+	if (childNum == 0)
+	{
+		for (int i = 0; i < (int)range.size(); i++)
+		{
+			range[i].min = range_[i].min;
+			range[i].max = range_[i].max;
+		}
+		return;
+	}
 	for (int i = 0; i < (int)range.size(); i++)
 	{
 		range[i].min = min(range[i].min, range_[i].min);

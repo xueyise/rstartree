@@ -17,7 +17,7 @@ public:
 public:
 	RSTRTree() : dim(0), m(0), M(0), height(0), Root(NULL) {}
 
-	RSTRTree(int dim_, int m_, int M_) : dim(dim_), m(m_), M(M_), height(1) {Root = new RSTNode(Leaf, M);}
+	RSTRTree(int dim_, int m_, int M_) : dim(dim_), m(m_), M(M_), height(1) {Root = new RSTNode(Leaf, dim, M);}
 
 	~RSTRTree();
 
