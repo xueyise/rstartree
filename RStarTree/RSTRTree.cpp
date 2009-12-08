@@ -87,6 +87,10 @@ void RSTRTree::InsertData(RSTData* data)
 	}	
 }
 
+void RSTRTree::InsertNode(RSTNode* insertNode, int h)
+{
+}
+
 RSTNode* RSTRTree::ChooseLeaf(RSTData* data)
 {
 	if (!Root) return NULL;
@@ -286,4 +290,82 @@ void RSTRTree::PickNextQudratic(RSTNode*& splitNode,RSTNode*& newSplitNode1,
 		}
 	}
 
+}
+
+bool RSTRTree::Delete(RSTData *data)
+{
+	// 确定待删除数据所在的叶子节点
+	RSTNode* pnode = (RSTNode*)(data->parent);
+	if(!pnode)
+		return false;
+	// 删除数据
+	// ???????????????????????还没有删除数据的操作??????????????????????????????
+
+	// 调整R树
+	CondenseTree(pnode);
+
+	// 调整根节点
+	if(this->Root->childNum == 1) //如果只有一个孩子，就让这个孩子成为根
+	{
+		pnode = (RSTNode*)(this->Root->childSet[0]);
+		delete this->Root;              //??????????????root是否是new出的????????????????
+		this->Root = pnode;
+	}
+	else if(this->Root->childNum == 0) //如果没有孩子，重置这个根的信息
+	{
+		this->Root->type = Leaf;
+		for(int i = 0; i < (int)(this->Root->range.size()); ++i)
+		{
+			(this->Root->range)[i].min = 0;
+			(this->Root->range)[i].max = 0;
+		}
+	}
+
+	return true;
+}
+
+void RSTRTree::CondenseTree(RSTNode* node)
+{
+	vector<RSTNode*> nodeset;      // 用以存放被删除的结点的指针
+	vector<int> heightset;               // 用以存放被删除的结点的层数（根节点层数为1）
+	nodeset.reserve(M);
+	heightset.reserve(M);
+	RSTNode* fnode = NULL;
+	int currentheight = 0;                // 用以存放当前node结点距离叶子节点的高度，height - currentheight是当前的层数
+	while(node->parent != NULL)     //如果不是根节点就执行循环
+	{
+		if(node->childNum < m)
+		{
+			//临时删除node,不释放内存,存放到nodeset中
+			fnode = (RSTNode*)(node->parent);
+			fnode->deleteNodeWithoutReleaseMem(node);
+			nodeset.push_back(node);
+			heightset.push_back(height - currentheight);
+		}
+		else
+		{
+			//调整node节点的range
+			node->range = node->childSet[0]->range;
+			for(int i=1;i<node->childNum;++i)
+			{
+				node->UpdateRange(node->childSet[i]->range);
+			}
+		}
+		node = fnode;  // 向上继续
+		++currentheight;   // 距离叶子节点距离加1
+	}
+	//将临时删除的节点内的条目重新插入到R树中
+	for(size_t i=0;i<nodeset.size();++i)
+	{
+		if(nodeset[i]->type == Leaf)
+		{
+			for(int j=0;j<nodeset[i]->childNum;++j)
+				InsertData((RSTData*)(nodeset[i]->childSet[j]));
+		}
+		else
+		{
+			for(int j=0;j<nodeset[i]->childNum;++j)
+				InsertNode((RSTNode*)(nodeset[i]->childSet[j]),heightset[i]);
+		}
+	}
 }
