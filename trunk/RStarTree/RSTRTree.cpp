@@ -193,8 +193,9 @@ void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode
 	using std::vector;
 	
 	//生成两个新的节点，用于存放后的结果
-	newSplitNode1 = new RSTNode(M);
-	newSplitNode2 = new RSTNode(M);
+	newSplitNode1 = new RSTNode(Leaf,M);;
+	newSplitNode2 = new RSTNode(Leaf,M);;
+	
 	
 	//将种子子节点加入到两个新节点中
 	newSplitNode1->AddNode(splitNode->childSet[firstSeedIndex]);
