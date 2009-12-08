@@ -29,10 +29,14 @@ public:
 	// 插入数据
 	void InsertData(RSTData* data);
 
-	void InsertNode(RSTNode* node, int h);
+	// 插入节点，h表示node应该插入的父节点所在层数
+	void InsertNode(RSTNode* insertNode, int h);
 
 	// 根据数据选择应插入的叶子节点
 	RSTNode* ChooseLeaf(RSTData* data);
+
+	// 根据层数选择应插入的父节点
+	RSTNode* ChooseNode(RSTNode* insertNode, int h);
 
 	// 插入数据后，调整树，自底向上
 	void AdjustTree(RSTNode* leafNode);

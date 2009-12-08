@@ -80,12 +80,16 @@ void RSTRTree::SearchByInter(RSTRange& range, RSTDataSet& result, RSTNode* node)
 void RSTRTree::InsertData(RSTData* data)
 {
 	RSTNode* insertNode = ChooseLeaf(data);
-	insertNode->AddNode((AbstractNode*)data);
-	AdjustTree(insertNode);
+	if (insertNode)
+	{
+		insertNode->AddNode((AbstractNode*)data);
+		AdjustTree(insertNode);
+	}	
 }
 
 RSTNode* RSTRTree::ChooseLeaf(RSTData* data)
 {
+	if (!Root) return NULL;
 	int i;
 	RSTNode* node = Root;
 	double min = -1;
