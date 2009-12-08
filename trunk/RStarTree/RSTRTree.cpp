@@ -89,8 +89,15 @@ void RSTRTree::InsertData(RSTData* data)
 
 void RSTRTree::InsertNode(RSTNode* insertNode, int h)
 {
+	RSTNode* node = ChooseNode(insertNode, h);
+	if (node)
+	{
+		node->AddNode((AbstractNode*)insertNode);
+		AdjustTree(node);
+	}
 }
 
+// 查找待插入数据的叶子节点
 RSTNode* RSTRTree::ChooseLeaf(RSTData* data)
 {
 	if (!Root) return NULL;
@@ -111,6 +118,33 @@ RSTNode* RSTRTree::ChooseLeaf(RSTData* data)
 			}
 		}
 		node = (RSTNode*)node->childSet[minChild];	
+	}
+	return node;
+}
+
+// 查找待插入节点的父节点
+RSTNode* RSTRTree::ChooseNode(RSTNode* insertNode, int h)
+{
+	if (!Root) return NULL;
+	int i;
+	int height = 1;
+	RSTNode* node = Root;
+	double min = -1;
+	double temp;
+	int minChild;
+	while (height != h)
+	{
+		for (i = 0; i < node->childNum; i++)
+		{
+			temp = ComputeMinAdditionVolume(node->childSet[i]->range, insertNode->range);
+			if (temp < min || min == -1)
+			{
+				min = temp;
+				minChild = i;
+			}
+		}
+		node = (RSTNode*)node->childSet[minChild];	
+		height++;
 	}
 	return node;
 }
