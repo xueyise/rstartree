@@ -67,7 +67,7 @@ public:
 
 	AbstractNode** childSet;// 子节点指针，为指针动态数组
 public:
-	RSTNode(int M = DefaultMValue);
+	RSTNode(int M = DefaultMValue);// 自动声明该节点type为非叶子节点
 
 	RSTNode(int type_, int M);
 	
