@@ -27,7 +27,9 @@ public:
 	void SearchByContain(RSTRange& range, RSTDataSet& result, RSTNode* node);// 查找区域内的元素
 
 	// 插入数据
-	void InsertNode(RSTData* data);
+	void InsertData(RSTData* data);
+
+	void InsertNode(RSTNode* node, int h);
 
 	// 根据数据选择应插入的叶子节点
 	RSTNode* ChooseLeaf(RSTData* data);

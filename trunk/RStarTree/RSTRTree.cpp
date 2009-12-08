@@ -77,7 +77,7 @@ void RSTRTree::SearchByInter(RSTRange& range, RSTDataSet& result, RSTNode* node)
 
 /////////////////////////////////插入数据函数/////////////////////////////////////////
 
-void RSTRTree::InsertNode(RSTData* data)
+void RSTRTree::InsertData(RSTData* data)
 {
 	RSTNode* insertNode = ChooseLeaf(data);
 	insertNode->AddNode((AbstractNode*)data);
