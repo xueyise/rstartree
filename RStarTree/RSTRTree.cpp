@@ -293,6 +293,8 @@ void RSTRTree::PickNextQudratic(RSTNode*& splitNode,RSTNode*& newSplitNode1,
 
 }
 
+//////////////////////////////删除数据操作////////////////////////////////////////////
+
 bool RSTRTree::Delete(RSTData *data)
 {
 	// 确定待删除数据所在的叶子节点
