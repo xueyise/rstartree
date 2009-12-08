@@ -15,14 +15,14 @@ public:
 	int m;// 子节点的最小数目
 	int M;// 子节点的最大数目
 public:
-	RSTRTree() {}
+	RSTRTree() : dim(0), m(0), M(0), height(0), Root(NULL) {}
 
-	RSTRTree(int dim_, int m_, int M_) : dim(dim_), m(m_), M(M_) {}
+	RSTRTree(int dim_, int m_, int M_) : dim(dim_), m(m_), M(M_), height(1) {Root = new RSTNode(Leaf, M);}
 
 	~RSTRTree();
 
-	// 区域查询
-	void Search(RSTRange& range, RSTDataSet& result, bool isContain);
+	// 区域查询,若树结构不正确时进行查找返回false
+	bool Search(RSTRange& range, RSTDataSet& result, bool isContain);
 	void SearchByInter(RSTRange& range, RSTDataSet& result, RSTNode* node);// 查找与区域相交的元素
 	void SearchByContain(RSTRange& range, RSTDataSet& result, RSTNode* node);// 查找区域内的元素
 
@@ -45,17 +45,16 @@ public:
 	void CondenseTree(RSTNode* leafNode);
 
 	// 节点分裂算法
+	// 节点被分裂成两个新节点，原来的节点在函数结束后
+	// 成为无效节点
 	void Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
-	void BruteForceSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
-	/////////////////////////////////////////////////////////////////////
-	///////////节点被分裂成两个新节点，原来的节点在函数结束后
-	///////////成为无效节点//////////////////////////////////////////////
+	void BruteForceSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);	
 	void QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
 	void LinearSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
 
-	// 为split操作选取种子，采用复杂度为n^2的近似算法
+	// 为Split操作选取种子，采用复杂度为n^2的近似算法
 	void PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& secondSeedIndex);
-	//为split操作选取种子，采用线性复杂度的近似算法
+	// 为Split操作选取种子，采用线性复杂度的近似算法
 	void PickSeedsLinear(RSTNode* splitNode);
 
 

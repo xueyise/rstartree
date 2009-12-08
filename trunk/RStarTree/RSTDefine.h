@@ -68,6 +68,8 @@ public:
 	AbstractNode** childSet;// 子节点指针，为指针动态数组
 public:
 	RSTNode(int M = DefaultMValue);
+
+	RSTNode(int type_, int M);
 	
 	~RSTNode();
 

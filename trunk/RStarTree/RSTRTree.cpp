@@ -9,13 +9,18 @@ static char THIS_FILE[] = __FILE__;
 
 /////////////////////////////////查询函数/////////////////////////////////////////
 
-void RSTRTree::Search(RSTRange& range, RSTDataSet& result, bool isContain)
+bool RSTRTree::Search(RSTRange& range, RSTDataSet& result, bool isContain)
 {
+	if (!Root || Root->childNum == 0)
+	{
+		return false;
+	}
 	result.clear();
 	if (isContain)
 		SearchByContain(range, result, Root);
 	else
 		SearchByInter(range, result, Root);
+	return true;
 }
 
 void RSTRTree::SearchByContain(RSTRange& range, RSTDataSet& result, RSTNode* node)
@@ -133,6 +138,8 @@ void RSTRTree::AdjustTree(RSTNode* leafNode)
 		Root = newRoot;
 	}
 }
+
+///////////////////////////////节点分裂相关操作///////////////////////////////////////////
 
 void RSTRTree::PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& secondSeedIndex){
 	//临时变量
