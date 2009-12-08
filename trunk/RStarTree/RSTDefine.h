@@ -69,7 +69,9 @@ public:
 public:
 	RSTNode(int M = DefaultMValue);// 自动声明该节点type为非叶子节点
 
-	RSTNode(int type_, int M);
+	RSTNode(int dim, int M);
+
+	RSTNode(int type_, int dim, int M);
 	
 	~RSTNode();
 
