@@ -8,6 +8,7 @@
 class RSTRTree
 {
 public:
+	int height;// 树的高度
 	int dim;// 树的维度
 	RSTNode* Root;// 树的根节点
 
