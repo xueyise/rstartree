@@ -79,9 +79,16 @@ double ComputeMinAdditionVolume(RSTRange& range1,RSTRange& range2){
 
 ///////////////////////////////节点相关操作///////////////////////////////////////////
 
-RSTNode::RSTNode(int M):childNum(0)
+RSTNode::RSTNode(int M /* = DefaultMValue */):childNum(0)
 {
 	type = NonLeafNode;
+	parent = NULL;
+	childSet = new AbstractNode*[M + 1];
+}
+
+RSTNode::RSTNode(int type_, int M) : childNum(0)
+{
+	type = type_;
 	parent = NULL;
 	childSet = new AbstractNode*[M + 1];
 }
