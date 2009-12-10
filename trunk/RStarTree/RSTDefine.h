@@ -39,6 +39,7 @@ public:
 	int type;
 	AbstractNode* parent;
 	RSTRange range;
+	virtual ~AbstractNode(){}
 };
 
 // 数据类
@@ -50,7 +51,7 @@ public:
 public:
 	RSTData();
 
-	~RSTData();
+	virtual ~RSTData();
 public:
 };
 
@@ -77,8 +78,10 @@ public:
 	
 	~RSTNode();
 
-	// 添加子节点，内联函数
+	// 添加子节点，(内联函数)，添加子节点后不负责父节点（当前节点）range的更新
 	void AddNode(AbstractNode* pChild);
+	//添加子节点，并在增加后对父节点（当前节点）的range进行相应的更新
+	void AddNodeAndUpdateRange(AbstractNode* pChild);
 
 	// 更新节点区域
 	void UpdateRange(RSTRange& range);// range为新加入区域

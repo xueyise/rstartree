@@ -19,9 +19,8 @@ public:
 
 	RSTRTree(int dim_, int m_, int M_) : dim(dim_), m(m_), M(M_), height(1) {Root = new RSTNode(Leaf, dim, M);}
 
-	~RSTRTree(){
-		//TODO 该析构函数尚未实现
-	}
+	~RSTRTree();
+	void ReleaseRec(AbstractNode* pNode);
 
 	// 区域查询,若树结构不正确时进行查找返回false
 	bool Search(RSTRange& range, RSTDataSet& result, bool isContain);

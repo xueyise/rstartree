@@ -109,12 +109,13 @@ RSTNode::~RSTNode()
 		for (int i = 0; i < childNum; i++)
 		{
 			delete childSet[i];
+			childSet[i]=NULL;
 		}
 		delete[] childSet;
 	}
 	if (parent)
 	{
-		delete parent;
+		parent=NULL;
 	}
 }
 
@@ -125,10 +126,16 @@ void RSTNode::AddNode(AbstractNode* pChild)
 	//Added By BaiYanbing
 	pChild->parent = this;
 }
+void RSTNode::AddNodeAndUpdateRange(AbstractNode* pChild){
+	//Add the new child node
+	this->AddNode(pChild);
+	//update the range of current node after the child is newly added
+	this->UpdateRange(pChild->range);
+}
 
 void RSTNode::UpdateRange(RSTRange& range_)
 {
-	if (childNum == 0)
+	if (childNum == 1)
 	{
 		for (int i = 0; i < (int)range.size(); i++)
 		{
