@@ -4,7 +4,6 @@
 
 #pragma once
 
-
 class CRStarTreeView : public CView
 {
 protected: // create from serialization only
@@ -40,6 +39,8 @@ protected:
 // Generated message map functions
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnTestBuildTree();
 };
 
 #ifndef _DEBUG  // debug version in RStarTreeView.cpp

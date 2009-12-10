@@ -9,6 +9,8 @@
 #include "resource.h"       // main symbols
 
 
+
+
 // CRStarTreeApp:
 // See RStarTree.cpp for the implementation of this class
 //

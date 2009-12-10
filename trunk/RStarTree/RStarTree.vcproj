@@ -304,5 +304,9 @@
 		</File>
 	</Files>
 	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="RStarTree.rc"
+		/>
 	</Globals>
 </VisualStudioProject>
