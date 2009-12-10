@@ -105,32 +105,32 @@ void CRStarTreeView::OnTestBuildTree()
 {
 	using std::ifstream;
 	RSTRTree tree(2,2,4);
-	//tree.dim = 2;
-	//tree.m = 2;
-	//tree.M = 4;
-	//ifstream inFile("data.txt");
-	//int N;
-	//inFile>>N;
-	//
-	//for(int i=0;i<N;i++){
-	//	double x,y;
-	//	inFile>>x>>y;
-	//	//cout<<x<<" "<<y<<endl;
-	//	RSTData* pData =new RSTData();
-	//	pData->point = new RSTPoint();
-	//	pData->point->push_back(x);
-	//	pData->point->push_back(y);
-	//	
-	//	RSTInter xInter;
-	//	RSTInter yInter;
-	//	xInter.max=xInter.min = x;
-	//	yInter.max= yInter.min = y;
+	tree.dim = 2;
+	tree.m = 2;
+	tree.M = 4;
+	ifstream inFile("data.txt");
+	int N;
+	inFile>>N;
+	
+	for(int i=0;i<N;i++){
+		double x,y;
+		inFile>>x>>y;
+		//cout<<x<<" "<<y<<endl;
+		RSTData* pData =new RSTData();
+		pData->point = new RSTPoint();
+		pData->point->push_back(x);
+		pData->point->push_back(y);
+		
+		RSTInter xInter;
+		RSTInter yInter;
+		xInter.max=xInter.min = x;
+		yInter.max= yInter.min = y;
 
-	//	pData->range.push_back(xInter);
-	//	pData->range.push_back(yInter);
+		pData->range.push_back(xInter);
+		pData->range.push_back(yInter);
 
-	//	//insertData
-	//	tree.InsertData(pData);
-	//}
-	//inFile.close();
+		//insertData
+		tree.InsertData(pData);
+	}
+	inFile.close();
 }
