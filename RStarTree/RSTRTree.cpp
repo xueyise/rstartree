@@ -75,6 +75,13 @@ void RSTRTree::SearchByInter(RSTRange& range, RSTDataSet& result, RSTNode* node)
 	}
 }
 
+
+RSTRTree::~RSTRTree(){
+
+	//节点的析构函数是递归调用的
+	delete this->Root;
+}
+
 /////////////////////////////////插入数据函数/////////////////////////////////////////
 
 void RSTRTree::InsertData(RSTData* data)
@@ -182,10 +189,13 @@ void RSTRTree::AdjustTree(RSTNode* leafNode)
 	{
 		RSTNode* newRoot = new RSTNode(NonLeafNode, dim, M);
 		Split(currentNode, splitNode1, splitNode2);
-		newRoot->AddNode(splitNode1);
+		/*newRoot->AddNode(splitNode1);
 		newRoot->AddNode(splitNode2);
 		newRoot->UpdateRange(splitNode1->range);
-		newRoot->UpdateRange(splitNode2->range);
+		newRoot->UpdateRange(splitNode2->range);*/
+		//Modified By BaiYanbing
+		newRoot->AddNodeAndUpdateRange(splitNode1);
+		newRoot->AddNodeAndUpdateRange(splitNode2);
 		Root = newRoot;
 		height++;
 	}
@@ -256,17 +266,20 @@ void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode
 	
 	
 	//将种子子节点加入到两个新节点中
-	newSplitNode1->AddNode(splitNode->childSet[firstSeedIndex]);
-	newSplitNode2->AddNode(splitNode->childSet[secondSeedIndex]);
+	newSplitNode1->AddNodeAndUpdateRange(splitNode->childSet[firstSeedIndex]);
+	newSplitNode2->AddNodeAndUpdateRange(splitNode->childSet[secondSeedIndex]);
 	splitNode->deleteNodeWithoutReleaseMem(firstSeedIndex);
 	splitNode->deleteNodeWithoutReleaseMem(secondSeedIndex);
 	
 
 	while(splitNode->childNum!=0){
 		//首先判断是否剩余子节点个数刚好使得某个分类满足下限
+		
+		//TODO 还有提高效率的余地
+		//可以利用choooseNext的过程将添加后的range大小记录下来，避免重新计算
 		if((splitNode->childNum+newSplitNode1->childNum)<=m){
 			for(int i=0;i<splitNode->childNum;i++){
-				newSplitNode1->AddNode(splitNode->childSet[i]);
+				newSplitNode1->AddNodeAndUpdateRange(splitNode->childSet[i]);
 			}
 			for(int i=splitNode->childNum-1;i>=0;i--){
 				splitNode->deleteNodeWithoutReleaseMem(i);
@@ -275,7 +288,7 @@ void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode
 		}	
 		else if((splitNode->childNum+newSplitNode2->childNum)<=m){
 			for(int i=0;i<splitNode->childNum;i++){
-				newSplitNode2->AddNode(splitNode->childSet[i]);
+				newSplitNode2->AddNodeAndUpdateRange(splitNode->childSet[i]);
 			}
 			for(int i=splitNode->childNum-1;i>=0;i--){
 				splitNode->deleteNodeWithoutReleaseMem(i);
@@ -300,7 +313,7 @@ void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode
 			tempNewNode=  newSplitNode2;
 		}
 		//加入到对应的分类
-		tempNewNode->AddNode(splitNode->childSet[tempIndex]);
+		tempNewNode->AddNodeAndUpdateRange(splitNode->childSet[tempIndex]);
 		//将其从原来的node中删除
 		splitNode->deleteNodeWithoutReleaseMem(tempIndex);
 	}
