@@ -122,6 +122,8 @@ void RSTNode::AddNode(AbstractNode* pChild)
 {
 	childSet[childNum] = pChild;
 	childNum++;
+	//Added By BaiYanbing
+	pChild->parent = this;
 }
 
 void RSTNode::UpdateRange(RSTRange& range_)

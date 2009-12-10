@@ -83,6 +83,10 @@ void RSTRTree::InsertData(RSTData* data)
 	if (insertNode)
 	{
 		insertNode->AddNode((AbstractNode*)data);
+		
+		//added By BaiYanbing
+		insertNode->UpdateRange(data->range);
+		
 		AdjustTree(insertNode);
 	}	
 }
@@ -93,6 +97,10 @@ void RSTRTree::InsertNode(RSTNode* insertNode, int h)
 	if (node)
 	{
 		node->AddNode((AbstractNode*)insertNode);
+
+		//added By BaiYanbing
+		node->UpdateRange(insertNode->range);
+
 		AdjustTree(node);
 	}
 }
