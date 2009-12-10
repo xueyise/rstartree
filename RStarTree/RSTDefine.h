@@ -4,6 +4,8 @@
 #include <vector>
 #include<limits>
 using std::vector;
+#ifndef DEF_BASIC_STRUCTURE
+#define DEF_BASIC_STRUCTURE 1
 
 ///////////////////////////////区间结构定义///////////////////////////////////////////
 
@@ -107,3 +109,5 @@ void ComputeBoundingRectangle(RSTRange& range1,RSTRange& range2,RSTRange& boundi
 double ComputeVolume(RSTRange& range);
 //计算将range2加入到range1后所需要的最小空间
 double ComputeMinAdditionVolume(RSTRange& range1,RSTRange& range2);
+
+#endif

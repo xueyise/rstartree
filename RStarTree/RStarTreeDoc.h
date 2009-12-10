@@ -3,7 +3,8 @@
 
 
 #pragma once
-
+#include <fstream>
+#include "RSTRTree.h"
 
 class CRStarTreeDoc : public CDocument
 {

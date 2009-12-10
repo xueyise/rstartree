@@ -23,6 +23,7 @@ BEGIN_MESSAGE_MAP(CRStarTreeView, CView)
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
+	ON_COMMAND(ID_TEST_BUILD_TREE, &CRStarTreeView::OnTestBuildTree)
 END_MESSAGE_MAP()
 
 // CRStarTreeView construction/destruction
@@ -99,3 +100,37 @@ CRStarTreeDoc* CRStarTreeView::GetDocument() const // non-debug version is inlin
 
 
 // CRStarTreeView message handlers
+
+void CRStarTreeView::OnTestBuildTree()
+{
+	using std::ifstream;
+	RSTRTree tree(2,2,4);
+	//tree.dim = 2;
+	//tree.m = 2;
+	//tree.M = 4;
+	//ifstream inFile("data.txt");
+	//int N;
+	//inFile>>N;
+	//
+	//for(int i=0;i<N;i++){
+	//	double x,y;
+	//	inFile>>x>>y;
+	//	//cout<<x<<" "<<y<<endl;
+	//	RSTData* pData =new RSTData();
+	//	pData->point = new RSTPoint();
+	//	pData->point->push_back(x);
+	//	pData->point->push_back(y);
+	//	
+	//	RSTInter xInter;
+	//	RSTInter yInter;
+	//	xInter.max=xInter.min = x;
+	//	yInter.max= yInter.min = y;
+
+	//	pData->range.push_back(xInter);
+	//	pData->range.push_back(yInter);
+
+	//	//insertData
+	//	tree.InsertData(pData);
+	//}
+	//inFile.close();
+}
