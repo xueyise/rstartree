@@ -20,42 +20,16 @@ struct RSTInter
 typedef std::vector<RSTInter> RSTRange;
 
 ///////////////////////////////索引数据定义///////////////////////////////////////////
-#define  Point			100
-#define  Rectangle		101
+//#define  Point			100
+//#define  Rectangle		101
 #define  NonLeafNode	201
 #define  Leaf			202
 
 // 点结构
-typedef std::vector<double> RSTPoint;
+typedef vector<double> RSTPoint;
 
 // 区域面积结构
 typedef RSTRange RSTRectangle;
-
-class RSTNode;
-
-class AbstractNode
-{
-public:
-	int type;
-	AbstractNode* parent;
-	RSTRange range;
-	virtual ~AbstractNode(){}
-};
-
-// 数据类
-class RSTData : public AbstractNode
-{
-public:
-	RSTPoint* point;
-	RSTRectangle* rectangle;
-public:
-	RSTData();
-
-	virtual ~RSTData();
-public:
-};
-
-typedef std::vector<RSTData*> RSTDataSet;
 
 ///////////////////////////////R树节点定义///////////////////////////////////////////
 
@@ -63,12 +37,18 @@ typedef std::vector<RSTData*> RSTDataSet;
 #define DefaultmValue 5
 
 // 节点定义
-class RSTNode : public AbstractNode
+class RSTNode
 {
 public:
+	int type;
+
+	RSTNode* parent;
+
+	RSTRange range;
+
 	int childNum;// 子节点个数	
 
-	AbstractNode** childSet;// 子节点指针，为指针动态数组
+	RSTNode** childSet;// 子节点指针，为指针动态数组
 public:
 	RSTNode(int M = DefaultMValue);// 自动声明该节点type为非叶子节点
 
@@ -79,23 +59,25 @@ public:
 	~RSTNode();
 
 	// 添加子节点，(内联函数)，添加子节点后不负责父节点（当前节点）range的更新
-	void AddNode(AbstractNode* pChild);
-	//添加子节点，并在增加后对父节点（当前节点）的range进行相应的更新
-	void AddNodeAndUpdateRange(AbstractNode* pChild);
+	void AddNode(RSTNode* pChild);
+	// 添加子节点，并在增加后对父节点（当前节点）的range进行相应的更新
+	void AddNodeAndUpdateRange(RSTNode* pChild);
 
 	// 更新节点区域
 	void UpdateRange(RSTRange& range);// range为新加入区域
 
 	// 判断该子节点在父节点中子节点数组的位置，由父节点调用
-	int GetIndexOfNode(AbstractNode* pChild);
+	int GetIndexOfNode(RSTNode* pChild);
 
 	// 从父节点中删除子节点，由父节点调用
-	void deleteNode(AbstractNode* pChild);
+	void deleteNode(RSTNode* pChild);
 	void deleteNode(int& indexToDelete);
 
-	void deleteNodeWithoutReleaseMem(AbstractNode* pChild);
+	void deleteNodeWithoutReleaseMem(RSTNode* pChild);
 	void deleteNodeWithoutReleaseMem(int& indexToDelete);
 };
+
+typedef vector<RSTNode*> RSTNodeSet;
 
 ////////////////////////////////多维区间操作定义//////////////////////////////////////////
 

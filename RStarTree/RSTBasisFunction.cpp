@@ -7,27 +7,6 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-///////////////////////////////数据类相关操作///////////////////////////////////////////
-
-RSTData::RSTData() : point(NULL), rectangle(NULL)
-{
-	type = Point;
-}
-
-RSTData::~RSTData()
-{
-	if (point)
-	{
-		delete point;
-		point = NULL;
-	}
-	if (rectangle)
-	{
-		delete rectangle;
-		rectangle = NULL;
-	}
-}
-
 ////////////////////////////////区间相关操作//////////////////////////////////////////
 
 // 判断两个区间是否相交
@@ -83,7 +62,7 @@ RSTNode::RSTNode(int M /* = DefaultMValue */):childNum(0)
 {
 	type = NonLeafNode;
 	parent = NULL;
-	childSet = new AbstractNode*[M + 1];
+	childSet = new RSTNode*[M + 1];
 }
 
 RSTNode::RSTNode(int dim, int M)
@@ -91,7 +70,7 @@ RSTNode::RSTNode(int dim, int M)
 	type = NonLeafNode;
 	parent = NULL;
 	range.resize(dim);
-	childSet = new AbstractNode*[M + 1];
+	childSet = new RSTNode*[M + 1];
 }
 
 RSTNode::RSTNode(int type_, int dim, int M) : childNum(0)
@@ -99,7 +78,7 @@ RSTNode::RSTNode(int type_, int dim, int M) : childNum(0)
 	type = type_;
 	parent = NULL;
 	range.resize(dim);
-	childSet = new AbstractNode*[M + 1];
+	childSet = new RSTNode*[M + 1];
 }
 
 RSTNode::~RSTNode()
@@ -119,14 +98,14 @@ RSTNode::~RSTNode()
 	}
 }
 
-void RSTNode::AddNode(AbstractNode* pChild)
+void RSTNode::AddNode(RSTNode* pChild)
 {
 	childSet[childNum] = pChild;
 	childNum++;
 	//Added By BaiYanbing
 	pChild->parent = this;
 }
-void RSTNode::AddNodeAndUpdateRange(AbstractNode* pChild){
+void RSTNode::AddNodeAndUpdateRange(RSTNode* pChild){
 	//Add the new child node
 	this->AddNode(pChild);
 	//update the range of current node after the child is newly added
@@ -151,7 +130,7 @@ void RSTNode::UpdateRange(RSTRange& range_)
 	}
 }
 
-int RSTNode::GetIndexOfNode(AbstractNode* pChild)
+int RSTNode::GetIndexOfNode(RSTNode* pChild)
 {
 	for (int i = 0; i < this->childNum; i++)
 		if (pChild == this->childSet[i])
@@ -163,7 +142,7 @@ void RSTNode::deleteNode(int& indexToDelete){
 	int tailIndex = childNum-1;
 	//如果删除的不是数组中的最后一个元素，做交换，然后再删除
 	if(indexToDelete!=tailIndex){
-		AbstractNode* temp = this->childSet[indexToDelete];
+		RSTNode* temp = this->childSet[indexToDelete];
 		childSet[indexToDelete] = childSet[tailIndex];
 		childSet[tailIndex] = temp;
 	}
@@ -171,7 +150,7 @@ void RSTNode::deleteNode(int& indexToDelete){
 	childNum--;
 }
 
-void RSTNode::deleteNode(AbstractNode* pChild)
+void RSTNode::deleteNode(RSTNode* pChild)
 {
 	int index = GetIndexOfNode(pChild);
 	if (index > 0) deleteNode(index);
@@ -182,14 +161,14 @@ void RSTNode::deleteNodeWithoutReleaseMem(int& indexToDelete){
 	int tailIndex = childNum-1;
 	//如果删除的不是数组中的最后一个元素，做交换，然后再删除
 	if(indexToDelete!=tailIndex){
-		AbstractNode* temp = this->childSet[indexToDelete];
+		RSTNode* temp = this->childSet[indexToDelete];
 		childSet[indexToDelete] = childSet[tailIndex];
 		childSet[tailIndex] = temp;
 	}
 	childNum--;
 }
 
-void RSTNode::deleteNodeWithoutReleaseMem(AbstractNode* pChild)
+void RSTNode::deleteNodeWithoutReleaseMem(RSTNode* pChild)
 {
 	int index = GetIndexOfNode(pChild);
 	if (index > 0) deleteNode(index);

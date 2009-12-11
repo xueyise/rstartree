@@ -112,25 +112,25 @@ void CRStarTreeView::OnTestBuildTree()
 	int N;
 	inFile>>N;
 	
-	for(int i=0;i<N;i++){
-		double x,y;
-		inFile>>x>>y;
-		//cout<<x<<" "<<y<<endl;
-		RSTData* pData =new RSTData();
-		pData->point = new RSTPoint();
-		pData->point->push_back(x);
-		pData->point->push_back(y);
-		
-		RSTInter xInter;
-		RSTInter yInter;
-		xInter.max=xInter.min = x;
-		yInter.max= yInter.min = y;
+	//for(int i=0;i<N;i++){
+	//	double x,y;
+	//	inFile>>x>>y;
+	//	//cout<<x<<" "<<y<<endl;
+	//	RSTData* pData =new RSTData();
+	//	pData->point = new RSTPoint();
+	//	pData->point->push_back(x);
+	//	pData->point->push_back(y);
+	//	
+	//	RSTInter xInter;
+	//	RSTInter yInter;
+	//	xInter.max=xInter.min = x;
+	//	yInter.max= yInter.min = y;
 
-		pData->range.push_back(xInter);
-		pData->range.push_back(yInter);
+	//	pData->range.push_back(xInter);
+	//	pData->range.push_back(yInter);
 
-		//insertData
-		tree.InsertData(pData);
-	}
+	//	//insertData
+	//	tree.InsertData(pData);
+	//}
 	inFile.close();
 }
