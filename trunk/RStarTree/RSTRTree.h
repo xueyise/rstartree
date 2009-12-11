@@ -20,21 +20,21 @@ public:
 	RSTRTree(int dim_, int m_, int M_) : dim(dim_), m(m_), M(M_), height(1) {Root = new RSTNode(Leaf, dim, M);}
 
 	~RSTRTree();
-	void ReleaseRec(AbstractNode* pNode);
+	void ReleaseRec(RSTNode* pNode);
 
 	// 区域查询,若树结构不正确时进行查找返回false
-	bool Search(RSTRange& range, RSTDataSet& result, bool isContain);
-	void SearchByInter(RSTRange& range, RSTDataSet& result, RSTNode* node);// 查找与区域相交的元素
-	void SearchByContain(RSTRange& range, RSTDataSet& result, RSTNode* node);// 查找区域内的元素
+	bool Search(RSTRange& range, RSTNodeSet& result, bool isContain);
+	void SearchByInter(RSTRange& range, RSTNodeSet& result, RSTNode* node);// 查找与区域相交的元素
+	void SearchByContain(RSTRange& range, RSTNodeSet& result, RSTNode* node);// 查找区域内的元素
 
 	// 插入数据
-	void InsertData(RSTData* data);
+	void InsertData(RSTNode* data);
 
 	// 插入节点，h表示node应该插入的父节点所在层数
 	void InsertNode(RSTNode* insertNode, int h);
 
 	// 根据数据选择应插入的叶子节点
-	RSTNode* ChooseLeaf(RSTData* data);
+	RSTNode* ChooseLeaf(RSTNode* data);
 
 	// 根据层数选择应插入的父节点
 	RSTNode* ChooseNode(RSTNode* insertNode, int h);
@@ -43,10 +43,10 @@ public:
 	void AdjustTree(RSTNode* leafNode);
 
 	// 删除数据
-	bool Delete(RSTData* data);
+	bool Delete(RSTNode* data);
 
 	// 查找数据所在叶子节点
-	bool FindLeaf(RSTData* data);
+	bool FindLeaf(RSTNode* data);
 
 	// 删除后，调整树，自底向上
 	void CondenseTree(RSTNode* leafNode);

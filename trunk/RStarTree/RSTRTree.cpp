@@ -9,7 +9,7 @@ static char THIS_FILE[] = __FILE__;
 
 /////////////////////////////////查询函数/////////////////////////////////////////
 
-bool RSTRTree::Search(RSTRange& range, RSTDataSet& result, bool isContain)
+bool RSTRTree::Search(RSTRange& range, RSTNodeSet& result, bool isContain)
 {
 	if (!Root || Root->childNum == 0)
 	{
@@ -23,7 +23,7 @@ bool RSTRTree::Search(RSTRange& range, RSTDataSet& result, bool isContain)
 	return true;
 }
 
-void RSTRTree::SearchByContain(RSTRange& range, RSTDataSet& result, RSTNode* node)
+void RSTRTree::SearchByContain(RSTRange& range, RSTNodeSet& result, RSTNode* node)
 {
 	if (node->type != Leaf)
 	{
@@ -32,7 +32,7 @@ void RSTRTree::SearchByContain(RSTRange& range, RSTDataSet& result, RSTNode* nod
 		{
 			if (IsContain(node->childSet[i]->range, range))
 			{
-				SearchByContain(range, result, (RSTNode*)node->childSet[i]);
+				SearchByContain(range, result, node->childSet[i]);
 			}
 		}
 	}
@@ -43,13 +43,13 @@ void RSTRTree::SearchByContain(RSTRange& range, RSTDataSet& result, RSTNode* nod
 		{
 			if (IsContain(node->childSet[i]->range, range))
 			{
-				result.push_back((RSTData*)(node->childSet[i]));
+				result.push_back(node->childSet[i]);
 			}
 		}
 	}
 }
 
-void RSTRTree::SearchByInter(RSTRange& range, RSTDataSet& result, RSTNode* node)
+void RSTRTree::SearchByInter(RSTRange& range, RSTNodeSet& result, RSTNode* node)
 {
 	if (node->type != Leaf)
 	{
@@ -58,7 +58,7 @@ void RSTRTree::SearchByInter(RSTRange& range, RSTDataSet& result, RSTNode* node)
 		{
 			if (IsJoin(node->childSet[i]->range, range))
 			{
-				SearchByContain(range, result, (RSTNode*)node->childSet[i]);
+				SearchByContain(range, result, node->childSet[i]);
 			}
 		}
 	}
@@ -69,7 +69,7 @@ void RSTRTree::SearchByInter(RSTRange& range, RSTDataSet& result, RSTNode* node)
 		{
 			if (IsJoin(node->childSet[i]->range, range))
 			{
-				result.push_back((RSTData*)(node->childSet[i]));
+				result.push_back((node->childSet[i]));
 			}
 		}
 	}
@@ -84,12 +84,12 @@ RSTRTree::~RSTRTree(){
 
 /////////////////////////////////插入数据函数/////////////////////////////////////////
 
-void RSTRTree::InsertData(RSTData* data)
+void RSTRTree::InsertData(RSTNode* data)
 {
 	RSTNode* insertNode = ChooseLeaf(data);
 	if (insertNode)
 	{
-		insertNode->AddNode((AbstractNode*)data);
+		insertNode->AddNode(data);
 		
 		//added By BaiYanbing
 		insertNode->UpdateRange(data->range);
@@ -103,7 +103,7 @@ void RSTRTree::InsertNode(RSTNode* insertNode, int h)
 	RSTNode* node = ChooseNode(insertNode, h);
 	if (node)
 	{
-		node->AddNode((AbstractNode*)insertNode);
+		node->AddNode(insertNode);
 
 		//added By BaiYanbing
 		node->UpdateRange(insertNode->range);
@@ -113,7 +113,7 @@ void RSTRTree::InsertNode(RSTNode* insertNode, int h)
 }
 
 // 查找待插入数据的叶子节点
-RSTNode* RSTRTree::ChooseLeaf(RSTData* data)
+RSTNode* RSTRTree::ChooseLeaf(RSTNode* data)
 {
 	if (!Root) return NULL;
 	int i;
@@ -132,7 +132,7 @@ RSTNode* RSTRTree::ChooseLeaf(RSTData* data)
 				minChild = i;
 			}
 		}
-		node = (RSTNode*)node->childSet[minChild];	
+		node = node->childSet[minChild];	
 	}
 	return node;
 }
@@ -158,7 +158,7 @@ RSTNode* RSTRTree::ChooseNode(RSTNode* insertNode, int h)
 				minChild = i;
 			}
 		}
-		node = (RSTNode*)node->childSet[minChild];	
+		node = node->childSet[minChild];	
 		height++;
 	}
 	return node;
@@ -351,10 +351,10 @@ void RSTRTree::PickNextQudratic(RSTNode*& splitNode,RSTNode*& newSplitNode1,
 
 //////////////////////////////删除数据操作////////////////////////////////////////////
 
-bool RSTRTree::Delete(RSTData *data)
+bool RSTRTree::Delete(RSTNode *data)
 {
 	// 确定待删除数据所在的叶子节点
-	RSTNode* pnode = (RSTNode*)(data->parent);
+	RSTNode* pnode = (data->parent);
 	if(!pnode)
 		return false;
 	// 删除数据
@@ -419,12 +419,12 @@ void RSTRTree::CondenseTree(RSTNode* node)
 		if(nodeset[i]->type == Leaf)
 		{
 			for(int j=0;j<nodeset[i]->childNum;++j)
-				InsertData((RSTData*)(nodeset[i]->childSet[j]));
+				InsertData(nodeset[i]->childSet[j]);
 		}
 		else
 		{
 			for(int j=0;j<nodeset[i]->childNum;++j)
-				InsertNode((RSTNode*)(nodeset[i]->childSet[j]),heightset[i]);
+				InsertNode(nodeset[i]->childSet[j],heightset[i]);
 		}
 	}
 }
