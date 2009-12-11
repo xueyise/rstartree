@@ -2,7 +2,8 @@
 // 基本结构定义
 //////////////////////////////////////////////////////////////////////////
 #include <vector>
-#include<limits>
+#include <deque>
+#include <math.h>
 using std::vector;
 #ifndef DEF_BASIC_STRUCTURE
 #define DEF_BASIC_STRUCTURE 1
@@ -12,8 +13,14 @@ using std::vector;
 // 区间结构，表示某一维上的区间
 struct RSTInter 
 {
+public:
 	double min;
 	double max;
+	RSTInter(){}
+	RSTInter(double min1,double max1){
+		min = min1;
+		max = max1;
+	}
 };
 
 // 多维区间集合
