@@ -214,6 +214,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\RSTTestData.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration

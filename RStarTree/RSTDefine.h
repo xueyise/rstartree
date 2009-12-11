@@ -24,12 +24,13 @@ typedef std::vector<RSTInter> RSTRange;
 //#define  Rectangle		101
 #define  NonLeafNode	201
 #define  Leaf			202
+#define  Data           203
 
 // 点结构
-typedef vector<double> RSTPoint;
+//typedef vector<double> RSTPoint;
 
 // 区域面积结构
-typedef RSTRange RSTRectangle;
+//typedef RSTRange RSTRectangle;
 
 ///////////////////////////////R树节点定义///////////////////////////////////////////
 

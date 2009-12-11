@@ -8,6 +8,8 @@
 #include "RStarTreeView.h"
 
 #include "RSTDefine.h"
+#include "RSTRTree.h"
+#include "RSTTestData.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
