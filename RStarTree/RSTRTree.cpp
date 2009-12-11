@@ -67,7 +67,7 @@ void RSTRTree::SearchByInter(RSTRange& range, RSTNodeSet& result, RSTNode* node)
 		// 叶子节点情况
 		for (int i = 0; i < node->childNum; i++)
 		{
-			if (IsJoin(node->childSet[i]->range, range))
+			if (IsContain(range, node->childSet[i]->range))
 			{
 				result.push_back((node->childSet[i]));
 			}
