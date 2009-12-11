@@ -106,6 +106,27 @@ CRStarTreeDoc* CRStarTreeView::GetDocument() const // non-debug version is inlin
 void CRStarTreeView::OnTestBuildTree()
 {
 	using std::ifstream;
+	using std::ofstream;
+	using std::endl;
+	using std::vector;
+	//生成数据文件
+	
+
+	/*ofstream outFile("data.txt");
+	int N = 100;
+	outFile<<N<<endl;
+	for(int i=0;i<100;i++){
+		int x = rand()%100;
+		int y = rand()%100;
+		if(rand()%2==0)x = -x;
+		if(rand()%2==0)y = -y;
+
+		outFile<<x<<" "<<y<<endl;
+	}
+	outFile.close();*/
+
+
+
 	RSTRTree tree(2,2,4);
 	tree.dim = 2;
 	tree.m = 2;
@@ -114,25 +135,69 @@ void CRStarTreeView::OnTestBuildTree()
 	int N;
 	inFile>>N;
 	
-	//for(int i=0;i<N;i++){
-	//	double x,y;
-	//	inFile>>x>>y;
-	//	//cout<<x<<" "<<y<<endl;
-	//	RSTData* pData =new RSTData();
-	//	pData->point = new RSTPoint();
-	//	pData->point->push_back(x);
-	//	pData->point->push_back(y);
-	//	
-	//	RSTInter xInter;
-	//	RSTInter yInter;
-	//	xInter.max=xInter.min = x;
-	//	yInter.max= yInter.min = y;
+	for(int i=0;i<N;i++){
+		double x,y;
+		inFile>>x>>y;
+		//cout<<x<<" "<<y<<endl;
+		/*RSTData* pData =new RSTData();
+		pData->type = Point;
+		pData->point = new RSTPoint();
+		pData->point->push_back(x);
+		pData->point->push_back(y);
+		
+		RSTInter xInter;
+		RSTInter yInter;
+		xInter.max=xInter.min = x;
+		yInter.max= yInter.min = y;
 
-	//	pData->range.push_back(xInter);
-	//	pData->range.push_back(yInter);
+		pData->range.push_back(xInter);
+		pData->range.push_back(yInter);*/
+		RSTPoint2D* p = new RSTPoint2D();
+		p->x = x;
+		p->y = y;
+		p->GenerateRange();
 
-	//	//insertData
-	//	tree.InsertData(pData);
-	//}
+		//insertData
+		tree.InsertData(p);
+	}
 	inFile.close();
+	ofstream out("result.txt");
+
+	//print the tree
+	using std::deque;
+	deque<RSTNode*> que;
+	que.push_back(tree.Root);
+	while(!que.empty()){
+		RSTNode* pNode = que.front();
+		out<<(void*)pNode<<":";
+		out<<"Parent:"<<(void*)pNode->parent;
+		for(int i=0;i<(int)pNode->range.size();i++){
+			out<<"("<<pNode->range[i].min<<","<<pNode->range[i].max<<")";	
+		}
+		out<<endl;		
+		que.pop_front();
+		if(pNode->type==Data)continue;
+		
+		else{
+			RSTNode* pRSTNode = (RSTNode*)pNode;
+			for(int i=0;i<pRSTNode->childNum;i++)
+				que.push_back(pRSTNode->childSet[i]);
+		}
+
+		
+	}
+
+	out<<endl;
+	out<<endl;
+	RSTNodeSet resultSet;
+	RSTRange range;
+	range.push_back(RSTInter(-100,100));
+	range.push_back(RSTInter(-100,100));
+	tree.Search(range,resultSet,false);
+
+	for(int i=0;i<(int)resultSet.size();i++){
+		out<<resultSet[i]->range[0].min<<
+			" "<<resultSet[i]->range[1].min<<endl;
+	}
+	out.close();
 }
