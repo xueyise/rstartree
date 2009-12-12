@@ -194,9 +194,7 @@ void CRStarTreeView::OnTestBuildTree()
 			for(int i=0;i<pRSTNode->childNum;i++)
 				que.push_back(pRSTNode->childSet[i]);
 		}
-		
 	}
-
 	RSTNodeSet resultSet;
 	RSTRange range;
 	range.push_back(RSTInter(-100,100));
