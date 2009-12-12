@@ -171,5 +171,5 @@ void RSTNode::deleteNodeWithoutReleaseMem(int& indexToDelete){
 void RSTNode::deleteNodeWithoutReleaseMem(RSTNode* pChild)
 {
 	int index = GetIndexOfNode(pChild);
-	if (index > 0) deleteNode(index);
+	if (index >= 0) deleteNode(index);
 }
