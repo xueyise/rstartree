@@ -3,6 +3,13 @@
 
 
 #pragma once
+#ifdef TEST
+	#include <vector>
+	#include "RSTDefine.h"
+	#include "RSTRTree.h"
+	#include "RSTTestData.h"
+#endif
+
 
 class CRStarTreeView : public CView
 {
@@ -13,6 +20,10 @@ protected: // create from serialization only
 // Attributes
 public:
 	CRStarTreeDoc* GetDocument() const;
+#ifdef TEST
+	std::vector<RSTPoint2D*> pointSet;
+#endif
+	
 
 // Operations
 public:
@@ -41,6 +52,11 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnTestBuildTree();
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnTestrangesearch();
+	afx_msg void OnAddpoint();
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // debug version in RStarTreeView.cpp

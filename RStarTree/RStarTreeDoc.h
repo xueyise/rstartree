@@ -5,6 +5,13 @@
 #pragma once
 #include <fstream>
 #include "RSTRTree.h"
+#include "RSTTestData.h"
+
+#ifdef TEST
+#define RectFlag 1000
+#define DrawPoint 1001
+#define Drag 1002
+#endif
 
 class CRStarTreeDoc : public CDocument
 {
@@ -14,6 +21,14 @@ protected: // create from serialization only
 
 // Attributes
 public:
+	RSTRTree* rtree;
+#ifdef TEST
+	RSTPoint2D start;
+	RSTPoint2D end;
+	RSTPoint2D dragPoint;
+	RSTNodeSet result;
+	int flag;
+#endif
 
 // Operations
 public:
