@@ -67,6 +67,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="opengl32.lib glu32.lib glaux.lib"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -148,6 +149,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="opengl32.lib glu32.lib glaux.lib"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -194,7 +196,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\myglshow3d.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\RStarTree.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RStarTree2DShow3D.cpp"
 				>
 			</File>
 			<File
@@ -248,11 +258,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\myglshow3d.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Resource.h"
 				>
 			</File>
 			<File
 				RelativePath=".\RStarTree.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RStarTree2DShow3D.h"
 				>
 			</File>
 			<File

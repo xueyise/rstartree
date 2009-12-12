@@ -3,6 +3,8 @@
 
 
 #pragma once
+#include "RStarTree2DShow3D.h"
+
 #ifdef TEST
 	#include <vector>
 	#include "RSTDefine.h"
@@ -57,6 +59,17 @@ public:
 	afx_msg void OnAddpoint();
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+protected:
+	Tree2DShow3D m_treeshow;
+	CPoint beginpoint;
+	CPoint endpoint;
+public:
+	afx_msg void OnDestroy();
+	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // debug version in RStarTreeView.cpp
