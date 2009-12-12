@@ -15,6 +15,9 @@
 #define new DEBUG_NEW
 #endif
 
+#ifdef TEST
+RSTRTree tree(2,3,6);
+#endif
 
 // CRStarTreeView
 
@@ -31,6 +34,12 @@ BEGIN_MESSAGE_MAP(CRStarTreeView, CView)
 	ON_COMMAND(ID_ADDPOINT, &CRStarTreeView::OnAddpoint)
 	ON_WM_LBUTTONUP()
 	ON_WM_MOUSEMOVE()
+	ON_WM_CREATE()
+	ON_WM_DESTROY()
+	ON_WM_ERASEBKGND()
+	ON_WM_SIZE()
+	ON_WM_RBUTTONDOWN()
+	ON_WM_RBUTTONUP()
 END_MESSAGE_MAP()
 
 // CRStarTreeView construction/destruction
@@ -63,7 +72,7 @@ void CRStarTreeView::OnDraw(CDC* pDC)
 
 	// TODO: add draw code for native data here
 #ifdef TEST
-	CBrush redBrush, blueBrush;
+	/*CBrush redBrush, blueBrush;
 	CPen bluePen;	
 	redBrush.CreateSolidBrush(RGB(255, 0, 0));
 	blueBrush.CreateSolidBrush(RGB(0, 0, 255));
@@ -103,10 +112,13 @@ void CRStarTreeView::OnDraw(CDC* pDC)
 			RSTPoint2D* p = pointSet[i];
 			pDC->Ellipse((int)p->x - 5, (int)p->y - 5, (int)p->x + 5, (int)p->y + 5);
 		}
-	}
+	}*/
 #endif
 	
-	
+	m_treeshow.BeginDraw(pDC->m_hDC);
+	m_treeshow.drawTree();
+
+	m_treeshow.EndDraw(pDC->m_hDC);
 }
 
 
@@ -176,7 +188,6 @@ void CRStarTreeView::OnTestBuildTree()
 
 
 
-	RSTRTree tree(2,5,20);
 	ifstream inFile("data.txt");
 	int N;
 	inFile>>N;
@@ -193,6 +204,13 @@ void CRStarTreeView::OnTestBuildTree()
 		tree.InsertData(p);
 	}
 	inFile.close();
+	//build done
+	m_treeshow.settree(&tree);
+
+
+
+
+
 	ofstream out("result.txt");
 	out<<"Tree Height:"<<tree.height<<endl;
 	//print the tree
@@ -238,7 +256,7 @@ void CRStarTreeView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: Add your message handler code here and/or call default
 #ifdef TEST
-	if (GetDocument()->flag == DrawPoint)
+	/*if (GetDocument()->flag == DrawPoint)
 	{
 		RSTPoint2D* p = new RSTPoint2D();
 		p->x = point.x;
@@ -253,9 +271,11 @@ void CRStarTreeView::OnLButtonDown(UINT nFlags, CPoint point)
 		GetDocument()->start.x = point.x;
 		GetDocument()->start.y = point.y;
 		GetDocument()->flag = Drag;
-	}
+	}*/
 	
 #endif
+	beginpoint = point;
+	endpoint = point;
 
 	CView::OnLButtonDown(nFlags, point);
 }
@@ -282,7 +302,7 @@ void CRStarTreeView::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: Add your message handler code here and/or call default
 #ifdef TEST
-	if (GetDocument()->flag == Drag)
+	/*if (GetDocument()->flag == Drag)
 	{
 		GetDocument()->end.x = point.x;
 		GetDocument()->end.y = point.y;
@@ -291,8 +311,11 @@ void CRStarTreeView::OnLButtonUp(UINT nFlags, CPoint point)
 		searchRange.push_back(RSTInter(GetDocument()->start.x, GetDocument()->end.x));
 		searchRange.push_back(RSTInter(GetDocument()->start.y, GetDocument()->end.y));
 		GetDocument()->rtree->Search(searchRange, GetDocument()->result, false);
-	}
+	}*/
 #endif
+	endpoint = point;
+	m_treeshow.Translation(endpoint.x-beginpoint.x,beginpoint.y-endpoint.y,true);
+	Invalidate(TRUE);
 
 	CView::OnLButtonUp(nFlags, point);
 }
@@ -301,12 +324,93 @@ void CRStarTreeView::OnMouseMove(UINT nFlags, CPoint point)
 {
 	// TODO: Add your message handler code here and/or call default
 #ifdef TEST
-	if (GetDocument()->flag == Drag)
+	/*if (GetDocument()->flag == Drag)
 	{
 		GetDocument()->dragPoint.x = point.x;
 		GetDocument()->dragPoint.y = point.y;
 		Invalidate();
-	}
+	}*/
 #endif
+	if(nFlags == MK_LBUTTON)
+	{
+		endpoint = point;
+		m_treeshow.Translation(endpoint.x-beginpoint.x,beginpoint.y-endpoint.y,false);
+	}
+	else if(nFlags == MK_RBUTTON)
+	{
+		endpoint = point;
+		double detx = endpoint.x - beginpoint.x;
+		double dety = beginpoint.y - endpoint.y;
+		double detlength = detx*detx+dety*dety;
+		if(detlength<0.000000001)
+			return;
+		double angle = detlength/100000.0;
+		m_treeshow.Rotation((int)dety,(int)-detx,angle,false);
+	}
+	else
+		;
+
+	Invalidate(TRUE);
 	CView::OnMouseMove(nFlags, point);
+}
+
+int CRStarTreeView::OnCreate(LPCREATESTRUCT lpCreateStruct)
+{
+	if (CView::OnCreate(lpCreateStruct) == -1)
+		return -1;
+
+	// TODO:  Add your specialized creation code here
+	CClientDC dc(this);
+	m_treeshow.Initialization(dc);
+
+	return 0;
+}
+
+void CRStarTreeView::OnDestroy()
+{
+	CView::OnDestroy();
+
+	// TODO: Add your message handler code here
+	m_treeshow.Destroy();
+}
+
+BOOL CRStarTreeView::OnEraseBkgnd(CDC* pDC)
+{
+	// TODO: Add your message handler code here and/or call default
+
+	//return CView::OnEraseBkgnd(pDC);
+	return TRUE;
+}
+
+void CRStarTreeView::OnSize(UINT nType, int cx, int cy)
+{
+	CView::OnSize(nType, cx, cy);
+
+	// TODO: Add your message handler code here
+	CClientDC dc(this);
+	m_treeshow.ReSize(dc,cx,cy);
+}
+
+void CRStarTreeView::OnRButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: Add your message handler code here and/or call default
+	beginpoint = point;
+	endpoint = point;
+
+	CView::OnRButtonDown(nFlags, point);
+}
+
+void CRStarTreeView::OnRButtonUp(UINT nFlags, CPoint point)
+{
+	// TODO: Add your message handler code here and/or call default
+	endpoint = point;
+	double detx = endpoint.x - beginpoint.x;
+	double dety = beginpoint.y - endpoint.y;
+	double detlength = detx*detx+dety*dety;
+	if(detlength<0.000000001)
+		return;
+	double angle = detlength/100000.0;
+	m_treeshow.Rotation((int)dety,(int)-detx,angle,true);
+
+	CView::OnRButtonUp(nFlags, point);
 }
