@@ -269,7 +269,10 @@ void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode
 	newSplitNode1->AddNodeAndUpdateRange(splitNode->childSet[firstSeedIndex]);
 	newSplitNode2->AddNodeAndUpdateRange(splitNode->childSet[secondSeedIndex]);
 	splitNode->deleteNodeWithoutReleaseMem(firstSeedIndex);
-	splitNode->deleteNodeWithoutReleaseMem(secondSeedIndex);
+	if(secondSeedIndex==splitNode->childNum){
+		splitNode->deleteNodeWithoutReleaseMem(firstSeedIndex);
+	}
+	else splitNode->deleteNodeWithoutReleaseMem(secondSeedIndex);
 	
 
 	while(splitNode->childNum!=0){
