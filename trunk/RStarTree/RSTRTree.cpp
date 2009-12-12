@@ -59,7 +59,7 @@ void RSTRTree::SearchByInter(RSTRange& range, RSTNodeSet& result, RSTNode* node)
 		{
 			if (IsJoin(node->childSet[i]->range, range))
 			{
-				SearchByContain(range, result, node->childSet[i]);
+				SearchByInter(range, result, node->childSet[i]);
 			}
 		}
 	}
