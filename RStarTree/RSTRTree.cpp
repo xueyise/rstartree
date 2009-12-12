@@ -319,7 +319,13 @@ void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode
 		tempNewNode->AddNodeAndUpdateRange(splitNode->childSet[tempIndex]);
 		//将其从原来的node中删除
 		splitNode->deleteNodeWithoutReleaseMem(tempIndex);
+		
+		
+	}
+	if(splitNode->parent){
 		splitNode->parent->deleteNode(splitNode);
+	}else{
+		delete splitNode;
 	}
 	
 }
