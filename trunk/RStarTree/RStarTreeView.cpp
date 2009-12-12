@@ -162,7 +162,6 @@ void CRStarTreeView::OnTestBuildTree()
 	}
 	inFile.close();
 	ofstream out("result.txt");
-
 	//print the tree
 	using std::deque;
 	deque<RSTNode*> que;
@@ -170,6 +169,18 @@ void CRStarTreeView::OnTestBuildTree()
 	while(!que.empty()){
 		RSTNode* pNode = que.front();
 		out<<(void*)pNode<<":";
+		/*for(int i=0;i<pNode->childNum;i++){
+			out<<(void*)&(pNode->childSet[i])<<" ";
+		}
+		out<<endl;
+		que.pop_front();
+		if(pNode->type==Data)continue;
+		else{
+			RSTNode* pRSTNode = (RSTNode*)pNode;
+			for(int i=0;i<pRSTNode->childNum;i++){
+				que.push_back(pRSTNode->childSet[i]);
+			}
+		}*/
 		out<<"Parent:"<<(void*)pNode->parent;
 		for(int i=0;i<(int)pNode->range.size();i++){
 			out<<"("<<pNode->range[i].min<<","<<pNode->range[i].max<<")";	
@@ -183,12 +194,9 @@ void CRStarTreeView::OnTestBuildTree()
 			for(int i=0;i<pRSTNode->childNum;i++)
 				que.push_back(pRSTNode->childSet[i]);
 		}
-
 		
 	}
 
-	out<<endl;
-	out<<endl;
 	RSTNodeSet resultSet;
 	RSTRange range;
 	range.push_back(RSTInter(-100,100));
