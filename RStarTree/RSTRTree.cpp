@@ -7,6 +7,7 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+static int insertNum = 1;
 /////////////////////////////////²éÑ¯º¯Êý/////////////////////////////////////////
 
 bool RSTRTree::Search(RSTRange& range, RSTNodeSet& result, bool isContain)
@@ -87,7 +88,7 @@ RSTRTree::~RSTRTree(){
 void RSTRTree::InsertData(RSTNode* data)
 {
 #ifdef TEST
-	TRACE("\n---------------Insert node %x--------------\n", (void*)data);
+	TRACE("\n---------------%d Insert node %x--------------\n", insertNum++, (void*)data);
 #endif
 
 	RSTNode* insertNode = ChooseLeaf(data);
@@ -108,7 +109,7 @@ void RSTRTree::InsertData(RSTNode* data)
 void RSTRTree::InsertNode(RSTNode* insertNode, int h)
 {
 #ifdef TEST
-	TRACE("\n---------------Insert node %x--------------\n", (void*)insertNode);
+	TRACE("\n---------------%d Insert node %x--------------\n", insertNum++, (void*)insertNode);
 #endif
 
 	RSTNode* node = ChooseNode(insertNode, h);
@@ -139,7 +140,6 @@ RSTNode* RSTRTree::ChooseLeaf(RSTNode* data)
 		min = -1;
 		for (i = 0; i < node->childNum; i++)
 		{
-			min = -1;
 			temp = ComputeMinAdditionVolume(node->childSet[i]->range, data->range);
 			if (temp < min || min == -1)
 			{
