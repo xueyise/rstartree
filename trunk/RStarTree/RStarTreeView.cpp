@@ -162,6 +162,7 @@ void CRStarTreeView::OnTestBuildTree()
 	}
 	inFile.close();
 	ofstream out("result.txt");
+	out<<"Tree Height:"<<tree.height<<endl;
 	//print the tree
 	using std::deque;
 	deque<RSTNode*> que;
@@ -195,6 +196,10 @@ void CRStarTreeView::OnTestBuildTree()
 				que.push_back(pRSTNode->childSet[i]);
 		}
 	}
+
+	
+	/*out<<endl;
+	out<<endl;
 	RSTNodeSet resultSet;
 	RSTRange range;
 	range.push_back(RSTInter(-100,100));
@@ -206,6 +211,6 @@ void CRStarTreeView::OnTestBuildTree()
 	for(int i=0;i<(int)resultSet.size();i++){
 		out<<resultSet[i]->range[0].min<<
 			" "<<resultSet[i]->range[1].min<<endl;
-	}
+	}*/
 	out.close();
 }
