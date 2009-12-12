@@ -40,6 +40,7 @@ BEGIN_MESSAGE_MAP(CRStarTreeView, CView)
 	ON_WM_SIZE()
 	ON_WM_RBUTTONDOWN()
 	ON_WM_RBUTTONUP()
+	ON_WM_MOUSEWHEEL()
 END_MESSAGE_MAP()
 
 // CRStarTreeView construction/destruction
@@ -413,4 +414,20 @@ void CRStarTreeView::OnRButtonUp(UINT nFlags, CPoint point)
 	m_treeshow.Rotation((int)dety,(int)-detx,angle,true);
 
 	CView::OnRButtonUp(nFlags, point);
+}
+
+BOOL CRStarTreeView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
+{
+	// TODO: Add your message handler code here and/or call default
+	if(zDelta>0)
+	{
+		m_treeshow.AdjustZoomRate(1/(1+((double)zDelta/1200)));
+	}
+	else if(zDelta<0)
+	{
+		m_treeshow.AdjustZoomRate(1-((double)zDelta/1200));
+	}
+	Invalidate(TRUE);
+
+	return CView::OnMouseWheel(nFlags, zDelta, pt);
 }
