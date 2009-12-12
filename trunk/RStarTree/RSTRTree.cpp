@@ -146,6 +146,11 @@ RSTNode* RSTRTree::ChooseLeaf(RSTNode* data)
 				min = temp;
 				minChild = i;
 			}
+			else if (temp == min && ComputeVolume(node->childSet[i]->range) < ComputeVolume(node->childSet[minChild]->range)	)
+			{
+				min = temp;
+				minChild = i;
+			}
 		}
 		node = node->childSet[minChild];	
 	}
