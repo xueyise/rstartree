@@ -199,7 +199,7 @@ void CRStarTreeView::OnTestBuildTree()
 	RSTRange range;
 	range.push_back(RSTInter(-100,100));
 	range.push_back(RSTInter(-100,100));
-	tree.Search(range,resultSet,false);
+	//tree.Search(range,resultSet,false);
 
 	for(int i=0;i<(int)resultSet.size();i++){
 		out<<resultSet[i]->range[0].min<<
