@@ -86,10 +86,17 @@ RSTRTree::~RSTRTree(){
 
 void RSTRTree::InsertData(RSTNode* data)
 {
+#ifdef TEST
+	TRACE("\n---------------Insert node %x--------------\n", (void*)data);
+#endif
+
 	RSTNode* insertNode = ChooseLeaf(data);
 	if (insertNode)
 	{
 		insertNode->AddNode(data);
+#ifdef TEST
+		TRACE("Add %x to %x\n", (void*)data, (void*)insertNode);
+#endif
 		
 		//added By BaiYanbing
 		insertNode->UpdateRange(data->range);
@@ -100,11 +107,17 @@ void RSTRTree::InsertData(RSTNode* data)
 
 void RSTRTree::InsertNode(RSTNode* insertNode, int h)
 {
+#ifdef TEST
+	TRACE("\n---------------Insert node %x--------------\n", (void*)insertNode);
+#endif
+
 	RSTNode* node = ChooseNode(insertNode, h);
 	if (node)
 	{
 		node->AddNode(insertNode);
-
+#ifdef TEST
+		TRACE("Add %x to %x\n", (void*)insertNode, (void*)node);
+#endif
 		//added By BaiYanbing
 		node->UpdateRange(insertNode->range);
 
@@ -126,6 +139,7 @@ RSTNode* RSTRTree::ChooseLeaf(RSTNode* data)
 		min = -1;
 		for (i = 0; i < node->childNum; i++)
 		{
+			min = -1;
 			temp = ComputeMinAdditionVolume(node->childSet[i]->range, data->range);
 			if (temp < min || min == -1)
 			{
@@ -152,6 +166,7 @@ RSTNode* RSTRTree::ChooseNode(RSTNode* insertNode, int h)
 	{
 		for (i = 0; i < node->childNum; i++)
 		{
+			min = -1;
 			temp = ComputeMinAdditionVolume(node->childSet[i]->range, insertNode->range);
 			if (temp < min || min == -1)
 			{
@@ -177,8 +192,17 @@ void RSTRTree::AdjustTree(RSTNode* leafNode)
 		if (currentNode->childNum > M)
 		{
 			Split(currentNode, splitNode1, splitNode2);
+#ifdef TEST
+			TRACE("Split %x to %x and %x\n", (void*)currentNode, (void*)splitNode1, (void*)splitNode2);
+#endif
 			parentNode->AddNode(splitNode1);
+#ifdef TEST
+			TRACE("Add %x to %x\n", (void*)splitNode1, (void*)parentNode);
+#endif
 			parentNode->AddNode(splitNode2);
+#ifdef TEST
+			TRACE("Add %x to %x\n", (void*)splitNode2, (void*)parentNode);
+#endif
 			parentNode->UpdateRange(splitNode1->range);
 			parentNode->UpdateRange(splitNode2->range);
 		}
@@ -190,13 +214,22 @@ void RSTRTree::AdjustTree(RSTNode* leafNode)
 	{
 		RSTNode* newRoot = new RSTNode(NonLeafNode, dim, M);
 		Split(currentNode, splitNode1, splitNode2);
+#ifdef TEST
+		TRACE("Split %x to %x and %x\n", (void*)currentNode, (void*)splitNode1, (void*)splitNode2);
+#endif
 		/*newRoot->AddNode(splitNode1);
 		newRoot->AddNode(splitNode2);
 		newRoot->UpdateRange(splitNode1->range);
 		newRoot->UpdateRange(splitNode2->range);*/
 		//Modified By BaiYanbing
 		newRoot->AddNodeAndUpdateRange(splitNode1);
+#ifdef TEST
+		TRACE("Add %x to %x\n", (void*)splitNode1, (void*)newRoot);
+#endif
 		newRoot->AddNodeAndUpdateRange(splitNode2);
+#ifdef TEST
+		TRACE("Add %x to %x\n", (void*)splitNode2, (void*)newRoot);
+#endif
 		Root = newRoot;
 		height++;
 	}

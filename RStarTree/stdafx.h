@@ -54,7 +54,7 @@
 #include "afx.h"
 #endif
 
-
+#define TEST
 
 
 
