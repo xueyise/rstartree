@@ -68,7 +68,7 @@ void CRStarTreeView::OnDraw(CDC* pDC)
 	redBrush.CreateSolidBrush(RGB(255, 0, 0));
 	blueBrush.CreateSolidBrush(RGB(0, 0, 255));
 	pDC->SelectObject(redBrush);
-	for (int i = 0; i < pointSet.size(); i++)
+	for (size_t i = 0; i < pointSet.size(); i++)
 	{
 		RSTPoint2D* p = pointSet[i];
 		pDC->Ellipse((int)p->x - 5, (int)p->y - 5, (int)p->x + 5, (int)p->y + 5);
@@ -97,7 +97,7 @@ void CRStarTreeView::OnDraw(CDC* pDC)
 	}
 	if (GetDocument()->result.size() > 0)
 	{
-		for (int i = 0; i < GetDocument()->result.size(); i++)
+		for (size_t i = 0; i < GetDocument()->result.size(); i++)
 		{
 			pDC->SelectObject(blueBrush);
 			RSTPoint2D* p = pointSet[i];
