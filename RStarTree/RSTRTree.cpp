@@ -123,6 +123,7 @@ RSTNode* RSTRTree::ChooseLeaf(RSTNode* data)
 	int minChild;
 	while (node->type != Leaf)
 	{
+		min = -1;
 		for (i = 0; i < node->childNum; i++)
 		{
 			temp = ComputeMinAdditionVolume(node->childSet[i]->range, data->range);
