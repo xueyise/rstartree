@@ -250,8 +250,11 @@ void RSTRTree::PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& sec
 	}
 
 	//diffrenceµÄ³õÊ¼Öµ
-	difference =2.22507e-308;
-	
+	ComputeBoundingRectangle(splitNode->childSet[0]->range,splitNode->childSet[1]->range,tempBoundingRange);
+	difference = ComputeVolume(tempBoundingRange)-pVol[0]-pVol[1];
+	firstSeedIndex = 0;
+	secondSeedIndex = 1;
+
 	for(int i=0;i<N;i++){
 		for(int j=i+1;j<N;j++){
 			if(j==i)continue;

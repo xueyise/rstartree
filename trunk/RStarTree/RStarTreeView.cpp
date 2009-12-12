@@ -113,9 +113,9 @@ void CRStarTreeView::OnTestBuildTree()
 	
 
 	/*ofstream outFile("data.txt");
-	int N = 100;
+	int N = 10000;
 	outFile<<N<<endl;
-	for(int i=0;i<100;i++){
+	for(int i=0;i<N;i++){
 		int x = rand()%100;
 		int y = rand()%100;
 		if(rand()%2==0)x = -x;
@@ -127,10 +127,7 @@ void CRStarTreeView::OnTestBuildTree()
 
 
 
-	RSTRTree tree(2,2,4);
-	tree.dim = 2;
-	tree.m = 2;
-	tree.M = 4;
+	RSTRTree tree(2,5,20);
 	ifstream inFile("data.txt");
 	int N;
 	inFile>>N;
@@ -138,20 +135,6 @@ void CRStarTreeView::OnTestBuildTree()
 	for(int i=0;i<N;i++){
 		double x,y;
 		inFile>>x>>y;
-		//cout<<x<<" "<<y<<endl;
-		/*RSTData* pData =new RSTData();
-		pData->type = Point;
-		pData->point = new RSTPoint();
-		pData->point->push_back(x);
-		pData->point->push_back(y);
-		
-		RSTInter xInter;
-		RSTInter yInter;
-		xInter.max=xInter.min = x;
-		yInter.max= yInter.min = y;
-
-		pData->range.push_back(xInter);
-		pData->range.push_back(yInter);*/
 		RSTPoint2D* p = new RSTPoint2D();
 		p->x = x;
 		p->y = y;
@@ -170,18 +153,6 @@ void CRStarTreeView::OnTestBuildTree()
 	while(!que.empty()){
 		RSTNode* pNode = que.front();
 		out<<(void*)pNode<<":";
-		/*for(int i=0;i<pNode->childNum;i++){
-			out<<(void*)&(pNode->childSet[i])<<" ";
-		}
-		out<<endl;
-		que.pop_front();
-		if(pNode->type==Data)continue;
-		else{
-			RSTNode* pRSTNode = (RSTNode*)pNode;
-			for(int i=0;i<pRSTNode->childNum;i++){
-				que.push_back(pRSTNode->childSet[i]);
-			}
-		}*/
 		out<<"Parent:"<<(void*)pNode->parent;
 		for(int i=0;i<(int)pNode->range.size();i++){
 			out<<"("<<pNode->range[i].min<<","<<pNode->range[i].max<<")";	
@@ -203,10 +174,9 @@ void CRStarTreeView::OnTestBuildTree()
 	RSTNodeSet resultSet;
 	RSTRange range;
 	range.push_back(RSTInter(-100,100));
-	range.push_back(RSTInter(-100,100));
+	range.push_back(RSTInter(-100,50));
 	tree.Search(range,resultSet,false);
 
-	out<<endl;
 	out<<resultSet.size() << endl;
 	for(int i=0;i<(int)resultSet.size();i++){
 		out<<resultSet[i]->range[0].min<<
