@@ -83,6 +83,10 @@ class RSTRStarTree : public RSTRTree
 {	
 	void Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
 	int ChooseSplitAxis(RSTNode*& splitNode);
-	int ChooseSplitIndex(int axis);
+	//选择进行分裂的位置
+	//输入分别为按min排序好的数组和按max排序好的数组
+	//minOrMax在函数结束后会指示splitIndex位于min排序数组还是max排序数组
+	//splitIndex指示分组后第一组数据的最后一个元素
+	void ChooseSplitIndex(RSTNode**& nodes1,RSTNode**& nodes2,bool& minOrMax,int& splitIndex);
 	
 };
