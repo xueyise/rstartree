@@ -93,9 +93,8 @@ class RSTNodeComparator{
 private:
 	int d;//用于比较的维度
 	bool isMin;//是否用low值去比较
-	RSTNode** nodes;//node的数组
 public:
-	RSTNodeComparator(int dd,bool min,RSTNode** pNode):d(dd),isMin(min),nodes(pNode){}
+	RSTNodeComparator(int dd,bool min):d(dd),isMin(min){}
 	bool operator()(RSTNode* pLeft,RSTNode* pRight){
 		if(isMin){
 			return pLeft->range[d].min<pRight->range[d].min;
@@ -123,9 +122,11 @@ double ComputeVolume(RSTRange& range);
 //计算将range2加入到range1后所需要的最小空间
 double ComputeMinAdditionVolume(RSTRange& range1,RSTRange& range2);
 double ComputeMargin(RSTRange& range);
+double ComputeOverlapValue(RSTRange& range1,RSTRange& range2);
 //计算给定节点中部分孩子节点的包围盒
 //firstIndex指示有效计算范围内的第一个孩子节点
 //lastIndex指示有效计算范围内的最后一个孩子节点
-void ComputePartialBoundingRange(RSTNode* pNode,int firstIndex,int lastIndex,RSTRange& resultRange);
+void ComputePartialBoundingRange(RSTNode** pNode,int firstIndex,int lastIndex,RSTRange& resultRange);
+
 
 #endif

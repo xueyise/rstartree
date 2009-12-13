@@ -509,9 +509,47 @@ void RSTRStarTree::Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& ne
 	}*/
 	//选择要分裂的坐标方向
 	int axis = ChooseSplitAxis(splitNode);
-	//构造该方向上的比较器
+	//接下来，分别暂时利用newSplitNode1和newSplitNode2的空间，
+	//暂时用newSplitNode1的空间存储对min进行排序的结果
+	//暂时用newSplitNode2的空间存储对max进行排序的结果
+	//copy pointers
+	for(int i=0;i<=M;i++){
+		newSplitNode1->childSet[i] = splitNode->childSet[i];
+		newSplitNode2->childSet[i] = splitNode->childSet[i];
+	}
+	//构造min方向和max方向上的比较器
+	RSTNodeComparator minCmp(axis,true);
+	RSTNodeComparator maxCmp(axis,false);
+	//sort
+	using namespace std;
+	sort(newSplitNode1->childSet,newSplitNode1->childSet+M+1,minCmp);
+	sort(newSplitNode2->childSet,newSplitNode2->childSet+M+1,maxCmp);
 
-
+	//
+	bool minOrMax;
+	int splitIndex;
+	ChooseSplitIndex(newSplitNode1->childSet,newSplitNode2->childSet,minOrMax,splitIndex);
+	RSTNode* p;
+	if(minOrMax){
+		p = newSplitNode1;
+	}else{
+		p = newSplitNode2;
+	}
+	//copy result
+	for(int i=0;i<=M;i++){
+		splitNode->childSet[i] = p->childSet[i];
+	}
+	for(int i=0;i<=splitIndex;i++){
+		newSplitNode1->AddNode(splitNode->childSet[i]);
+	}
+	for(int i=splitIndex+1;i<=M;i++){
+		newSplitNode2->AddNode(splitNode->childSet[i]);
+	}
+	if(splitNode->parent){
+		splitNode->parent->deleteNode(splitNode);
+	}else{
+		delete splitNode;
+	}
 
 }
 int RSTRStarTree::ChooseSplitAxis(RSTNode*& splitNode){
@@ -531,7 +569,7 @@ int RSTRStarTree::ChooseSplitAxis(RSTNode*& splitNode){
 		tempS = 0;
 		k=1;
 		//sort by min
-		RSTNodeComparator minCom(i,true,splitNode->childSet);
+		RSTNodeComparator minCom(i,true);
 		sort(splitNode->childSet,splitNode->childSet+N,minCom);
 		///////min//////////
 		//初始化
@@ -545,13 +583,13 @@ int RSTRStarTree::ChooseSplitAxis(RSTNode*& splitNode){
 			//第一组的包围盒
 			ComputeBoundingRectangle(splitNode->childSet[m-2+k]->range,firstGroupBoundingRange,firstGroupBoundingRange);
 			//第二组的包围盒
-			ComputePartialBoundingRange(splitNode,m-1+k,M,secondGroupBoundingRange);
+			ComputePartialBoundingRange(splitNode->childSet,m-1+k,M,secondGroupBoundingRange);
 			//计算margin的和
 			tempS +=( ComputeMargin(firstGroupBoundingRange)+ComputeMargin(secondGroupBoundingRange));
 		}
 		///////max//////////
 		//sort by max
-		RSTNodeComparator maxCom(i,false,splitNode->childSet);
+		RSTNodeComparator maxCom(i,false);
 		sort(splitNode->childSet,splitNode->childSet+N,maxCom);
 		//初始化
 		firstGroupBoundingRange = splitNode->childSet[0]->range;
@@ -564,7 +602,7 @@ int RSTRStarTree::ChooseSplitAxis(RSTNode*& splitNode){
 			//第一组的包围盒
 			ComputeBoundingRectangle(splitNode->childSet[m-2+k]->range,firstGroupBoundingRange,firstGroupBoundingRange);
 			//第二组的包围盒
-			ComputePartialBoundingRange(splitNode,m-1+k,M,secondGroupBoundingRange);
+			ComputePartialBoundingRange(splitNode->childSet,m-1+k,M,secondGroupBoundingRange);
 			//计算Margin
 			tempS +=(ComputeMargin(firstGroupBoundingRange)+ComputeMargin(secondGroupBoundingRange));
 		}
@@ -577,4 +615,64 @@ int RSTRStarTree::ChooseSplitAxis(RSTNode*& splitNode){
 		}
 	}
 	return resultAxis;
+}
+void RSTRStarTree::ChooseSplitIndex(RSTNode**& nodes1,RSTNode**& nodes2,bool& minOrMax,int& splitIndex){
+	RSTRange firstGroupBoundingRange;
+	RSTRange secondGroupBoundingRange;
+	int K_MIN = 1;
+	int K_MAX = M-2*m+2;
+	double resultOverlap =DBL_MAX;
+	double resultArea = DBL_MAX;
+	double tempOverlap,tempArea;
+
+	minOrMax = true;
+	splitIndex = 0;
+	//初始化第一组的包围盒
+	firstGroupBoundingRange = nodes1[0]->range;
+	for(int i=1;i<m-1;i++){
+		ComputeBoundingRectangle(nodes1[i]->range,firstGroupBoundingRange,firstGroupBoundingRange);
+	}
+	//Loop
+	for(int k=K_MIN;k<=K_MAX;k++){
+		ComputeBoundingRectangle(nodes1[m-2+k]->range,firstGroupBoundingRange,firstGroupBoundingRange);
+		ComputePartialBoundingRange(nodes1,m-1+k,M,secondGroupBoundingRange);
+		tempOverlap = ComputeOverlapValue(firstGroupBoundingRange,secondGroupBoundingRange);
+		if(tempOverlap<resultOverlap){
+			splitIndex = m-2+k;
+			resultOverlap=tempOverlap;
+			resultArea = ComputeVolume(firstGroupBoundingRange)+ComputeVolume(secondGroupBoundingRange);
+		}else if(tempOverlap==resultOverlap){
+			tempArea = ComputeVolume(firstGroupBoundingRange)+ComputeVolume(secondGroupBoundingRange);
+			if(tempArea<resultArea){
+				splitIndex = m-2+k;
+				resultArea = tempArea;
+			}else continue;
+		}else continue;
+	}
+
+
+	//对按max排序的数组进行操作
+	firstGroupBoundingRange = nodes2[0]->range;
+	for(int i=1;i<m-1;i++){
+		ComputeBoundingRectangle(nodes2[i]->range,firstGroupBoundingRange,firstGroupBoundingRange);
+	}
+	//Loop
+	for(int k=K_MIN;k<=K_MAX;k++){
+		ComputeBoundingRectangle(nodes2[m-2+k]->range,firstGroupBoundingRange,firstGroupBoundingRange);
+		ComputePartialBoundingRange(nodes2,m-1+k,M,secondGroupBoundingRange);
+		tempOverlap = ComputeOverlapValue(firstGroupBoundingRange,secondGroupBoundingRange);
+		if(tempOverlap<resultOverlap){
+			splitIndex = m-2+k;
+			resultOverlap = tempOverlap;
+			resultArea = ComputeVolume(firstGroupBoundingRange)+ComputeVolume(secondGroupBoundingRange);
+			minOrMax = false;
+		}else if(tempOverlap==resultOverlap){
+			tempArea = ComputeVolume(firstGroupBoundingRange)+ComputeVolume(secondGroupBoundingRange);
+			if(tempArea<resultArea){
+				resultArea = tempArea;
+				splitIndex = m-2+k;
+				minOrMax = false;
+			}else continue;
+		}else continue;
+	}
 }

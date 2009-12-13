@@ -63,13 +63,17 @@ double ComputeMargin(RSTRange& range){
 	}
 	return ret;
 }
+double ComputeOverlapValue(RSTRange& range1,RSTRange& range2){
 
-void ComputePartialBoundingRange(RSTNode* pNode,int firstIndex,int lastIndex,RSTRange& resultRange){
+	return 0;
+}
+
+void ComputePartialBoundingRange(RSTNode** pNode,int firstIndex,int lastIndex,RSTRange& resultRange){
 	//初始化
-	resultRange = pNode->childSet[firstIndex]->range;
+	resultRange = pNode[firstIndex]->range;
 	//依次计算
 	for(int i=firstIndex+1;i<=lastIndex;i++){
-		ComputeBoundingRectangle(pNode->childSet[i]->range,resultRange,resultRange);
+		ComputeBoundingRectangle(pNode[i]->range,resultRange,resultRange);
 	}
 }
 ///////////////////////////////节点相关操作///////////////////////////////////////////
