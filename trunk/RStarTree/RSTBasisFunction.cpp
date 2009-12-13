@@ -64,8 +64,18 @@ double ComputeMargin(RSTRange& range){
 	return ret;
 }
 double ComputeOverlapValue(RSTRange& range1,RSTRange& range2){
-
-	return 0;
+	double ret = 0;
+	double min,max;
+	for(int i=0;i<(int)range1.size();i++){
+		min = max(range1[i].min,range2[i].min);
+		max = min(range1[i].max,range2[i].max);
+		//如果在一个维度上区间没有相交，则两个range就没有交，直接返回0
+		if(max<=min)return 0;
+		else{
+			ret+=(max-min);
+		}
+	}
+	return ret;
 }
 
 void ComputePartialBoundingRange(RSTNode** pNode,int firstIndex,int lastIndex,RSTRange& resultRange){
