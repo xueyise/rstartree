@@ -480,3 +480,101 @@ void RSTRTree::CondenseTree(RSTNode* node)
 		}
 	}
 }
+void RSTRStarTree::Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
+	
+	//allocate memory for two new nodes
+	newSplitNode1 = new RSTNode(splitNode->type,this->dim,this->M);
+	newSplitNode2 = new RSTNode(splitNode->type,this->dim,this->M);
+
+	//allocate memory for  arrays
+	/*RSTNode** resultMin = new RSTNode*[this->M+1];
+	if(!resultMin)return;
+	RSTNode** resultMax = new RSTNode*[this->M+1];
+	if(!resultMax){
+		delete resultMin;
+		return;
+	}
+	RSTNode** pCurrentMin = new RSTNode*[this->M+1];
+	if(!pCurrentMin){
+		delete resultMin;
+		delete resultMax;
+		return;
+	}
+	RSTNode** pCurrentMax = new RSTNode*[this->M+1];
+	if(!pCurrentMax){
+		delete resultMin;
+		delete resultMax;
+		delete pCurrentMin;
+		return ;
+	}*/
+	//选择要分裂的坐标方向
+	int axis = ChooseSplitAxis(splitNode);
+	//构造该方向上的比较器
+
+
+
+}
+int RSTRStarTree::ChooseSplitAxis(RSTNode*& splitNode){
+	double resultS= DBL_MAX;
+	double tempS;
+	int k;
+	int resultAxis = 0;
+	int D = this->dim;
+	int N = this->M+1;
+	int K_MAX = M-2*m+1;
+	int K_MIN =1;
+	//临时变量，第一组矩形的包围盒和第二组矩形的包围盒
+	RSTRange firstGroupBoundingRange;
+	RSTRange secondGroupBoundingRange;
+	using namespace std;
+	for(int i=0;i<D;i++){
+		tempS = 0;
+		k=1;
+		//sort by min
+		RSTNodeComparator minCom(i,true,splitNode->childSet);
+		sort(splitNode->childSet,splitNode->childSet+N,minCom);
+		///////min//////////
+		//初始化
+		
+		firstGroupBoundingRange = splitNode->childSet[0]->range;
+		for(int j=1;j<m-1;j++){
+			ComputeBoundingRectangle(splitNode->childSet[j]->range,firstGroupBoundingRange,firstGroupBoundingRange);
+		}
+		//Loop
+		for(int k=K_MIN;k<=K_MAX;k++){
+			//第一组的包围盒
+			ComputeBoundingRectangle(splitNode->childSet[m-2+k]->range,firstGroupBoundingRange,firstGroupBoundingRange);
+			//第二组的包围盒
+			ComputePartialBoundingRange(splitNode,m-1+k,M,secondGroupBoundingRange);
+			//计算margin的和
+			tempS +=( ComputeMargin(firstGroupBoundingRange)+ComputeMargin(secondGroupBoundingRange));
+		}
+		///////max//////////
+		//sort by max
+		RSTNodeComparator maxCom(i,false,splitNode->childSet);
+		sort(splitNode->childSet,splitNode->childSet+N,maxCom);
+		//初始化
+		firstGroupBoundingRange = splitNode->childSet[0]->range;
+		for(int j=1;j<m-1;j++){
+			ComputeBoundingRectangle(splitNode->childSet[j]->range,firstGroupBoundingRange,firstGroupBoundingRange);
+		}
+		//Loop
+		for(int k=K_MIN;k<=K_MAX;k++){
+			//compute margin and add to tempS
+			//第一组的包围盒
+			ComputeBoundingRectangle(splitNode->childSet[m-2+k]->range,firstGroupBoundingRange,firstGroupBoundingRange);
+			//第二组的包围盒
+			ComputePartialBoundingRange(splitNode,m-1+k,M,secondGroupBoundingRange);
+			//计算Margin
+			tempS +=(ComputeMargin(firstGroupBoundingRange)+ComputeMargin(secondGroupBoundingRange));
+		}
+
+
+		//如果计算结果比当前的结果小，则更新当前结果
+		if(tempS<resultS){
+			resultAxis = i;
+			resultS = tempS;
+		}
+	}
+	return resultAxis;
+}

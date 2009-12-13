@@ -55,7 +55,23 @@ double ComputeMinAdditionVolume(RSTRange& range1,RSTRange& range2){
 	ComputeBoundingRectangle(range1,range2,boundingRange);
 	return ComputeVolume(boundingRange)-ComputeVolume(range1);
 }
+double ComputeMargin(RSTRange& range){
+	double ret = 0;
+	int N = (int)range.size();
+	for(int i=0;i<N;i++){
+		ret+=(range[i].max-range[i].min);
+	}
+	return ret;
+}
 
+void ComputePartialBoundingRange(RSTNode* pNode,int firstIndex,int lastIndex,RSTRange& resultRange){
+	//初始化
+	resultRange = pNode->childSet[firstIndex]->range;
+	//依次计算
+	for(int i=firstIndex+1;i<=lastIndex;i++){
+		ComputeBoundingRectangle(pNode->childSet[i]->range,resultRange,resultRange);
+	}
+}
 ///////////////////////////////节点相关操作///////////////////////////////////////////
 
 RSTNode::RSTNode(int M /* = DefaultMValue */):childNum(0)

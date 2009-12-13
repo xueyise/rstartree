@@ -4,6 +4,8 @@
 #include <vector>
 #include <deque>
 #include <math.h>
+#include <algorithm>
+#include <float.h>
 using std::vector;
 #ifndef DEF_BASIC_STRUCTURE
 #define DEF_BASIC_STRUCTURE 1
@@ -84,6 +86,24 @@ public:
 	void deleteNodeWithoutReleaseMem(RSTNode* pChild);
 	void deleteNodeWithoutReleaseMem(int& indexToDelete);
 };
+//自定义比较器，用于R*树split算法的排序，需要对不同维度的min或max进行比较
+//d表示要比较的维度，从0开始
+//min表示是否根据第d维区间的min值进行比较，如果为false，则根据max进行比较
+class RSTNodeComparator{
+private:
+	int d;//用于比较的维度
+	bool isMin;//是否用low值去比较
+	RSTNode** nodes;//node的数组
+public:
+	RSTNodeComparator(int dd,bool min,RSTNode** pNode):d(dd),isMin(min),nodes(pNode){}
+	bool operator()(RSTNode* pLeft,RSTNode* pRight){
+		if(isMin){
+			return pLeft->range[d].min<pRight->range[d].min;
+		}else{
+			return pLeft->range[d].max<pRight->range[d].max;
+		}
+	}
+};
 
 typedef vector<RSTNode*> RSTNodeSet;
 
@@ -102,5 +122,10 @@ void ComputeBoundingRectangle(RSTRange& range1,RSTRange& range2,RSTRange& boundi
 double ComputeVolume(RSTRange& range);
 //计算将range2加入到range1后所需要的最小空间
 double ComputeMinAdditionVolume(RSTRange& range1,RSTRange& range2);
+double ComputeMargin(RSTRange& range);
+//计算给定节点中部分孩子节点的包围盒
+//firstIndex指示有效计算范围内的第一个孩子节点
+//lastIndex指示有效计算范围内的最后一个孩子节点
+void ComputePartialBoundingRange(RSTNode* pNode,int firstIndex,int lastIndex,RSTRange& resultRange);
 
 #endif
