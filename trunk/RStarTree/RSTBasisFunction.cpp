@@ -203,3 +203,31 @@ void RSTNode::deleteNodeWithoutReleaseMem(RSTNode* pChild)
 	int index = GetIndexOfNode(pChild);
 	if (index >= 0) deleteNode(index);
 }
+
+double RSTNode::ComputeNodeOverlap(int childInd)
+{
+	double overlap = 0;
+	for (int i = 0; i < childNum; i++)
+	{
+		if (i == childInd)
+		{
+			continue;
+		}
+		overlap += ComputeOverlapValue(childSet[i]->range, childSet[childInd]->range);
+	}
+	return overlap;
+}
+
+double RSTNode::ComputeNodeOverlap(int childInd, RSTRange& range)
+{
+	double overlap = 0;
+	for (int i = 0; i < childNum; i++)
+	{
+		if (i == childInd)
+		{
+			continue;
+		}
+		overlap += ComputeOverlapValue(childSet[i]->range, range);
+	}
+	return overlap;
+}
