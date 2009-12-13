@@ -207,7 +207,7 @@ void CRStarTreeView::OnTestBuildTree()
 	inFile.close();
 	//build done
 	m_treeshow.settree(&tree);
-
+	Invalidate(TRUE);
 
 
 
@@ -390,6 +390,7 @@ void CRStarTreeView::OnSize(UINT nType, int cx, int cy)
 	// TODO: Add your message handler code here
 	CClientDC dc(this);
 	m_treeshow.ReSize(dc,cx,cy);
+	Invalidate(TRUE);
 }
 
 void CRStarTreeView::OnRButtonDown(UINT nFlags, CPoint point)
