@@ -54,7 +54,7 @@ public:
 	// 节点分裂算法
 	// 节点被分裂成两个新节点，原来的节点在函数结束后
 	// 成为无效节点
-	void Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
+	virtual void Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
 	void BruteForceSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);	
 	void QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
 	void LinearSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
@@ -80,7 +80,9 @@ public:
 /////////////////////////////R*树算法实现/////////////////////////////////////////////
 
 class RSTRStarTree : public RSTRTree
-{	
+{	public:
+	
+	RSTRStarTree(int dim_, int m_, int M_):RSTRTree(dim_,m_,M_){}
 	void Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
 	int ChooseSplitAxis(RSTNode*& splitNode);
 	//选择进行分裂的位置

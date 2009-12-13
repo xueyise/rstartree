@@ -486,27 +486,6 @@ void RSTRStarTree::Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& ne
 	newSplitNode1 = new RSTNode(splitNode->type,this->dim,this->M);
 	newSplitNode2 = new RSTNode(splitNode->type,this->dim,this->M);
 
-	//allocate memory for  arrays
-	/*RSTNode** resultMin = new RSTNode*[this->M+1];
-	if(!resultMin)return;
-	RSTNode** resultMax = new RSTNode*[this->M+1];
-	if(!resultMax){
-		delete resultMin;
-		return;
-	}
-	RSTNode** pCurrentMin = new RSTNode*[this->M+1];
-	if(!pCurrentMin){
-		delete resultMin;
-		delete resultMax;
-		return;
-	}
-	RSTNode** pCurrentMax = new RSTNode*[this->M+1];
-	if(!pCurrentMax){
-		delete resultMin;
-		delete resultMax;
-		delete pCurrentMin;
-		return ;
-	}*/
 	//选择要分裂的坐标方向
 	int axis = ChooseSplitAxis(splitNode);
 	//接下来，分别暂时利用newSplitNode1和newSplitNode2的空间，
@@ -530,24 +509,33 @@ void RSTRStarTree::Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& ne
 	int splitIndex;
 	ChooseSplitIndex(newSplitNode1->childSet,newSplitNode2->childSet,minOrMax,splitIndex);
 	RSTNode* p;
+	//如果最佳分裂点位于按min排序的数组中
 	if(minOrMax){
 		p = newSplitNode1;
 	}else{
+		//如果最佳分裂点位于按max排序的数组中
 		p = newSplitNode2;
 	}
-	//copy result
+	//将最佳分裂所在的排序数组复制到原数组中
 	for(int i=0;i<=M;i++){
 		splitNode->childSet[i] = p->childSet[i];
 	}
+	//将0~splitIndex所在的元素放到newSplitNode1中
 	for(int i=0;i<=splitIndex;i++){
-		newSplitNode1->AddNode(splitNode->childSet[i]);
+		newSplitNode1->AddNodeAndUpdateRange(splitNode->childSet[i]);
 	}
+	//将其他元素放到newSplitNode2中
 	for(int i=splitIndex+1;i<=M;i++){
-		newSplitNode2->AddNode(splitNode->childSet[i]);
+		newSplitNode2->AddNodeAndUpdateRange(splitNode->childSet[i]);
 	}
+	//将splitNode的childNum设置为0，防止删除时递归删除其原来的child
+	splitNode->childNum = 0;
+	
+	//删除原来的splitNode
 	if(splitNode->parent){
 		splitNode->parent->deleteNode(splitNode);
 	}else{
+		//如果是根则直接释放
 		delete splitNode;
 	}
 
@@ -559,7 +547,7 @@ int RSTRStarTree::ChooseSplitAxis(RSTNode*& splitNode){
 	int resultAxis = 0;
 	int D = this->dim;
 	int N = this->M+1;
-	int K_MAX = M-2*m+1;
+	int K_MAX = M-2*m+2;
 	int K_MIN =1;
 	//临时变量，第一组矩形的包围盒和第二组矩形的包围盒
 	RSTRange firstGroupBoundingRange;
