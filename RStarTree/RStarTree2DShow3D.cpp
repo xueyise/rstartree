@@ -53,7 +53,6 @@ void Tree2DShow3D::drawRectangle()
 {
 	glDepthMask(GL_TRUE);
 	size_t value;
-	glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 	glLineWidth(3);
 	for(size_t i=0;i<m_node.size();++i)
 	{
@@ -64,7 +63,7 @@ void Tree2DShow3D::drawRectangle()
 			glColor4f(1,0,0,0.5f);
 		else
 			glColor4f(0,0,1,0.5f);
-		glBegin(GL_POLYGON);
+		glBegin(GL_LINE_LOOP);
 		glVertex3d(m_node[i]->range[0].min,m_node[i]->range[1].min,
 				rangeperlayer*m_layer[i]);
 		glVertex3d(m_node[i]->range[0].min,m_node[i]->range[1].max,
