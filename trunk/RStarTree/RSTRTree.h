@@ -80,6 +80,9 @@ public:
 /////////////////////////////R*Ê÷Ëã·¨ÊµÏÖ/////////////////////////////////////////////
 
 class RSTRStarTree : public RSTRTree
-{
+{	
+	void Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
+	int ChooseSplitAxis(RSTNode*& splitNode);
+	int ChooseSplitIndex(int axis);
 	
 };
