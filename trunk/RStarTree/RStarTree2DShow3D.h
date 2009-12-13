@@ -13,7 +13,8 @@ private:
 	const RSTRTree* m_tree;
 	double rangeperlayer;
 	bool zup;
-	//RSTNode* 
+	vector<RSTNode*> m_node;
+	vector<int> m_layer;
 
 public:
 	Tree2DShow3D():m_tree(NULL),rangeperlayer(0),zup(false){}
@@ -22,7 +23,7 @@ public:
 	void drawTree();
 	void drawDate(const RSTNode* p);
 
-	void settree(const RSTRTree* p){m_tree = p;}
+	void settree(const RSTRTree* p){m_tree = p;updateTreeDate();}
 
 	void Initialization(CClientDC &dc){m_gls3d.Initialization(dc);}
 	void Destroy(){m_gls3d.Destroy();}
@@ -37,8 +38,10 @@ public:
 	void EndDraw(HDC& m_hdc){m_gls3d.EndDraw(m_hdc);}
 
 private:
-	void drawNode(const RSTNode* p,const int &layernumber);
+	void drawRectangle();
+	void fillRectangle();
 	void setzup();
+	void setDrawItem();
 	bool updateTreeDate();
 };
 
