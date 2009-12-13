@@ -46,6 +46,8 @@ typedef std::vector<RSTInter> RSTRange;
 #define DefaultMValue 10
 #define DefaultmValue 5
 
+#define P 32
+
 // 节点定义
 class RSTNode
 {
@@ -85,6 +87,10 @@ public:
 
 	void deleteNodeWithoutReleaseMem(RSTNode* pChild);
 	void deleteNodeWithoutReleaseMem(int& indexToDelete);
+
+	// 计算子节点重复度
+	double ComputeNodeOverlap(int childInd);
+	double ComputeNodeOverlap(int childInd, RSTRange& range);
 };
 //自定义比较器，用于R*树split算法的排序，需要对不同维度的min或max进行比较
 //d表示要比较的维度，从0开始
@@ -123,6 +129,7 @@ double ComputeVolume(RSTRange& range);
 double ComputeMinAdditionVolume(RSTRange& range1,RSTRange& range2);
 double ComputeMargin(RSTRange& range);
 double ComputeOverlapValue(RSTRange& range1,RSTRange& range2);
+
 //计算给定节点中部分孩子节点的包围盒
 //firstIndex指示有效计算范围内的第一个孩子节点
 //lastIndex指示有效计算范围内的最后一个孩子节点

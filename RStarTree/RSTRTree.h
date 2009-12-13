@@ -83,6 +83,12 @@ class RSTRStarTree : public RSTRTree
 {	public:
 	
 	RSTRStarTree(int dim_, int m_, int M_):RSTRTree(dim_,m_,M_){}
+public:
+	// 根据数据选择应插入的叶子节点
+	RSTNode* ChooseLeaf(RSTNode* data);
+	// 根据层数选择应插入的父节点
+	//RSTNode* ChooseNode(RSTNode* insertNode, int h);
+
 	void Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
 	int ChooseSplitAxis(RSTNode*& splitNode);
 	//选择进行分裂的位置
@@ -90,5 +96,4 @@ class RSTRStarTree : public RSTRTree
 	//minOrMax在函数结束后会指示splitIndex位于min排序数组还是max排序数组
 	//splitIndex指示分组后第一组数据的最后一个元素
 	void ChooseSplitIndex(RSTNode**& nodes1,RSTNode**& nodes2,bool& minOrMax,int& splitIndex);
-	
 };

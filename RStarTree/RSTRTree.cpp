@@ -480,6 +480,102 @@ void RSTRTree::CondenseTree(RSTNode* node)
 		}
 	}
 }
+
+////////////////////////////R*树操作//////////////////////////////////////////////
+
+RSTNode* RSTRStarTree::ChooseLeaf(RSTNode* data)
+{
+	if (!Root) return NULL;
+	int i;
+	RSTNode* node = Root;
+	double min = -1;
+	double temp;
+	int minChild;
+	RSTRange tempRange;
+	while (node->type != Leaf && node->childNum > 0 && node->childSet[0]->type != Leaf)
+	{
+		min = -1;
+		for (i = 0; i < node->childNum; i++)
+		{
+			temp = ComputeMinAdditionVolume(node->childSet[i]->range, data->range);
+			if (temp < min || min == -1)
+			{
+				min = temp;
+				minChild = i;
+			}
+			else if (temp == min && ComputeVolume(node->childSet[i]->range) < ComputeVolume(node->childSet[minChild]->range)	)
+			{
+				min = temp;
+				minChild = i;
+			}
+		}
+		node = node->childSet[minChild];	
+	}
+
+	// 这里提供两个版本
+	// 方案1 复杂度较高 但更为精确
+	if (node->childNum > 0 && node->childSet[0]->type != Leaf) // 修改查找叶子节点的方法，通过计算增加最少重复查找
+	{
+		min = -1;
+		for (i = 0; i < node->childNum; i++)
+		{
+			ComputeBoundingRectangle(node->childSet[i]->range, data->range, tempRange);
+			temp = node->ComputeNodeOverlap(i, tempRange) - node->ComputeNodeOverlap(i);
+			if (temp < min || min == -1)
+			{
+				min = temp;
+				minChild = i;
+			}
+			else if (temp == min && ComputeMinAdditionVolume(node->childSet[i]->range, data->range) < 
+				ComputeMinAdditionVolume(node->childSet[minChild]->range, data->range))
+			{
+				min = temp;
+				minChild = i;
+			}
+		}
+	}
+
+	// 方案2 近似最小重复区域查找 速度较快 但是是近似算法 
+	if (node->childNum > 0 && node->childSet[0]->type != Leaf) 
+	{
+		// 排序操作
+		for (int i = 0; i < node->childNum; i++)
+		{
+			for (int j = 0; j < node->childNum - 1; j++)
+			{
+				if (ComputeMinAdditionVolume(node->childSet[j]->range, data->range) > 
+					ComputeMinAdditionVolume(node->childSet[j + 1]->range, data->range))
+				{
+					RSTNode* tempP;
+					tempP = node->childSet[j];
+					node->childSet[j] = node->childSet[j + 1];
+					node->childSet[j + 1] = tempP;
+				}
+			}
+		}
+		min = -1;
+		for (int i = 0; i < P && i < node->childNum; i++)
+		{
+			ComputeBoundingRectangle(node->childSet[i]->range, data->range, tempRange);
+			temp = node->ComputeNodeOverlap(i, tempRange) - node->ComputeNodeOverlap(i);
+			if (temp < min || min == -1)
+			{
+				min = temp;
+				minChild = i;
+			}
+			else if (temp == min && ComputeMinAdditionVolume(node->childSet[i]->range, data->range) < 
+				ComputeMinAdditionVolume(node->childSet[minChild]->range, data->range))
+			{
+				min = temp;
+				minChild = i;
+			}
+		}
+	}
+
+	node = node->childSet[minChild];
+	return node;
+}
+
 void RSTRStarTree::Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
 	
 	//allocate memory for two new nodes
