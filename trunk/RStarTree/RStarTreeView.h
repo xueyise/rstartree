@@ -64,6 +64,7 @@ protected:
 	Tree2DShow3D m_treeshow;
 	CPoint beginpoint;
 	CPoint endpoint;
+	bool flagdraging;
 public:
 	afx_msg void OnDestroy();
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);

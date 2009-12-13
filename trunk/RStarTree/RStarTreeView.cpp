@@ -275,6 +275,7 @@ void CRStarTreeView::OnLButtonDown(UINT nFlags, CPoint point)
 	}*/
 	
 #endif
+	flagdraging = true;
 	beginpoint = point;
 	endpoint = point;
 
@@ -314,9 +315,13 @@ void CRStarTreeView::OnLButtonUp(UINT nFlags, CPoint point)
 		GetDocument()->rtree->Search(searchRange, GetDocument()->result, false);
 	}*/
 #endif
-	endpoint = point;
-	m_treeshow.Translation(endpoint.x-beginpoint.x,beginpoint.y-endpoint.y,true);
-	Invalidate(TRUE);
+	if(flagdraging)
+	{
+		endpoint = point;
+		m_treeshow.Translation(endpoint.x-beginpoint.x,beginpoint.y-endpoint.y,true);
+		flagdraging = false;
+		Invalidate(TRUE);
+	}
 
 	CView::OnLButtonUp(nFlags, point);
 }
@@ -346,7 +351,7 @@ void CRStarTreeView::OnMouseMove(UINT nFlags, CPoint point)
 		if(detlength<0.000000001)
 			return;
 		double angle = detlength/100000.0;
-		m_treeshow.Rotation((int)dety,(int)-detx,angle,false);
+		m_treeshow.Rotation((int)-dety,(int)detx,angle,false);
 	}
 	else
 		;
@@ -363,6 +368,9 @@ int CRStarTreeView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	// TODO:  Add your specialized creation code here
 	CClientDC dc(this);
 	m_treeshow.Initialization(dc);
+	beginpoint.SetPoint(0,0);
+	endpoint.SetPoint(0,0);
+	flagdraging = false;
 
 	return 0;
 }
@@ -412,7 +420,7 @@ void CRStarTreeView::OnRButtonUp(UINT nFlags, CPoint point)
 	if(detlength<0.000000001)
 		return;
 	double angle = detlength/100000.0;
-	m_treeshow.Rotation((int)dety,(int)-detx,angle,true);
+	m_treeshow.Rotation((int)-dety,(int)detx,angle,true);
 
 	CView::OnRButtonUp(nFlags, point);
 }
