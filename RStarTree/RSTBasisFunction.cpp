@@ -64,7 +64,7 @@ double ComputeMargin(RSTRange& range){
 	return ret;
 }
 double ComputeOverlapValue(RSTRange& range1,RSTRange& range2){
-	double ret = 0;
+	double ret = 1.0;
 	double min,max;
 	for(int i=0;i<(int)range1.size();i++){
 		min = max(range1[i].min,range2[i].min);
@@ -72,7 +72,7 @@ double ComputeOverlapValue(RSTRange& range1,RSTRange& range2){
 		//如果在一个维度上区间没有相交，则两个range就没有交，直接返回0
 		if(max<=min)return 0;
 		else{
-			ret+=(max-min);
+			ret*=(max-min);
 		}
 	}
 	return ret;
