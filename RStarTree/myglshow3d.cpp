@@ -67,7 +67,7 @@ void MyGLShow3D::Initialization(CClientDC &dc)
 	ocenter[2] = 0;
 	prange = 1;
 	lengthperpixel = 1;
-	flag = 1;//false;
+	flag = false;
 	pzoomrate = 1;
 	for(int i=0;i<4;++i)
 	{
