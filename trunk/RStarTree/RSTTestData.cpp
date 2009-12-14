@@ -5,9 +5,9 @@
 
 RSTPoint2D::RSTPoint2D(double x_, double y_) : RSTNode(Data, 2, 0), x(x_), y(y_)
 {
+	this->childNum=0;
 	GenerateRange();
 }
-
 
 void RSTPoint2D::GenerateRange()
 {
