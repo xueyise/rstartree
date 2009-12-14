@@ -5,10 +5,14 @@ void Tree2DShow3D::drawTree()
 {
 	if(m_tree == NULL)
 		return;
-	drawData();
-	drawRectangle();
-	drawBranch();
-	fillRectangle();
+	if(showstate[0])
+		drawData();
+	if(showstate[1])
+		drawBranch();
+	if(showstate[2])
+		drawRectangle();
+	if(showstate[3])
+		fillRectangle();
 }
 
 void Tree2DShow3D::fillRectangle()
