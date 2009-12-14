@@ -46,6 +46,7 @@ BEGIN_MESSAGE_MAP(CRStarTreeView, CView)
 	ON_WM_MOUSEWHEEL()
 	ON_COMMAND(ID_FILE_OPEN, &CRStarTreeView::OnFileOpen)
 	ON_COMMAND(ID_32779, &CRStarTreeView::OnResetPosition)
+	ON_COMMAND(ID_DISPLAY_OPTION, &CRStarTreeView::OnDisplayOption)
 END_MESSAGE_MAP()
 
 // CRStarTreeView construction/destruction
@@ -523,4 +524,12 @@ void CRStarTreeView::OnResetPosition()
 	// TODO: Add your command handler code here
 	m_treeshow.ResetPosition();
 	Invalidate(TRUE);
+}
+
+void CRStarTreeView::OnDisplayOption()
+{
+
+
+//TODO
+
 }
