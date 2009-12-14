@@ -12,12 +12,13 @@ private:
 	MyGLShow3D m_gls3d;
 	const RSTRTree* m_tree;
 	double rangeperlayer;
-	bool zup;
+	bool zfront;
 	vector<RSTNode*> m_node;
 	vector<int> m_layer;
+	vector<double> m_branch;
 
 public:
-	Tree2DShow3D():m_tree(NULL),rangeperlayer(0),zup(false){}
+	Tree2DShow3D():m_tree(NULL),rangeperlayer(0),zfront(true){}
 	~Tree2DShow3D(){m_tree = NULL;}
 
 	void drawTree();
@@ -40,6 +41,7 @@ public:
 private:
 	void drawRectangle();
 	void fillRectangle();
+	void drawBranch();
 	void setzup();
 	void setDrawItem();
 	bool updateTreeDate();
