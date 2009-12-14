@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Chinese (P.R.C.) resources
+// 中文(中华人民共和国) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
 #ifdef _WIN32
@@ -148,8 +148,9 @@ BEGIN
             MENUITEM "透视投影",                        ID_32781
         END
         MENUITEM "重置位置",                        ID_32779
+        MENUITEM "显示选项",                        ID_DISPLAY_OPTION
     END
-    MENUITEM "操作",                          65535
+    MENUITEM "操作",                          ID_32782
 END
 
 
@@ -191,6 +192,27 @@ BEGIN
     LTEXT           "RStarTree Version 1.0",IDC_STATIC,40,10,119,8,SS_NOPREFIX
     LTEXT           "Copyright (C) 2009",IDC_STATIC,40,25,119,8
     DEFPUSHBUTTON   "OK",IDOK,178,7,50,16,WS_GROUP
+END
+
+IDD_DLG_DISPLAY_OPTIONS DIALOGEX 0, 0, 315, 170
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,67,113,50,14
+    PUSHBUTTON      "取消",IDCANCEL,184,114,50,14
+    GROUPBOX        "显示数据",IDC_STATIC_DISPLAY_DATA_GROUP,34,21,110,27,WS_GROUP
+    CONTROL         "显示",IDC_DISPLAY_DATA_RADIO1,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,47,32,32,10
+    CONTROL         "不显示",IDC_DISPLAY_DATA_RADIO2,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,100,32,40,10
+    GROUPBOX        "显示R树边",IDC_STATIC,32,64,115,30,WS_TABSTOP
+    CONTROL         "显示",IDC_DISPLAY_TREE_EDGE1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,46,80,32,10
+    CONTROL         "不显示",IDC_DISPLAY_TREE_EDGE2,"Button",BS_AUTORADIOBUTTON,100,80,40,10
+    GROUPBOX        "叶子节点边框",IDC_STATIC,159,21,115,30
+    GROUPBOX        "叶子节点透明",IDC_STATIC,160,64,116,32
+    CONTROL         "显示",IDC_DISPLAY_LEFF_EDGE1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,171,35,32,10
+    CONTROL         "不显示",IDC_DISPLAY_LEFF_EDGE2,"Button",BS_AUTORADIOBUTTON,221,36,40,10
+    CONTROL         "透明",IDC_LEAF_OBSELETE1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,168,78,32,10
+    CONTROL         "不透明",IDC_LEAF_OBSELETE2,"Button",BS_AUTORADIOBUTTON,225,79,40,10
 END
 
 
@@ -247,6 +269,14 @@ BEGIN
         RIGHTMARGIN, 228
         TOPMARGIN, 7
         BOTTOMMARGIN, 48
+    END
+
+    IDD_DLG_DISPLAY_OPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 308
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 163
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -376,7 +406,7 @@ BEGIN
     AFX_IDS_PREVIEW_CLOSE   "Close print preview mode\nCancel Preview"
 END
 
-#endif    // Chinese (P.R.C.) resources
+#endif    // 中文(中华人民共和国) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

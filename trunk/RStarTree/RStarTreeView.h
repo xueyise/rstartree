@@ -4,6 +4,7 @@
 
 #pragma once
 #include "RStarTree2DShow3D.h"
+#include "DisplayOptionDialog.h"
 
 #ifdef TEST
 	#include <vector>
@@ -74,6 +75,7 @@ public:
 	afx_msg BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
 	afx_msg void OnFileOpen();
 	afx_msg void OnResetPosition();
+	afx_msg void OnDisplayOption();
 };
 
 #ifndef _DEBUG  // debug version in RStarTreeView.cpp
