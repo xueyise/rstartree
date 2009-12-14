@@ -37,6 +37,7 @@ public:
 	{m_gls3d.Translation(cx,cy,flagsave);}
 	void Rotation(const int &cx,const int &cy,const double angle,const bool &flagsave)
 	{m_gls3d.Rotation(cx,cy,angle,flagsave);}
+	void ResetPosition(){m_gls3d.ResetPosition();}
 
 	void BeginDraw(HDC& m_hdc){m_gls3d.BeginDraw(m_hdc);}
 	void EndDraw(HDC& m_hdc){m_gls3d.EndDraw(m_hdc);}
