@@ -34,7 +34,7 @@ public:
 	void InsertNode(RSTNode* insertNode, int h);
 
 	// 根据数据选择应插入的叶子节点
-	RSTNode* ChooseLeaf(RSTNode* data);
+	virtual RSTNode* ChooseLeaf(RSTNode* data);
 
 	// 根据层数选择应插入的父节点
 	RSTNode* ChooseNode(RSTNode* insertNode, int h);
