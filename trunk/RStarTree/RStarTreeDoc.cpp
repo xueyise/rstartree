@@ -32,6 +32,7 @@ CRStarTreeDoc::CRStarTreeDoc()
 
 CRStarTreeDoc::~CRStarTreeDoc()
 {
+	delete rtree;
 }
 
 BOOL CRStarTreeDoc::OnNewDocument()

@@ -514,29 +514,30 @@ RSTNode* RSTRStarTree::ChooseLeaf(RSTNode* data)
 
 	// 这里提供两个版本
 	// 方案1 复杂度较高 但更为精确
-	if (node->childNum > 0 && node->childSet[0]->type != Leaf) // 修改查找叶子节点的方法，通过计算增加最少重复查找
-	{
-		min = -1;
-		for (i = 0; i < node->childNum; i++)
-		{
-			ComputeBoundingRectangle(node->childSet[i]->range, data->range, tempRange);
-			temp = node->ComputeNodeOverlap(i, tempRange) - node->ComputeNodeOverlap(i);
-			if (temp < min || min == -1)
-			{
-				min = temp;
-				minChild = i;
-			}
-			else if (temp == min && ComputeMinAdditionVolume(node->childSet[i]->range, data->range) < 
-				ComputeMinAdditionVolume(node->childSet[minChild]->range, data->range))
-			{
-				min = temp;
-				minChild = i;
-			}
-		}
-	}
+	//if (node->childNum > 0 && node->childSet[0]->type == Leaf) // 修改查找叶子节点的方法，通过计算增加最少重复查找
+	//{
+	//	min = -1;
+	//	for (i = 0; i < node->childNum; i++)
+	//	{
+	//		ComputeBoundingRectangle(node->childSet[i]->range, data->range, tempRange);
+	//		temp = node->ComputeNodeOverlap(i, tempRange) - node->ComputeNodeOverlap(i);
+	//		if (temp < min || min == -1)
+	//		{
+	//			min = temp;
+	//			minChild = i;
+	//		}
+	//		else if (temp == min && ComputeMinAdditionVolume(node->childSet[i]->range, data->range) < 
+	//			ComputeMinAdditionVolume(node->childSet[minChild]->range, data->range))
+	//		{
+	//			min = temp;
+	//			minChild = i;
+	//		}
+	//	}
+	//	node = node->childSet[minChild];
+	//}
 
 	// 方案2 近似最小重复区域查找 速度较快 但是是近似算法 
-	if (node->childNum > 0 && node->childSet[0]->type != Leaf) 
+	if (node->childNum > 0 && node->childSet[0]->type == Leaf) 
 	{
 		// 排序操作
 		for (int i = 0; i < node->childNum; i++)
@@ -570,9 +571,9 @@ RSTNode* RSTRStarTree::ChooseLeaf(RSTNode* data)
 				minChild = i;
 			}
 		}
+		node = node->childSet[minChild];
 	}
 
-	node = node->childSet[minChild];
 	return node;
 }
 

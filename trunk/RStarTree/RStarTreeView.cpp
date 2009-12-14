@@ -16,7 +16,7 @@
 #endif
 
 #ifdef TEST
-RSTRStarTree tree(2,2,4);
+RSTRStarTree tree(2,25,50);
 #endif
 
 // CRStarTreeView
