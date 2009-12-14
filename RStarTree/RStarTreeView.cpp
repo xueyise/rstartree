@@ -11,12 +11,15 @@
 #include "RSTRTree.h"
 #include "RSTTestData.h"
 
+#include <string>
+#include <sstream>
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 #ifdef TEST
-RSTRStarTree tree(2,25,50);
+RSTRStarTree tree(2,4,8);
 #endif
 
 // CRStarTreeView
@@ -41,6 +44,7 @@ BEGIN_MESSAGE_MAP(CRStarTreeView, CView)
 	ON_WM_RBUTTONDOWN()
 	ON_WM_RBUTTONUP()
 	ON_WM_MOUSEWHEEL()
+	ON_COMMAND(ID_FILE_OPEN, &CRStarTreeView::OnFileOpen)
 END_MESSAGE_MAP()
 
 // CRStarTreeView construction/destruction
@@ -187,12 +191,12 @@ void CRStarTreeView::OnTestBuildTree()
 	}
 	outFile.close();*/
 
-
-
 	ifstream inFile("data.txt");
 	int N;
 	inFile>>N;
+
 	
+
 	for(int i=0;i<N;i++){
 		double x,y;
 		inFile>>x>>y;
@@ -206,6 +210,7 @@ void CRStarTreeView::OnTestBuildTree()
 	}
 	inFile.close();
 	//build done
+
 	m_treeshow.settree(&tree);
 	Invalidate(TRUE);
 
@@ -439,4 +444,78 @@ BOOL CRStarTreeView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 	Invalidate(TRUE);
 
 	return CView::OnMouseWheel(nFlags, zDelta, pt);
+}
+
+void CRStarTreeView::OnFileOpen()
+{
+	// TODO: Add your command handler code here
+	CFileDialog mydlg(true,_T("*.txt"),_T("*.txt"),NULL,_T("(*.txt)|*.txt||"),
+		this,NULL);
+	if(mydlg.DoModal()!=IDOK)
+		return;
+	std::wstring filename = mydlg.GetPathName();
+	std::ifstream infile(filename.c_str());
+	std::string tempstr;
+	std::getline(infile,tempstr);
+	if(tempstr.compare("testdata2d") != 0)
+		return;
+	RSTPoint2D *points = NULL;
+	size_t pointnumber = 0;
+	RSTRectangle2D* rectangles = NULL;
+	size_t rectanglenumber = 0;
+	while(tempstr != "databegin")
+	{
+		getline(infile,tempstr,'\n');
+		if(tempstr == "pointnumber:")
+		{
+			infile>>pointnumber;
+			getline(infile,tempstr,'\n');
+		}
+		else if (tempstr == "rectanglenumber:")
+		{
+			infile>>rectanglenumber;
+			getline(infile,tempstr,'\n');
+		}
+		else
+			break;
+	}
+	RSTRTree* ptree = this->GetDocument()->rtree;
+	vector<RSTNode*> *pset = &(this->GetDocument()->dateset);
+	pset->clear();
+	size_t datasize = pointnumber + rectanglenumber;
+	pset->reserve(datasize);
+	while(tempstr != "dataend")
+	{
+		getline(infile,tempstr,'\n');
+		if(tempstr == "pointdate:")
+		{
+			for(size_t i=0;i<pointnumber;++i)
+			{
+				points = new RSTPoint2D;
+				infile>>points->x>>points->y;
+				points->GenerateRange();
+				pset->push_back(points);
+				ptree->InsertData(points);
+			}
+			getline(infile,tempstr,'\n');
+		}
+		else if (tempstr == "retangledate:")
+		{
+			for(size_t i=0;i<rectanglenumber;++i)
+			{
+				rectangles = new RSTRectangle2D;
+				infile>>rectangles->xmin>>rectangles->ymin
+					>>rectangles->xmax>>rectangles->ymax;
+				rectangles->GenerateRange();
+				pset->push_back(rectangles);
+				ptree->InsertData(rectangles);
+			}
+			getline(infile,tempstr,'\n');
+		}
+		else
+			break;
+	}
+	infile.close();
+	m_treeshow.settree(ptree);
+	Invalidate(TRUE);
 }

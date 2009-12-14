@@ -68,7 +68,7 @@ public:
 
 	RSTNode(int type_, int dim, int M);
 	
-	~RSTNode();
+	virtual ~RSTNode();
 
 	// 添加子节点，(内联函数)，添加子节点后不负责父节点（当前节点）range的更新
 	void AddNode(RSTNode* pChild);

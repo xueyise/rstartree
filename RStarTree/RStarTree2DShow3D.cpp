@@ -94,6 +94,7 @@ void Tree2DShow3D::drawRectangle()
 
 void Tree2DShow3D::drawDate(const RSTNode* p)
 {
+
 }
 
 bool Tree2DShow3D::updateTreeDate()
@@ -149,7 +150,7 @@ void Tree2DShow3D::setDrawItem()
 			tempx = ((*pc)[i]->range[0].min + (*pc)[i]->range[0].max)*0.5;
 			tempy = ((*pc)[i]->range[1].min + (*pc)[i]->range[1].max)*0.5;
 			tempz = layernumber * rangeperlayer;
-			if( ((*pc)[i]->type) != Leaf)
+			if( ((*pc)[i]->type) != Data)
 			{
 				for(int j=0;j<(*pc)[i]->childNum;++j)
 				{
