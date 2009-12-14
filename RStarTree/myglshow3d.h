@@ -54,6 +54,8 @@ public:
 	void EndDraw(HDC& m_hdc);
 
 	double* GetCurrentModelViewMatrix()const{return (double*)cmvmatrix;}
+	void ResetCurrentModelViewMatrix();
+	void ResetPosition();
 
 private:
 	void TransformVectorFromScreenToWorld(const int &vx,const int &vy,double& wx,

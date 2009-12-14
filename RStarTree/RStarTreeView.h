@@ -73,6 +73,7 @@ public:
 	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
 	afx_msg BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
 	afx_msg void OnFileOpen();
+	afx_msg void OnResetPosition();
 };
 
 #ifndef _DEBUG  // debug version in RStarTreeView.cpp

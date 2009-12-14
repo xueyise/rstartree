@@ -45,6 +45,7 @@ BEGIN_MESSAGE_MAP(CRStarTreeView, CView)
 	ON_WM_RBUTTONUP()
 	ON_WM_MOUSEWHEEL()
 	ON_COMMAND(ID_FILE_OPEN, &CRStarTreeView::OnFileOpen)
+	ON_COMMAND(ID_32779, &CRStarTreeView::OnResetPosition)
 END_MESSAGE_MAP()
 
 // CRStarTreeView construction/destruction
@@ -213,9 +214,6 @@ void CRStarTreeView::OnTestBuildTree()
 
 	m_treeshow.setTree(&tree);
 	Invalidate(TRUE);
-
-
-
 
 	ofstream out("result.txt");
 	out<<"Tree Height:"<<tree.height<<endl;
@@ -517,5 +515,12 @@ void CRStarTreeView::OnFileOpen()
 	}
 	infile.close();
 	m_treeshow.setTree(ptree,pset);
+	Invalidate(TRUE);
+}
+
+void CRStarTreeView::OnResetPosition()
+{
+	// TODO: Add your command handler code here
+	m_treeshow.ResetPosition();
 	Invalidate(TRUE);
 }

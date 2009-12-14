@@ -384,3 +384,28 @@ void MyGLShow3D::GetRotateMatirx(const double &angle,const double &ax,const doub
 	rotatematrix[2][1] = t1_cyz + sx;
 	rotatematrix[2][2] = c + t1_c*axis[2]*axis[2];
 }
+void MyGLShow3D::ResetCurrentModelViewMatrix()
+{
+	for(int i=0;i<4;++i)
+	{
+		for(int j=0;j<4;++j)
+		{
+			if(i==j)
+			{
+				cmvmatrix[i*4+j] = 1;
+				inversecmvmatrix[i*4+j] = 1;
+			}
+			else
+			{
+				cmvmatrix[i*4+j] = 0;
+				inversecmvmatrix[i*4+j] = 0;
+			}
+		}
+	}
+	SaveCurrentModelViewMatrix();
+}
+void MyGLShow3D::ResetPosition()
+{
+	ResetCurrentModelViewMatrix();
+	SetZoomRate(1);
+}
