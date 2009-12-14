@@ -15,7 +15,8 @@ instruction:
 
 double MyGLShow3D::copycmvmatrix[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
-MyGLShow3D::MyGLShow3D():m_hglrc(NULL),prange(1),lengthperpixel(1),flag(false),pzoomrate(1)
+MyGLShow3D::MyGLShow3D():m_hglrc(NULL),prange(1),lengthperpixel(1),
+                    projectionflag(false),pzoomrate(1)
 {
 	pcenter[0] = 0;
 	pcenter[1] = 0;
@@ -67,7 +68,7 @@ void MyGLShow3D::Initialization(CClientDC &dc)
 	ocenter[2] = 0;
 	prange = 1;
 	lengthperpixel = 1;
-	flag = false;
+	projectionflag = false;
 	pzoomrate = 1;
 	for(int i=0;i<4;++i)
 	{
@@ -102,19 +103,29 @@ void MyGLShow3D::ReSize(CClientDC &dc,int cx,int cy)
 	wglMakeCurrent(dc.m_hDC,m_hglrc);
 	if(cx<cy)
 	{
-		lengthperpixel = (prange*pzoomrate)/(double)cy;
 		glViewport((cx-cy)/2,0,cy,cy);
 	}
 	else
 	{
-		lengthperpixel = (prange*pzoomrate)/(double)cx;
 		glViewport(0,(cy-cx)/2,cx,cx);
 	}
+	UpdateLengthPerPixel();
 	wglMakeCurrent(NULL,NULL);
 }
 
+void MyGLShow3D::UpdateLengthPerPixel()
+{
+	if(canvasrange[0]<canvasrange[1])
+	{
+		lengthperpixel = (prange*pzoomrate)/(double)canvasrange[1];
+	}
+	else
+	{
+		lengthperpixel = (prange*pzoomrate)/(double)canvasrange[0];
+	}
+}
 
-void MyGLShow3D::UpdataParameter(const double &x1, const double &x2, const double &y1, 
+void MyGLShow3D::UpdateParameter(const double &x1, const double &x2, const double &y1, 
 								 const double &y2,const double &z1,const double &z2)
 {
 	double maxrange = x2 - x1;
@@ -124,7 +135,7 @@ void MyGLShow3D::UpdataParameter(const double &x1, const double &x2, const doubl
 	temprange = z2 - z1;
 	if(maxrange<temprange)
 		maxrange = temprange;
-	prange = 2*sqrt(pow(maxrange,2.0)*3);
+	prange = sqrt(pow(maxrange,2.0)*3);
 	ocenter[0] = (x1 + x2) /2.0;
 	ocenter[1] = (y1 + y2) /2.0;
 	ocenter[2] = (z1 + z2) /2.0;
@@ -132,16 +143,7 @@ void MyGLShow3D::UpdataParameter(const double &x1, const double &x2, const doubl
 	pcenter[1] = 0;
 	pcenter[2] = 0;
 	//pzoomrate = 1.0;
-	if(canvasrange[0]<canvasrange[1])
-	{
-		lengthperpixel = (prange*pzoomrate)/(double)canvasrange[1];
-		//glViewport((canvasrange[0]-canvasrange[1])/2,0,canvasrange[1],canvasrange[1]);
-	}
-	else
-	{
-		lengthperpixel = (prange*pzoomrate)/(double)canvasrange[0];
-		//glViewport(0,(canvasrange[1]-canvasrange[0])/2,canvasrange[0],canvasrange[0]);
-	}
+	UpdateLengthPerPixel();
 }
 
 void MyGLShow3D::AdjustZoomRate(const double& rate)
@@ -157,10 +159,7 @@ void MyGLShow3D::SetZoomRate(const double &zoomrate)
 	if(zoomrate<0.0000000001)
 		return;
 	pzoomrate = zoomrate;
-	if(canvasrange[0]<canvasrange[1])
-		lengthperpixel = (prange*pzoomrate)/(double)canvasrange[1];
-	else
-		lengthperpixel = (prange*pzoomrate)/(double)canvasrange[0];
+	UpdateLengthPerPixel();
 }
 
 void MyGLShow3D::BeginDraw(HDC& m_hdc)
@@ -181,22 +180,22 @@ void MyGLShow3D::BeginDraw(HDC& m_hdc)
 		GL_NICEST);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	if(flag)
+	if(projectionflag)
 	{
 		//gluPerspective(60,1,prange*1.732,prange*3.732);
 		glFrustum(-prange/2*pzoomrate,prange/2*pzoomrate,
 				-prange/2*pzoomrate,prange/2*pzoomrate,
-				prange*1.732,prange*3.732);
+				prange*0.866,prange*1.866);
 	}
 	else
 	{
 		glOrtho(-prange/2*pzoomrate,prange/2*pzoomrate,
 				-prange/2*pzoomrate,prange/2*pzoomrate,
-				prange*1.732,prange*3.732);
+				prange*0.866,prange*1.866);
 	}
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(0,0,prange*2.732,0,0,0,0,1,0);
+	gluLookAt(0,0,prange*1.366,0,0,0,0,1,0);
 	//glTranslated(-ocenter[0],-ocenter[1],-ocenter[2]);
 	glMultMatrixd(cmvmatrix);
 	glTranslated(-ocenter[0],-ocenter[1],-ocenter[2]);
@@ -334,7 +333,7 @@ void MyGLShow3D::SetRotateMatrix(const double &angle,const double &ax,const doub
 	cmvmatrix[5] = copycmvmatrix[1]*rotatematrix[0][1] + copycmvmatrix[5]*rotatematrix[1][1] +
 		copycmvmatrix[9]*rotatematrix[2][1];
 	cmvmatrix[6] = copycmvmatrix[2]*rotatematrix[0][1] + copycmvmatrix[6]*rotatematrix[1][1] +
-		copycmvmatrix[9]*rotatematrix[2][1];
+		copycmvmatrix[10]*rotatematrix[2][1];
 	cmvmatrix[8] = copycmvmatrix[0]*rotatematrix[0][2] + copycmvmatrix[4]*rotatematrix[1][2] +
 		copycmvmatrix[8]*rotatematrix[2][2];
 	cmvmatrix[9] = copycmvmatrix[1]*rotatematrix[0][2] + copycmvmatrix[5]*rotatematrix[1][2] +
