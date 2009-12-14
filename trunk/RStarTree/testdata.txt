@@ -1,0 +1,15 @@
+testdata2d
+pointnumber:
+3
+rectanglenumber:
+3
+databeigin
+pointdate:
+10 20
+15 16
+12 18
+retangledate:
+20 20 30 30
+35 35 40 40
+20 45 25 48
+dataend
