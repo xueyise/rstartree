@@ -10,6 +10,11 @@ using std::vector;
 #ifndef DEF_BASIC_STRUCTURE
 #define DEF_BASIC_STRUCTURE 1
 
+#define DEFAULT_DIMENTION 2
+#define DEFAULT_LITTLE_M 5
+#define DEFALUT_BIG_M 10
+
+
 ///////////////////////////////区间结构定义///////////////////////////////////////////
 
 // 区间结构，表示某一维上的区间

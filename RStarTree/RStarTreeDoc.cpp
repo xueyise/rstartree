@@ -24,7 +24,7 @@ END_MESSAGE_MAP()
 CRStarTreeDoc::CRStarTreeDoc()
 {
 	// TODO: add one-time construction code here
-	rtree = new RSTRTree(2, 2, 4);
+	rtree = new RSTRTree(DEFAULT_DIMENTION, DEFAULT_LITTLE_M, DEFALUT_BIG_M);
 #ifdef TEST
 	flag = DrawPoint;
 #endif
