@@ -405,12 +405,20 @@ void RSTRTree::PickNextQudratic(RSTNode*& splitNode,RSTNode*& newSplitNode1,
 
 bool RSTRTree::Delete(RSTNode *data)
 {
+#ifdef TEST
+	TRACE("-----------------Delete Node %x---------------\n", (void*)data);
+#endif
+
 	// 确定待删除数据所在的叶子节点
 	RSTNode* pnode = (data->parent);
 	if(!pnode)
 		return false;
 	// 删除数据
 	// ???????????????????????还没有删除数据的操作??????????????????????????????
+	pnode->deleteNode(data);
+#ifdef TEST
+	TRACE("delete %x from %x\n", (void*)data, (void*)pnode);
+#endif
 
 	// 调整R树
 	CondenseTree(pnode);
@@ -433,6 +441,7 @@ bool RSTRTree::Delete(RSTNode *data)
 	}
 
 	return true;
+
 }
 
 void RSTRTree::CondenseTree(RSTNode* node)
@@ -445,23 +454,23 @@ void RSTRTree::CondenseTree(RSTNode* node)
 	int currentheight = 0;                // 用以存放当前node结点距离叶子节点的高度，height - currentheight是当前的层数
 	while(node->parent != NULL)     //如果不是根节点就执行循环
 	{
+		node->range = node->childSet[0]->range;
+		for(int i=1;i<node->childNum;++i)
+		{
+			node->UpdateRange(node->childSet[i]->range);
+		}
+		fnode = (RSTNode*)(node->parent);
 		if(node->childNum < m)
 		{
-			//临时删除node,不释放内存,存放到nodeset中
-			fnode = (RSTNode*)(node->parent);
+			//临时删除node,不释放内存,存放到nodeset中			
 			fnode->deleteNodeWithoutReleaseMem(node);
+#ifdef TEST
+			TRACE("delete %x from %x\n", (void*)node, (void*)fnode);
+#endif
 			nodeset.push_back(node);
 			heightset.push_back(height - currentheight);
 		}
-		else
-		{
-			//调整node节点的range
-			node->range = node->childSet[0]->range;
-			for(int i=1;i<node->childNum;++i)
-			{
-				node->UpdateRange(node->childSet[i]->range);
-			}
-		}
+
 		node = fnode;  // 向上继续
 		++currentheight;   // 距离叶子节点距离加1
 	}
