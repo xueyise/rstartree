@@ -70,6 +70,8 @@ public:
 	
 	virtual ~RSTNode();
 
+	virtual void GetDataPoints(vector<double> &vec);
+
 	// 添加子节点，(内联函数)，添加子节点后不负责父节点（当前节点）range的更新
 	void AddNode(RSTNode* pChild);
 	// 添加子节点，并在增加后对父节点（当前节点）的range进行相应的更新

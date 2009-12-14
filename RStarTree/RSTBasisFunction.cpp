@@ -128,6 +128,11 @@ RSTNode::~RSTNode()
 	}
 }
 
+void RSTNode::GetDataPoints(vector<double> &vec)
+{
+	vec.clear();
+}
+
 void RSTNode::AddNode(RSTNode* pChild)
 {
 	childSet[childNum] = pChild;

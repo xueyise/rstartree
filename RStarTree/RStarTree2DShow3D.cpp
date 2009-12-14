@@ -5,6 +5,7 @@ void Tree2DShow3D::drawTree()
 {
 	if(m_tree == NULL)
 		return;
+	drawData();
 	drawRectangle();
 	drawBranch();
 	fillRectangle();
@@ -92,9 +93,34 @@ void Tree2DShow3D::drawRectangle()
 	}
 }
 
-void Tree2DShow3D::drawDate(const RSTNode* p)
+void Tree2DShow3D::drawData()
 {
-
+	if(m_dataset == NULL)
+		return;
+	vector<double> vec;
+	glDepthMask(GL_TRUE);
+	glColor4f(0.5f,0.25f,1.0f,1);
+	glPointSize(5);
+	glLineWidth(1);
+	for(size_t i=0;i<m_dataset->size();++i)
+	{
+		(*m_dataset)[i]->GetDataPoints(vec);
+		if(vec.size() == 2)
+		{
+			glBegin(GL_POINTS);
+			glVertex3d(vec[0],vec[1],0);
+			glEnd();
+		}
+		else
+		{
+			glBegin(GL_LINE_LOOP);
+			for(size_t j=0;j<vec.size();j+=2)
+			{
+				glVertex3d(vec[j],vec[j+1],0);
+			}
+			glEnd();
+		}
+	}
 }
 
 bool Tree2DShow3D::updateTreeDate()

@@ -15,6 +15,13 @@ void RSTPoint2D::GenerateRange()
 	range[1].min = range[1].max = y;
 }
 
+void RSTPoint2D::GetDataPoints(vector<double> &vec)
+{
+	vec.clear();
+	vec.reserve(2);
+	vec.push_back(x);
+	vec.push_back(y);
+}
 ///////////////////////////3维点类///////////////////////////////////////////////
 
 RSTPoint3D::RSTPoint3D(double x_, double y_, double z_)  : RSTNode(Data, 3, 0), x(x_), y(y_), z(z_)
@@ -43,6 +50,20 @@ void RSTRectangle2D::GenerateRange()
 	range[0].max = xmax;
 	range[1].min = ymin;
 	range[1].max = ymax;
+}
+
+void RSTRectangle2D::GetDataPoints(vector<double> &vec)
+{
+	vec.clear();
+	vec.reserve(8);
+	vec.push_back(xmin);
+	vec.push_back(ymin);
+	vec.push_back(xmin);
+	vec.push_back(ymax);
+	vec.push_back(xmax);
+	vec.push_back(ymax);
+	vec.push_back(xmax);
+	vec.push_back(ymin);
 }
 
 ///////////////////////////3维矩形类///////////////////////////////////////////////
