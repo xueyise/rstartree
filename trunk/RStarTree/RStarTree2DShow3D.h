@@ -18,6 +18,7 @@ private:
 	vector<double> m_branch;
 	vector<RSTNode*> *m_dataset;
 	bool showstate[4];
+	
 
 public:
 	Tree2DShow3D():m_tree(NULL),rangeperlayer(0),zfront(true),m_dataset(NULL){};
