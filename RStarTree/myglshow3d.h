@@ -28,7 +28,7 @@ private:
 	int canvasrange[2];
 	double lengthperpixel;
 	double pzoomrate;
-	bool flag;                                      // true is perspective projection,false is ortho-projection
+	bool projectionflag;                        // true is perspective projection,false is ortho-projection
 	double cmvmatrix[16];                   // current model veiw matrix
 	double inversecmvmatrix[16];
 	static double copycmvmatrix[16];
@@ -39,7 +39,7 @@ public:
 	void Initialization(CClientDC &dc);
 	void Destroy();
 	void ReSize(CClientDC &dc,int cx,int cy);
-	void UpdataParameter(const double& x1,const double& x2,const double& y1,
+	void UpdateParameter(const double& x1,const double& x2,const double& y1,
 		const double& y2,const double &z1,const double &z2);
 	void AdjustZoomRate(const double& rate);
 
@@ -60,6 +60,7 @@ private:
 		double& wy,double& wz);
 	void TransformVectorFromWorldToScreen(const double& wx,const double& wy,
 		const double& wz,int &vx,int &vy);
+	void UpdateLengthPerPixel();
 	void SaveCurrentModelViewMatrix();
 	void LoadCurrentModelViewMatrix();
 	void SetZoomRate(const double& zoomrate);

@@ -16,7 +16,7 @@ void Tree2DShow3D::fillRectangle()
 	glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
 	if(zup)
 	{
-		for(size_t i=m_node.size()-1;i>0;--i)
+		for(size_t i=m_node.size()-1;i>=0;--i)
 		{
 			glBegin(GL_POLYGON);
 			glVertex3d(m_node[i]->range[0].min,m_node[i]->range[1].min,
@@ -96,7 +96,7 @@ bool Tree2DShow3D::updateTreeDate()
 	if(range[0]<range[1])
 		range[0] = range[1];
 	rangeperlayer = range[0]/m_tree->height;
-	m_gls3d.UpdataParameter(m_tree->Root->range[0].min,m_tree->Root->range[0].max,
+	m_gls3d.UpdateParameter(m_tree->Root->range[0].min,m_tree->Root->range[0].max,
 		m_tree->Root->range[1].min,m_tree->Root->range[1].max,0,range[0]);
 	setDrawItem();
 	return true;
