@@ -16,15 +16,18 @@ private:
 	vector<RSTNode*> m_node;
 	vector<int> m_layer;
 	vector<double> m_branch;
+	vector<RSTNode*> *m_dataset;
 
 public:
-	Tree2DShow3D():m_tree(NULL),rangeperlayer(0),zfront(true){}
+	Tree2DShow3D():m_tree(NULL),rangeperlayer(0),zfront(true),m_dataset(NULL){}
 	~Tree2DShow3D(){m_tree = NULL;}
 
 	void drawTree();
-	void drawDate(const RSTNode* p);
+	void drawData();
 
-	void settree(const RSTRTree* p){m_tree = p;updateTreeDate();}
+	void setTree(const RSTRTree* p1,vector<RSTNode*> *p2){setTree(p1);setData(p2);}
+	void setTree(const RSTRTree* p){m_tree = p;updateTreeDate();}
+	void setData(vector<RSTNode*> *p){m_dataset = p;}
 
 	void Initialization(CClientDC &dc){m_gls3d.Initialization(dc);}
 	void Destroy(){m_gls3d.Destroy();}
@@ -46,6 +49,8 @@ private:
 	void setDrawItem();
 	bool updateTreeDate();
 };
+
+
 
 
 #endif

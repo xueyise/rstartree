@@ -211,7 +211,7 @@ void CRStarTreeView::OnTestBuildTree()
 	inFile.close();
 	//build done
 
-	m_treeshow.settree(&tree);
+	m_treeshow.setTree(&tree);
 	Invalidate(TRUE);
 
 
@@ -516,6 +516,6 @@ void CRStarTreeView::OnFileOpen()
 			break;
 	}
 	infile.close();
-	m_treeshow.settree(ptree);
+	m_treeshow.setTree(ptree,pset);
 	Invalidate(TRUE);
 }

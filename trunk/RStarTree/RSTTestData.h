@@ -15,6 +15,7 @@ public:
 	RSTPoint2D(double x_, double y_); 
 
 	void GenerateRange();
+	void GetDataPoints(vector<double> &vec);
 };
 
 // 3Œ¨µ„¿‡
@@ -44,6 +45,7 @@ public:
 	RSTRectangle2D(double xmin_, double xmax_, double ymin_, double ymax_);
 
 	void GenerateRange();
+	void GetDataPoints(vector<double> &vec);
 };
 
 // 3Œ¨æÿ–Œ
