@@ -49,6 +49,8 @@ public:
 	void BeginDraw(HDC& m_hdc){m_gls3d.BeginDraw(m_hdc);}
 	void EndDraw(HDC& m_hdc){m_gls3d.EndDraw(m_hdc);}
 
+	bool * getShowState()const{return (bool*)showstate;}
+
 private:
 	void drawData();
 	void drawRectangle();

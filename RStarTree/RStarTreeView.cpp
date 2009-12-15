@@ -528,8 +528,19 @@ void CRStarTreeView::OnResetPosition()
 
 void CRStarTreeView::OnDisplayOption()
 {
-
-
-//TODO
-
+	//TODO
+	DisplayOptionDialog dlg;
+	bool *showstate;
+	showstate = m_treeshow.getShowState();
+	dlg.notDisplayDataNode = showstate[0]?false:true;
+	dlg.notDisplayRTreeEdge = showstate[1]?false:true;
+	dlg.notDisplayLeafNodeEdge = showstate[2]?false:true;
+	dlg.leafNodeNotObsolete = showstate[3]?false:true;
+	if(dlg.DoModal() == IDOK)
+	{
+		showstate[0] = dlg.notDisplayDataNode?false:true;
+		showstate[1] = dlg.notDisplayRTreeEdge?false:true;
+		showstate[2] = dlg.notDisplayLeafNodeEdge?false:true;
+		showstate[3] = dlg.leafNodeNotObsolete?false:true;
+	}
 }
