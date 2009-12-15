@@ -96,4 +96,8 @@ public:
 	//minOrMax在函数结束后会指示splitIndex位于min排序数组还是max排序数组
 	//splitIndex指示分组后第一组数据的最后一个元素
 	void ChooseSplitIndex(RSTNode**& nodes1,RSTNode**& nodes2,bool& minOrMax,int& splitIndex);
+
+	//旧版本的split函数，可以不用，推荐用Split
+	void Split2(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
+	void ChooseSplitIndex(RSTNode**& nodes1,RSTNode**& node2,bool*minOrMax,int& splitIndex);
 };

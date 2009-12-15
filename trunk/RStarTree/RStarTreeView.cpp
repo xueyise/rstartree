@@ -207,8 +207,8 @@ void CRStarTreeView::OnTestBuildTree()
 	int N;
 	inFile>>N;
 	int m,M;
-	m=10;
-	M=20;
+	m=2;
+	M=4;
 	
 	vector<RSTRange> ranges;
 	srand(unsigned(time(NULL)));
@@ -265,28 +265,28 @@ void CRStarTreeView::OnTestBuildTree()
 	inFile.close();
 	
 	ofstream out("result.txt",ofstream::app);
-	//out<<"Tree Height:"<<tree.height<<endl;
-	////print the tree
-	//using std::deque;
-	//deque<RSTNode*> que;
-	//que.push_back(tree.Root);
-	//while(!que.empty()){
-	//	RSTNode* pNode = que.front();
-	//	out<<(void*)pNode<<":";
-	//	out<<"Parent:"<<(void*)pNode->parent;
-	//	for(int i=0;i<(int)pNode->range.size();i++){
-	//		out<<"("<<pNode->range[i].min<<","<<pNode->range[i].max<<")";	
-	//	}
-	//	out<<endl;		
-	//	que.pop_front();
-	//	if(pNode->type==Data)continue;
-	//	
-	//	else{
-	//		RSTNode* pRSTNode = (RSTNode*)pNode;
-	//		for(int i=0;i<pRSTNode->childNum;i++)
-	//			que.push_back(pRSTNode->childSet[i]);
-	//	}
-	//}
+	out<<"Tree Height:"<<starTree.height<<endl;
+	//print the tree
+	using std::deque;
+	/*deque<RSTNode*> que;
+	que.push_back(starTree.Root);
+	while(!que.empty()){
+		RSTNode* pNode = que.front();
+		out<<(void*)pNode<<":";
+		out<<"Parent:"<<(void*)pNode->parent;
+		for(int i=0;i<(int)pNode->range.size();i++){
+			out<<"("<<pNode->range[i].min<<","<<pNode->range[i].max<<")";	
+		}
+		out<<endl;		
+		que.pop_front();
+		if(pNode->type==Data)continue;
+		
+		else{
+			RSTNode* pRSTNode = (RSTNode*)pNode;
+			for(int i=0;i<pRSTNode->childNum;i++)
+				que.push_back(pRSTNode->childSet[i]);
+		}
+	}*/
 	
 
 	out<<endl<<N<<"Points in the Tree"<<endl;

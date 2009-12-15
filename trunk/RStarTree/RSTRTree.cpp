@@ -80,6 +80,7 @@ void RSTRTree::SearchByInter(RSTRange& range, RSTNodeSet& result, RSTNode* node)
 RSTRTree::~RSTRTree(){
 
 	//节点的析构函数是递归调用的
+	
 	delete this->Root;
 }
 
@@ -585,8 +586,70 @@ RSTNode* RSTRStarTree::ChooseLeaf(RSTNode* data)
 
 	return node;
 }
-
 void RSTRStarTree::Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
+	//为第二个节点分配内存
+	newSplitNode2 = new RSTNode(splitNode->type,this->dim,this->M);
+	int axis = ChooseSplitAxis(splitNode);
+	//copy contents from splitNode to newly allocated node
+	for(int i=0;i<=M;i++){
+		newSplitNode2->childSet[i] = splitNode->childSet[i];
+	}
+
+	//
+	RSTNodeComparator minCmp(axis,true);
+	RSTNodeComparator maxCmp(axis,false);
+	//sort
+	using namespace std;
+	sort(splitNode->childSet,splitNode->childSet+M+1,minCmp);
+	sort(newSplitNode2->childSet,newSplitNode2->childSet+M+1,maxCmp);
+
+	//
+	bool minOrMax;
+	int splitIndex;
+	ChooseSplitIndex(splitNode->childSet,newSplitNode2->childSet,minOrMax,splitIndex);
+	if(minOrMax){
+		//copy the second part into newsplitnode2
+		newSplitNode2->childNum = 0;
+		for(int i=splitIndex+1;i<=M;i++){
+			newSplitNode2->AddNodeAndUpdateRange(splitNode->childSet[i]);
+		}	
+		//reset the split number
+
+		splitNode->childNum = splitIndex+1;
+		splitNode->UpdateRange();
+	}else{
+		splitNode->childNum = 0;
+		for(int i=splitIndex+1;i<=M;i++){
+			splitNode->AddNodeAndUpdateRange(newSplitNode2->childSet[i]);
+		}
+		newSplitNode2->childNum = splitIndex+1;
+	}
+	newSplitNode1 = splitNode;
+	//将其他位置清空
+	for(int i=newSplitNode1->childNum;i<=M;i++){
+		newSplitNode1->childSet[i]=NULL;
+	}
+	for(int i=newSplitNode2->childNum;i<=M;i++){
+		newSplitNode2->childSet[i]=NULL;
+	}
+	for(int i=0;i<newSplitNode1->childNum;i++){
+		newSplitNode1->childSet[i]->parent = 
+			newSplitNode1;
+	}
+	for(int i=0;i<newSplitNode2->childNum;i++){
+		newSplitNode2->childSet[i]->parent = 
+			newSplitNode2;
+	}
+	newSplitNode1->UpdateRange();
+	newSplitNode2->UpdateRange();
+	if(splitNode->parent){
+		splitNode->parent->deleteNodeWithoutReleaseMem(splitNode);
+	}else{
+		;//do nothing
+	}
+}
+
+void RSTRStarTree::Split2(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
 	
 	//allocate memory for two new nodes
 	newSplitNode1 = new RSTNode(splitNode->type,this->dim,this->M);
