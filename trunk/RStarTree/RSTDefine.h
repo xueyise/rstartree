@@ -51,7 +51,7 @@ typedef std::vector<RSTInter> RSTRange;
 #define DefaultMValue 10
 #define DefaultmValue 5
 
-#define P 32
+#define P 16
 
 // 节点定义
 class RSTNode
