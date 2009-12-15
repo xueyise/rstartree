@@ -57,10 +57,12 @@ public:
 	virtual void Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
 	void BruteForceSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);	
 	void QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
+	void QuadraticSplit2(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
 	void LinearSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
 
 	// 为Split操作选取种子，采用复杂度为n^2的近似算法
 	void PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& secondSeedIndex);
+	void PickSeedsQudratic2(RSTNode* splitNode,int& firstSeedIndex,int& secondSeedIndex);
 	// 为Split操作选取种子，采用线性复杂度的近似算法
 	void PickSeedsLinear(RSTNode* splitNode);
 
@@ -69,6 +71,9 @@ public:
 	void PickNextQudratic(RSTNode*& splitNode,RSTNode*& newSplitNode1,
 								RSTNode*& newSplitNode2,RSTRange& tempBoundingRange,int& index,
 								double& d1,double& d2);
+	void PickNextQudratic2(RSTNode* splitNode,int startIndex,int endIndex,
+								 RSTNode* newSplitNode2,RSTRange& tempBoundingRange,int& index,
+								 double& d1,double& d2);
 
 	// Split算法中选择下个成员，采用线性复杂度算法
 	void PickNextLinear();

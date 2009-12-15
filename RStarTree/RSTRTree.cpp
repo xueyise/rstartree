@@ -279,6 +279,135 @@ void RSTRTree::PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& sec
 void RSTRTree::Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
 	QuadraticSplit(splitNode,newSplitNode1,newSplitNode2);
 }
+void RSTRTree::QuadraticSplit2(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
+	//allocate memory for new node
+	newSplitNode2 = new RSTNode(splitNode->type,m,M);
+
+	//
+	int tempIndex;
+	int index;
+	double d1,d2;
+
+	RSTRange tempBoundingRange;
+
+	//choose seeds
+	int firstSeedIndex = -1;
+	int secondSeedIndex = -1;
+	
+	this->PickSeedsQudratic(splitNode,firstSeedIndex,secondSeedIndex);
+	
+	
+	//将第二个种子加入到newSplitNode2中
+	newSplitNode2->AddNodeAndUpdateRange(splitNode->childSet[secondSeedIndex]);
+	splitNode->deleteNodeWithoutReleaseMem(secondSeedIndex);
+	//在splitNode中处理第一个种子 
+	if(firstSeedIndex!=0){
+		RSTNode* tempNode = splitNode->childSet[0];
+		splitNode->childSet[0] = splitNode->childSet[firstSeedIndex];
+		splitNode->childSet[firstSeedIndex] = tempNode;
+	}
+
+	int startIndex = 1;
+	int endIndex = splitNode->childNum;
+	while((endIndex-startIndex)!=0){
+		
+		if(endIndex<=m){
+			//copy all left nodes
+			splitNode->childNum = endIndex;
+			startIndex = endIndex;
+			//将第一个节点书中的可用区域标识为空
+			break;
+		}
+		if((endIndex-startIndex+newSplitNode2->childNum)<=m){
+			//copy all left nodes
+			for(int i=startIndex;i<endIndex;i++){
+				newSplitNode2->AddNodeAndUpdateRange(splitNode->childSet[i]);
+			}
+			//将第一个节点数组中的可用区域标识为空
+			endIndex = startIndex;
+			break;
+		}
+
+		PickNextQudratic2(splitNode,startIndex,endIndex-1,newSplitNode2,tempBoundingRange,index,d1,d2);
+		bool isFirstArray = false;
+		if(d1<d2){
+			isFirstArray = true;
+		}else if(d1>d2){
+			isFirstArray = false;
+		}else{
+			//比较大小
+			RSTRange tempRange;
+			ComputePartialBoundingRange(splitNode->childSet,startIndex,endIndex-1,tempRange);
+			if(ComputeVolume(tempRange)<ComputeVolume(newSplitNode2->range)){
+				isFirstArray = true;
+			}else {
+				isFirstArray = false;
+			}
+		
+		}
+		if(isFirstArray){
+			if(index==startIndex){
+				startIndex++;
+			}else{
+				RSTNode* tempNode;
+				tempNode = splitNode->childSet[startIndex];
+				splitNode->childSet[startIndex]=splitNode->childSet[index];
+				splitNode->childSet[index] = tempNode;
+				startIndex++;
+			}
+
+		}else{
+			newSplitNode2->AddNodeAndUpdateRange(splitNode->childSet[index]);
+			RSTNode* tempNode;
+			splitNode->childSet[index]=splitNode->childSet[endIndex-1];
+			endIndex--;
+		}
+	}
+	splitNode->childNum = startIndex;
+	splitNode->UpdateRange();
+
+	if(splitNode->parent){
+		splitNode->parent->deleteNodeWithoutReleaseMem(splitNode);
+	}else{
+		;//do nothing
+	}
+
+
+}
+void RSTRTree::PickNextQudratic2(RSTNode* splitNode,int startIndex,int endIndex,
+								 RSTNode* newSplitNode2,RSTRange& tempBoundingRange,int& index,
+								 double& d1,double& d2){
+	
+									 
+									 
+									 
+	
+
+	double diff = -1;
+	double tempDiff;
+	double tempD1,tempD2;
+	RSTRange firstRange;
+
+	//compute the range for the first set
+	ComputePartialBoundingRange(splitNode->childSet,startIndex,endIndex,firstRange);
+
+	for(int i=startIndex;i<=endIndex;i++){
+		RSTRange& currentRange = splitNode->childSet[i]->range;
+		ComputeBoundingRectangle(firstRange,currentRange,tempBoundingRange);
+		tempD1 = ComputeVolume(tempBoundingRange)-ComputeVolume(firstRange);
+		ComputeBoundingRectangle(newSplitNode2->range,currentRange,tempBoundingRange);
+		tempD2 = ComputeVolume(tempBoundingRange)-ComputeVolume(newSplitNode2->range);
+		tempDiff = fabs(tempD1-tempD2);
+		if(tempDiff>diff){
+			diff = tempDiff;
+			d1 = tempD1;
+			d2= tempD2;
+			index = i;
+		}
+	
+	}
+
+}
 void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
 	//
 	//如果子节点个数小于M，则不需要进行分裂操作
