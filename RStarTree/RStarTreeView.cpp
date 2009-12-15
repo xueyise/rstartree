@@ -20,6 +20,9 @@
 
 #ifdef TEST
 RSTRStarTree tree(2,4,8);
+
+int N;
+
 #endif
 
 // CRStarTreeView
@@ -47,6 +50,7 @@ BEGIN_MESSAGE_MAP(CRStarTreeView, CView)
 	ON_COMMAND(ID_FILE_OPEN, &CRStarTreeView::OnFileOpen)
 	ON_COMMAND(ID_32779, &CRStarTreeView::OnResetPosition)
 	ON_COMMAND(ID_DISPLAY_OPTION, &CRStarTreeView::OnDisplayOption)
+	ON_COMMAND(ID_TEST_BUILD_TREE_FROM_FILE, &CRStarTreeView::OnTestBuildTreeFromFile)
 END_MESSAGE_MAP()
 
 // CRStarTreeView construction/destruction
@@ -181,11 +185,11 @@ void CRStarTreeView::OnTestBuildTree()
 	
 
 	/*ofstream outFile("data.txt");
-	int N = 10000;
+	int N = 1000000;
 	outFile<<N<<endl;
 	for(int i=0;i<N;i++){
-		int x = rand()%100;
-		int y = rand()%100;
+		double x = rand()+(double)rand()/RAND_MAX;
+		double y = rand()+(double)rand()/RAND_MAX;
 		if(rand()%2==0)x = -x;
 		if(rand()%2==0)y = -y;
 
@@ -193,12 +197,47 @@ void CRStarTreeView::OnTestBuildTree()
 	}
 	outFile.close();*/
 
+
 	ifstream inFile("data.txt");
 	int N;
 	inFile>>N;
-
+	int m,M;
+	m=10;
+	M=20;
 	
+	vector<RSTRange> ranges;
+	srand(time(NULL));
+	for(int i=0;i<5;i++){
+		RSTRange range;
+		double xMin = rand()+(double)rand()/RAND_MAX;
+		xMin = -xMin;
+		double xMax = rand()+(double)rand()/RAND_MAX;
 
+		double yMin = rand()+(double)rand()/RAND_MAX;
+		yMin = -yMin;
+		double yMax = rand()+(double)rand()/RAND_MAX;
+
+		int T=10;
+		xMin = xMin/T;
+		yMin = yMin/T;
+		xMax = xMax/T;
+		yMax = yMax/T;
+		range.push_back(RSTInter(xMin,xMax));
+		range.push_back(RSTInter(yMin,yMax));
+		ranges.push_back(range);
+	}
+	//input ranges
+	/*RSTRange range1;
+	range1.push_back(RSTInter(-200,200));
+	range1.push_back(RSTInter(300,600));
+	ranges.push_back(range1);
+	RSTRange range2;
+	range2.push_back(RSTInter(500,600));
+	range2.push_back(RSTInter(-600,600));
+	ranges.push_back(range2);*/
+
+	RSTRStarTree starTree(2,m,M);
+	RSTRTree tree(2,m,M);
 	for(int i=0;i<N;i++){
 		double x,y;
 		inFile>>x>>y;
@@ -209,51 +248,100 @@ void CRStarTreeView::OnTestBuildTree()
 
 		//insertData
 		tree.InsertData(p);
+		
+		
+		p = new RSTPoint2D();
+		p->x = x;
+		p->y = y;
+		p->GenerateRange();
+		starTree.InsertData(p);
+
 	}
 	inFile.close();
-	//build done
+	
+	ofstream out("result.txt",ofstream::app);
+	//out<<"Tree Height:"<<tree.height<<endl;
+	////print the tree
+	//using std::deque;
+	//deque<RSTNode*> que;
+	//que.push_back(tree.Root);
+	//while(!que.empty()){
+	//	RSTNode* pNode = que.front();
+	//	out<<(void*)pNode<<":";
+	//	out<<"Parent:"<<(void*)pNode->parent;
+	//	for(int i=0;i<(int)pNode->range.size();i++){
+	//		out<<"("<<pNode->range[i].min<<","<<pNode->range[i].max<<")";	
+	//	}
+	//	out<<endl;		
+	//	que.pop_front();
+	//	if(pNode->type==Data)continue;
+	//	
+	//	else{
+	//		RSTNode* pRSTNode = (RSTNode*)pNode;
+	//		for(int i=0;i<pRSTNode->childNum;i++)
+	//			que.push_back(pRSTNode->childSet[i]);
+	//	}
+	//}
+	
 
-	m_treeshow.setTree(&tree);
-	Invalidate(TRUE);
+	out<<endl<<N<<"Points in the Tree"<<endl;
+	out<<"m="<<tree.m<<" M="<<tree.M<<endl;
+	LARGE_INTEGER frequency;
+	QueryPerformanceFrequency(&frequency);
+	LARGE_INTEGER beginCounter,endCounter;
+	RSTNodeSet rTreeSet,starTreeSet;
+	double resultTime;
 
-	ofstream out("result.txt");
-	out<<"Tree Height:"<<tree.height<<endl;
-	//print the tree
-	using std::deque;
-	deque<RSTNode*> que;
-	que.push_back(tree.Root);
-	while(!que.empty()){
-		RSTNode* pNode = que.front();
-		out<<(void*)pNode<<":";
-		out<<"Parent:"<<(void*)pNode->parent;
-		for(int i=0;i<(int)pNode->range.size();i++){
-			out<<"("<<pNode->range[i].min<<","<<pNode->range[i].max<<")";	
-		}
-		out<<endl;		
-		que.pop_front();
-		if(pNode->type==Data)continue;
+	for(int i=0;i<ranges.size();i++){
+		RSTRange& range = ranges[i];
+		out<<"Range is x:"<<range[0].min<<"to"<<range[0].max;
+		out<<" y:"<<range[1].min<<"to"<<range[1].max<<endl;
+
+
+		QueryPerformanceCounter(&beginCounter);
+		tree.Search(range,rTreeSet,false);
+		QueryPerformanceCounter(&endCounter);
 		
-		else{
-			RSTNode* pRSTNode = (RSTNode*)pNode;
-			for(int i=0;i<pRSTNode->childNum;i++)
-				que.push_back(pRSTNode->childSet[i]);
-		}
+		resultTime = 
+			((double)endCounter.QuadPart-(double)beginCounter.QuadPart)
+			/
+			(frequency.QuadPart);
+		resultTime= resultTime*1000*1000;
+
+		out<<"RTree:"<<rTreeSet.size();
+		out<<" Time:"<<resultTime<<"us"<<endl;
+
+		
+		QueryPerformanceCounter(&beginCounter);
+		starTree.Search(range,starTreeSet,false);
+		QueryPerformanceCounter(&endCounter);
+
+
+
+		resultTime = 
+			((double)endCounter.QuadPart-(double)beginCounter.QuadPart)
+			/
+			(frequency.QuadPart);
+		resultTime= resultTime*1000*1000;
+		out<<"R*Tree:"<<starTreeSet.size();
+		out<<" Time:"<<resultTime<<"us"<<endl;
+
 	}
+	
 
 	
-	/*out<<endl;
-	out<<endl;
-	RSTNodeSet resultSet;
-	RSTRange range;
-	range.push_back(RSTInter(-100,100));
-	range.push_back(RSTInter(-100,50));
-	tree.Search(range,resultSet,false);
+	
 
-	out<<resultSet.size() << endl;
-	for(int i=0;i<(int)resultSet.size();i++){
-		out<<resultSet[i]->range[0].min<<
-			" "<<resultSet[i]->range[1].min<<endl;
-	}*/
+
+
+	
+
+
+	
+	
+
+
+	
 	out.close();
 }
 
@@ -541,4 +629,12 @@ void CRStarTreeView::OnDisplayOption()
 		m_treeshow.setNodeEdgeShowState(dlg.notDisplayLeafNodeEdge?false:true);
 		m_treeshow.setNodeFaceShowState(dlg.leafNodeNotObsolete?false:true);
 	}
+}
+
+void CRStarTreeView::OnTestBuildTreeFromFile()
+{
+
+
+	
+	
 }

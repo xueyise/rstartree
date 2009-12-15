@@ -76,6 +76,7 @@ public:
 	afx_msg void OnFileOpen();
 	afx_msg void OnResetPosition();
 	afx_msg void OnDisplayOption();
+	afx_msg void OnTestBuildTreeFromFile();
 };
 
 #ifndef _DEBUG  // debug version in RStarTreeView.cpp
