@@ -19,11 +19,13 @@ private:
 	vector<int> m_layer;
 	vector<double> m_branch;
 	vector<RSTNode*> *m_dataset;
+	vector<RSTNode*> *m_result;
 	AssistantObject* m_ao;
 	bool showstate[5];
 
 public:
-	Tree2DShow3D():m_tree(NULL),rangeperlayer(0),zfront(true),m_dataset(NULL),m_ao(NULL){};
+	Tree2DShow3D():m_tree(NULL),rangeperlayer(0),zfront(true),m_dataset(NULL),
+		m_ao(NULL),m_result(NULL){};
 	~Tree2DShow3D(){m_tree = NULL;m_dataset = NULL;}
 
 	void drawTree();
@@ -31,6 +33,7 @@ public:
 	void setTree(const RSTRTree* p1,vector<RSTNode*> *p2){setTree(p1);setData(p2);}
 	void setTree(const RSTRTree* p){m_tree = p;updateTreeDate();}
 	void setData(vector<RSTNode*> *p){m_dataset = p;}
+	void setResult(vector<RSTNode*> *p){m_result = p;}
 
 	void setDataShowState(const bool &state){showstate[0] = state;}
 	void setBranchState(const bool &state){showstate[1] = state;}
@@ -62,6 +65,7 @@ public:
 	void EndDraw(HDC& m_hdc){m_gls3d.EndDraw(m_hdc);}
 
 private:
+	void drawResult();
 	void drawAssistantObject();
 	void drawData();
 	void drawRectangle();
@@ -97,6 +101,7 @@ public:
 	double top;
 	double z;
 
+	void adjustRange();
 	void draw();
 };
 

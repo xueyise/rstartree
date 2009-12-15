@@ -23,11 +23,11 @@ protected: // create from serialization only
 public:
 	RSTRTree* rtree;
 	vector<RSTNode*> dateset;
+	RSTNodeSet result;
 #ifdef TEST
 	RSTPoint2D start;
 	RSTPoint2D end;
 	RSTPoint2D dragPoint;
-	RSTNodeSet result;
 	int flag;
 #endif
 

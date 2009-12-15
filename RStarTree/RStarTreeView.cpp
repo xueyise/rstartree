@@ -382,6 +382,8 @@ void CRStarTreeView::OnLButtonDown(UINT nFlags, CPoint point)
 	case LBUTTONRANGESEARCH:
 		m_treeshow.get2DCoordinateFromSCreenToWorld(beginpoint.x,beginpoint.y,
 			m_aorectangle.left,m_aorectangle.bottom);
+		m_treeshow.get2DCoordinateFromSCreenToWorld(beginpoint.x,beginpoint.y,
+			m_aorectangle.left,m_aorectangle.bottom);
 		break;
 	case LBUTTONRANGELOCATION:
 		break;
@@ -440,6 +442,13 @@ void CRStarTreeView::OnLButtonUp(UINT nFlags, CPoint point)
 	case LBUTTONRANGESEARCH:
 		m_treeshow.get2DCoordinateFromSCreenToWorld(endpoint.x,endpoint.y,
 			m_aorectangle.right,m_aorectangle.top);
+		m_aorectangle.adjustRange();
+		m_range.clear();
+		m_range.push_back(RSTInter(m_aorectangle.left,m_aorectangle.right));
+		m_range.push_back(RSTInter(m_aorectangle.bottom,m_aorectangle.top));
+		this->GetDocument()->result.clear();
+		this->GetDocument()->rtree->Search(m_range,this->GetDocument()->result,false);
+		m_treeshow.setResult(&(this->GetDocument()->result));
 		break;
 	case LBUTTONRANGELOCATION:
 		break;
@@ -637,6 +646,9 @@ void CRStarTreeView::OnFileOpen()
 		else
 			break;
 	}
+	delete this->GetDocument()->rtree;
+	this->GetDocument()->rtree = new RSTRTree(DEFAULT_DIMENTION, DEFAULT_LITTLE_M,
+		DEFALUT_BIG_M);
 	RSTRTree* ptree = this->GetDocument()->rtree;
 	vector<RSTNode*> *pset = &(this->GetDocument()->dateset);
 	pset->clear();
