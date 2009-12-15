@@ -6,6 +6,8 @@
 #include "RSTDefine.h"
 #include "RSTRTree.h"
 
+class AssistantObject;
+
 class Tree2DShow3D
 {
 private:
@@ -17,11 +19,11 @@ private:
 	vector<int> m_layer;
 	vector<double> m_branch;
 	vector<RSTNode*> *m_dataset;
+	AssistantObject* m_ao;
 	bool showstate[5];
-	
 
 public:
-	Tree2DShow3D():m_tree(NULL),rangeperlayer(0),zfront(true),m_dataset(NULL){};
+	Tree2DShow3D():m_tree(NULL),rangeperlayer(0),zfront(true),m_dataset(NULL),m_ao(NULL){};
 	~Tree2DShow3D(){m_tree = NULL;m_dataset = NULL;}
 
 	void drawTree();
@@ -34,10 +36,16 @@ public:
 	void setBranchState(const bool &state){showstate[1] = state;}
 	void setNodeEdgeShowState(const bool &state){showstate[2] = state;}
 	void setNodeFaceShowState(const bool &state){showstate[3] = state;}
+	void setAssistantObjectShowState(const bool &state){showstate[4] = state;}
 	bool getDataShowState()const{return showstate[0];}
 	bool getBranchState()const{return showstate[1];}
 	bool getNodeEdgeShowState()const{return showstate[2];}
 	bool getNodeFaceShowState()const{return showstate[3];}
+	bool getAssistantObjectShowState()const{return showstate[4];}
+
+	void setAssistantObject(AssistantObject* p){m_ao = p;}
+
+	void get2DCoordinateFromSCreenToWorld(const int &sx,const int &sy,double &wx,double &wy);
 
 	void Initialization(CClientDC &dc)
 	{m_gls3d.Initialization(dc);for(int i=0;i<4;++i) showstate[i] = true;showstate[4]=false;}
@@ -54,6 +62,7 @@ public:
 	void EndDraw(HDC& m_hdc){m_gls3d.EndDraw(m_hdc);}
 
 private:
+	void drawAssistantObject();
 	void drawData();
 	void drawRectangle();
 	void fillRectangle();
@@ -61,6 +70,34 @@ private:
 	void setzup();
 	void setDrawItem();
 	bool updateTreeDate();
+};
+
+class AssistantObject
+{
+public:
+	virtual void draw(){}
+};
+
+class AOPoint:AssistantObject
+{
+public:
+	double x;
+	double y;
+	double z;
+
+	void draw();
+};
+
+class AORectangle:AssistantObject
+{
+public:
+	double left;
+	double bottom;
+	double right;
+	double top;
+	double z;
+
+	void draw();
 };
 
 

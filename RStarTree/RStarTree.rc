@@ -148,10 +148,16 @@ BEGIN
             MENUITEM "正投影",                         ID_32780
             MENUITEM "透视投影",                        ID_32781
         END
-        MENUITEM "重置位置",                        ID_32779
+        MENUITEM "重置位置",                        ID_RESETPOSITION
         MENUITEM "显示选项",                        ID_DISPLAY_OPTION
+        MENUITEM "鼠标牵引",                        ID_MOUSEDRAG
     END
-    MENUITEM "操作",                          ID_32782
+    POPUP "操作"
+    BEGIN
+        MENUITEM "区域查询",                        ID_RANGESEARCH
+        MENUITEM "区域定位",                        ID_32786
+        MENUITEM "点定位",                         ID_32787
+    END
 END
 
 

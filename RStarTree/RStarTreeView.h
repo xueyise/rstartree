@@ -65,7 +65,14 @@ protected:
 	Tree2DShow3D m_treeshow;
 	CPoint beginpoint;
 	CPoint endpoint;
+	int lbuttonflag;
 	bool flagdraging;
+	AOPoint m_aopoint;
+	AORectangle m_aorectangle;
+	static const int LBUTTONDRAG = 0;
+	static const int LBUTTONRANGESEARCH = 1;
+	static const int LBUTTONRANGELOCATION = 2;
+	static const int LBUTTONPOINTLOCATION = 3;
 public:
 	afx_msg void OnDestroy();
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
@@ -76,6 +83,8 @@ public:
 	afx_msg void OnFileOpen();
 	afx_msg void OnResetPosition();
 	afx_msg void OnDisplayOption();
+	afx_msg void OnRangeSearch();
+	afx_msg void OnMouseDrag();
 	afx_msg void OnTestBuildTreeFromFile();
 };
 
