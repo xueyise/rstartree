@@ -17,7 +17,7 @@ private:
 	vector<int> m_layer;
 	vector<double> m_branch;
 	vector<RSTNode*> *m_dataset;
-	bool showstate[4];
+	bool showstate[5];
 	
 
 public:
@@ -34,9 +34,13 @@ public:
 	void setBranchState(const bool &state){showstate[1] = state;}
 	void setNodeEdgeShowState(const bool &state){showstate[2] = state;}
 	void setNodeFaceShowState(const bool &state){showstate[3] = state;}
+	bool getDataShowState()const{return showstate[0];}
+	bool getBranchState()const{return showstate[1];}
+	bool getNodeEdgeShowState()const{return showstate[2];}
+	bool getNodeFaceShowState()const{return showstate[3];}
 
 	void Initialization(CClientDC &dc)
-	{m_gls3d.Initialization(dc);for(int i=0;i<4;++i) showstate[i] = true;}
+	{m_gls3d.Initialization(dc);for(int i=0;i<4;++i) showstate[i] = true;showstate[4]=false;}
 	void Destroy(){m_gls3d.Destroy();}
 	void ReSize(CClientDC &dc,int cx,int cy){m_gls3d.ReSize(dc,cx,cy);}
 	void AdjustZoomRate(const double& rate){m_gls3d.AdjustZoomRate(rate);}
@@ -48,8 +52,6 @@ public:
 
 	void BeginDraw(HDC& m_hdc){m_gls3d.BeginDraw(m_hdc);}
 	void EndDraw(HDC& m_hdc){m_gls3d.EndDraw(m_hdc);}
-
-	bool * getShowState()const{return (bool*)showstate;}
 
 private:
 	void drawData();
