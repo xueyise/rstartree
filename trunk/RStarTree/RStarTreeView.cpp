@@ -48,16 +48,21 @@ BEGIN_MESSAGE_MAP(CRStarTreeView, CView)
 	ON_WM_RBUTTONUP()
 	ON_WM_MOUSEWHEEL()
 	ON_COMMAND(ID_FILE_OPEN, &CRStarTreeView::OnFileOpen)
-	ON_COMMAND(ID_32779, &CRStarTreeView::OnResetPosition)
+	ON_COMMAND(ID_RESETPOSITION, &CRStarTreeView::OnResetPosition)
 	ON_COMMAND(ID_DISPLAY_OPTION, &CRStarTreeView::OnDisplayOption)
 	ON_COMMAND(ID_TEST_BUILD_TREE_FROM_FILE, &CRStarTreeView::OnTestBuildTreeFromFile)
+	ON_COMMAND(ID_RANGESEARCH, &CRStarTreeView::OnRangeSearch)
+	ON_COMMAND(ID_MOUSEDRAG, &CRStarTreeView::OnMouseDrag)
 END_MESSAGE_MAP()
 
 // CRStarTreeView construction/destruction
 
 CRStarTreeView::CRStarTreeView()
+: lbuttonflag(0),flagdraging(false)
 {
 	// TODO: add construction code here
+	m_aorectangle.z = 0;
+	m_aopoint.z = 0;
 }
 
 CRStarTreeView::~CRStarTreeView()
@@ -206,7 +211,7 @@ void CRStarTreeView::OnTestBuildTree()
 	M=20;
 	
 	vector<RSTRange> ranges;
-	srand(time(NULL));
+	srand(unsigned(time(NULL)));
 	for(int i=0;i<5;i++){
 		RSTRange range;
 		double xMin = rand()+(double)rand()/RAND_MAX;
@@ -292,7 +297,7 @@ void CRStarTreeView::OnTestBuildTree()
 	RSTNodeSet rTreeSet,starTreeSet;
 	double resultTime;
 
-	for(int i=0;i<ranges.size();i++){
+	for(size_t i=0;i<ranges.size();i++){
 		RSTRange& range = ranges[i];
 		out<<"Range is x:"<<range[0].min<<"to"<<range[0].max;
 		out<<" y:"<<range[1].min<<"to"<<range[1].max<<endl;
@@ -367,9 +372,24 @@ void CRStarTreeView::OnLButtonDown(UINT nFlags, CPoint point)
 	}*/
 	
 #endif
-	flagdraging = true;
 	beginpoint = point;
 	endpoint = point;
+	switch(lbuttonflag)
+	{
+	case LBUTTONDRAG:
+		flagdraging = true;
+		break;
+	case LBUTTONRANGESEARCH:
+		m_treeshow.get2DCoordinateFromSCreenToWorld(beginpoint.x,beginpoint.y,
+			m_aorectangle.left,m_aorectangle.bottom);
+		break;
+	case LBUTTONRANGELOCATION:
+		break;
+	case LBUTTONPOINTLOCATION:
+		break;
+	default:
+		break;
+	}
 
 	CView::OnLButtonDown(nFlags, point);
 }
@@ -407,13 +427,28 @@ void CRStarTreeView::OnLButtonUp(UINT nFlags, CPoint point)
 		GetDocument()->rtree->Search(searchRange, GetDocument()->result, false);
 	}*/
 #endif
-	if(flagdraging)
+	endpoint = point;
+	switch(lbuttonflag)
 	{
-		endpoint = point;
-		m_treeshow.Translation(endpoint.x-beginpoint.x,beginpoint.y-endpoint.y,true);
-		flagdraging = false;
-		Invalidate(TRUE);
+	case LBUTTONDRAG:
+		if(flagdraging)
+		{
+			m_treeshow.Translation(endpoint.x-beginpoint.x,beginpoint.y-endpoint.y,true);
+			flagdraging = false;
+		}
+		break;
+	case LBUTTONRANGESEARCH:
+		m_treeshow.get2DCoordinateFromSCreenToWorld(endpoint.x,endpoint.y,
+			m_aorectangle.right,m_aorectangle.top);
+		break;
+	case LBUTTONRANGELOCATION:
+		break;
+	case LBUTTONPOINTLOCATION:
+		break;
+	default:
+		break;
 	}
+	Invalidate(TRUE);
 
 	CView::OnLButtonUp(nFlags, point);
 }
@@ -432,18 +467,41 @@ void CRStarTreeView::OnMouseMove(UINT nFlags, CPoint point)
 	if(nFlags == MK_LBUTTON)
 	{
 		endpoint = point;
-		m_treeshow.Translation(endpoint.x-beginpoint.x,beginpoint.y-endpoint.y,false);
+		switch(lbuttonflag)
+		{
+		case LBUTTONDRAG:
+			m_treeshow.Translation(endpoint.x-beginpoint.x,beginpoint.y-endpoint.y,false);
+			break;
+		case LBUTTONRANGESEARCH:
+			m_treeshow.get2DCoordinateFromSCreenToWorld(endpoint.x,endpoint.y,
+					m_aorectangle.right,m_aorectangle.top);
+			break;
+		case LBUTTONRANGELOCATION:
+			break;
+		case LBUTTONPOINTLOCATION:
+			break;
+		default:
+			break;
+		}
 	}
 	else if(nFlags == MK_RBUTTON)
 	{
-		endpoint = point;
-		double detx = endpoint.x - beginpoint.x;
-		double dety = beginpoint.y - endpoint.y;
-		double detlength = detx*detx+dety*dety;
-		if(detlength<0.000000001)
-			return;
-		double angle = detlength/100000.0;
-		m_treeshow.Rotation((int)-dety,(int)detx,angle,false);
+		if(lbuttonflag == LBUTTONDRAG)
+		{
+			endpoint = point;
+			double detx = endpoint.x - beginpoint.x;
+			double dety = beginpoint.y - endpoint.y;
+			double detlength = detx*detx+dety*dety;
+			if(detlength<0.000000001)
+				return;
+			double angle = detlength/100000.0;
+			m_treeshow.Rotation((int)-dety,(int)detx,angle,false);
+		}
+		else
+		{
+			endpoint = point;
+			m_treeshow.Translation(endpoint.x-beginpoint.x,beginpoint.y-endpoint.y,false);
+		}
 	}
 	else
 		;
@@ -505,14 +563,24 @@ void CRStarTreeView::OnRButtonDown(UINT nFlags, CPoint point)
 void CRStarTreeView::OnRButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: Add your message handler code here and/or call default
-	endpoint = point;
-	double detx = endpoint.x - beginpoint.x;
-	double dety = beginpoint.y - endpoint.y;
-	double detlength = detx*detx+dety*dety;
-	if(detlength<0.000000001)
-		return;
-	double angle = detlength/100000.0;
-	m_treeshow.Rotation((int)-dety,(int)detx,angle,true);
+	if(lbuttonflag == LBUTTONDRAG)
+	{
+		endpoint = point;
+		double detx = endpoint.x - beginpoint.x;
+		double dety = beginpoint.y - endpoint.y;
+		double detlength = detx*detx+dety*dety;
+		if(detlength<0.000000001)
+			return;
+		double angle = detlength/100000.0;
+		m_treeshow.Rotation((int)-dety,(int)detx,angle,true);
+		Invalidate(TRUE);
+	}
+	else
+	{
+		endpoint = point;
+		m_treeshow.Translation(endpoint.x-beginpoint.x,beginpoint.y-endpoint.y,true);
+		Invalidate(TRUE);
+	}
 
 	CView::OnRButtonUp(nFlags, point);
 }
@@ -545,7 +613,10 @@ void CRStarTreeView::OnFileOpen()
 	std::string tempstr;
 	std::getline(infile,tempstr);
 	if(tempstr.compare("testdata2d") != 0)
+	{
+		MessageBox(_T("文件格式错误"),_T("错误提示"),MB_ICONERROR|MB_OK);
 		return;
+	}
 	RSTPoint2D *points = NULL;
 	size_t pointnumber = 0;
 	RSTRectangle2D* rectangles = NULL;
@@ -637,4 +708,24 @@ void CRStarTreeView::OnTestBuildTreeFromFile()
 
 	
 	
+}
+
+void CRStarTreeView::OnRangeSearch()
+{
+	// TODO: Add your command handler code here
+	lbuttonflag = LBUTTONRANGESEARCH;
+	m_treeshow.ResetPosition();
+	m_treeshow.setAssistantObject((AssistantObject *)(&m_aorectangle));
+	m_treeshow.setAssistantObjectShowState(true);
+	m_treeshow.setBranchState(false);
+	m_treeshow.setNodeEdgeShowState(false);
+	m_treeshow.setDataShowState(true);
+	m_treeshow.setNodeFaceShowState(false);
+	Invalidate(TRUE);
+}
+
+void CRStarTreeView::OnMouseDrag()
+{
+	// TODO: Add your command handler code here
+	lbuttonflag = LBUTTONDRAG;
 }

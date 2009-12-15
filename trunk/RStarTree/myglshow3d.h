@@ -57,6 +57,12 @@ public:
 	void ResetCurrentModelViewMatrix();
 	void ResetPosition();
 
+	void GetCanvasRange(int &x,int &y)const{x=canvasrange[0];y=canvasrange[1];}
+	double GetLengthPerPixel()const{return lengthperpixel;}
+	double GetViewRange()const{return prange*pzoomrate;}
+	void GetObjectCenter(double &x,double &y,double &z)
+	{x=ocenter[0];y=ocenter[1];z=ocenter[2];}
+
 private:
 	void TransformVectorFromScreenToWorld(const int &vx,const int &vy,double& wx,
 		double& wy,double& wz);

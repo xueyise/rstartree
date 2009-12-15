@@ -11,6 +11,8 @@ void Tree2DShow3D::drawTree()
 		drawBranch();
 	if(showstate[2])
 		drawRectangle();
+	if(showstate[4])
+		drawAssistantObject();
 	if(showstate[3])
 		fillRectangle();
 }
@@ -202,6 +204,34 @@ void Tree2DShow3D::setDrawItem()
 	}
 }
 
+void Tree2DShow3D::drawAssistantObject()
+{
+	glDepthMask(GL_TRUE);
+	if(m_ao!=NULL)
+		m_ao->draw();
+}
+
+void Tree2DShow3D::get2DCoordinateFromSCreenToWorld(const int &sx,const int &sy,
+													double &wx,double &wy)
+{
+	int screen[2];
+	double oc[3];
+	m_gls3d.GetCanvasRange(screen[0],screen[1]);
+	m_gls3d.GetObjectCenter(oc[0],oc[1],oc[2]);
+	double tempvalue1 = m_gls3d.GetViewRange()*0.5;
+	double tempvalue2 = m_gls3d.GetLengthPerPixel();
+	double* mx = m_gls3d.GetCurrentModelViewMatrix();
+	if(screen[0]<screen[1])
+	{
+		wx = - tempvalue1*screen[0]/screen[1] + tempvalue2*sx + oc[0] - mx[12];
+		wy = tempvalue1 - tempvalue2*sy + oc[1] - mx[13];
+	}
+	else
+	{
+		wx = -tempvalue1 + tempvalue2*sx + oc[0] - mx[12];
+		wy = tempvalue1*screen[1]/screen[0] - tempvalue2*sy + oc[1] - mx[13];
+	}
+}
 void Tree2DShow3D::setzup()
 {
 	double* p = m_gls3d.GetCurrentModelViewMatrix();
@@ -209,4 +239,25 @@ void Tree2DShow3D::setzup()
 		zfront = true;
 	else
 		zfront = false;
+}
+
+void AOPoint::draw()
+{
+	glColor4f(1,0,0,1);
+	glPointSize(8);
+	glBegin(GL_POINTS);
+	glVertex3d(x,y,z);
+	glEnd();
+}
+
+void AORectangle::draw()
+{
+	glColor4f(1,1,1,1);
+	glLineWidth(5);
+	glBegin(GL_LINE_LOOP);
+	glVertex3d(left,bottom,z);
+	glVertex3d(left,top,z);
+	glVertex3d(right,top,z);
+	glVertex3d(right,bottom,z);
+	glEnd();
 }
