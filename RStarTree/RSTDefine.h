@@ -84,6 +84,7 @@ public:
 
 	// 更新节点区域
 	void UpdateRange(RSTRange& range);// range为新加入区域
+	void UpdateRange();
 
 	// 判断该子节点在父节点中子节点数组的位置，由父节点调用
 	int GetIndexOfNode(RSTNode* pChild);

@@ -164,6 +164,26 @@ void RSTNode::UpdateRange(RSTRange& range_)
 		range[i].max = max(range[i].max, range_[i].max);
 	}
 }
+void RSTNode::UpdateRange(){
+	if(childNum<1)return;
+	for (int i = 0; i < (int)range.size(); i++)
+	{
+		range[i].min = childSet[0]->range[i].min;
+		range[i].max = childSet[0]->range[i].max;
+	}
+	if(childNum==1)return;
+	for(int j=1;j<childNum;j++){
+		for (int i = 0; i < (int)range.size(); i++)
+		{
+			range[i].min = min(range[i].min,childSet[j]->range[i].min);
+			range[i].max = max(range[i].max,childSet[j]->range[i].max);
+		}
+	}
+		
+
+
+	
+}
 
 int RSTNode::GetIndexOfNode(RSTNode* pChild)
 {
@@ -206,7 +226,7 @@ void RSTNode::deleteNodeWithoutReleaseMem(int& indexToDelete){
 void RSTNode::deleteNodeWithoutReleaseMem(RSTNode* pChild)
 {
 	int index = GetIndexOfNode(pChild);
-	if (index >= 0) deleteNode(index);
+	if (index >= 0) deleteNodeWithoutReleaseMem(index);
 }
 
 double RSTNode::ComputeNodeOverlap(int childInd)
