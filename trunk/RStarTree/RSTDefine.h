@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <float.h>
 using std::vector;
+
 #ifndef DEF_BASIC_STRUCTURE
 #define DEF_BASIC_STRUCTURE 1
 
@@ -34,24 +35,17 @@ public:
 typedef std::vector<RSTInter> RSTRange;
 
 ///////////////////////////////索引数据定义///////////////////////////////////////////
-//#define  Point			100
-//#define  Rectangle		101
+
 #define  NonLeafNode	201
 #define  Leaf			202
 #define  Data           203
-
-// 点结构
-//typedef vector<double> RSTPoint;
-
-// 区域面积结构
-//typedef RSTRange RSTRectangle;
 
 ///////////////////////////////R树节点定义///////////////////////////////////////////
 
 #define DefaultMValue 10
 #define DefaultmValue 5
 
-#define P 16
+#define P 16 // 记录近似R*查找算法的判断节点个数
 
 // 节点定义
 class RSTNode
@@ -100,6 +94,7 @@ public:
 	double ComputeNodeOverlap(int childInd);
 	double ComputeNodeOverlap(int childInd, RSTRange& range);
 };
+
 // 自定义比较器，用于R*树split算法的排序，需要对不同维度的min或max进行比较
 // d表示要比较的维度，从0开始
 // min表示是否根据第d维区间的min值进行比较，如果为false，则根据max进行比较
@@ -118,15 +113,22 @@ public:
 	}
 };
 
+// 记录点索引和对应值的结构，用于排序
 struct RSTNodeValue
 {
 	int nodeInd;
 	double m_value;
 };
 
-bool CompareRSTNodeValue(RSTNodeValue& r1, RSTNodeValue& r2);
+// 排序比较函数
+bool CompareRSTNodeValueASC(RSTNodeValue& r1, RSTNodeValue& r2);
+bool CompareRSTNodeValueDESC(RSTNodeValue& r1, RSTNodeValue& r2);
 
+// 节点集合
 typedef vector<RSTNode*> RSTNodeSet;
+
+// 点定义，用于记录中心点
+typedef vector<double> RSTCPoint;
 
 ////////////////////////////////多维区间操作定义//////////////////////////////////////////
 
@@ -136,13 +138,15 @@ bool IsJoin(RSTRange& range1, RSTRange& range2);
 // 判断区间2是否在区间1中
 bool IsContain(RSTRange& range1, RSTRange& range2);
 
-//Range相关函数
 //计算两个Range的包围盒
 void ComputeBoundingRectangle(RSTRange& range1,RSTRange& range2,RSTRange& boundingRange);
+
 //计算Range的大小
 double ComputeVolume(RSTRange& range);
+
 //计算将range2加入到range1后所需要的最小空间
 double ComputeMinAdditionVolume(RSTRange& range1,RSTRange& range2);
+
 double ComputeMargin(RSTRange& range);
 double ComputeOverlapValue(RSTRange& range1,RSTRange& range2);
 
@@ -151,5 +155,10 @@ double ComputeOverlapValue(RSTRange& range1,RSTRange& range2);
 //lastIndex指示有效计算范围内的最后一个孩子节点
 void ComputePartialBoundingRange(RSTNode** pNode,int firstIndex,int lastIndex,RSTRange& resultRange);
 
+// 得到矩形区域的中心点
+void GetCenter(RSTRange& range, RSTCPoint& cPoint);
+
+// 计算两点间距离
+double GetDistance(RSTCPoint& p1, RSTCPoint& p2);
 
 #endif
