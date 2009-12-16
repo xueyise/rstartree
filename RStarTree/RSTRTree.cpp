@@ -799,7 +799,7 @@ void RSTRStarTree::AdjustTree(RSTNode* leafNode)
 // Ç¿ÆÈÖØ²åÈë
 void RSTRStarTree::ReInsert(RSTNode* reInsertNode)
 {
-	//int i;
+	int i;
 	GetCenter(reInsertNode->range, center);
 
 	for (i = 0; i < reInsertNode->childNum; i++)
@@ -812,7 +812,15 @@ void RSTRStarTree::ReInsert(RSTNode* reInsertNode)
 	for (i = 0; i < P && i < M + 1; i++)
 	{
 		tempNodeSet[i] = reInsertNode->childSet[rstNodeValueSet[i].nodeInd];
-		reInsertNode->deleteNodeWithoutReleaseMem(tempNodeSet[i]);
+	}
+	reInsertNode->childNum = reInsertNode->childNum - min(P, M + 1);
+	for (i = 0; i < reInsertNode->childNum; i++)
+	{
+		tempLeaveNode[i] = reInsertNode->childSet[rstNodeValueSet[M - i].nodeInd];
+	}
+	for (i = 0; i < reInsertNode->childNum; i++)
+	{
+		reInsertNode->childSet[i] = tempLeaveNode[i];
 	}
 	if (reInsertNode->childNum > 0)
 	{

@@ -100,12 +100,13 @@ public:
 	RSTRange* boundingRect;// 包围盒数组
 
 	RSTNode** tempNodeSet;// 临时节点数组
+	RSTNode** tempLeaveNode;
 
 	RSTNodeValue* rstNodeValueSet;// 用于排序的点和值结合数组
 
 public:
 	RSTRStarTree() : RSTRTree(), reInsertFlag(true), distance(NULL), minAddVolume(NULL), 
-		rstNodeValueSet(NULL), tempNodeSet(NULL) {}
+		rstNodeValueSet(NULL), tempNodeSet(NULL), tempLeaveNode(NULL) {}
 	
 	RSTRStarTree(int dim_, int m_, int M_) : RSTRTree(dim_,m_,M_), reInsertFlag(true) 
 	{
@@ -114,6 +115,9 @@ public:
 		boundingRect = new RSTRange[M];
 		rstNodeValueSet = new RSTNodeValue[M + 1];
 		tempNodeSet = new RSTNode*[min(P, M + 1)];
+		tempLeaveNode = new RSTNode*[M + 1 - min(P, M + 1)];
+		center.resize(dim);
+		tempPoint.resize(dim);
 	}
 
 	~RSTRStarTree()
@@ -123,6 +127,7 @@ public:
 		if (boundingRect) delete[] boundingRect;
 		if (rstNodeValueSet) delete[] rstNodeValueSet;
 		if (tempNodeSet) delete[] tempNodeSet;
+		if(tempLeaveNode) delete[] tempLeaveNode;
 	}
 public:
 	// 插入数据
