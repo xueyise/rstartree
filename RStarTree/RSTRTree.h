@@ -84,31 +84,36 @@ public:
 
 /////////////////////////////R*树算法实现/////////////////////////////////////////////
 
-// 用来排序的结构
-//class NodeValueElement
-//{
-//public:
-//	RSTNode* node;
-//	double value;
-//};
-
 class RSTRStarTree : public RSTRTree
 {	
 public:
-	bool reInsertFlag;
-	double* distance;
-	double* minAddVolume;
-	RSTRange* boundingRect;
-	RSTNodeValue* rstNodeValueSet;
+	bool reInsertFlag;// 是否需要重新插入的标志值
+
+	double* distance;// 记录各个子节点矩形中心到父节点矩形中心距离数组
+
+	double* minAddVolume;// 最小增加面积
+
+	RSTCPoint center;// 记录父节点中心点
+
+	RSTCPoint tempPoint;// 记录每个子节点中心节点
+
+	RSTRange* boundingRect;// 包围盒数组
+
+	RSTNode** tempNodeSet;// 临时节点数组
+
+	RSTNodeValue* rstNodeValueSet;// 用于排序的点和值结合数组
+
 public:
-	RSTRStarTree() : RSTRTree(), reInsertFlag(true), distance(NULL), minAddVolume(NULL), rstNodeValueSet(NULL) {}
+	RSTRStarTree() : RSTRTree(), reInsertFlag(true), distance(NULL), minAddVolume(NULL), 
+		rstNodeValueSet(NULL), tempNodeSet(NULL) {}
 	
 	RSTRStarTree(int dim_, int m_, int M_) : RSTRTree(dim_,m_,M_), reInsertFlag(true) 
 	{
 		distance = new double[M + 1];
 		minAddVolume = new double[M];
 		boundingRect = new RSTRange[M];
-		rstNodeValueSet = new RSTNodeValue[M];
+		rstNodeValueSet = new RSTNodeValue[M + 1];
+		tempNodeSet = new RSTNode*[min(P, M + 1)];
 	}
 
 	~RSTRStarTree()
@@ -117,6 +122,7 @@ public:
 		if (minAddVolume) delete[] minAddVolume;
 		if (boundingRect) delete[] boundingRect;
 		if (rstNodeValueSet) delete[] rstNodeValueSet;
+		if (tempNodeSet) delete[] tempNodeSet;
 	}
 public:
 	// 插入数据

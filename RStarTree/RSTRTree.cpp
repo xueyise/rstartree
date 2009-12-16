@@ -556,6 +556,7 @@ bool RSTRTree::Delete(RSTNode *data)
 		pnode = (RSTNode*)(this->Root->childSet[0]);
 		delete this->Root;              //??????????????root是否是new出的????????????????
 		this->Root = pnode;
+		height--;
 	}
 	else if(this->Root->childNum == 0) //如果没有孩子，重置这个根的信息
 	{
@@ -694,11 +695,9 @@ RSTNode* RSTRStarTree::ChooseLeaf(RSTNode* data)
 	//}
 
 	// 方案2 近似最小重复区域查找 速度较快 但是是近似算法 
-
 	if (node->childNum > 0 && node->childSet[0]->type == Leaf) 
 	{
 		// 排序操作
-		//RSTNode* tempP;
 		bool flag = true;
 		for (i = 0; i < node->childNum; i++)
 		{
@@ -706,28 +705,13 @@ RSTNode* RSTRStarTree::ChooseLeaf(RSTNode* data)
 			minAddVolume[i] = ComputeVolume(boundingRect[i]) - ComputeVolume(node->childSet[i]->range);
 			rstNodeValueSet[i].m_value = minAddVolume[i];
 			rstNodeValueSet[i].nodeInd = i;
-			//minAddVolume[i] = ComputeMinAdditionVolume(node->childSet[i]->range, data->range);
 		}
 		// 这部分改为系统排序
-		std::sort(rstNodeValueSet, rstNodeValueSet + node->childNum, CompareRSTNodeValue);
-		/*for (i = 0; i < node->childNum && flag; i++)
-		{
-			flag = false;
-			for (j = 0; j < node->childNum - 1; j++)
-			{
-				if (minAddVolume[j] > minAddVolume[j + 1])
-				{					
-					tempP = node->childSet[j];
-					node->childSet[j] = node->childSet[j + 1];
-					node->childSet[j + 1] = tempP;
-					flag = true;
-				}
-			}
-		}*/
+		std::sort(rstNodeValueSet, rstNodeValueSet + node->childNum, CompareRSTNodeValueASC);
 		min = -1;
 		for (i = 0; i < P && i < node->childNum; i++)
 		{
-			temp = node->ComputeNodeOverlap(i, boundingRect[rstNodeValueSet[i].nodeInd]) - node->ComputeNodeOverlap(rstNodeValueSet[i].nodeInd);
+			temp = node->ComputeNodeOverlap(rstNodeValueSet[i].nodeInd, boundingRect[rstNodeValueSet[i].nodeInd]) - node->ComputeNodeOverlap(rstNodeValueSet[i].nodeInd);
 			if (temp < min || min == -1)
 			{
 				min = temp;
@@ -762,7 +746,7 @@ void RSTRStarTree::AdjustTree(RSTNode* leafNode)
 			{
 				// 强迫重插入操作
 				reInsertFlag = false;
-
+				ReInsert(currentNode);
 			}
 			else
 			{
@@ -808,6 +792,7 @@ void RSTRStarTree::AdjustTree(RSTNode* leafNode)
 #endif
 		Root = newRoot;
 		height++;
+		reInsertFlag = true;
 	}
 }
 
@@ -815,7 +800,33 @@ void RSTRStarTree::AdjustTree(RSTNode* leafNode)
 void RSTRStarTree::ReInsert(RSTNode* reInsertNode)
 {
 	//int i;
+	GetCenter(reInsertNode->range, center);
 
+	for (i = 0; i < reInsertNode->childNum; i++)
+	{
+		GetCenter(reInsertNode->childSet[i]->range, tempPoint);
+		rstNodeValueSet[i].m_value = GetDistance(tempPoint, center);
+		rstNodeValueSet[i].nodeInd = i;
+	}
+	std::sort(rstNodeValueSet, rstNodeValueSet + M + 1, CompareRSTNodeValueDESC);
+	for (i = 0; i < P && i < M + 1; i++)
+	{
+		tempNodeSet[i] = reInsertNode->childSet[rstNodeValueSet[i].nodeInd];
+		reInsertNode->deleteNodeWithoutReleaseMem(tempNodeSet[i]);
+	}
+	if (reInsertNode->childNum > 0)
+	{
+		reInsertNode->range = reInsertNode->childSet[0]->range;
+		for (i = 1; i < reInsertNode->childNum; i++)
+		{
+			reInsertNode->UpdateRange(reInsertNode->childSet[i]->range);
+		}
+	}
+	for (i = 0; i < P && i < M + 1; i++)
+	{
+		InsertData(tempNodeSet[i]);
+		tempNodeSet[i] = NULL;
+	}
 }
 
 void RSTRStarTree::Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){

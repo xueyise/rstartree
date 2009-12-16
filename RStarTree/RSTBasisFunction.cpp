@@ -86,6 +86,27 @@ void ComputePartialBoundingRange(RSTNode** pNode,int firstIndex,int lastIndex,RS
 		ComputeBoundingRectangle(pNode[i]->range,resultRange,resultRange);
 	}
 }
+
+// 不重新设置空间
+void GetCenter(RSTRange& range, RSTCPoint& cPoint)
+{
+	//cPoint.resize(range.size());
+	for (int i = 0; i < (int)range.size(); i++)
+	{
+		cPoint[i] = 0.5 * (range[i].min + range[i].max);
+	}
+}
+
+double GetDistance(RSTCPoint& p1, RSTCPoint& p2)
+{
+	double dis = 0;
+	for (int i = 0; i < p1.size(); i++)
+	{
+		dis += (p1[i] - p2[i]) * (p1[i] - p2[i]);
+	}
+	return dis;
+}
+
 ///////////////////////////////节点相关操作///////////////////////////////////////////
 
 RSTNode::RSTNode(int M /* = DefaultMValue */):childNum(0)
@@ -257,7 +278,12 @@ double RSTNode::ComputeNodeOverlap(int childInd, RSTRange& range)
 	return overlap;
 }
 
-bool CompareRSTNodeValue(RSTNodeValue& r1, RSTNodeValue& r2)
+bool CompareRSTNodeValueASC(RSTNodeValue& r1, RSTNodeValue& r2)
 {
 	return r1.m_value < r2.m_value;
+}
+
+bool CompareRSTNodeValueDESC(RSTNodeValue& r1, RSTNodeValue& r2)
+{
+	return r1.m_value > r2.m_value;
 }
