@@ -294,7 +294,7 @@ void CRStarTreeView::OnTestBuildTree()
 	QueryPerformanceCounter(&beginCounter);
 	for(int i=0;i<N;i++){
 		
-		/*tree.InsertData(inputVecTree[i]);*/
+		tree.InsertData(inputVecTree[i]);
 	}
 	QueryPerformanceCounter(&endCounter);
 	resultTime = 
