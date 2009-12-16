@@ -63,7 +63,7 @@ void Tree2DShow3D::drawBranch()
 {
 	glDepthMask(GL_TRUE);
 	glLineWidth(2);
-	glColor4f(1,1,0,1);
+	glColor4f(1.0f,1.0f,0.0f,1);
 	glBegin(GL_LINES);
 	for(size_t i=0;i<m_branch.size();i+=6)
 	{
@@ -136,7 +136,7 @@ void Tree2DShow3D::drawResult()
 		return;
 	vector<double> vec;
 	glDepthMask(GL_TRUE);
-	glColor4f(1.0f,1.0f,0.5f,1);
+	glColor4f(0.0f,1.0f,1.0f,1);
 	glPointSize(10);
 	glLineWidth(1);
 	for(size_t i=0;i<m_result->size();++i)
