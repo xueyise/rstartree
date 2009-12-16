@@ -19,7 +19,7 @@
 #endif
 
 #ifdef TEST
-RSTRStarTree tree(2,4,8);
+//RSTRStarTree tree(2,4,8);
 
 int N;
 
@@ -187,6 +187,11 @@ void CRStarTreeView::OnTestBuildTree()
 	using std::ofstream;
 	using std::endl;
 	using std::vector;
+
+	LARGE_INTEGER frequency;
+	LARGE_INTEGER beginCounter,endCounter;
+	double resultTime;
+	QueryPerformanceFrequency(&frequency);
 	//生成数据文件
 	
 
@@ -208,8 +213,8 @@ void CRStarTreeView::OnTestBuildTree()
 	int N;
 	inFile>>N;
 	int m,M;
-	m=2;
-	M=4;
+	m=4;
+	M=8;
 	
 	vector<RSTRange> ranges;
 	srand(unsigned(time(NULL)));
@@ -232,7 +237,7 @@ void CRStarTreeView::OnTestBuildTree()
 		range.push_back(RSTInter(yMin,yMax));
 		ranges.push_back(range);
 	}
-	//input ranges
+	
 	/*RSTRange range1;
 	range1.push_back(RSTInter(-200,200));
 	range1.push_back(RSTInter(300,600));
@@ -244,30 +249,51 @@ void CRStarTreeView::OnTestBuildTree()
 
 	RSTRStarTree starTree(2,m,M);
 	RSTRTree tree(2,m,M);
+	using std::pair;
+	using std::vector;
+	vector<RSTPoint2D*> inputVecTree;
+	vector<RSTPoint2D*> inputVecStarTree;
+	pair<int,int> p;
 	for(int i=0;i<N;i++){
 		double x,y;
 		inFile>>x>>y;
+
 		RSTPoint2D* p = new RSTPoint2D();
 		p->x = x;
 		p->y = y;
 		p->GenerateRange();
+		inputVecStarTree.push_back(p);
 
-		//insertData
-		tree.InsertData(p);
-		
-		
 		p = new RSTPoint2D();
 		p->x = x;
 		p->y = y;
 		p->GenerateRange();
-		starTree.InsertData(p);
+		inputVecTree.push_back(p);
 
+		
 	}
 	inFile.close();
+	::AfxMessageBox(_T("Data Read Complete"));
+	QueryPerformanceCounter(&beginCounter);
+	for(int i=0;i<N;i++){
+		
+		starTree.InsertData(inputVecStarTree[i]);
+		tree.InsertData(inputVecTree[i]);
+	}
+	QueryPerformanceCounter(&endCounter);
+	resultTime = 
+			((double)endCounter.QuadPart-(double)beginCounter.QuadPart)
+			/
+			(frequency.QuadPart);
+	resultTime= resultTime*1000;
 	
+			
+	
+
 	ofstream out("result.txt",ofstream::app);
-	out<<"Tree Height:"<<starTree.height<<endl;
-	//print the tree
+	out<<endl<<"Tree Height:"<<starTree.height<<endl;
+	out<<"Build Tree Time:"<<resultTime<<"ms"<<endl;
+//	print the tree
 	using std::deque;
 	/*deque<RSTNode*> que;
 	que.push_back(starTree.Root);
@@ -290,13 +316,12 @@ void CRStarTreeView::OnTestBuildTree()
 	}*/
 	
 
-	out<<endl<<N<<"Points in the Tree"<<endl;
+	out<<N<<"Points in the Tree"<<endl;
 	out<<"m="<<tree.m<<" M="<<tree.M<<endl;
-	LARGE_INTEGER frequency;
-	QueryPerformanceFrequency(&frequency);
-	LARGE_INTEGER beginCounter,endCounter;
+	
+	
+	
 	RSTNodeSet rTreeSet,starTreeSet;
-	double resultTime;
 
 	for(size_t i=0;i<ranges.size();i++){
 		RSTRange& range = ranges[i];

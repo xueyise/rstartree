@@ -279,9 +279,9 @@ void RSTRTree::PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& sec
 void RSTRTree::Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
 	QuadraticSplit(splitNode,newSplitNode1,newSplitNode2);
 }
-void RSTRTree::QuadraticSplit2(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
+void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
 	//allocate memory for new node
-	newSplitNode2 = new RSTNode(splitNode->type,m,M);
+	newSplitNode2 = new RSTNode(splitNode->type,dim,M);
 
 	//
 	int index;
@@ -369,8 +369,7 @@ void RSTRTree::QuadraticSplit2(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNod
 	}else{
 		;//do nothing
 	}
-
-
+	newSplitNode1 = splitNode;
 }
 void RSTRTree::PickNextQudratic2(RSTNode* splitNode,int startIndex,int endIndex,
 								 RSTNode* newSplitNode2,RSTRange& tempBoundingRange,int& index,
@@ -406,7 +405,7 @@ void RSTRTree::PickNextQudratic2(RSTNode* splitNode,int startIndex,int endIndex,
 	}
 
 }
-void RSTRTree::QuadraticSplit(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
+void RSTRTree::QuadraticSplit2(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
 	//
 	//如果子节点个数小于M，则不需要进行分裂操作
 	if(splitNode->childNum<=M)return;
@@ -855,13 +854,13 @@ void RSTRStarTree::Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& ne
 	}
 	newSplitNode1 = splitNode;
 	//将其他位置清空
-	for(int i=newSplitNode1->childNum;i<=M;i++){
+	/*for(int i=newSplitNode1->childNum;i<=M;i++){
 		newSplitNode1->childSet[i]=NULL;
 	}
 	for(int i=newSplitNode2->childNum;i<=M;i++){
 		newSplitNode2->childSet[i]=NULL;
-	}
-	for(int i=0;i<newSplitNode1->childNum;i++){
+	}*/
+	/*for(int i=0;i<newSplitNode1->childNum;i++){
 		newSplitNode1->childSet[i]->parent = 
 			newSplitNode1;
 	}
@@ -870,7 +869,16 @@ void RSTRStarTree::Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& ne
 			newSplitNode2;
 	}
 	newSplitNode1->UpdateRange();
-	newSplitNode2->UpdateRange();
+	newSplitNode2->UpdateRange();*/
+	if(minOrMax){
+		newSplitNode1->UpdateRange();
+	}else{
+		for(int i=0;i<newSplitNode2->childNum;i++){
+			newSplitNode2->childSet[i]->parent = 
+				newSplitNode2;
+		}
+		newSplitNode2->UpdateRange();
+	}
 	if(splitNode->parent){
 		splitNode->parent->deleteNodeWithoutReleaseMem(splitNode);
 	}else{
