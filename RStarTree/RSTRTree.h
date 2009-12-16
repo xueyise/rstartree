@@ -28,7 +28,7 @@ public:
 	void SearchByContain(RSTRange& range, RSTNodeSet& result, RSTNode* node);// 查找区域内的元素
 
 	// 插入数据
-	void InsertData(RSTNode* data);
+	virtual void InsertData(RSTNode* data);
 
 	// 插入节点，h表示node应该插入的父节点所在层数
 	void InsertNode(RSTNode* insertNode, int h);
@@ -40,7 +40,7 @@ public:
 	RSTNode* ChooseNode(RSTNode* insertNode, int h);
 
 	// 插入数据后，调整树，自底向上
-	void AdjustTree(RSTNode* leafNode);
+	virtual void AdjustTree(RSTNode* leafNode);
 
 	// 删除数据
 	bool Delete(RSTNode* data);
@@ -84,15 +84,46 @@ public:
 
 /////////////////////////////R*树算法实现/////////////////////////////////////////////
 
+// 用来排序的结构
+//class NodeValueElement
+//{
+//public:
+//	RSTNode* node;
+//	double value;
+//};
+
 class RSTRStarTree : public RSTRTree
-{	public:
-	
-	RSTRStarTree(int dim_, int m_, int M_):RSTRTree(dim_,m_,M_){}
+{	
 public:
+	bool reInsertFlag;
+	double* distance;
+	double* minAddVolume;
+	RSTRange* boundingRect;
+public:
+	RSTRStarTree() : RSTRTree(), reInsertFlag(true), distance(NULL), minAddVolume(NULL) {}
+	
+	RSTRStarTree(int dim_, int m_, int M_) : RSTRTree(dim_,m_,M_), reInsertFlag(true) 
+	{
+		distance = new double[M + 1];
+		minAddVolume = new double[M];
+		boundingRect = new RSTRange[M];
+	}
+
+	~RSTRStarTree()
+	{
+		if (distance) delete[] distance;
+		if (minAddVolume) delete[] minAddVolume;
+		if (boundingRect) delete[] boundingRect;
+	}
+public:
+	// 插入数据
+	void InsertData(RSTNode* data);
 	// 根据数据选择应插入的叶子节点
 	RSTNode* ChooseLeaf(RSTNode* data);
-	// 根据层数选择应插入的父节点
-	//RSTNode* ChooseNode(RSTNode* insertNode, int h);
+	// 插入数据后，调整树，自底向上
+	void AdjustTree(RSTNode* leafNode);
+	// 强制重插入操作
+	void ReInsert(RSTNode* reInsertNode);
 
 	void Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2);
 	int ChooseSplitAxis(RSTNode*& splitNode);
