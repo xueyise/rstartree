@@ -199,6 +199,7 @@ void CRStarTreeView::OnTestBuildTree()
 
 	/*ofstream outFile("data.txt");
 	int N = 1000000;
+	srand(time(NULL));
 	outFile<<N<<endl;
 	for(int i=0;i<N;i++){
 		double x = rand()+(double)rand()/RAND_MAX;
@@ -215,8 +216,11 @@ void CRStarTreeView::OnTestBuildTree()
 	int N;
 	inFile>>N;
 	int m,M;
-	m=4;
-	M=8;
+	m=2;
+	M=4;
+	
+	double xMin = 65535,yMin = 65535;
+	double yMax = -65535,xMax = -65535;
 	
 	vector<RSTRange> ranges;
 	srand(unsigned(time(NULL)));
@@ -272,15 +276,25 @@ void CRStarTreeView::OnTestBuildTree()
 		p->GenerateRange();
 		inputVecTree.push_back(p);
 
+		if(x<xMin)
+			xMin = x;
+		if(x>xMax)
+			xMax = x;
+		if(y<yMin)
+			yMin = y;
+		if(y>yMax)
+			yMax = y;
+
 		
 	}
 	inFile.close();
+		
 	::AfxMessageBox(_T("Data Read Complete"));
+	ofstream out("result.txt",ofstream::app);
 	QueryPerformanceCounter(&beginCounter);
 	for(int i=0;i<N;i++){
 		
-		starTree.InsertData(inputVecStarTree[i]);
-		tree.InsertData(inputVecTree[i]);
+		/*tree.InsertData(inputVecTree[i]);*/
 	}
 	QueryPerformanceCounter(&endCounter);
 	resultTime = 
@@ -288,13 +302,25 @@ void CRStarTreeView::OnTestBuildTree()
 			/
 			(frequency.QuadPart);
 	resultTime= resultTime*1000;
+	out<<endl<<"Build R-Tree time:"<<resultTime<<"ms"<<endl; 
+	QueryPerformanceCounter(&beginCounter);
+	for(int i=0;i<N;i++){
+		
+		starTree.InsertData(inputVecStarTree[i]);
+	}
+	QueryPerformanceCounter(&endCounter);
+	resultTime = 
+			((double)endCounter.QuadPart-(double)beginCounter.QuadPart)
+			/
+			(frequency.QuadPart);
+	resultTime= resultTime*1000;
+	out<<"Build R*Tree time:"<<resultTime<<"ms"<<endl;
+
 	
 			
 	
 
-	ofstream out("result.txt",ofstream::app);
-	out<<endl<<"Tree Height:"<<starTree.height<<endl;
-	out<<"Build Tree Time:"<<resultTime<<"ms"<<endl;
+
 //	print the tree
 	using std::deque;
 	/*deque<RSTNode*> que;
@@ -360,20 +386,19 @@ void CRStarTreeView::OnTestBuildTree()
 		out<<" Time:"<<resultTime<<"us"<<endl;
 
 	}
+	//check the bounding range
 	
+	out<<"R-TREE Range:"<<(
+		(xMin==tree.Root->range[0].min&&
+		xMax==tree.Root->range[0].max&&
+		yMin==tree.Root->range[1].min&&
+		yMax==tree.Root->range[1].max)?"OK":"Error")<<endl;
 
-	
-	
-
-
-
-	
-
-
-	
-	
-
-
+	out<<"R*TREE Range:"<<(
+		(xMin==starTree.Root->range[0].min&&
+		xMax==starTree.Root->range[0].max&&
+		yMin==starTree.Root->range[1].min&&
+		yMax==starTree.Root->range[1].max)?"OK":"Error")<<endl;
 	
 	out.close();
 }
