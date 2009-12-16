@@ -63,6 +63,7 @@ public:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 protected:
 	Tree2DShow3D m_treeshow;
+	RSTRange m_range;
 	CPoint beginpoint;
 	CPoint endpoint;
 	int lbuttonflag;
@@ -73,6 +74,7 @@ protected:
 	static const int LBUTTONRANGESEARCH = 1;
 	static const int LBUTTONRANGELOCATION = 2;
 	static const int LBUTTONPOINTLOCATION = 3;
+	static const int LBUTTONDISABLE = 4;
 public:
 	afx_msg void OnDestroy();
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
@@ -86,8 +88,10 @@ public:
 	afx_msg void OnRangeSearch();
 	afx_msg void OnMouseDrag();
 	afx_msg void OnTestBuildTreeFromFile();
-	RSTRange m_range;
 	afx_msg void OnRangeLocation();
+	afx_msg void OnDemoShow();
+	static UINT demothread(LPVOID param);
+	bool flagdemoshow;
 };
 
 #ifndef _DEBUG  // debug version in RStarTreeView.cpp
