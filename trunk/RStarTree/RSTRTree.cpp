@@ -643,7 +643,7 @@ void RSTRStarTree::InsertData(RSTNode* data)
 RSTNode* RSTRStarTree::ChooseLeaf(RSTNode* data)
 {
 	if (!Root) return NULL;
-	int i, j;
+	int i;
 	RSTNode* node = Root;
 	double min = -1;
 	double temp;
@@ -698,7 +698,7 @@ RSTNode* RSTRStarTree::ChooseLeaf(RSTNode* data)
 	if (node->childNum > 0 && node->childSet[0]->type == Leaf) 
 	{
 		// 排序操作
-		RSTNode* tempP;
+		//RSTNode* tempP;
 		bool flag = true;
 		for (i = 0; i < node->childNum; i++)
 		{
@@ -814,7 +814,7 @@ void RSTRStarTree::AdjustTree(RSTNode* leafNode)
 // 强迫重插入
 void RSTRStarTree::ReInsert(RSTNode* reInsertNode)
 {
-	int i;
+	//int i;
 
 }
 
