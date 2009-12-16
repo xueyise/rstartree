@@ -53,15 +53,18 @@ public:
 	void BeginDraw(HDC& m_hdc);
 	void EndDraw(HDC& m_hdc);
 
-	double* GetCurrentModelViewMatrix()const{return (double*)cmvmatrix;}
+	const double* GetCurrentModelViewMatrix()const{return (double*)cmvmatrix;}
 	void ResetCurrentModelViewMatrix();
 	void ResetPosition();
 
 	void GetCanvasRange(int &x,int &y)const{x=canvasrange[0];y=canvasrange[1];}
 	double GetLengthPerPixel()const{return lengthperpixel;}
 	double GetViewRange()const{return prange*pzoomrate;}
-	void GetObjectCenter(double &x,double &y,double &z)
+	void GetObjectCenter(double &x,double &y,double &z)const
 	{x=ocenter[0];y=ocenter[1];z=ocenter[2];}
+	bool GetProjectionMethod()const{return projectionflag;}
+
+	void SetProjectionMethod(const bool &flag){projectionflag = flag;}
 
 private:
 	void TransformVectorFromScreenToWorld(const int &vx,const int &vy,double& wx,

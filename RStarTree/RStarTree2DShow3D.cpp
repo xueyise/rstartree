@@ -1,21 +1,36 @@
 #include "stdafx.h"
 #include "RStarTree2DShow3D.h"
+#include "windows.h"
 
 void Tree2DShow3D::drawTree()
 {
 	if(m_tree == NULL)
 		return;
-	drawResult();
-	if(showstate[0])
+	if(demoshow)
+	{
+		if(showstate[5])
+			drawResult();
 		drawData();
-	if(showstate[1])
-		drawBranch();
-	if(showstate[2])
-		drawRectangle();
-	if(showstate[4])
+		drawDemoBranch();
+		drawDemoRectangle();
 		drawAssistantObject();
-	if(showstate[3])
-		fillRectangle();
+		fillDemoRectangle();
+	}
+	else
+	{
+		if(showstate[5])
+			drawResult();
+		if(showstate[0])
+			drawData();
+		if(showstate[1])
+			drawBranch();
+		if(showstate[2])
+			drawRectangle();
+		if(showstate[4])
+			drawAssistantObject();
+		if(showstate[3])
+			fillRectangle();
+	}
 }
 
 void Tree2DShow3D::fillRectangle()
@@ -59,6 +74,54 @@ void Tree2DShow3D::fillRectangle()
 	}
 }
 
+void Tree2DShow3D::fillDemoRectangle()
+{
+	glDepthMask(GL_FALSE);
+	glColor4f(1,1,1,0.3f);
+	glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+	if(zfront)
+	{
+		for(size_t i=m_node.size()-1;i>=0;--i)
+		{
+			if(!flagnode[i])
+				return;
+			if(m_tree->height - m_layer[i] + 1<democurrentlayer)
+				return;
+			glBegin(GL_POLYGON);
+			glVertex3d(m_node[i]->range[0].min,m_node[i]->range[1].min,
+				rangeperlayer*m_layer[i]);
+			glVertex3d(m_node[i]->range[0].min,m_node[i]->range[1].max,
+				rangeperlayer*m_layer[i]);
+			glVertex3d(m_node[i]->range[0].max,m_node[i]->range[1].max,
+				rangeperlayer*m_layer[i]);
+			glVertex3d(m_node[i]->range[0].max,m_node[i]->range[1].min,
+				rangeperlayer*m_layer[i]);
+			glEnd();
+			if(i==0)
+				break;
+		}
+	}
+	else
+	{
+		for(size_t i=0;i<m_node.size();++i)
+		{
+			if(!flagnode[i])
+				return;
+			if(m_tree->height - m_layer[i] + 1<democurrentlayer)
+				return;
+			glBegin(GL_POLYGON);
+			glVertex3d(m_node[i]->range[0].min,m_node[i]->range[1].min,
+				rangeperlayer*m_layer[i]);
+			glVertex3d(m_node[i]->range[0].min,m_node[i]->range[1].max,
+				rangeperlayer*m_layer[i]);
+			glVertex3d(m_node[i]->range[0].max,m_node[i]->range[1].max,
+				rangeperlayer*m_layer[i]);
+			glVertex3d(m_node[i]->range[0].max,m_node[i]->range[1].min,
+				rangeperlayer*m_layer[i]);
+			glEnd();
+		}
+	}
+}
 void Tree2DShow3D::drawBranch()
 {
 	glDepthMask(GL_TRUE);
@@ -73,6 +136,24 @@ void Tree2DShow3D::drawBranch()
 	glEnd();
 }
 
+void Tree2DShow3D::drawDemoBranch()
+{
+	glDepthMask(GL_TRUE);
+	glLineWidth(2);
+	glColor4f(1.0f,1.0f,0.0f,1);
+	glBegin(GL_LINES);
+	for(size_t i=0,j=0;i<m_branch.size();i+=6,++j)
+	{
+		if(!flagbranch[j])
+			return;
+		if(m_tree->height - m_layer[j] + 1 == democurrentlayer)
+		{
+			glVertex3d(m_branch[i],m_branch[i+1],m_branch[i+2]);
+			glVertex3d(m_branch[i+3],m_branch[i+4],m_branch[i+5]);
+		}
+	}
+	glEnd();
+}
 void Tree2DShow3D::drawRectangle()
 {
 	glDepthMask(GL_TRUE);
@@ -99,7 +180,36 @@ void Tree2DShow3D::drawRectangle()
 		glEnd();
 	}
 }
-
+void Tree2DShow3D::drawDemoRectangle()
+{
+	glDepthMask(GL_TRUE);
+	size_t value;
+	glLineWidth(3);
+	for(size_t i=0;i<m_node.size();++i)
+	{
+		if(!flagnode[i])
+			return;
+		if(m_tree->height - m_layer[i] + 1<democurrentlayer)
+			return;
+		value = m_layer[i]%3;
+		if(value==0)
+			glColor4f(0,1,0,1);
+		else if(value==1)
+			glColor4f(1,0,0,1);
+		else
+			glColor4f(0,0,1,1);
+		glBegin(GL_LINE_LOOP);
+		glVertex3d(m_node[i]->range[0].min,m_node[i]->range[1].min,
+				rangeperlayer*m_layer[i]);
+		glVertex3d(m_node[i]->range[0].min,m_node[i]->range[1].max,
+			rangeperlayer*m_layer[i]);
+		glVertex3d(m_node[i]->range[0].max,m_node[i]->range[1].max,
+			rangeperlayer*m_layer[i]);
+		glVertex3d(m_node[i]->range[0].max,m_node[i]->range[1].min,
+			rangeperlayer*m_layer[i]);
+		glEnd();
+	}
+}
 void Tree2DShow3D::drawData()
 {
 	if(m_dataset == NULL)
@@ -160,7 +270,7 @@ void Tree2DShow3D::drawResult()
 	}
 }
 
-bool Tree2DShow3D::updateTreeDate()
+bool Tree2DShow3D::updateTreeData()
 {
 	if(m_tree == NULL)
 		return false;
@@ -235,6 +345,78 @@ void Tree2DShow3D::setDrawItem()
 	}
 }
 
+void Tree2DShow3D::setDemoItem()
+{
+	m_node.clear();
+	flagnode.clear();
+	m_layer.clear();
+	m_branch.clear();
+	flagbranch.clear();
+	size_t sizevalue1 = size_t(pow(double(m_tree->M),m_tree->height));
+	size_t sizevalue2 = (sizevalue1 -1) / (m_tree->M - 1);
+	m_node.reserve(sizevalue2);
+	flagnode.reserve(sizevalue2);
+	m_layer.reserve(sizevalue2);
+	m_branch.reserve(sizevalue2 * (m_tree->M) *3);
+	flagbranch.reserve(sizevalue2 * (m_tree->M) *3);
+	branchlayer.reserve(sizevalue2 * (m_tree->M) *3);
+	vector<RSTNode*> vec1;
+	vector<RSTNode*> vec2;
+	vec1.reserve(sizevalue1);
+	vec2.reserve(sizevalue1);
+	vector<RSTNode*> *pc = &vec1;
+	vector<RSTNode*> *pn = &vec2;
+	vector<RSTNode*> *tempp = NULL;
+	int layernumber = m_tree->height;
+	pc->push_back(m_tree->Root);
+	double tempx;
+	double tempy;
+	double tempz;
+	double temprange1[4];
+	m_ao->getrange(temprange1[0],temprange1[1],temprange1[2],temprange1[3]);
+	RSTRange temprange2;
+	temprange2.push_back(RSTInter(temprange1[0],temprange1[1]));
+	temprange2.push_back(RSTInter(temprange1[2],temprange1[3]));
+	while(layernumber>0)
+	{
+		for(size_t i=0;i<pc->size();++i)
+		{
+			m_node.push_back((*pc)[i]);
+			if(IsJoin((*pc)[i]->range,temprange2))
+				flagnode.push_back(true);
+			else
+				flagnode.push_back(false);
+			m_layer.push_back(layernumber);
+			tempx = ((*pc)[i]->range[0].min + (*pc)[i]->range[0].max)*0.5;
+			tempy = ((*pc)[i]->range[1].min + (*pc)[i]->range[1].max)*0.5;
+			tempz = layernumber * rangeperlayer;
+			if( ((*pc)[i]->type) != Data)
+			{
+				for(int j=0;j<(*pc)[i]->childNum;++j)
+				{
+					pn->push_back((*pc)[i]->childSet[j]);
+					m_branch.push_back(tempx);
+					m_branch.push_back(tempy);
+					m_branch.push_back(tempz);
+					m_branch.push_back((pn->back()->range[0].max+pn->back()->range[0].min)*0.5);
+					m_branch.push_back((pn->back()->range[1].max+pn->back()->range[1].min)*0.5);
+					m_branch.push_back(rangeperlayer*(layernumber));
+					branchlayer.push_back(layernumber-1);
+					if(IsJoin((*pc)[i]->childSet[j]->range,temprange2))
+						flagbranch.push_back(true);
+					else
+						flagbranch.push_back(false);
+				}
+			}
+		}
+		pc->clear();
+		tempp = pc;
+		pc = pn;
+		pn = tempp;
+		--layernumber;
+	}
+}
+
 void Tree2DShow3D::drawAssistantObject()
 {
 	glDepthMask(GL_TRUE);
@@ -251,7 +433,7 @@ void Tree2DShow3D::get2DCoordinateFromSCreenToWorld(const int &sx,const int &sy,
 	m_gls3d.GetObjectCenter(oc[0],oc[1],oc[2]);
 	double tempvalue1 = m_gls3d.GetViewRange()*0.5;
 	double tempvalue2 = m_gls3d.GetLengthPerPixel();
-	double* mx = m_gls3d.GetCurrentModelViewMatrix();
+	const double* mx = m_gls3d.GetCurrentModelViewMatrix();
 	if(screen[0]<screen[1])
 	{
 		wx = - tempvalue1*screen[0]/screen[1] + tempvalue2*sx + oc[0] - mx[12];
@@ -265,7 +447,7 @@ void Tree2DShow3D::get2DCoordinateFromSCreenToWorld(const int &sx,const int &sy,
 }
 void Tree2DShow3D::setzup()
 {
-	double* p = m_gls3d.GetCurrentModelViewMatrix();
+	const double* p = m_gls3d.GetCurrentModelViewMatrix();
 	if(p[10]>0)
 		zfront = true;
 	else

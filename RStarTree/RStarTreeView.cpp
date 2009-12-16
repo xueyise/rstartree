@@ -54,12 +54,14 @@ BEGIN_MESSAGE_MAP(CRStarTreeView, CView)
 	ON_COMMAND(ID_RANGESEARCH, &CRStarTreeView::OnRangeSearch)
 	ON_COMMAND(ID_MOUSEDRAG, &CRStarTreeView::OnMouseDrag)
 	ON_COMMAND(ID_RANGELOCATION, &CRStarTreeView::OnRangeLocation)
+	ON_COMMAND(ID_DEMOSHOW, &CRStarTreeView::OnDemoShow)
 END_MESSAGE_MAP()
 
 // CRStarTreeView construction/destruction
 
 CRStarTreeView::CRStarTreeView()
 : lbuttonflag(0),flagdraging(false)
+, flagdemoshow(false)
 {
 	// TODO: add construction code here
 	m_aorectangle.z = 0;
@@ -547,11 +549,12 @@ void CRStarTreeView::OnMouseMove(UINT nFlags, CPoint point)
 			double angle = detlength/100000.0;
 			m_treeshow.Rotation((int)-dety,(int)detx,angle,false);
 		}
-		else
+		else if(lbuttonflag != LBUTTONDISABLE)
 		{
 			endpoint = point;
 			m_treeshow.Translation(endpoint.x-beginpoint.x,beginpoint.y-endpoint.y,false);
 		}
+		else;
 	}
 	else
 		;
@@ -625,12 +628,14 @@ void CRStarTreeView::OnRButtonUp(UINT nFlags, CPoint point)
 		m_treeshow.Rotation((int)-dety,(int)detx,angle,true);
 		Invalidate(TRUE);
 	}
-	else
+	else if(lbuttonflag != LBUTTONDISABLE)
 	{
 		endpoint = point;
 		m_treeshow.Translation(endpoint.x-beginpoint.x,beginpoint.y-endpoint.y,true);
 		Invalidate(TRUE);
 	}
+	else
+		;
 
 	CView::OnRButtonUp(nFlags, point);
 }
@@ -756,11 +761,9 @@ void CRStarTreeView::OnDisplayOption()
 }
 
 void CRStarTreeView::OnTestBuildTreeFromFile()
-{
+{	
 
 
-	
-	
 }
 
 void CRStarTreeView::OnRangeSearch()
@@ -774,6 +777,7 @@ void CRStarTreeView::OnRangeSearch()
 	m_treeshow.setNodeEdgeShowState(false);
 	m_treeshow.setDataShowState(true);
 	m_treeshow.setNodeFaceShowState(false);
+	m_treeshow.setResultState(true);
 	Invalidate(TRUE);
 }
 
@@ -794,5 +798,40 @@ void CRStarTreeView::OnRangeLocation()
 	m_treeshow.setNodeEdgeShowState(false);
 	m_treeshow.setDataShowState(true);
 	m_treeshow.setNodeFaceShowState(false);
+	m_treeshow.setResultState(true);
 	Invalidate(TRUE);
+}
+
+UINT CRStarTreeView::demothread(LPVOID param)
+{
+	CRStarTreeView* p = (CRStarTreeView*)param;
+	int treeheight = p->GetDocument()->rtree->height;
+	while(p->flagdemoshow)
+	{
+		for(int i=0;i<treeheight;++i)
+		{
+			p->m_treeshow.setDemoCurrentLayer(i);
+			Sleep(1000);
+		}
+		break;
+	}
+	return 0;
+}
+
+void CRStarTreeView::OnDemoShow()
+{
+	// TODO: Add your command handler code here
+	if(flagdemoshow)
+	{
+		flagdemoshow = false;
+		m_treeshow.setDemoShowState(false);
+	}
+	else
+	{
+		flagdemoshow = true;
+		m_treeshow.setDemoShowState(true);
+		m_treeshow.setResultState(false);
+		m_treeshow.setAssistantObjectShowState(true);
+		AfxBeginThread(demothread,this);
+	}
 }

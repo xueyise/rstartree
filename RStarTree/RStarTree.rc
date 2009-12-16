@@ -156,6 +156,7 @@ BEGIN
     BEGIN
         MENUITEM "区域查询",                        ID_RANGESEARCH
         MENUITEM "区域定位",                        ID_32787
+        MENUITEM "演示",                          ID_RESETPOSITION
     END
 END
 
