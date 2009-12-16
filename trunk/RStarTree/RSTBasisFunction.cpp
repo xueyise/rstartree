@@ -142,6 +142,7 @@ RSTNode::~RSTNode()
 			childSet[i]=NULL;
 		}
 		delete[] childSet;
+		childSet = NULL;
 	}
 	if (parent)
 	{
