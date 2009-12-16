@@ -100,9 +100,9 @@ public:
 	double ComputeNodeOverlap(int childInd);
 	double ComputeNodeOverlap(int childInd, RSTRange& range);
 };
-//自定义比较器，用于R*树split算法的排序，需要对不同维度的min或max进行比较
-//d表示要比较的维度，从0开始
-//min表示是否根据第d维区间的min值进行比较，如果为false，则根据max进行比较
+// 自定义比较器，用于R*树split算法的排序，需要对不同维度的min或max进行比较
+// d表示要比较的维度，从0开始
+// min表示是否根据第d维区间的min值进行比较，如果为false，则根据max进行比较
 class RSTNodeComparator{
 private:
 	int d;//用于比较的维度
@@ -116,6 +116,14 @@ public:
 			return pLeft->range[d].max<pRight->range[d].max;
 		}
 	}
+};
+
+class RSTNodeValueComparator
+{
+public:
+	RSTNode* node;
+	double m_value;
+
 };
 
 typedef vector<RSTNode*> RSTNodeSet;

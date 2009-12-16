@@ -284,7 +284,6 @@ void RSTRTree::QuadraticSplit2(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNod
 	newSplitNode2 = new RSTNode(splitNode->type,m,M);
 
 	//
-	int tempIndex;
 	int index;
 	double d1,d2;
 
@@ -358,7 +357,6 @@ void RSTRTree::QuadraticSplit2(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNod
 
 		}else{
 			newSplitNode2->AddNodeAndUpdateRange(splitNode->childSet[index]);
-			RSTNode* tempNode;
 			splitNode->childSet[index]=splitNode->childSet[endIndex-1];
 			endIndex--;
 		}
@@ -622,10 +620,31 @@ void RSTRTree::CondenseTree(RSTNode* node)
 
 ////////////////////////////R*树操作//////////////////////////////////////////////
 
+void RSTRStarTree::InsertData(RSTNode* data)
+{
+#ifdef TEST
+	TRACE("\n---------------%d Insert node %x--------------\n", insertNum++, (void*)data);
+#endif
+
+	RSTNode* insertNode = ChooseLeaf(data);
+	if (insertNode)
+	{
+		insertNode->AddNode(data);
+#ifdef TEST
+		TRACE("Add %x to %x\n", (void*)data, (void*)insertNode);
+#endif
+
+		//added By BaiYanbing
+		insertNode->UpdateRange(data->range);
+
+		AdjustTree(insertNode);
+	}	
+}
+
 RSTNode* RSTRStarTree::ChooseLeaf(RSTNode* data)
 {
 	if (!Root) return NULL;
-	int i;
+	int i, j;
 	RSTNode* node = Root;
 	double min = -1;
 	double temp;
@@ -676,35 +695,42 @@ RSTNode* RSTRStarTree::ChooseLeaf(RSTNode* data)
 	//}
 
 	// 方案2 近似最小重复区域查找 速度较快 但是是近似算法 
+
 	if (node->childNum > 0 && node->childSet[0]->type == Leaf) 
 	{
 		// 排序操作
-		for (int i = 0; i < node->childNum; i++)
+		RSTNode* tempP;
+		bool flag = true;
+		for (i = 0; i < node->childNum; i++)
 		{
-			for (int j = 0; j < node->childNum - 1; j++)
+			ComputeBoundingRectangle(node->childSet[i]->range, data->range, boundingRect[i]);
+			minAddVolume[i] = ComputeVolume(boundingRect[i]) - ComputeVolume(node->childSet[i]->range);
+			//minAddVolume[i] = ComputeMinAdditionVolume(node->childSet[i]->range, data->range);
+		}
+		for (i = 0; i < node->childNum && flag; i++)
+		{
+			flag = false;
+			for (j = 0; j < node->childNum - 1; j++)
 			{
-				if (ComputeMinAdditionVolume(node->childSet[j]->range, data->range) > 
-					ComputeMinAdditionVolume(node->childSet[j + 1]->range, data->range))
-				{
-					RSTNode* tempP;
+				if (minAddVolume[j] > minAddVolume[j + 1])
+				{					
 					tempP = node->childSet[j];
 					node->childSet[j] = node->childSet[j + 1];
 					node->childSet[j + 1] = tempP;
+					flag = true;
 				}
 			}
 		}
 		min = -1;
-		for (int i = 0; i < P && i < node->childNum; i++)
+		for (i = 0; i < P && i < node->childNum; i++)
 		{
-			ComputeBoundingRectangle(node->childSet[i]->range, data->range, tempRange);
-			temp = node->ComputeNodeOverlap(i, tempRange) - node->ComputeNodeOverlap(i);
+			temp = node->ComputeNodeOverlap(i, boundingRect[i]) - node->ComputeNodeOverlap(i);
 			if (temp < min || min == -1)
 			{
 				min = temp;
 				minChild = i;
 			}
-			else if (temp == min && ComputeMinAdditionVolume(node->childSet[i]->range, data->range) < 
-				ComputeMinAdditionVolume(node->childSet[minChild]->range, data->range))
+			else if (temp == min && minAddVolume[i] < minAddVolume[minChild])
 			{
 				min = temp;
 				minChild = i;
@@ -715,6 +741,80 @@ RSTNode* RSTRStarTree::ChooseLeaf(RSTNode* data)
 
 	return node;
 }
+
+// 相当于论文中的OverfkiwTreatment操作
+void RSTRStarTree::AdjustTree(RSTNode* leafNode)
+{
+	RSTNode* currentNode = leafNode;
+	RSTNode* parentNode; 
+	RSTNode* splitNode1;
+	RSTNode* splitNode2;
+	while (currentNode != Root)
+	{
+		//
+		parentNode = (RSTNode*)currentNode->parent;
+		if (currentNode->childNum > M)
+		{
+			if (reInsertFlag)
+			{
+				// 强迫重插入操作
+				reInsertFlag = false;
+
+			}
+			else
+			{
+				Split(currentNode, splitNode1, splitNode2);
+#ifdef TEST
+				TRACE("Split %x to %x and %x\n", (void*)currentNode, (void*)splitNode1, (void*)splitNode2);
+#endif
+				parentNode->AddNode(splitNode1);
+#ifdef TEST
+				TRACE("Add %x to %x\n", (void*)splitNode1, (void*)parentNode);
+#endif
+				parentNode->AddNode(splitNode2);
+#ifdef TEST
+				TRACE("Add %x to %x\n", (void*)splitNode2, (void*)parentNode);
+#endif
+				parentNode->UpdateRange(splitNode1->range);
+				parentNode->UpdateRange(splitNode2->range);
+			}		
+		}
+		else
+			parentNode->UpdateRange(currentNode->range);
+		currentNode = parentNode;
+	}
+	if (currentNode->childNum > M)
+	{
+		RSTNode* newRoot = new RSTNode(NonLeafNode, dim, M);
+		Split(currentNode, splitNode1, splitNode2);
+#ifdef TEST
+		TRACE("Split %x to %x and %x\n", (void*)currentNode, (void*)splitNode1, (void*)splitNode2);
+#endif
+		/*newRoot->AddNode(splitNode1);
+		newRoot->AddNode(splitNode2);
+		newRoot->UpdateRange(splitNode1->range);
+		newRoot->UpdateRange(splitNode2->range);*/
+		//Modified By BaiYanbing
+		newRoot->AddNodeAndUpdateRange(splitNode1);
+#ifdef TEST
+		TRACE("Add %x to %x\n", (void*)splitNode1, (void*)newRoot);
+#endif
+		newRoot->AddNodeAndUpdateRange(splitNode2);
+#ifdef TEST
+		TRACE("Add %x to %x\n", (void*)splitNode2, (void*)newRoot);
+#endif
+		Root = newRoot;
+		height++;
+	}
+}
+
+// 强迫重插入
+void RSTRStarTree::ReInsert(RSTNode* reInsertNode)
+{
+	int i;
+
+}
+
 void RSTRStarTree::Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
 	//为第二个节点分配内存
 	newSplitNode2 = new RSTNode(splitNode->type,this->dim,this->M);
