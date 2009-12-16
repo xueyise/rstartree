@@ -87,6 +87,7 @@ public:
 	afx_msg void OnMouseDrag();
 	afx_msg void OnTestBuildTreeFromFile();
 	RSTRange m_range;
+	afx_msg void OnRangeLocation();
 };
 
 #ifndef _DEBUG  // debug version in RStarTreeView.cpp

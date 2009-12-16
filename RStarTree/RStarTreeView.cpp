@@ -53,6 +53,7 @@ BEGIN_MESSAGE_MAP(CRStarTreeView, CView)
 	ON_COMMAND(ID_TEST_BUILD_TREE_FROM_FILE, &CRStarTreeView::OnTestBuildTreeFromFile)
 	ON_COMMAND(ID_RANGESEARCH, &CRStarTreeView::OnRangeSearch)
 	ON_COMMAND(ID_MOUSEDRAG, &CRStarTreeView::OnMouseDrag)
+	ON_COMMAND(ID_RANGELOCATION, &CRStarTreeView::OnRangeLocation)
 END_MESSAGE_MAP()
 
 // CRStarTreeView construction/destruction
@@ -386,6 +387,10 @@ void CRStarTreeView::OnLButtonDown(UINT nFlags, CPoint point)
 			m_aorectangle.left,m_aorectangle.bottom);
 		break;
 	case LBUTTONRANGELOCATION:
+		m_treeshow.get2DCoordinateFromSCreenToWorld(beginpoint.x,beginpoint.y,
+			m_aorectangle.left,m_aorectangle.bottom);
+		m_treeshow.get2DCoordinateFromSCreenToWorld(beginpoint.x,beginpoint.y,
+			m_aorectangle.left,m_aorectangle.bottom);
 		break;
 	case LBUTTONPOINTLOCATION:
 		break;
@@ -451,6 +456,15 @@ void CRStarTreeView::OnLButtonUp(UINT nFlags, CPoint point)
 		m_treeshow.setResult(&(this->GetDocument()->result));
 		break;
 	case LBUTTONRANGELOCATION:
+		m_treeshow.get2DCoordinateFromSCreenToWorld(endpoint.x,endpoint.y,
+			m_aorectangle.right,m_aorectangle.top);
+		m_aorectangle.adjustRange();
+		m_range.clear();
+		m_range.push_back(RSTInter(m_aorectangle.left,m_aorectangle.right));
+		m_range.push_back(RSTInter(m_aorectangle.bottom,m_aorectangle.top));
+		this->GetDocument()->result.clear();
+		this->GetDocument()->rtree->Search(m_range,this->GetDocument()->result,true);
+		m_treeshow.setResult(&(this->GetDocument()->result));
 		break;
 	case LBUTTONPOINTLOCATION:
 		break;
@@ -486,6 +500,8 @@ void CRStarTreeView::OnMouseMove(UINT nFlags, CPoint point)
 					m_aorectangle.right,m_aorectangle.top);
 			break;
 		case LBUTTONRANGELOCATION:
+			m_treeshow.get2DCoordinateFromSCreenToWorld(endpoint.x,endpoint.y,
+					m_aorectangle.right,m_aorectangle.top);
 			break;
 		case LBUTTONPOINTLOCATION:
 			break;
@@ -740,4 +756,18 @@ void CRStarTreeView::OnMouseDrag()
 {
 	// TODO: Add your command handler code here
 	lbuttonflag = LBUTTONDRAG;
+}
+
+void CRStarTreeView::OnRangeLocation()
+{
+	// TODO: Add your command handler code here
+	lbuttonflag = LBUTTONRANGELOCATION;
+	m_treeshow.ResetPosition();
+	m_treeshow.setAssistantObject((AssistantObject *)(&m_aorectangle));
+	m_treeshow.setAssistantObjectShowState(true);
+	m_treeshow.setBranchState(false);
+	m_treeshow.setNodeEdgeShowState(false);
+	m_treeshow.setDataShowState(true);
+	m_treeshow.setNodeFaceShowState(false);
+	Invalidate(TRUE);
 }
