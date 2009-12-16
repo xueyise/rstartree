@@ -704,9 +704,13 @@ RSTNode* RSTRStarTree::ChooseLeaf(RSTNode* data)
 		{
 			ComputeBoundingRectangle(node->childSet[i]->range, data->range, boundingRect[i]);
 			minAddVolume[i] = ComputeVolume(boundingRect[i]) - ComputeVolume(node->childSet[i]->range);
+			rstNodeValueSet[i].m_value = minAddVolume[i];
+			rstNodeValueSet[i].nodeInd = i;
 			//minAddVolume[i] = ComputeMinAdditionVolume(node->childSet[i]->range, data->range);
 		}
-		for (i = 0; i < node->childNum && flag; i++)
+		// 这部分改为系统排序
+		std::sort(rstNodeValueSet, rstNodeValueSet + node->childNum, CompareRSTNodeValue);
+		/*for (i = 0; i < node->childNum && flag; i++)
 		{
 			flag = false;
 			for (j = 0; j < node->childNum - 1; j++)
@@ -719,20 +723,20 @@ RSTNode* RSTRStarTree::ChooseLeaf(RSTNode* data)
 					flag = true;
 				}
 			}
-		}
+		}*/
 		min = -1;
 		for (i = 0; i < P && i < node->childNum; i++)
 		{
-			temp = node->ComputeNodeOverlap(i, boundingRect[i]) - node->ComputeNodeOverlap(i);
+			temp = node->ComputeNodeOverlap(i, boundingRect[rstNodeValueSet[i].nodeInd]) - node->ComputeNodeOverlap(rstNodeValueSet[i].nodeInd);
 			if (temp < min || min == -1)
 			{
 				min = temp;
-				minChild = i;
+				minChild = rstNodeValueSet[i].nodeInd;
 			}
-			else if (temp == min && minAddVolume[i] < minAddVolume[minChild])
+			else if (temp == min && minAddVolume[rstNodeValueSet[i].nodeInd] < minAddVolume[minChild])
 			{
 				min = temp;
-				minChild = i;
+				minChild = rstNodeValueSet[i].nodeInd;
 			}
 		}
 		node = node->childSet[minChild];

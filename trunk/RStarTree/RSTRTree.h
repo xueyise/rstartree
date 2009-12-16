@@ -99,14 +99,16 @@ public:
 	double* distance;
 	double* minAddVolume;
 	RSTRange* boundingRect;
+	RSTNodeValue* rstNodeValueSet;
 public:
-	RSTRStarTree() : RSTRTree(), reInsertFlag(true), distance(NULL), minAddVolume(NULL) {}
+	RSTRStarTree() : RSTRTree(), reInsertFlag(true), distance(NULL), minAddVolume(NULL), rstNodeValueSet(NULL) {}
 	
 	RSTRStarTree(int dim_, int m_, int M_) : RSTRTree(dim_,m_,M_), reInsertFlag(true) 
 	{
 		distance = new double[M + 1];
 		minAddVolume = new double[M];
 		boundingRect = new RSTRange[M];
+		rstNodeValueSet = new RSTNodeValue[M];
 	}
 
 	~RSTRStarTree()
@@ -114,6 +116,7 @@ public:
 		if (distance) delete[] distance;
 		if (minAddVolume) delete[] minAddVolume;
 		if (boundingRect) delete[] boundingRect;
+		if (rstNodeValueSet) delete[] rstNodeValueSet;
 	}
 public:
 	// ≤Â»Î ˝æ›
