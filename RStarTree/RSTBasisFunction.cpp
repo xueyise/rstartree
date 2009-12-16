@@ -256,3 +256,8 @@ double RSTNode::ComputeNodeOverlap(int childInd, RSTRange& range)
 	}
 	return overlap;
 }
+
+bool CompareRSTNodeValue(RSTNodeValue& r1, RSTNodeValue& r2)
+{
+	return r1.m_value < r2.m_value;
+}

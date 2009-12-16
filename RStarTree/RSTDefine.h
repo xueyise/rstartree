@@ -118,13 +118,13 @@ public:
 	}
 };
 
-class RSTNodeValueComparator
+struct RSTNodeValue
 {
-public:
-	RSTNode* node;
+	int nodeInd;
 	double m_value;
-
 };
+
+bool CompareRSTNodeValue(RSTNodeValue& r1, RSTNodeValue& r2);
 
 typedef vector<RSTNode*> RSTNodeSet;
 
