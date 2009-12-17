@@ -4,7 +4,7 @@ pointnumber:
 rectanglenumber:
 3
 databeigin
-pointdate:
+pointdata:
 -41 -67
 -69 -24
 62 64
@@ -20,7 +20,7 @@ pointdate:
 53 -68
 62 57
 23 -41
-retangledate:
+retangledata:
 20 20 30 30
 35 35 40 40
 20 45 25 48
