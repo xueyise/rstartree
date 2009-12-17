@@ -71,6 +71,10 @@ public:
 	
 	virtual ~RSTNode();
 
+	virtual int GetDataType(){return 0;}
+	//输出数据点
+	virtual void OutPutData(std::ostream &output){}
+	//按顺序返回数据点的各个坐标值,由继承它的子类实现
 	virtual void GetDataPoints(vector<double> &vec);
 
 	// 添加子节点，(内联函数)，添加子节点后不负责父节点（当前节点）range的更新

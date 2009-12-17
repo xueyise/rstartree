@@ -94,6 +94,7 @@ public:
 	static UINT demothread(LPVOID param);
 	bool flagdemoshow;
 	afx_msg void OnAddData();
+	afx_msg void OnFileSave();
 };
 
 #ifndef _DEBUG  // debug version in RStarTreeView.cpp
