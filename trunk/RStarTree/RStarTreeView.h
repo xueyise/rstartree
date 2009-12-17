@@ -95,6 +95,8 @@ public:
 	bool flagdemoshow;
 	afx_msg void OnAddData();
 	afx_msg void OnFileSave();
+public://
+	void test2DPoint();
 };
 
 #ifndef _DEBUG  // debug version in RStarTreeView.cpp
