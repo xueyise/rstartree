@@ -12,8 +12,8 @@ using std::vector;
 #define DEF_BASIC_STRUCTURE 1
 
 #define DEFAULT_DIMENTION 2
-#define DEFAULT_LITTLE_M 5
-#define DEFALUT_BIG_M 10
+#define DEFAULT_LITTLE_M 2
+#define DEFALUT_BIG_M 4
 
 
 ///////////////////////////////区间结构定义///////////////////////////////////////////

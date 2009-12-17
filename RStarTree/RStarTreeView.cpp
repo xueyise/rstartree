@@ -322,8 +322,8 @@ void CRStarTreeView::OnTestBuildTree()
 
 
 //	print the tree
-	using std::deque;
-	/*deque<RSTNode*> que;
+	/*using std::deque;
+	deque<RSTNode*> que;
 	que.push_back(starTree.Root);
 	while(!que.empty()){
 		RSTNode* pNode = que.front();
@@ -718,7 +718,7 @@ void CRStarTreeView::OnFileOpen()
 			break;
 	}
 	delete this->GetDocument()->rtree;
-	this->GetDocument()->rtree = new RSTRTree(DEFAULT_DIMENTION, DEFAULT_LITTLE_M,
+	this->GetDocument()->rtree = new RSTRStarTree(DEFAULT_DIMENTION, DEFAULT_LITTLE_M,
 		DEFALUT_BIG_M);
 	RSTRTree* ptree = this->GetDocument()->rtree;
 	vector<RSTNode*> *pset = &(this->GetDocument()->dateset);
