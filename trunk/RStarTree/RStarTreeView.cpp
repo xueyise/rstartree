@@ -702,6 +702,7 @@ void CRStarTreeView::OnFileOpen()
 	size_t pointnumber = 0;
 	RSTRectangle2D* rectangles = NULL;
 	size_t rectanglenumber = 0;
+	int errorcount = 0;
 	while(tempstr != "databegin")
 	{
 		getline(infile,tempstr,'\n');
@@ -716,7 +717,14 @@ void CRStarTreeView::OnFileOpen()
 			getline(infile,tempstr,'\n');
 		}
 		else
-			break;
+		{
+			++errorcount;
+			if(errorcount>100)
+			{
+				MessageBox(_T("文件格式错误"),_T("错误提示"),MB_ICONERROR|MB_OK);
+				return;
+			}
+		}
 	}
 	delete this->GetDocument()->rtree;
 	this->GetDocument()->rtree = new RSTRStarTree(DEFAULT_DIMENTION, DEFAULT_LITTLE_M,
@@ -726,6 +734,7 @@ void CRStarTreeView::OnFileOpen()
 	pset->clear();
 	size_t datasize = pointnumber + rectanglenumber;
 	pset->reserve(datasize);
+	errorcount = 0;
 	while(tempstr != "dataend")
 	{
 		getline(infile,tempstr,'\n');
@@ -754,8 +763,15 @@ void CRStarTreeView::OnFileOpen()
 			}
 			getline(infile,tempstr,'\n');
 		}
-		else
-			break;
+		else	
+		{
+			++errorcount;
+			if(errorcount>100)
+			{
+				MessageBox(_T("文件格式错误"),_T("错误提示"),MB_ICONERROR|MB_OK);
+				return;
+			}
+		}
 	}
 	infile.close();
 	m_treeshow.setTree(ptree,pset);
