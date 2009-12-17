@@ -831,12 +831,29 @@ UINT CRStarTreeView::demothread(LPVOID param)
 {
 	CRStarTreeView* p = (CRStarTreeView*)param;
 	int treeheight = p->GetDocument()->rtree->height;
+	p->m_treeshow.demoXRotate(-1.57);
+	p->m_treeshow.demoMove(0,0,-0.5);
 	while(p->flagdemoshow)
 	{
-		for(int i=0;i<treeheight;++i)
+		for(int i=0;i<=treeheight;++i)
 		{
 			p->m_treeshow.setDemoCurrentLayer(i);
-			Sleep(1000);
+			for(int j=0;j<40;++j)
+			{
+				p->m_treeshow.demoZRotate(0.1);
+				p->m_treeshow.demoMove(0,0,1.0/(double)treeheight/80.0);
+				p->Invalidate(TRUE);
+				Sleep(25);
+			}
+		}
+		p->m_treeshow.setDemoCurrentLayer(treeheight+1);
+		p->Invalidate(TRUE);
+		for(int i=0;i<40;++i)
+		{
+			p->m_treeshow.demoZRotate(0.1);
+			p->m_treeshow.demoXRotate(1.57/40.0);
+			p->Invalidate(TRUE);
+			Sleep(25);
 		}
 		break;
 	}
@@ -849,14 +866,25 @@ void CRStarTreeView::OnDemoShow()
 	if(flagdemoshow)
 	{
 		flagdemoshow = false;
-		m_treeshow.setDemoShowState(false);
+		m_treeshow.setTree(this->GetDocument()->rtree,&(this->GetDocument()->result));
 	}
 	else
 	{
-		flagdemoshow = true;
-		m_treeshow.setDemoShowState(true);
-		m_treeshow.setResultState(false);
-		m_treeshow.setAssistantObjectShowState(true);
-		AfxBeginThread(demothread,this);
+		if(m_treeshow.setDemoShowState(true))
+		{
+			flagdemoshow = true;
+			m_treeshow.setDemoShowState(true);
+			m_treeshow.setResultState(false);
+			m_treeshow.setAssistantObjectShowState(true);
+			m_treeshow.setPorjectionState(true);
+			AfxBeginThread(demothread,this);
+			lbuttonflag = LBUTTONDISABLE;
+		}
+		else
+		{
+			AfxMessageBox(_T("演示条件不足：\n\r1-数据不为空\n\r2-有查询框"));
+			flagdemoshow = false;
+			m_treeshow.setTree(this->GetDocument()->rtree,&(this->GetDocument()->dateset));
+		}
 	}
 }

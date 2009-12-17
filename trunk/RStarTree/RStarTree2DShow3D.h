@@ -47,7 +47,7 @@ public:
 	void setAssistantObjectShowState(const bool &state){showstate[4] = state;}
 	void setResultState(const bool &state){showstate[5] = state;}
 	void setPorjectionState(const bool &state){m_gls3d.SetProjectionMethod(state);}
-	void setDemoShowState(const bool &state){demoshow = state;if(state)setDemoItem();}
+	bool setDemoShowState(const bool &state);
 	void setDemoCurrentLayer(const int &layer){democurrentlayer = layer;}
 
 	bool getDataShowState()const{return showstate[0];}
@@ -77,12 +77,11 @@ public:
 	void BeginDraw(HDC& m_hdc){m_gls3d.BeginDraw(m_hdc);}
 	void EndDraw(HDC& m_hdc){m_gls3d.EndDraw(m_hdc);}
 
-	void demoXRotate(const double &angle){m_gls3d.Rotation(angle,1,0,0,true);}
-	void demoYRotate(const double &angle){m_gls3d.Rotation(angle,0,1,0,true);}
-	void demoZRotate(const double &angle){m_gls3d.Rotation(angle,0,0,1,true);}
-	void demoMove(const double &x,const double &y,const double &z)
-	{m_gls3d.Translation(x,y,z,true);}
-	void demoZoom(const double &rate){m_gls3d.AdjustZoomRate(rate);}
+	void demoXRotate(const double &angle){if(demoshow)m_gls3d.Rotation(angle,1,0,0,true);}
+	void demoYRotate(const double &angle){if(demoshow)m_gls3d.Rotation(angle,0,1,0,true);}
+	void demoZRotate(const double &angle){if(demoshow)m_gls3d.Rotation(angle,0,0,1,true);}
+	void demoMove(const double &x,const double &y,const double &z);
+	void demoZoom(const double &rate){if(demoshow)m_gls3d.AdjustZoomRate(rate);}
 
 private:
 	void drawResult();

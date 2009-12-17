@@ -84,9 +84,19 @@ void Tree2DShow3D::fillDemoRectangle()
 		for(size_t i=m_node.size()-1;i>=0;--i)
 		{
 			if(!flagnode[i])
-				return;
+			{
+				if(i==0)
+					break;
+				else
+					continue;
+			}
 			if(m_tree->height - m_layer[i] + 1<democurrentlayer)
-				return;
+			{
+				if(i==0)
+					break;
+				else
+					continue;
+			}
 			glBegin(GL_POLYGON);
 			glVertex3d(m_node[i]->range[0].min,m_node[i]->range[1].min,
 				rangeperlayer*m_layer[i]);
@@ -145,8 +155,8 @@ void Tree2DShow3D::drawDemoBranch()
 	for(size_t i=0,j=0;i<m_branch.size();i+=6,++j)
 	{
 		if(!flagbranch[j])
-			return;
-		if(m_tree->height - m_layer[j] + 1 == democurrentlayer)
+			continue;
+		if(m_tree->height - branchlayer[j] + 1 == democurrentlayer)
 		{
 			glVertex3d(m_branch[i],m_branch[i+1],m_branch[i+2]);
 			glVertex3d(m_branch[i+3],m_branch[i+4],m_branch[i+5]);
@@ -188,9 +198,9 @@ void Tree2DShow3D::drawDemoRectangle()
 	for(size_t i=0;i<m_node.size();++i)
 	{
 		if(!flagnode[i])
-			return;
+			continue;
 		if(m_tree->height - m_layer[i] + 1<democurrentlayer)
-			return;
+			continue;
 		value = m_layer[i]%3;
 		if(value==0)
 			glColor4f(0,1,0,1);
@@ -352,6 +362,7 @@ void Tree2DShow3D::setDemoItem()
 	m_layer.clear();
 	m_branch.clear();
 	flagbranch.clear();
+	branchlayer.clear();
 	size_t sizevalue1 = size_t(pow(double(m_tree->M),m_tree->height));
 	size_t sizevalue2 = (sizevalue1 -1) / (m_tree->M - 1);
 	m_node.reserve(sizevalue2);
@@ -400,8 +411,8 @@ void Tree2DShow3D::setDemoItem()
 					m_branch.push_back(tempz);
 					m_branch.push_back((pn->back()->range[0].max+pn->back()->range[0].min)*0.5);
 					m_branch.push_back((pn->back()->range[1].max+pn->back()->range[1].min)*0.5);
-					m_branch.push_back(rangeperlayer*(layernumber));
-					branchlayer.push_back(layernumber-1);
+					m_branch.push_back(rangeperlayer*(layernumber-1));
+					branchlayer.push_back(layernumber);
 					if(IsJoin((*pc)[i]->childSet[j]->range,temprange2))
 						flagbranch.push_back(true);
 					else
@@ -416,7 +427,15 @@ void Tree2DShow3D::setDemoItem()
 		--layernumber;
 	}
 }
-
+bool Tree2DShow3D::setDemoShowState(const bool &state)
+{
+	if(m_tree==NULL || m_ao==NULL)
+		return false;
+	demoshow = state;
+	if(state)
+		setDemoItem();
+	return true;
+}
 void Tree2DShow3D::drawAssistantObject()
 {
 	glDepthMask(GL_TRUE);
@@ -453,7 +472,13 @@ void Tree2DShow3D::setzup()
 	else
 		zfront = false;
 }
-
+void Tree2DShow3D::demoMove(const double &x,const double &y,const double &z)
+{
+	if(!demoshow)
+		return;
+	double templength = m_tree->height*rangeperlayer;
+	m_gls3d.Translation(x*templength,y*templength,z*templength,true);
+}
 void AOPoint::draw()
 {
 	glColor4f(1,0,0,1);
