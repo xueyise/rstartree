@@ -3,12 +3,21 @@
 
 ///////////////////////////定义一些测试用数据结构///////////////////////////////////////////////
 
+#define RSTPOINT2D  1
+#define RSTPOINT3D 2
+#define RSTRECTANGLE2D 3
+#define RSTRECTANGLE3D 4
+#define RSTPOINT 5
+#define RSTRECTANGLE 6
+
 // 2维点类
 class RSTPoint2D : public RSTNode
 {
 public:
 	double x;
 	double y;
+
+	static const int type = RSTPOINT2D;
 public:
 	RSTPoint2D() : RSTNode(Data, 2, 0) {}
 
@@ -16,6 +25,8 @@ public:
 
 	void GenerateRange();
 	void GetDataPoints(vector<double> &vec);
+	void OutPutData(std::ostream &output);
+	int GetDataType(){return type;}
 };
 
 // 3维点类
@@ -39,6 +50,8 @@ class RSTRectangle2D : public RSTNode
 public:
 	double xmin, ymin;
 	double xmax, ymax;
+
+	static const int type = RSTRECTANGLE2D;
 public:
 	RSTRectangle2D() : RSTNode(Data, 2, 0) {}
 
@@ -46,6 +59,8 @@ public:
 
 	void GenerateRange();
 	void GetDataPoints(vector<double> &vec);
+	void OutPutData(std::ostream &output);
+	int GetDataType(){return type;}
 };
 
 // 3维矩形

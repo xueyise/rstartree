@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "RSTTestData.h"
+#include <iostream>
 
 ///////////////////////////2维点类///////////////////////////////////////////////
 
@@ -21,6 +22,11 @@ void RSTPoint2D::GetDataPoints(vector<double> &vec)
 	vec.reserve(2);
 	vec.push_back(x);
 	vec.push_back(y);
+}
+
+void RSTPoint2D::OutPutData(std::ostream &output)
+{
+	output<<x<<" "<<y<<std::endl;
 }
 ///////////////////////////3维点类///////////////////////////////////////////////
 
@@ -64,6 +70,11 @@ void RSTRectangle2D::GetDataPoints(vector<double> &vec)
 	vec.push_back(ymax);
 	vec.push_back(xmax);
 	vec.push_back(ymin);
+}
+
+void RSTRectangle2D::OutPutData(std::ostream &output)
+{
+	output<<xmin<<" "<<ymin<<" "<<xmax<<" "<<ymax<<std::endl;
 }
 
 ///////////////////////////3维矩形类///////////////////////////////////////////////

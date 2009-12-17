@@ -56,6 +56,7 @@ BEGIN_MESSAGE_MAP(CRStarTreeView, CView)
 	ON_COMMAND(ID_RANGELOCATION, &CRStarTreeView::OnRangeLocation)
 	ON_COMMAND(ID_DEMOSHOW, &CRStarTreeView::OnDemoShow)
 	ON_COMMAND(ID_ADDDATA, &CRStarTreeView::OnAddData)
+	ON_COMMAND(ID_FILE_SAVE, &CRStarTreeView::OnFileSave)
 END_MESSAGE_MAP()
 
 // CRStarTreeView construction/destruction
@@ -812,6 +813,11 @@ void CRStarTreeView::OnTestBuildTreeFromFile()
 void CRStarTreeView::OnRangeSearch()
 {
 	// TODO: Add your command handler code here
+	if(this->GetDocument()->rtree == NULL)
+	{
+		MessageBox(_T("当前R树为空，不能查询，请输入数据再试。"),_T("错误操作提示"),MB_OK);
+		return;
+	}
 	lbuttonflag = LBUTTONRANGESEARCH;
 	m_treeshow.ResetPosition();
 	m_treeshow.setProjectionState(false);
@@ -834,6 +840,11 @@ void CRStarTreeView::OnMouseDrag()
 void CRStarTreeView::OnRangeLocation()
 {
 	// TODO: Add your command handler code here
+	if(this->GetDocument()->rtree == NULL)
+	{
+		MessageBox(_T("当前R树为空，不能定位，请输入数据再试。"),_T("错误操作提示"),MB_OK);
+		return;
+	}
 	lbuttonflag = LBUTTONRANGELOCATION;
 	m_treeshow.ResetPosition();
 	m_treeshow.setProjectionState(false);
@@ -997,6 +1008,16 @@ UINT CRStarTreeView::demothread(LPVOID param)
 void CRStarTreeView::OnDemoShow()
 {
 	// TODO: Add your command handler code here
+	if(this->GetDocument()->rtree == NULL)
+	{
+		MessageBox(_T("当前R树为空，不能演示，请输入数据再试。"),_T("错误操作提示"),MB_OK);
+		return;
+	}
+	if(lbuttonflag != LBUTTONRANGESEARCH)
+	{
+		MessageBox(_T("请先些换到\"区域查询\"状态"),_T("错误操作提示"),MB_OK);
+		return;
+	}
 	if(flagdemoshow)
 	{
 		flagdemoshow = false;
@@ -1027,6 +1048,11 @@ void CRStarTreeView::OnDemoShow()
 void CRStarTreeView::OnAddData()
 {
 	// TODO: Add your command handler code here
+	if(this->GetDocument()->rtree == NULL)
+	{
+		MessageBox(_T("当前R树为空，不支持手动插入"),_T("错误操作提示"),MB_OK);
+		return;
+	}
 	lbuttonflag = LBUTTONADDDATA;
 	m_treeshow.ResetPosition();
 	m_treeshow.setProjectionState(false);
@@ -1040,3 +1066,46 @@ void CRStarTreeView::OnAddData()
 	Invalidate(TRUE);
 }
 
+void CRStarTreeView::OnFileSave()
+{
+	// TODO: Add your command handler code here
+	if(this->GetDocument()->rtree == NULL)
+	{
+		MessageBox(_T("当前R树为空，不能保存"),_T("错误操作提示"),MB_OK);
+		return;
+	}
+	CFileDialog mydlg(false,_T("*.txt"),_T("*.txt"),NULL,_T("(*.txt)|*.txt||"),this,NULL);
+	if(mydlg.DoModal()!=IDOK)
+		return;
+	std::wstring filename = mydlg.GetPathName();
+	std::ofstream outfile(filename.c_str());
+	outfile<<"testdata2d"<<std::endl;
+	vector<RSTNode*> pointset;
+	vector<RSTNode*> rectangleset;
+	vector<double> tempvec;
+	vector<RSTNode*> *pdata = &(this->GetDocument()->dateset);
+	pointset.reserve(pdata->size());
+	rectangleset.reserve(pdata->size());
+	pointset.clear();
+	rectangleset.clear();
+	for(size_t i=0;i<pdata->size();++i)
+	{
+		if( (*pdata)[i]->GetDataType() == RSTPOINT2D)
+			pointset.push_back((*pdata)[i]);
+		else if((*pdata)[i]->GetDataType() == RSTRECTANGLE2D)
+			rectangleset.push_back((*pdata)[i]);
+		else;
+	}
+	if(!(pointset.empty()))
+		outfile<<"pointnumber:"<<std::endl<<pointset.size()<<std::endl;
+	if(!(rectangleset.empty()))
+		outfile<<"rectanglenumber:"<<std::endl<<rectangleset.size()<<std::endl;
+	outfile<<"databegin"<<std::endl<<"pointdata:"<<std::endl;
+	for(size_t i=0;i<pointset.size();++i)
+		pointset[i]->OutPutData(outfile);
+	outfile<<"rectangledata:"<<std::endl;
+	for(size_t i=0;i<rectangleset.size();++i)
+		rectangleset[i]->OutPutData(outfile);
+	outfile<<"dataend"<<std::endl;
+	outfile.close();
+}
