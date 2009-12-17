@@ -46,7 +46,7 @@ public:
 	void setNodeFaceShowState(const bool &state){showstate[3] = state;}
 	void setAssistantObjectShowState(const bool &state){showstate[4] = state;}
 	void setResultState(const bool &state){showstate[5] = state;}
-	void setPorjectionState(const bool &state){m_gls3d.SetProjectionMethod(state);}
+	void setProjectionState(const bool &state){m_gls3d.SetProjectionMethod(state);}
 	bool setDemoShowState(const bool &state);
 	void setDemoCurrentLayer(const int &layer){democurrentlayer = layer;}
 
@@ -55,7 +55,7 @@ public:
 	bool getNodeEdgeShowState()const{return showstate[2];}
 	bool getNodeFaceShowState()const{return showstate[3];}
 	bool getAssistantObjectShowState()const{return showstate[4];}
-	bool getPorjectionState()const{return m_gls3d.GetProjectionMethod();}
+	bool getProjectionState()const{return m_gls3d.GetProjectionMethod();}
 	bool getDemoShowState()const{return showstate[5];}
 
 	void setAssistantObject(AssistantObject* p){m_ao = p;}
