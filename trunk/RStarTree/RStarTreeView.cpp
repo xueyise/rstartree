@@ -729,7 +729,7 @@ void CRStarTreeView::OnFileOpen()
 	while(tempstr != "dataend")
 	{
 		getline(infile,tempstr,'\n');
-		if(tempstr == "pointdate:")
+		if(tempstr == "pointdata:")
 		{
 			for(size_t i=0;i<pointnumber;++i)
 			{
@@ -741,7 +741,7 @@ void CRStarTreeView::OnFileOpen()
 			}
 			getline(infile,tempstr,'\n');
 		}
-		else if (tempstr == "retangledate:")
+		else if (tempstr == "retangledata:")
 		{
 			for(size_t i=0;i<rectanglenumber;++i)
 			{
