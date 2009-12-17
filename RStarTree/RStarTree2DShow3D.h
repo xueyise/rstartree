@@ -73,6 +73,7 @@ public:
 	void Rotation(const int &cx,const int &cy,const double angle,const bool &flagsave)
 	{m_gls3d.Rotation(cx,cy,angle,flagsave);}
 	void ResetPosition(){m_gls3d.ResetPosition();}
+	void Reset(){updateTreeData();};
 
 	void BeginDraw(HDC& m_hdc){m_gls3d.BeginDraw(m_hdc);}
 	void EndDraw(HDC& m_hdc){m_gls3d.EndDraw(m_hdc);}

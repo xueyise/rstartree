@@ -55,6 +55,7 @@ BEGIN_MESSAGE_MAP(CRStarTreeView, CView)
 	ON_COMMAND(ID_MOUSEDRAG, &CRStarTreeView::OnMouseDrag)
 	ON_COMMAND(ID_RANGELOCATION, &CRStarTreeView::OnRangeLocation)
 	ON_COMMAND(ID_DEMOSHOW, &CRStarTreeView::OnDemoShow)
+	ON_COMMAND(ID_ADDDATA, &CRStarTreeView::OnAddData)
 END_MESSAGE_MAP()
 
 // CRStarTreeView construction/destruction
@@ -447,6 +448,13 @@ void CRStarTreeView::OnLButtonDown(UINT nFlags, CPoint point)
 		break;
 	case LBUTTONPOINTLOCATION:
 		break;
+	case LBUTTONADDDATA:
+		m_treeshow.setAssistantObjectShowState(false);
+		m_treeshow.get2DCoordinateFromSCreenToWorld(beginpoint.x,beginpoint.y,
+			m_aorectangle.left,m_aorectangle.bottom);
+		m_treeshow.get2DCoordinateFromSCreenToWorld(beginpoint.x,beginpoint.y,
+			m_aorectangle.left,m_aorectangle.bottom);
+		break;
 	default:
 		break;
 	}
@@ -488,6 +496,8 @@ void CRStarTreeView::OnLButtonUp(UINT nFlags, CPoint point)
 	}*/
 #endif
 	endpoint = point;
+	RSTPoint2D* rstpoint = NULL;
+	RSTRectangle2D* rstrectangle = NULL;
 	switch(lbuttonflag)
 	{
 	case LBUTTONDRAG:
@@ -520,6 +530,35 @@ void CRStarTreeView::OnLButtonUp(UINT nFlags, CPoint point)
 		m_treeshow.setResult(&(this->GetDocument()->result));
 		break;
 	case LBUTTONPOINTLOCATION:
+		break;
+	case LBUTTONADDDATA:
+		if(beginpoint == endpoint)
+		{
+			rstpoint = new RSTPoint2D;
+			rstpoint->x = m_aorectangle.left;
+			rstpoint->y = m_aorectangle.bottom;
+			rstpoint->GenerateRange();
+			this->GetDocument()->dateset.push_back(rstpoint);
+			this->GetDocument()->rtree->InsertData(rstpoint);
+			rstpoint = NULL;
+		}
+		else
+		{
+			m_treeshow.get2DCoordinateFromSCreenToWorld(endpoint.x,endpoint.y,
+				m_aorectangle.right,m_aorectangle.top);
+			m_aorectangle.adjustRange();
+			rstrectangle = new RSTRectangle2D;
+			rstrectangle->xmin = m_aorectangle.left;
+			rstrectangle->ymin = m_aorectangle.bottom;
+			rstrectangle->xmax = m_aorectangle.right;
+			rstrectangle->ymax = m_aorectangle.top;
+			rstrectangle->GenerateRange();
+			this->GetDocument()->dateset.push_back(rstrectangle);
+			this->GetDocument()->rtree->InsertData(rstrectangle);
+			rstrectangle = NULL;
+			m_treeshow.setAssistantObjectShowState(false);
+		}
+		m_treeshow.Reset();
 		break;
 	default:
 		break;
@@ -557,6 +596,11 @@ void CRStarTreeView::OnMouseMove(UINT nFlags, CPoint point)
 					m_aorectangle.right,m_aorectangle.top);
 			break;
 		case LBUTTONPOINTLOCATION:
+			break;
+		case LBUTTONADDDATA:
+			m_treeshow.get2DCoordinateFromSCreenToWorld(endpoint.x,endpoint.y,
+					m_aorectangle.right,m_aorectangle.top);
+			m_treeshow.setAssistantObjectShowState(true);
 			break;
 		default:
 			break;
@@ -813,6 +857,7 @@ void CRStarTreeView::OnRangeSearch()
 	// TODO: Add your command handler code here
 	lbuttonflag = LBUTTONRANGESEARCH;
 	m_treeshow.ResetPosition();
+	m_treeshow.setProjectionState(false);
 	m_treeshow.setAssistantObject((AssistantObject *)(&m_aorectangle));
 	m_treeshow.setAssistantObjectShowState(true);
 	m_treeshow.setBranchState(false);
@@ -834,6 +879,7 @@ void CRStarTreeView::OnRangeLocation()
 	// TODO: Add your command handler code here
 	lbuttonflag = LBUTTONRANGELOCATION;
 	m_treeshow.ResetPosition();
+	m_treeshow.setProjectionState(false);
 	m_treeshow.setAssistantObject((AssistantObject *)(&m_aorectangle));
 	m_treeshow.setAssistantObjectShowState(true);
 	m_treeshow.setBranchState(false);
@@ -1019,4 +1065,20 @@ void CRStarTreeView::OnDemoShow()
 			m_treeshow.setTree(this->GetDocument()->rtree,&(this->GetDocument()->dateset));
 		}
 	}
+}
+
+void CRStarTreeView::OnAddData()
+{
+	// TODO: Add your command handler code here
+	lbuttonflag = LBUTTONADDDATA;
+	m_treeshow.ResetPosition();
+	m_treeshow.setProjectionState(false);
+	m_treeshow.setAssistantObject((AssistantObject *)(&m_aorectangle));
+	m_treeshow.setAssistantObjectShowState(true);
+	m_treeshow.setBranchState(false);
+	m_treeshow.setNodeEdgeShowState(false);
+	m_treeshow.setDataShowState(true);
+	m_treeshow.setNodeFaceShowState(false);
+	m_treeshow.setResultState(false);
+	Invalidate(TRUE);
 }

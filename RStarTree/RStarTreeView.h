@@ -75,6 +75,7 @@ protected:
 	static const int LBUTTONRANGELOCATION = 2;
 	static const int LBUTTONPOINTLOCATION = 3;
 	static const int LBUTTONDISABLE = 4;
+	static const int LBUTTONADDDATA = 5;
 public:
 	afx_msg void OnDestroy();
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
@@ -92,6 +93,7 @@ public:
 	afx_msg void OnDemoShow();
 	static UINT demothread(LPVOID param);
 	bool flagdemoshow;
+	afx_msg void OnAddData();
 };
 
 #ifndef _DEBUG  // debug version in RStarTreeView.cpp
