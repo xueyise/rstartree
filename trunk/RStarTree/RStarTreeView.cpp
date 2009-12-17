@@ -741,7 +741,7 @@ void CRStarTreeView::OnFileOpen()
 			}
 			getline(infile,tempstr,'\n');
 		}
-		else if (tempstr == "retangledata:")
+		else if (tempstr == "rectangledata:")
 		{
 			for(size_t i=0;i<rectanglenumber;++i)
 			{
