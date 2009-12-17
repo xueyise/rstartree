@@ -14,10 +14,13 @@ public:
 
 	int m;// 子节点的最小数目
 	int M;// 子节点的最大数目
-public:
-	RSTRTree() : dim(0), m(0), M(0), height(0), Root(NULL) {}
 
-	RSTRTree(int dim_, int m_, int M_) : dim(dim_), m(m_), M(M_), height(1) {Root = new RSTNode(Leaf, dim, M);}
+	//临时数据
+	double *pVol;
+public:
+	RSTRTree() : dim(0), m(0), M(0), height(0), Root(NULL),pVol(NULL) {}
+
+	RSTRTree(int dim_, int m_, int M_) : dim(dim_), m(m_), M(M_), height(1) {Root = new RSTNode(Leaf, dim, M);pVol=NULL;}
 
 	virtual ~RSTRTree();
 	void ReleaseRec(RSTNode* pNode);
