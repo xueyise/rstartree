@@ -965,6 +965,7 @@ UINT CRStarTreeView::demothread(LPVOID param)
 	p->m_treeshow.setResultState(true);
 	p->m_treeshow.setProjectionState(true);
 	p->Invalidate(TRUE);
+	
 
 	return 0;
 }
