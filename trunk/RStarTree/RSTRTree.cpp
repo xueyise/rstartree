@@ -80,7 +80,10 @@ void RSTRTree::SearchByInter(RSTRange& range, RSTNodeSet& result, RSTNode* node)
 RSTRTree::~RSTRTree(){
 
 	//节点的析构函数是递归调用的
-	
+	if(pVol){
+		delete pVol;
+		pVol = NULL;
+	}
 	delete this->Root;
 }
 
@@ -247,7 +250,9 @@ void RSTRTree::PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& sec
 	//临时变量
 	int N = splitNode->childNum;
 	double difference,tempDiff;
-	double* pVol = new double[N];
+	if(!pVol){
+		pVol = new double[N];
+	}
 	RSTRange tempBoundingRange;
 	
 	//提前计算每个range的大小
@@ -274,7 +279,7 @@ void RSTRTree::PickSeedsQudratic(RSTNode* splitNode,int& firstSeedIndex,int& sec
 		}
 	}
 	//释放内存
-	delete pVol;
+	/*delete pVol;*/
 }
 void RSTRTree::Split(RSTNode* splitNode,RSTNode*& newSplitNode1,RSTNode*& newSplitNode2){
 	QuadraticSplit(splitNode,newSplitNode1,newSplitNode2);
