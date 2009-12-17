@@ -3,7 +3,7 @@ pointnumber:
 15
 rectanglenumber:
 3
-databeigin
+databegin
 pointdata:
 -41 -67
 -69 -24
@@ -20,7 +20,7 @@ pointdata:
 53 -68
 62 57
 23 -41
-retangledata:
+rectangledata:
 20 20 30 30
 35 35 40 40
 20 45 25 48
