@@ -346,6 +346,7 @@ void CRStarTreeView::OnTestBuildTree()
 
 	out<<N<<"Points in the Tree"<<endl;
 	out<<"m="<<tree.m<<" M="<<tree.M<<endl;
+	out<<"Height:"<<tree.height<<endl;
 	
 	
 	
@@ -830,8 +831,8 @@ void CRStarTreeView::OnRangeLocation()
 UINT CRStarTreeView::demothread(LPVOID param)
 {
 	CRStarTreeView* p = (CRStarTreeView*)param;
-	int treeheight = p->GetDocument()->rtree->height;
-	p->m_treeshow.demoXRotate(-1.57);
+	int treeHeight = p->GetDocument()->rtree->height;
+	/*p->m_treeshow.demoXRotate(-1.57);
 	p->m_treeshow.demoMove(0,0,-0.5);
 	while(p->flagdemoshow)
 	{
@@ -857,7 +858,114 @@ UINT CRStarTreeView::demothread(LPVOID param)
 			Sleep(25);
 		}
 		break;
+	}*/
+
+
+
+	//time definition
+	long TIME_UNIT = 2;
+	
+	long  inclineTimes = 500;
+	long fullAroundTimes = 1000;
+	long  upTimes = 500;
+	long downTimes = 500;
+
+	//get percentage
+	double percentagePerMoveUp = (1.0/treeHeight)/500;
+	double percentagePerMoveDown = -((0.5+1.0/treeHeight)/500);
+
+	//angle definition 
+	
+	double zFullAroundAngleOnce = (2.0*PI)/fullAroundTimes;
+	double inclineAnglePerOnceForward = (PI/12.0)/inclineTimes;
+	double inclineAnglePerOnceBackward = -inclineAnglePerOnceForward;
+	
+	
+	//
+	double xMove = 0.0;
+	double yMove = 0.0;
+	 
+
+	//get to the right position
+	p->m_treeshow.ResetPosition();
+	p->m_treeshow.demoXRotate(-PI/2.0);
+
+	int numOfLayers = treeHeight+1;
+	int layerIndex =1;
+
+	//move down
+	p->m_treeshow.demoMove
+		(xMove,yMove,-0.5);
+	
+	//begin loop 
+	do{
+		//set layer,display the current tree edges and eliminate the upper
+
+		p->m_treeshow.setDemoCurrentLayer(layerIndex);
+		//incline forward
+		for(int i=0;i<inclineTimes;i++){
+			p->m_treeshow.demoXRotate(inclineAnglePerOnceForward);
+			p->Invalidate(TRUE);
+			Sleep(TIME_UNIT);
+		}
+		//rotate full around 
+		for(int i=0;i<fullAroundTimes;i++){
+		
+			p->m_treeshow.demoZRotate(zFullAroundAngleOnce);
+			p->Invalidate(TRUE);
+			Sleep(TIME_UNIT);
+		}
+
+		//incline backward
+		for(int i=0;i<inclineTimes;i++){
+			p->m_treeshow.demoXRotate(inclineAnglePerOnceBackward);
+			p->Invalidate(TRUE);
+			Sleep(TIME_UNIT);
+		}
+
+
+		//move up
+		for(int i=0;i<upTimes;i++){
+			p->m_treeshow.demoMove(xMove,yMove,percentagePerMoveUp);
+			p->Invalidate(TRUE);
+			Sleep(TIME_UNIT);
+		}
+
+		//display the next layer
+		layerIndex++;
+	
+	}while(layerIndex<=numOfLayers);
+
+
+	//post 
+
+	//Move down and incline forward
+	
+	for(int i=0;i<downTimes;i++){
+		
+		p->m_treeshow.demoMove(xMove,yMove,percentagePerMoveDown);
+		p->Invalidate(TRUE);
+		Sleep(TIME_UNIT);
 	}
+	for(int i=0;i<inclineTimes;i++){
+		p->m_treeshow.demoXRotate(inclineAnglePerOnceForward);
+		p->Invalidate(TRUE);
+		Sleep(TIME_UNIT);
+	}
+	for(int i=0;i<inclineTimes;i++){
+		p->m_treeshow.demoXRotate(inclineAnglePerOnceForward);
+		p->Invalidate(TRUE);
+		Sleep(TIME_UNIT);
+	}
+		
+
+
+
+
+	p->m_treeshow.setResultState(true);
+	p->m_treeshow.setProjectionState(true);
+	p->Invalidate(TRUE);
+
 	return 0;
 }
 

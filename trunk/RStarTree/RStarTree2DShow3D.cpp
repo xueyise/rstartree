@@ -12,7 +12,8 @@ void Tree2DShow3D::drawTree()
 			drawResult();
 		drawData();
 		drawDemoBranch();
-		drawDemoRectangle();
+		//drawDemoRectangle();
+		drawRectangle();
 		drawAssistantObject();
 		fillDemoRectangle();
 	}
@@ -90,7 +91,7 @@ void Tree2DShow3D::fillDemoRectangle()
 				else
 					continue;
 			}
-			if(m_tree->height - m_layer[i] + 1<democurrentlayer)
+			if(m_tree->height - m_layer[i]>=democurrentlayer)
 			{
 				if(i==0)
 					break;
@@ -156,7 +157,7 @@ void Tree2DShow3D::drawDemoBranch()
 	{
 		if(!flagbranch[j])
 			continue;
-		if(m_tree->height - branchlayer[j] + 1 == democurrentlayer)
+		if(m_tree->height - branchlayer[j] + 1 < democurrentlayer)
 		{
 			glVertex3d(m_branch[i],m_branch[i+1],m_branch[i+2]);
 			glVertex3d(m_branch[i+3],m_branch[i+4],m_branch[i+5]);
