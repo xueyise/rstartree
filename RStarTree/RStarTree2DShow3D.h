@@ -82,6 +82,7 @@ public:
 	void demoZRotate(const double &angle){if(demoshow)m_gls3d.Rotation(angle,0,0,1,true);}
 	void demoMove(const double &x,const double &y,const double &z);
 	void demoZoom(const double &rate){if(demoshow)m_gls3d.AdjustZoomRate(rate);}
+	void demoSetAssistantObjectHeight(const double &rate);
 
 private:
 	void drawResult();
@@ -102,30 +103,30 @@ private:
 class AssistantObject
 {
 public:
+	double z;
+
 	virtual void draw(){}
 	virtual void getrange(double &x1,double&x2,double &y1,double &y2)const{}
 };
 
-class AOPoint:AssistantObject
+class AOPoint:public AssistantObject
 {
 public:
 	double x;
 	double y;
-	double z;
 
 	void getrange(double &x1,double&x2,double &y1,double &y2)const
 	{x1 = x; x2 = x; y1 = y; y2 = y;}
 	void draw();
 };
 
-class AORectangle:AssistantObject
+class AORectangle:public AssistantObject
 {
 public:
 	double left;
 	double bottom;
 	double right;
 	double top;
-	double z;
 
 	void adjustRange();
 	void getrange(double &x1,double&x2,double &y1,double &y2)const

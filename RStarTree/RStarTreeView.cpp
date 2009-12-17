@@ -901,6 +901,8 @@ UINT CRStarTreeView::demothread(LPVOID param)
 	double xMove = 0.0;
 	double yMove = 0.0;
 	 
+	//assistantobjectheightrate
+	double aoht = 1.0;
 
 	//get to the right position
 	p->m_treeshow.ResetPosition();
@@ -912,7 +914,8 @@ UINT CRStarTreeView::demothread(LPVOID param)
 	//move down
 	p->m_treeshow.demoMove
 		(xMove,yMove,-0.5);
-	
+	p->m_treeshow.demoSetAssistantObjectHeight(aoht);
+
 	//begin loop 
 	do{
 		//set layer,display the current tree edges and eliminate the upper
@@ -943,6 +946,9 @@ UINT CRStarTreeView::demothread(LPVOID param)
 		//move up
 		for(int i=0;i<upTimes;i++){
 			p->m_treeshow.demoMove(xMove,yMove,percentagePerMoveUp);
+			aoht -= percentagePerMoveUp;
+			aoht = aoht<0?0:aoht;
+			p->m_treeshow.demoSetAssistantObjectHeight(aoht);
 			p->Invalidate(TRUE);
 			Sleep(TIME_UNIT);
 		}

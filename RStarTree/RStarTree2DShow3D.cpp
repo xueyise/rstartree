@@ -480,6 +480,11 @@ void Tree2DShow3D::demoMove(const double &x,const double &y,const double &z)
 	double templength = m_tree->height*rangeperlayer;
 	m_gls3d.Translation(x*templength,y*templength,z*templength,true);
 }
+void Tree2DShow3D::demoSetAssistantObjectHeight(const double &rate)
+{
+	if(demoshow) 
+		m_ao->z = rate*(m_tree->height)*rangeperlayer;
+}
 void AOPoint::draw()
 {
 	glColor4f(1,0,0,1);
