@@ -1,0 +1,1784 @@
+
+
+
+m=2 M=4
+
+Data Set Size:1000
+Build R-Tree Time:7.02909ms  Height=6 PointNum=1000 R-TREE Range:OK
+Build R*Tree Time:7.71533ms  Height=7 PointNum=1000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:4 Points Time:5.15386us
+    R*Tree:4 Points Time:7.71533us Percentage:64.9954%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:1 Points Time:2.56387us
+    R*Tree:1 Points Time:7.71533us Percentage:69.2082%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:0 Points Time:1.85355us
+    R*Tree:0 Points Time:7.71533us Percentage:49.7011%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:2 Points Time:2.47365us
+    R*Tree:2 Points Time:7.71533us Percentage:104.703%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:2 Points Time:2.45109us
+    R*Tree:2 Points Time:7.71533us Percentage:98.9345%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:3 Points Time:3.09374us
+    R*Tree:3 Points Time:7.71533us Percentage:88.2195%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:3 Points Time:2.8571us
+    R*Tree:3 Points Time:7.71533us Percentage:89.4737%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:0 Points Time:1.76293us
+    R*Tree:0 Points Time:7.71533us Percentage:43.0752%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:2 Points Time:2.93585us
+    R*Tree:2 Points Time:7.71533us Percentage:72.22%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:1 Points Time:2.1729us
+    R*Tree:1 Points Time:7.71533us Percentage:79.2388%
+
+Data Set Size:2000
+Build R-Tree Time:15.1418ms  Height=7 PointNum=2000 R-TREE Range:OK
+Build R*Tree Time:17.7509ms  Height=7 PointNum=2000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:7 Points Time:10.0715us
+    R*Tree:7 Points Time:17.7509us Percentage:43.4482%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:1 Points Time:2.82702us
+    R*Tree:1 Points Time:17.7509us Percentage:63.5638%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:0 Points Time:2.07516us
+    R*Tree:0 Points Time:17.7509us Percentage:40.4081%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:3 Points Time:2.9398us
+    R*Tree:3 Points Time:17.7509us Percentage:96.554%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:3 Points Time:2.92833us
+    R*Tree:3 Points Time:17.7509us Percentage:108.986%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:4 Points Time:4.62399us
+    R*Tree:4 Points Time:17.7509us Percentage:69.2683%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:5 Points Time:3.5599us
+    R*Tree:5 Points Time:17.7509us Percentage:108.982%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:0 Points Time:2.01501us
+    R*Tree:0 Points Time:17.7509us Percentage:40.6716%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:5 Points Time:4.5302us
+    R*Tree:5 Points Time:17.7509us Percentage:74.109%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:2 Points Time:2.66517us
+    R*Tree:2 Points Time:17.7509us Percentage:99.8664%
+
+Data Set Size:5000
+Build R-Tree Time:41.9469ms  Height=8 PointNum=5000 R-TREE Range:OK
+Build R*Tree Time:48.5236ms  Height=8 PointNum=5000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:19 Points Time:34.5598us
+    R*Tree:19 Points Time:48.5236us Percentage:27.4658%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:10 Points Time:7.53015us
+    R*Tree:10 Points Time:48.5236us Percentage:70.6396%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:3 Points Time:5.68056us
+    R*Tree:3 Points Time:48.5236us Percentage:44.9321%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:12 Points Time:8.19536us
+    R*Tree:12 Points Time:48.5236us Percentage:67.7982%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:12 Points Time:8.12017us
+    R*Tree:12 Points Time:48.5236us Percentage:68.2407%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:9 Points Time:9.15379us
+    R*Tree:9 Points Time:48.5236us Percentage:59.1389%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:13 Points Time:9.2179us
+    R*Tree:13 Points Time:48.5236us Percentage:64.845%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:1 Points Time:4.40595us
+    R*Tree:1 Points Time:48.5236us Percentage:33.959%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:18 Points Time:10.485us
+    R*Tree:18 Points Time:48.5236us Percentage:50.0528%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:8 Points Time:6.89463us
+    R*Tree:8 Points Time:48.5236us Percentage:61.723%
+
+Data Set Size:10000
+Build R-Tree Time:91.6734ms  Height=9 PointNum=10000 R-TREE Range:OK
+Build R*Tree Time:100.245ms  Height=9 PointNum=10000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:46 Points Time:55.0668us
+    R*Tree:46 Points Time:100.245us Percentage:34.2917%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:19 Points Time:11.5036us
+    R*Tree:19 Points Time:100.245us Percentage:68.2043%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:5 Points Time:9.98085us
+    R*Tree:5 Points Time:100.245us Percentage:59.7018%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:32 Points Time:19.8454us
+    R*Tree:32 Points Time:100.245us Percentage:53.2682%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:23 Points Time:13.5297us
+    R*Tree:23 Points Time:100.245us Percentage:68.9354%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:21 Points Time:12.3346us
+    R*Tree:21 Points Time:100.245us Percentage:66.564%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:36 Points Time:15.477us
+    R*Tree:36 Points Time:100.245us Percentage:69.226%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:3 Points Time:6.50761us
+    R*Tree:3 Points Time:100.245us Percentage:51.9915%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:39 Points Time:17.6123us
+    R*Tree:39 Points Time:100.245us Percentage:57.4606%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:16 Points Time:10.5036us
+    R*Tree:16 Points Time:100.245us Percentage:64.6008%
+
+Data Set Size:20000
+Build R-Tree Time:200.563ms  Height=9 PointNum=20000 R-TREE Range:OK
+Build R*Tree Time:217.493ms  Height=9 PointNum=20000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:97 Points Time:95.5288us
+    R*Tree:97 Points Time:217.493us Percentage:42.1507%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:35 Points Time:19.8643us
+    R*Tree:35 Points Time:217.493us Percentage:73.9033%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:9 Points Time:10.282us
+    R*Tree:9 Points Time:217.493us Percentage:70.5269%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:67 Points Time:26.2366us
+    R*Tree:67 Points Time:217.493us Percentage:59.7789%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:46 Points Time:26.2853us
+    R*Tree:46 Points Time:217.493us Percentage:56.5082%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:32 Points Time:16.887us
+    R*Tree:32 Points Time:217.493us Percentage:76.201%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:80 Points Time:27.6577us
+    R*Tree:80 Points Time:217.493us Percentage:65.896%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:4 Points Time:7.54123us
+    R*Tree:4 Points Time:217.493us Percentage:72.4826%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:84 Points Time:28.9204us
+    R*Tree:84 Points Time:217.493us Percentage:61.9788%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:30 Points Time:17.5712us
+    R*Tree:30 Points Time:217.493us Percentage:65.0181%
+
+Data Set Size:30000
+Build R-Tree Time:313.527ms  Height=10 PointNum=30000 R-TREE Range:OK
+Build R*Tree Time:340.566ms  Height=10 PointNum=30000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:141 Points Time:129.802us
+    R*Tree:141 Points Time:340.566us Percentage:39.0841%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:55 Points Time:27.6086us
+    R*Tree:55 Points Time:340.566us Percentage:60.0218%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:18 Points Time:15.3191us
+    R*Tree:18 Points Time:340.566us Percentage:55.1431%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:96 Points Time:34.631us
+    R*Tree:96 Points Time:340.566us Percentage:54.1468%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:73 Points Time:33.0482us
+    R*Tree:73 Points Time:340.566us Percentage:61.7226%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:42 Points Time:21.575us
+    R*Tree:42 Points Time:340.566us Percentage:68.6873%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:120 Points Time:45.5331us
+    R*Tree:120 Points Time:340.566us Percentage:61.0304%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:8 Points Time:10.6429us
+    R*Tree:8 Points Time:340.566us Percentage:61.1415%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:130 Points Time:48.0218us
+    R*Tree:130 Points Time:340.566us Percentage:48.7553%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:51 Points Time:24.1987us
+    R*Tree:51 Points Time:340.566us Percentage:58.6777%
+
+Data Set Size:40000
+Build R-Tree Time:431.875ms  Height=10 PointNum=40000 R-TREE Range:OK
+Build R*Tree Time:495.484ms  Height=10 PointNum=40000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:181 Points Time:157.986us
+    R*Tree:181 Points Time:495.484us Percentage:46.063%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:73 Points Time:31.9053us
+    R*Tree:73 Points Time:495.484us Percentage:62.9561%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:23 Points Time:17.105us
+    R*Tree:23 Points Time:495.484us Percentage:52.2869%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:123 Points Time:39.7513us
+    R*Tree:123 Points Time:495.484us Percentage:54.975%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:97 Points Time:41.7548us
+    R*Tree:97 Points Time:495.484us Percentage:56.5147%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:55 Points Time:27.1048us
+    R*Tree:55 Points Time:495.484us Percentage:66.5873%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:153 Points Time:44.0935us
+    R*Tree:153 Points Time:495.484us Percentage:66.357%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:8 Points Time:11.5372us
+    R*Tree:8 Points Time:495.484us Percentage:54.2205%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:167 Points Time:50.315us
+    R*Tree:167 Points Time:495.484us Percentage:59.8775%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:63 Points Time:28.1199us
+    R*Tree:63 Points Time:495.484us Percentage:135.87%
+
+Data Set Size:50000
+Build R-Tree Time:580.891ms  Height=10 PointNum=50000 R-TREE Range:OK
+Build R*Tree Time:611.543ms  Height=10 PointNum=50000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:235 Points Time:172.787us
+    R*Tree:235 Points Time:611.543us Percentage:56.131%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:99 Points Time:35.1609us
+    R*Tree:99 Points Time:611.543us Percentage:74.7673%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:32 Points Time:18.105us
+    R*Tree:32 Points Time:611.543us Percentage:55.3156%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:156 Points Time:44.4014us
+    R*Tree:156 Points Time:611.543us Percentage:57.5657%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:123 Points Time:43.9918us
+    R*Tree:123 Points Time:611.543us Percentage:62.4338%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:69 Points Time:30.0822us
+    R*Tree:69 Points Time:611.543us Percentage:60.9729%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:190 Points Time:48.0107us
+    R*Tree:190 Points Time:611.543us Percentage:79.7115%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:10 Points Time:12.5186us
+    R*Tree:10 Points Time:611.543us Percentage:57.2372%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:206 Points Time:55.755us
+    R*Tree:206 Points Time:611.543us Percentage:60.5486%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:86 Points Time:29.8302us
+    R*Tree:86 Points Time:611.543us Percentage:62.1806%
+
+Data Set Size:60000
+Build R-Tree Time:735.21ms  Height=10 PointNum=60000 R-TREE Range:OK
+Build R*Tree Time:778.965ms  Height=10 PointNum=60000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:287 Points Time:284.811us
+    R*Tree:287 Points Time:778.965us Percentage:42.2856%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:114 Points Time:41.0856us
+    R*Tree:114 Points Time:778.965us Percentage:76.5028%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:33 Points Time:19.1125us
+    R*Tree:33 Points Time:778.965us Percentage:54.8387%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:187 Points Time:49.0178us
+    R*Tree:187 Points Time:778.965us Percentage:61.0172%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:145 Points Time:46.4955us
+    R*Tree:145 Points Time:778.965us Percentage:66.4295%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:84 Points Time:33.4245us
+    R*Tree:84 Points Time:778.965us Percentage:60.6109%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:227 Points Time:59.356us
+    R*Tree:227 Points Time:778.965us Percentage:72.1457%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:11 Points Time:13.5973us
+    R*Tree:11 Points Time:778.965us Percentage:54.8529%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:240 Points Time:60.9013us
+    R*Tree:240 Points Time:778.965us Percentage:63.7284%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:97 Points Time:32.2666us
+    R*Tree:97 Points Time:778.965us Percentage:62.6007%
+
+Data Set Size:70000
+Build R-Tree Time:813.361ms  Height=10 PointNum=70000 R-TREE Range:OK
+Build R*Tree Time:886.49ms  Height=10 PointNum=70000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:330 Points Time:208.173us
+    R*Tree:330 Points Time:886.49us Percentage:58.8642%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:132 Points Time:44.5031us
+    R*Tree:132 Points Time:886.49us Percentage:79.4133%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:40 Points Time:20.3079us
+    R*Tree:40 Points Time:886.49us Percentage:56.8308%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:214 Points Time:62.0331us
+    R*Tree:214 Points Time:886.49us Percentage:51.894%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:165 Points Time:49.3791us
+    R*Tree:165 Points Time:886.49us Percentage:67.4379%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:101 Points Time:37.3678us
+    R*Tree:101 Points Time:886.49us Percentage:62.8868%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:255 Points Time:61.0627us
+    R*Tree:255 Points Time:886.49us Percentage:74.617%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:12 Points Time:14.5035us
+    R*Tree:12 Points Time:886.49us Percentage:56.7379%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:280 Points Time:69.2055us
+    R*Tree:280 Points Time:886.49us Percentage:64.7237%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:108 Points Time:35.2887us
+    R*Tree:108 Points Time:886.49us Percentage:62.9598%
+
+Data Set Size:80000
+Build R-Tree Time:1014.02ms  Height=11 PointNum=80000 R-TREE Range:OK
+Build R*Tree Time:1023.62ms  Height=10 PointNum=80000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:378 Points Time:239.729us
+    R*Tree:378 Points Time:1023.62us Percentage:57.5059%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:151 Points Time:48.7697us
+    R*Tree:151 Points Time:1023.62us Percentage:78.1472%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:45 Points Time:22.7626us
+    R*Tree:45 Points Time:1023.62us Percentage:54.633%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:249 Points Time:80.0063us
+    R*Tree:249 Points Time:1023.62us Percentage:61.1176%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:191 Points Time:62.1909us
+    R*Tree:191 Points Time:1023.62us Percentage:68.7781%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:116 Points Time:48.687us
+    R*Tree:116 Points Time:1023.62us Percentage:58.3896%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:293 Points Time:71.2169us
+    R*Tree:293 Points Time:1023.62us Percentage:74.0921%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:14 Points Time:16.8379us
+    R*Tree:14 Points Time:1023.62us Percentage:48.9189%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:320 Points Time:83.8293us
+    R*Tree:320 Points Time:1023.62us Percentage:71.6404%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:127 Points Time:39.6535us
+    R*Tree:127 Points Time:1023.62us Percentage:58.8069%
+
+Data Set Size:90000
+Build R-Tree Time:1187.15ms  Height=11 PointNum=90000 R-TREE Range:OK
+Build R*Tree Time:1172.22ms  Height=11 PointNum=90000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:425 Points Time:269.977us
+    R*Tree:425 Points Time:1172.22us Percentage:52.379%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:178 Points Time:54.567us
+    R*Tree:178 Points Time:1172.22us Percentage:77.6921%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:53 Points Time:25.571us
+    R*Tree:53 Points Time:1172.22us Percentage:52.4985%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:284 Points Time:65.2245us
+    R*Tree:284 Points Time:1172.22us Percentage:60.9452%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:230 Points Time:64.1604us
+    R*Tree:230 Points Time:1172.22us Percentage:69.5318%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:140 Points Time:47.4053us
+    R*Tree:140 Points Time:1172.22us Percentage:56.5666%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:334 Points Time:75.9501us
+    R*Tree:334 Points Time:1172.22us Percentage:229.421%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:17 Points Time:20.1987us
+    R*Tree:17 Points Time:1172.22us Percentage:45.5244%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:374 Points Time:91.9344us
+    R*Tree:374 Points Time:1172.22us Percentage:68.2764%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:151 Points Time:45.0104us
+    R*Tree:151 Points Time:1172.22us Percentage:60.7457%
+
+Data Set Size:100000
+Build R-Tree Time:1442.77ms  Height=11 PointNum=100000 R-TREE Range:OK
+Build R*Tree Time:1295.67ms  Height=11 PointNum=100000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:473 Points Time:296.206us
+    R*Tree:473 Points Time:1295.67us Percentage:53.9319%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:200 Points Time:60.3825us
+    R*Tree:200 Points Time:1295.67us Percentage:77.5495%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:60 Points Time:27.7554us
+    R*Tree:60 Points Time:1295.67us Percentage:52.4444%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:311 Points Time:71.0325us
+    R*Tree:311 Points Time:1295.67us Percentage:66.319%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:257 Points Time:66.4426us
+    R*Tree:257 Points Time:1295.67us Percentage:67.9583%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:158 Points Time:50.108us
+    R*Tree:158 Points Time:1295.67us Percentage:60.3269%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:370 Points Time:83.2955us
+    R*Tree:370 Points Time:1295.67us Percentage:70.4838%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:18 Points Time:20.8192us
+    R*Tree:18 Points Time:1295.67us Percentage:43.4282%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:416 Points Time:93.4611us
+    R*Tree:416 Points Time:1295.67us Percentage:71.2723%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:167 Points Time:48.3866us
+    R*Tree:167 Points Time:1295.67us Percentage:58.7054%
+
+
+
+m=4 M=8
+
+Data Set Size:1000
+Build R-Tree Time:6.92312ms  Height=4 PointNum=1000 R-TREE Range:OK
+Build R*Tree Time:8.67657ms  Height=4 PointNum=1000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:4 Points Time:6.99989us
+    R*Tree:4 Points Time:8.67657us Percentage:59.4494%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:1 Points Time:3.47363us
+    R*Tree:1 Points Time:8.67657us Percentage:74.3563%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:0 Points Time:2.41706us
+    R*Tree:0 Points Time:8.67657us Percentage:61.2803%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:2 Points Time:3.75578us
+    R*Tree:2 Points Time:8.67657us Percentage:72.1736%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:2 Points Time:3.62044us
+    R*Tree:2 Points Time:8.67657us Percentage:68.8491%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:3 Points Time:4.2065us
+    R*Tree:3 Points Time:8.67657us Percentage:72.3895%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:3 Points Time:4.03001us
+    R*Tree:3 Points Time:8.67657us Percentage:78.7313%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:0 Points Time:2.38738us
+    R*Tree:0 Points Time:8.67657us Percentage:50.2403%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:2 Points Time:3.79693us
+    R*Tree:2 Points Time:8.67657us Percentage:65.2527%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:1 Points Time:2.81199us
+    R*Tree:1 Points Time:8.67657us Percentage:62.5668%
+
+Data Set Size:2000
+Build R-Tree Time:15.463ms  Height=5 PointNum=2000 R-TREE Range:OK
+Build R*Tree Time:18.9376ms  Height=5 PointNum=2000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:7 Points Time:16.2403us
+    R*Tree:7 Points Time:18.9376us Percentage:28.5892%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:1 Points Time:4.88318us
+    R*Tree:1 Points Time:18.9376us Percentage:60.6645%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:0 Points Time:3.11273us
+    R*Tree:0 Points Time:18.9376us Percentage:60.984%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:3 Points Time:5.15781us
+    R*Tree:3 Points Time:18.9376us Percentage:57.8027%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:3 Points Time:5.62793us
+    R*Tree:3 Points Time:18.9376us Percentage:58.3814%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:4 Points Time:5.39841us
+    R*Tree:4 Points Time:18.9376us Percentage:77.0195%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:5 Points Time:6.66907us
+    R*Tree:5 Points Time:18.9376us Percentage:60.82%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:0 Points Time:2.92833us
+    R*Tree:0 Points Time:18.9376us Percentage:54.9459%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:5 Points Time:6.3608us
+    R*Tree:5 Points Time:18.9376us Percentage:52.3019%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:2 Points Time:5.50763us
+    R*Tree:2 Points Time:18.9376us Percentage:54.469%
+
+Data Set Size:5000
+Build R-Tree Time:45.4883ms  Height=5 PointNum=5000 R-TREE Range:OK
+Build R*Tree Time:51.7505ms  Height=5 PointNum=5000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:19 Points Time:28.943us
+    R*Tree:19 Points Time:51.7505us Percentage:23.4837%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:10 Points Time:7.60138us
+    R*Tree:10 Points Time:51.7505us Percentage:78.9838%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:3 Points Time:5.51871us
+    R*Tree:3 Points Time:51.7505us Percentage:54.7039%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:12 Points Time:8.83445us
+    R*Tree:12 Points Time:51.7505us Percentage:56.4703%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:12 Points Time:9.62035us
+    R*Tree:12 Points Time:51.7505us Percentage:48.1839%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:9 Points Time:8.51114us
+    R*Tree:9 Points Time:51.7505us Percentage:64.6225%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:13 Points Time:10.9587us
+    R*Tree:13 Points Time:51.7505us Percentage:54.9922%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:1 Points Time:3.79693us
+    R*Tree:1 Points Time:51.7505us Percentage:50.7973%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:18 Points Time:10.0038us
+    R*Tree:18 Points Time:51.7505us Percentage:56.6693%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:8 Points Time:8.0711us
+    R*Tree:8 Points Time:51.7505us Percentage:49.1371%
+
+Data Set Size:10000
+Build R-Tree Time:97.702ms  Height=6 PointNum=10000 R-TREE Range:OK
+Build R*Tree Time:112.645ms  Height=5 PointNum=10000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:46 Points Time:51.2058us
+    R*Tree:46 Points Time:112.645us Percentage:26.1803%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:19 Points Time:12.2669us
+    R*Tree:19 Points Time:112.645us Percentage:60.9858%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:5 Points Time:7.06756us
+    R*Tree:5 Points Time:112.645us Percentage:53.8858%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:32 Points Time:12.8981us
+    R*Tree:32 Points Time:112.645us Percentage:54.6788%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:23 Points Time:13.09us
+    R*Tree:23 Points Time:112.645us Percentage:56.2895%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:21 Points Time:10.1352us
+    R*Tree:21 Points Time:112.645us Percentage:69.6939%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:36 Points Time:14.2103us
+    R*Tree:36 Points Time:112.645us Percentage:67.4882%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:3 Points Time:5.68016us
+    R*Tree:3 Points Time:112.645us Percentage:50.627%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:39 Points Time:15.4093us
+    R*Tree:39 Points Time:112.645us Percentage:53.2589%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:16 Points Time:10.8455us
+    R*Tree:16 Points Time:112.645us Percentage:51.4066%
+
+Data Set Size:20000
+Build R-Tree Time:210.813ms  Height=6 PointNum=20000 R-TREE Range:OK
+Build R*Tree Time:240.179ms  Height=6 PointNum=20000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:97 Points Time:114.337us
+    R*Tree:97 Points Time:240.179us Percentage:32.7841%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:35 Points Time:17.1315us
+    R*Tree:35 Points Time:240.179us Percentage:75.6629%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:9 Points Time:9.98124us
+    R*Tree:9 Points Time:240.179us Percentage:84.7441%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:67 Points Time:23.154us
+    R*Tree:67 Points Time:240.179us Percentage:64.6357%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:46 Points Time:21.4243us
+    R*Tree:46 Points Time:240.179us Percentage:78.0846%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:32 Points Time:14.7742us
+    R*Tree:32 Points Time:240.179us Percentage:77.9403%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:80 Points Time:26.9655us
+    R*Tree:80 Points Time:240.179us Percentage:67.9498%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:4 Points Time:7.35327us
+    R*Tree:4 Points Time:240.179us Percentage:80.7771%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:84 Points Time:26.2402us
+    R*Tree:84 Points Time:240.179us Percentage:70.6455%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:30 Points Time:20.8904us
+    R*Tree:30 Points Time:240.179us Percentage:70.4173%
+
+Data Set Size:30000
+Build R-Tree Time:330.784ms  Height=6 PointNum=30000 R-TREE Range:OK
+Build R*Tree Time:380.06ms  Height=6 PointNum=30000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:141 Points Time:136.994us
+    R*Tree:141 Points Time:380.06us Percentage:35.8333%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:55 Points Time:23.2102us
+    R*Tree:55 Points Time:380.06us Percentage:75.7523%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:18 Points Time:19.3004us
+    R*Tree:18 Points Time:380.06us Percentage:51.4608%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:96 Points Time:28.973us
+    R*Tree:96 Points Time:380.06us Percentage:64.8383%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:73 Points Time:29.8792us
+    R*Tree:73 Points Time:380.06us Percentage:55.6737%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:42 Points Time:17.3982us
+    R*Tree:42 Points Time:380.06us Percentage:70.4635%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:120 Points Time:36.4957us
+    R*Tree:120 Points Time:380.06us Percentage:66.2958%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:8 Points Time:8.71415us
+    R*Tree:8 Points Time:380.06us Percentage:73.8159%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:130 Points Time:36.7473us
+    R*Tree:130 Points Time:380.06us Percentage:60.2765%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:51 Points Time:19.8303us
+    R*Tree:51 Points Time:380.06us Percentage:71.1087%
+
+Data Set Size:40000
+Build R-Tree Time:455.089ms  Height=6 PointNum=40000 R-TREE Range:OK
+Build R*Tree Time:513.482ms  Height=6 PointNum=40000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:181 Points Time:164.133us
+    R*Tree:181 Points Time:513.482us Percentage:36.4019%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:73 Points Time:27.3494us
+    R*Tree:73 Points Time:513.482us Percentage:70.1301%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:23 Points Time:14.8268us
+    R*Tree:23 Points Time:513.482us Percentage:77.6876%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:123 Points Time:34.8451us
+    R*Tree:123 Points Time:513.482us Percentage:59.7377%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:97 Points Time:37.6535us
+    R*Tree:97 Points Time:513.482us Percentage:54.0136%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:55 Points Time:20.4773us
+    R*Tree:55 Points Time:513.482us Percentage:70.1297%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:153 Points Time:43.3111us
+    R*Tree:153 Points Time:513.482us Percentage:64.4565%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:8 Points Time:9.06001us
+    R*Tree:8 Points Time:513.482us Percentage:70.6661%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:167 Points Time:44.8414us
+    R*Tree:167 Points Time:513.482us Percentage:56.0195%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:63 Points Time:21.7856us
+    R*Tree:63 Points Time:513.482us Percentage:73.9596%
+
+Data Set Size:50000
+Build R-Tree Time:587.5ms  Height=6 PointNum=50000 R-TREE Range:OK
+Build R*Tree Time:664.279ms  Height=6 PointNum=50000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:235 Points Time:188.989us
+    R*Tree:235 Points Time:664.279us Percentage:41.3728%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:99 Points Time:31.4617us
+    R*Tree:99 Points Time:664.279us Percentage:71.7062%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:32 Points Time:16.8007us
+    R*Tree:32 Points Time:664.279us Percentage:73.3253%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:156 Points Time:41.6535us
+    R*Tree:156 Points Time:664.279us Percentage:60.5596%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:123 Points Time:43.3036us
+    R*Tree:123 Points Time:664.279us Percentage:54.9008%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:69 Points Time:23.2743us
+    R*Tree:69 Points Time:664.279us Percentage:72.0871%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:190 Points Time:48.112us
+    R*Tree:190 Points Time:664.279us Percentage:68.9878%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:10 Points Time:10.0074us
+    R*Tree:10 Points Time:664.279us Percentage:76.559%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:206 Points Time:53.6307us
+    R*Tree:206 Points Time:664.279us Percentage:58.1877%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:86 Points Time:35.9468us
+    R*Tree:86 Points Time:664.279us Percentage:49.5712%
+
+Data Set Size:60000
+Build R-Tree Time:718.952ms  Height=7 PointNum=60000 R-TREE Range:OK
+Build R*Tree Time:816.032ms  Height=6 PointNum=60000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:287 Points Time:220.437us
+    R*Tree:287 Points Time:816.032us Percentage:43.0324%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:114 Points Time:36.0897us
+    R*Tree:114 Points Time:816.032us Percentage:67.3542%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:33 Points Time:17.0824us
+    R*Tree:33 Points Time:816.032us Percentage:76.3644%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:187 Points Time:45.657us
+    R*Tree:187 Points Time:816.032us Percentage:60.3214%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:145 Points Time:47.8113us
+    R*Tree:145 Points Time:816.032us Percentage:52.0754%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:84 Points Time:24.3455us
+    R*Tree:84 Points Time:816.032us Percentage:76.6831%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:227 Points Time:53.4804us
+    R*Tree:227 Points Time:816.032us Percentage:68.7548%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:11 Points Time:9.99232us
+    R*Tree:11 Points Time:816.032us Percentage:76.1475%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:240 Points Time:60.9654us
+    R*Tree:240 Points Time:816.032us Percentage:58.5621%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:97 Points Time:26.6276us
+    R*Tree:97 Points Time:816.032us Percentage:69.7573%
+
+Data Set Size:70000
+Build R-Tree Time:854.707ms  Height=7 PointNum=70000 R-TREE Range:OK
+Build R*Tree Time:966.536ms  Height=7 PointNum=70000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:330 Points Time:247.729us
+    R*Tree:330 Points Time:966.536us Percentage:41.8395%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:132 Points Time:40.4956us
+    R*Tree:132 Points Time:966.536us Percentage:70.5806%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:40 Points Time:19.0258us
+    R*Tree:40 Points Time:966.536us Percentage:74.0781%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:214 Points Time:49.2549us
+    R*Tree:214 Points Time:966.536us Percentage:64.837%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:165 Points Time:57.341us
+    R*Tree:165 Points Time:966.536us Percentage:51.0397%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:101 Points Time:26.2552us
+    R*Tree:101 Points Time:966.536us Percentage:79.3106%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:255 Points Time:57.1609us
+    R*Tree:255 Points Time:966.536us Percentage:75.2908%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:12 Points Time:10.0901us
+    R*Tree:12 Points Time:966.536us Percentage:77.0845%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:280 Points Time:65.6119us
+    R*Tree:280 Points Time:966.536us Percentage:61.1179%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:108 Points Time:28.2362us
+    R*Tree:108 Points Time:966.536us Percentage:75.2375%
+
+Data Set Size:80000
+Build R-Tree Time:1019.3ms  Height=7 PointNum=80000 R-TREE Range:OK
+Build R*Tree Time:1114.81ms  Height=7 PointNum=80000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:378 Points Time:269.552us
+    R*Tree:378 Points Time:1114.81us Percentage:47.2692%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:151 Points Time:43.2961us
+    R*Tree:151 Points Time:1114.81us Percentage:73.7522%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:45 Points Time:20.0373us
+    R*Tree:45 Points Time:1114.81us Percentage:101.446%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:249 Points Time:55.1044us
+    R*Tree:249 Points Time:1114.81us Percentage:64.299%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:191 Points Time:53.0403us
+    R*Tree:191 Points Time:1114.81us Percentage:61.2735%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:116 Points Time:27.808us
+    R*Tree:116 Points Time:1114.81us Percentage:81.3838%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:293 Points Time:60.1383us
+    R*Tree:293 Points Time:1114.81us Percentage:81.3334%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:14 Points Time:10.9622us
+    R*Tree:14 Points Time:1114.81us Percentage:73.0814%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:320 Points Time:72.1979us
+    R*Tree:320 Points Time:1114.81us Percentage:61.1668%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:127 Points Time:30.2065us
+    R*Tree:127 Points Time:1114.81us Percentage:76.6759%
+
+Data Set Size:90000
+Build R-Tree Time:1124.12ms  Height=7 PointNum=90000 R-TREE Range:OK
+Build R*Tree Time:1271.7ms  Height=7 PointNum=90000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:425 Points Time:329.946us
+    R*Tree:425 Points Time:1271.7us Percentage:47.1339%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:178 Points Time:52.4463us
+    R*Tree:178 Points Time:1271.7us Percentage:69.5505%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:53 Points Time:21.1766us
+    R*Tree:53 Points Time:1271.7us Percentage:80.5247%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:284 Points Time:61.8336us
+    R*Tree:284 Points Time:1271.7us Percentage:64.4698%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:230 Points Time:60.0291us
+    R*Tree:230 Points Time:1271.7us Percentage:61.8296%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:140 Points Time:30.3189us
+    R*Tree:140 Points Time:1271.7us Percentage:84.9733%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:334 Points Time:66.0365us
+    R*Tree:334 Points Time:1271.7us Percentage:84.4358%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:17 Points Time:11.6274us
+    R*Tree:17 Points Time:1271.7us Percentage:74.8154%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:374 Points Time:81.5286us
+    R*Tree:374 Points Time:1271.7us Percentage:69.4286%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:151 Points Time:32.4807us
+    R*Tree:151 Points Time:1271.7us Percentage:81.6776%
+
+Data Set Size:100000
+Build R-Tree Time:1392.2ms  Height=7 PointNum=100000 R-TREE Range:OK
+Build R*Tree Time:1436.31ms  Height=7 PointNum=100000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:473 Points Time:300.958us
+    R*Tree:473 Points Time:1436.31us Percentage:48.3312%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:200 Points Time:52.7811us
+    R*Tree:200 Points Time:1436.31us Percentage:71.5167%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:60 Points Time:22.5711us
+    R*Tree:60 Points Time:1436.31us Percentage:76.1159%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:311 Points Time:59.6306us
+    R*Tree:311 Points Time:1436.31us Percentage:70.4013%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:257 Points Time:60.796us
+    R*Tree:257 Points Time:1436.31us Percentage:66.3558%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:158 Points Time:33.022us
+    R*Tree:158 Points Time:1436.31us Percentage:91.0747%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:370 Points Time:70.7808us
+    R*Tree:370 Points Time:1436.31us Percentage:85.3516%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:18 Points Time:12.0113us
+    R*Tree:18 Points Time:1436.31us Percentage:76.994%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:416 Points Time:93.9835us
+    R*Tree:416 Points Time:1436.31us Percentage:66.776%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:167 Points Time:35.007us
+    R*Tree:167 Points Time:1436.31us Percentage:83.4407%
+
+
+
+m=10 M=20
+
+Data Set Size:1000
+Build R-Tree Time:10.3956ms  Height=3 PointNum=1000 R-TREE Range:OK
+Build R*Tree Time:18.6271ms  Height=3 PointNum=1000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:4 Points Time:8.34929us
+    R*Tree:4 Points Time:18.6271us Percentage:58.1307%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:1 Points Time:5.52623us
+    R*Tree:1 Points Time:18.6271us Percentage:39.5918%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:0 Points Time:3.51874us
+    R*Tree:0 Points Time:18.6271us Percentage:51.8106%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:2 Points Time:4.48509us
+    R*Tree:2 Points Time:18.6271us Percentage:93.7092%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:2 Points Time:4.48113us
+    R*Tree:2 Points Time:18.6271us Percentage:64.4295%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:3 Points Time:6.04106us
+    R*Tree:3 Points Time:18.6271us Percentage:45.2443%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:3 Points Time:4.54128us
+    R*Tree:3 Points Time:18.6271us Percentage:68.2903%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:0 Points Time:2.7368us
+    R*Tree:0 Points Time:18.6271us Percentage:65.1099%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:2 Points Time:6.05254us
+    R*Tree:2 Points Time:18.6271us Percentage:66.8323%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:1 Points Time:3.51874us
+    R*Tree:1 Points Time:18.6271us Percentage:60.7962%
+
+Data Set Size:2000
+Build R-Tree Time:21.5825ms  Height=3 PointNum=2000 R-TREE Range:OK
+Build R*Tree Time:42.1233ms  Height=3 PointNum=2000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:7 Points Time:22.8754us
+    R*Tree:7 Points Time:42.1233us Percentage:43.1055%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:1 Points Time:6.67659us
+    R*Tree:1 Points Time:42.1233us Percentage:53.2124%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:0 Points Time:4.09412us
+    R*Tree:0 Points Time:42.1233us Percentage:60.6031%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:3 Points Time:5.44352us
+    R*Tree:3 Points Time:42.1233us Percentage:97.4484%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:3 Points Time:5.32322us
+    R*Tree:3 Points Time:42.1233us Percentage:90.0461%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:4 Points Time:8.4134us
+    R*Tree:4 Points Time:42.1233us Percentage:52.9937%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:5 Points Time:6.19143us
+    R*Tree:5 Points Time:42.1233us Percentage:77.1124%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:0 Points Time:3.35729us
+    R*Tree:0 Points Time:42.1233us Percentage:61.0325%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:5 Points Time:7.69517us
+    R*Tree:5 Points Time:42.1233us Percentage:85.4469%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:2 Points Time:4.42454us
+    R*Tree:2 Points Time:42.1233us Percentage:80.7173%
+
+Data Set Size:5000
+Build R-Tree Time:61.8065ms  Height=4 PointNum=5000 R-TREE Range:OK
+Build R*Tree Time:115.332ms  Height=4 PointNum=5000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:19 Points Time:40.83us
+    R*Tree:19 Points Time:115.332us Percentage:29.6291%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:10 Points Time:14.7516us
+    R*Tree:10 Points Time:115.332us Percentage:60.1159%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:3 Points Time:6.96981us
+    R*Tree:3 Points Time:115.332us Percentage:63.4815%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:12 Points Time:9.12016us
+    R*Tree:12 Points Time:115.332us Percentage:79.6373%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:12 Points Time:9.60887us
+    R*Tree:12 Points Time:115.332us Percentage:65.2994%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:9 Points Time:12.1878us
+    R*Tree:9 Points Time:115.332us Percentage:54.8719%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:13 Points Time:9.5788us
+    R*Tree:13 Points Time:115.332us Percentage:83.0455%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:1 Points Time:5.04899us
+    R*Tree:1 Points Time:115.332us Percentage:68.9474%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:18 Points Time:12.853us
+    R*Tree:18 Points Time:115.332us Percentage:65.194%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:8 Points Time:7.83842us
+    R*Tree:8 Points Time:115.332us Percentage:70.4059%
+
+Data Set Size:10000
+Build R-Tree Time:135.663ms  Height=4 PointNum=10000 R-TREE Range:OK
+Build R*Tree Time:243.549ms  Height=4 PointNum=10000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:46 Points Time:67.5704us
+    R*Tree:46 Points Time:243.549us Percentage:34.0211%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:19 Points Time:20.2252us
+    R*Tree:19 Points Time:243.549us Percentage:42.974%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:5 Points Time:11.6128us
+    R*Tree:5 Points Time:243.549us Percentage:63.484%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:32 Points Time:15.4018us
+    R*Tree:32 Points Time:243.549us Percentage:70.3708%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:23 Points Time:15.0599us
+    R*Tree:23 Points Time:243.549us Percentage:60.659%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:21 Points Time:18.1315us
+    R*Tree:21 Points Time:243.549us Percentage:45.6754%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:36 Points Time:15.9883us
+    R*Tree:36 Points Time:243.549us Percentage:69.1756%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:3 Points Time:9.28201us
+    R*Tree:3 Points Time:243.549us Percentage:59.7374%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:39 Points Time:19.2213us
+    R*Tree:39 Points Time:243.549us Percentage:56.6014%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:16 Points Time:12.8569us
+    R*Tree:16 Points Time:243.549us Percentage:59.1505%
+
+Data Set Size:20000
+Build R-Tree Time:297.606ms  Height=4 PointNum=20000 R-TREE Range:OK
+Build R*Tree Time:511.457ms  Height=4 PointNum=20000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:97 Points Time:126.393us
+    R*Tree:97 Points Time:511.457us Percentage:25.0023%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:35 Points Time:32.6611us
+    R*Tree:35 Points Time:511.457us Percentage:42.012%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:9 Points Time:14.4248us
+    R*Tree:9 Points Time:511.457us Percentage:53.0616%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:67 Points Time:24.8983us
+    R*Tree:67 Points Time:511.457us Percentage:55.4586%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:46 Points Time:24.3079us
+    R*Tree:46 Points Time:511.457us Percentage:50.4794%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:32 Points Time:26.789us
+    R*Tree:32 Points Time:511.457us Percentage:32.8227%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:80 Points Time:24.2588us
+    R*Tree:80 Points Time:511.457us Percentage:62.669%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:4 Points Time:11.1878us
+    R*Tree:4 Points Time:511.457us Percentage:47.8813%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:84 Points Time:24.4056us
+    R*Tree:84 Points Time:511.457us Percentage:68.747%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:30 Points Time:18.4508us
+    R*Tree:30 Points Time:511.457us Percentage:53.1163%
+
+Data Set Size:30000
+Build R-Tree Time:459.755ms  Height=4 PointNum=30000 R-TREE Range:OK
+Build R*Tree Time:793.407ms  Height=4 PointNum=30000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:141 Points Time:140.404us
+    R*Tree:141 Points Time:793.407us Percentage:30.6683%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:55 Points Time:38.5447us
+    R*Tree:55 Points Time:793.407us Percentage:38.8865%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:18 Points Time:17.304us
+    R*Tree:18 Points Time:793.407us Percentage:52.7054%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:96 Points Time:30.0897us
+    R*Tree:96 Points Time:793.407us Percentage:52.5869%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:73 Points Time:32.5519us
+    R*Tree:73 Points Time:793.407us Percentage:52.0496%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:42 Points Time:33.3719us
+    R*Tree:42 Points Time:793.407us Percentage:31.5977%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:120 Points Time:32.635us
+    R*Tree:120 Points Time:793.407us Percentage:61.4332%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:8 Points Time:12.5787us
+    R*Tree:8 Points Time:793.407us Percentage:48.4475%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:130 Points Time:34.7098us
+    R*Tree:130 Points Time:793.407us Percentage:55.9199%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:51 Points Time:22.7025us
+    R*Tree:51 Points Time:793.407us Percentage:51.9784%
+
+Data Set Size:40000
+Build R-Tree Time:644.437ms  Height=4 PointNum=40000 R-TREE Range:OK
+Build R*Tree Time:1087.62ms  Height=4 PointNum=40000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:181 Points Time:161.847us
+    R*Tree:181 Points Time:1087.62us Percentage:31.7105%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:73 Points Time:50.4127us
+    R*Tree:73 Points Time:1087.62us Percentage:38.098%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:23 Points Time:19.7065us
+    R*Tree:23 Points Time:1087.62us Percentage:49.8665%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:123 Points Time:34.9353us
+    R*Tree:123 Points Time:1087.62us Percentage:51.4799%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:97 Points Time:41.443us
+    R*Tree:97 Points Time:1087.62us Percentage:43.6779%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:55 Points Time:49.097us
+    R*Tree:55 Points Time:1087.62us Percentage:24.441%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:153 Points Time:37.1949us
+    R*Tree:153 Points Time:1087.62us Percentage:59.0257%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:8 Points Time:13.6238us
+    R*Tree:8 Points Time:1087.62us Percentage:44.7833%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:167 Points Time:42.2134us
+    R*Tree:167 Points Time:1087.62us Percentage:49.9423%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:63 Points Time:26.6798us
+    R*Tree:63 Points Time:1087.62us Percentage:47.414%
+
+Data Set Size:50000
+Build R-Tree Time:832.7ms  Height=5 PointNum=50000 R-TREE Range:OK
+Build R*Tree Time:1381.58ms  Height=4 PointNum=50000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:235 Points Time:181.561us
+    R*Tree:235 Points Time:1381.58us Percentage:32.7108%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:99 Points Time:61.0481us
+    R*Tree:99 Points Time:1381.58us Percentage:35.0578%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:32 Points Time:22.8002us
+    R*Tree:32 Points Time:1381.58us Percentage:48.871%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:156 Points Time:44.7251us
+    R*Tree:156 Points Time:1381.58us Percentage:51.0547%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:123 Points Time:47.9731us
+    R*Tree:123 Points Time:1381.58us Percentage:43.8365%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:69 Points Time:45.454us
+    R*Tree:69 Points Time:1381.58us Percentage:31.3954%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:190 Points Time:42.4204us
+    R*Tree:190 Points Time:1381.58us Percentage:62.9825%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:10 Points Time:15.1015us
+    R*Tree:10 Points Time:1381.58us Percentage:46.8503%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:206 Points Time:51.0934us
+    R*Tree:206 Points Time:1381.58us Percentage:51.7469%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:86 Points Time:29.2211us
+    R*Tree:86 Points Time:1381.58us Percentage:48.7589%
+
+Data Set Size:60000
+Build R-Tree Time:1009ms  Height=5 PointNum=60000 R-TREE Range:OK
+Build R*Tree Time:1700.75ms  Height=4 PointNum=60000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:287 Points Time:210.075us
+    R*Tree:287 Points Time:1700.75us Percentage:41.2932%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:114 Points Time:68.6566us
+    R*Tree:114 Points Time:1700.75us Percentage:33.0563%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:33 Points Time:24.6162us
+    R*Tree:33 Points Time:1700.75us Percentage:44.9908%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:187 Points Time:42.3642us
+    R*Tree:187 Points Time:1700.75us Percentage:59.5968%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:145 Points Time:48.9616us
+    R*Tree:145 Points Time:1700.75us Percentage:51.7732%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:84 Points Time:50.4919us
+    R*Tree:84 Points Time:1700.75us Percentage:29.1414%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:227 Points Time:48.3641us
+    R*Tree:227 Points Time:1700.75us Percentage:59.8758%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:11 Points Time:17.0634us
+    R*Tree:11 Points Time:1700.75us Percentage:40.4058%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:240 Points Time:62.0026us
+    R*Tree:240 Points Time:1700.75us Percentage:54.1201%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:97 Points Time:32.8942us
+    R*Tree:97 Points Time:1700.75us Percentage:49.908%
+
+Data Set Size:70000
+Build R-Tree Time:1196.79ms  Height=5 PointNum=70000 R-TREE Range:OK
+Build R*Tree Time:1996.94ms  Height=5 PointNum=70000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:330 Points Time:233.808us
+    R*Tree:330 Points Time:1996.94us Percentage:34.9133%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:132 Points Time:75.6268us
+    R*Tree:132 Points Time:1996.94us Percentage:32.9273%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:40 Points Time:25.1425us
+    R*Tree:40 Points Time:1996.94us Percentage:44.8266%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:214 Points Time:46.0784us
+    R*Tree:214 Points Time:1996.94us Percentage:60.1372%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:165 Points Time:53.5441us
+    R*Tree:165 Points Time:1996.94us Percentage:72.4643%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:101 Points Time:55.8788us
+    R*Tree:101 Points Time:1996.94us Percentage:32.5555%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:255 Points Time:52.364us
+    R*Tree:255 Points Time:1996.94us Percentage:60.0396%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:12 Points Time:17.7251us
+    R*Tree:12 Points Time:1996.94us Percentage:39.8084%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:280 Points Time:69.435us
+    R*Tree:280 Points Time:1996.94us Percentage:58.6846%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:108 Points Time:34.3002us
+    R*Tree:108 Points Time:1996.94us Percentage:50.9864%
+
+Data Set Size:80000
+Build R-Tree Time:1401.2ms  Height=5 PointNum=80000 R-TREE Range:OK
+Build R*Tree Time:2309.07ms  Height=5 PointNum=80000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:378 Points Time:314.754us
+    R*Tree:378 Points Time:2309.07us Percentage:34.0718%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:151 Points Time:92.9574us
+    R*Tree:151 Points Time:2309.07us Percentage:36.5349%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:45 Points Time:28.1911us
+    R*Tree:45 Points Time:2309.07us Percentage:42.6867%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:249 Points Time:52.5556us
+    R*Tree:249 Points Time:2309.07us Percentage:65.9581%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:191 Points Time:57.2809us
+    R*Tree:191 Points Time:2309.07us Percentage:54.9392%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:116 Points Time:60.6381us
+    R*Tree:116 Points Time:2309.07us Percentage:32.858%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:293 Points Time:56.8824us
+    R*Tree:293 Points Time:2309.07us Percentage:60.4784%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:14 Points Time:19.2739us
+    R*Tree:14 Points Time:2309.07us Percentage:39.2251%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:320 Points Time:77.4273us
+    R*Tree:320 Points Time:2309.07us Percentage:57.885%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:127 Points Time:36.6049us
+    R*Tree:127 Points Time:2309.07us Percentage:53.014%
+
+Data Set Size:90000
+Build R-Tree Time:1590.54ms  Height=5 PointNum=90000 R-TREE Range:OK
+Build R*Tree Time:2599.41ms  Height=5 PointNum=90000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:425 Points Time:283.841us
+    R*Tree:425 Points Time:2599.41us Percentage:39.0422%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:178 Points Time:91.0025us
+    R*Tree:178 Points Time:2599.41us Percentage:36.63%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:53 Points Time:28.6462us
+    R*Tree:53 Points Time:2599.41us Percentage:44.6719%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:284 Points Time:52.4693us
+    R*Tree:284 Points Time:2599.41us Percentage:67.7288%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:230 Points Time:61.7394us
+    R*Tree:230 Points Time:2599.41us Percentage:57.2556%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:140 Points Time:61.7244us
+    R*Tree:140 Points Time:2599.41us Percentage:38.7479%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:334 Points Time:60.371us
+    R*Tree:334 Points Time:2599.41us Percentage:64.2508%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:17 Points Time:19.9732us
+    R*Tree:17 Points Time:2599.41us Percentage:41.125%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:374 Points Time:82.6228us
+    R*Tree:374 Points Time:2599.41us Percentage:77.9143%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:151 Points Time:42.1311us
+    R*Tree:151 Points Time:2599.41us Percentage:55.8314%
+
+Data Set Size:100000
+Build R-Tree Time:1803.02ms  Height=5 PointNum=100000 R-TREE Range:OK
+Build R*Tree Time:2942.41ms  Height=5 PointNum=100000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:473 Points Time:453.245us
+    R*Tree:473 Points Time:2942.41us Percentage:25.446%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:200 Points Time:95.0927us
+    R*Tree:200 Points Time:2942.41us Percentage:37.027%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:60 Points Time:29.5334us
+    R*Tree:60 Points Time:2942.41us Percentage:46.8298%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:311 Points Time:57.6045us
+    R*Tree:311 Points Time:2942.41us Percentage:67.7864%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:257 Points Time:63.42us
+    R*Tree:257 Points Time:2942.41us Percentage:79.8577%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:158 Points Time:71.7056us
+    R*Tree:158 Points Time:2942.41us Percentage:39.9651%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:370 Points Time:69.623us
+    R*Tree:370 Points Time:2942.41us Percentage:65.3615%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:18 Points Time:21.3416us
+    R*Tree:18 Points Time:2942.41us Percentage:41.6069%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:416 Points Time:103.246us
+    R*Tree:416 Points Time:2942.41us Percentage:67.4809%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:167 Points Time:52.5821us
+    R*Tree:167 Points Time:2942.41us Percentage:47.8089%
+
+
+
+m=12 M=30
+
+Data Set Size:1000
+Build R-Tree Time:12.3824ms  Height=3 PointNum=1000 R-TREE Range:OK
+Build R*Tree Time:23.6265ms  Height=3 PointNum=1000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:4 Points Time:15.1988us
+    R*Tree:4 Points Time:23.6265us Percentage:38.3878%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:1 Points Time:13.2705us
+    R*Tree:1 Points Time:23.6265us Percentage:28.4717%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:0 Points Time:4.09016us
+    R*Tree:0 Points Time:23.6265us Percentage:43.1115%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:2 Points Time:4.88714us
+    R*Tree:2 Points Time:23.6265us Percentage:53.3846%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:2 Points Time:6.28205us
+    R*Tree:2 Points Time:23.6265us Percentage:38.6583%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:3 Points Time:5.9172us
+    R*Tree:3 Points Time:23.6265us Percentage:58.1957%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:3 Points Time:5.88712us
+    R*Tree:3 Points Time:23.6265us Percentage:45.2712%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:0 Points Time:3.91327us
+    R*Tree:0 Points Time:23.6265us Percentage:41.2074%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:2 Points Time:5.40593us
+    R*Tree:2 Points Time:23.6265us Percentage:66.5544%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:1 Points Time:5.24448us
+    R*Tree:1 Points Time:23.6265us Percentage:38.4215%
+
+Data Set Size:2000
+Build R-Tree Time:27.0149ms  Height=3 PointNum=2000 R-TREE Range:OK
+Build R*Tree Time:55.8319ms  Height=3 PointNum=2000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:7 Points Time:23.6462us
+    R*Tree:7 Points Time:55.8319us Percentage:33.8164%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:1 Points Time:7.87562us
+    R*Tree:1 Points Time:55.8319us Percentage:53.271%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:0 Points Time:5.66908us
+    R*Tree:0 Points Time:55.8319us Percentage:33.687%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:3 Points Time:7.47357us
+    R*Tree:3 Points Time:55.8319us Percentage:37.7264%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:3 Points Time:9.05249us
+    R*Tree:3 Points Time:55.8319us Percentage:30.9407%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:4 Points Time:8.58633us
+    R*Tree:4 Points Time:55.8319us Percentage:52.014%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:5 Points Time:8.68407us
+    R*Tree:5 Points Time:55.8319us Percentage:38.1818%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:0 Points Time:5.50763us
+    R*Tree:0 Points Time:55.8319us Percentage:33.5824%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:5 Points Time:7.77036us
+    R*Tree:5 Points Time:55.8319us Percentage:63.5262%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:2 Points Time:7.72564us
+    R*Tree:2 Points Time:55.8319us Percentage:36.0549%
+
+Data Set Size:5000
+Build R-Tree Time:76.3337ms  Height=3 PointNum=5000 R-TREE Range:OK
+Build R*Tree Time:160.075ms  Height=3 PointNum=5000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:19 Points Time:45.9166us
+    R*Tree:19 Points Time:160.075us Percentage:29.5235%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:10 Points Time:13.1878us
+    R*Tree:10 Points Time:160.075us Percentage:71.3227%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:3 Points Time:8.41696us
+    R*Tree:3 Points Time:160.075us Percentage:39.1678%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:12 Points Time:10.9211us
+    R*Tree:12 Points Time:160.075us Percentage:48.6738%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:12 Points Time:16.1842us
+    R*Tree:12 Points Time:160.075us Percentage:34.4467%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:9 Points Time:12.8494us
+    R*Tree:9 Points Time:160.075us Percentage:45.5822%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:13 Points Time:12.5677us
+    R*Tree:13 Points Time:160.075us Percentage:44.7495%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:1 Points Time:7.47357us
+    R*Tree:1 Points Time:160.075us Percentage:27.8672%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:18 Points Time:11.669us
+    R*Tree:18 Points Time:160.075us Percentage:56.7316%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:8 Points Time:11.2218us
+    R*Tree:8 Points Time:160.075us Percentage:41.5756%
+
+Data Set Size:10000
+Build R-Tree Time:172.463ms  Height=3 PointNum=10000 R-TREE Range:OK
+Build R*Tree Time:343.851ms  Height=3 PointNum=10000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:46 Points Time:74.5101us
+    R*Tree:46 Points Time:343.851us Percentage:31.1658%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:19 Points Time:22.3716us
+    R*Tree:19 Points Time:343.851us Percentage:54.4628%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:5 Points Time:12.1502us
+    R*Tree:5 Points Time:343.851us Percentage:39.389%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:32 Points Time:14.9622us
+    R*Tree:32 Points Time:343.851us Percentage:51.4837%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:23 Points Time:19.2253us
+    R*Tree:23 Points Time:343.851us Percentage:37.3093%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:21 Points Time:18.68us
+    R*Tree:21 Points Time:343.851us Percentage:37.7947%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:36 Points Time:21.8307us
+    R*Tree:36 Points Time:343.851us Percentage:36.8517%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:3 Points Time:11.2218us
+    R*Tree:3 Points Time:343.851us Percentage:27.5725%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:39 Points Time:20.947us
+    R*Tree:39 Points Time:343.851us Percentage:44.4535%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:16 Points Time:28.2591us
+    R*Tree:16 Points Time:343.851us Percentage:30.8226%
+
+Data Set Size:20000
+Build R-Tree Time:380.63ms  Height=4 PointNum=20000 R-TREE Range:OK
+Build R*Tree Time:747.035ms  Height=4 PointNum=20000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:97 Points Time:127.836us
+    R*Tree:97 Points Time:747.035us Percentage:29.7926%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:35 Points Time:31.8756us
+    R*Tree:35 Points Time:747.035us Percentage:50.784%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:9 Points Time:17.2328us
+    R*Tree:9 Points Time:747.035us Percentage:35.0556%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:67 Points Time:24.1801us
+    R*Tree:67 Points Time:747.035us Percentage:54.5709%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:46 Points Time:31.8982us
+    R*Tree:46 Points Time:747.035us Percentage:28.8396%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:32 Points Time:27.4732us
+    R*Tree:32 Points Time:747.035us Percentage:32.0471%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:80 Points Time:27.6988us
+    R*Tree:80 Points Time:747.035us Percentage:48.1956%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:4 Points Time:15.2554us
+    R*Tree:4 Points Time:747.035us Percentage:24.9877%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:84 Points Time:30.9132us
+    R*Tree:84 Points Time:747.035us Percentage:47.0628%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:30 Points Time:23.0222us
+    R*Tree:30 Points Time:747.035us Percentage:34.568%
+
+Data Set Size:30000
+Build R-Tree Time:605.556ms  Height=4 PointNum=30000 R-TREE Range:OK
+Build R*Tree Time:1154.46ms  Height=4 PointNum=30000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:141 Points Time:162.061us
+    R*Tree:141 Points Time:1154.46us Percentage:24.9554%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:55 Points Time:47.9727us
+    R*Tree:55 Points Time:1154.46us Percentage:37.2147%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:18 Points Time:21.2965us
+    R*Tree:18 Points Time:1154.46us Percentage:31.085%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:96 Points Time:31.398us
+    R*Tree:96 Points Time:1154.46us Percentage:49.5576%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:73 Points Time:37.3152us
+    R*Tree:73 Points Time:1154.46us Percentage:38.3437%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:42 Points Time:36.8265us
+    R*Tree:42 Points Time:1154.46us Percentage:26.7864%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:120 Points Time:39.8074us
+    R*Tree:120 Points Time:1154.46us Percentage:56.9839%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:8 Points Time:18.6914us
+    R*Tree:8 Points Time:1154.46us Percentage:24.3172%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:130 Points Time:41.1386us
+    R*Tree:130 Points Time:1154.46us Percentage:51.7127%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:51 Points Time:27.5975us
+    R*Tree:51 Points Time:1154.46us Percentage:34.6143%
+
+Data Set Size:40000
+Build R-Tree Time:814.681ms  Height=4 PointNum=40000 R-TREE Range:OK
+Build R*Tree Time:1562.01ms  Height=4 PointNum=40000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:181 Points Time:223.872us
+    R*Tree:181 Points Time:1562.01us Percentage:28.6377%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:73 Points Time:59.5254us
+    R*Tree:73 Points Time:1562.01us Percentage:38.1331%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:23 Points Time:25.0032us
+    R*Tree:23 Points Time:1562.01us Percentage:36.1595%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:123 Points Time:38.1573us
+    R*Tree:123 Points Time:1562.01us Percentage:48.4822%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:97 Points Time:41.1458us
+    R*Tree:97 Points Time:1562.01us Percentage:49.2926%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:55 Points Time:47.1421us
+    R*Tree:55 Points Time:1562.01us Percentage:27.8393%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:153 Points Time:41.7777us
+    R*Tree:153 Points Time:1562.01us Percentage:71.565%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:8 Points Time:20.6502us
+    R*Tree:8 Points Time:1562.01us Percentage:27.9626%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:167 Points Time:50.3601us
+    R*Tree:167 Points Time:1562.01us Percentage:55.7857%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:63 Points Time:30.2437us
+    R*Tree:63 Points Time:1562.01us Percentage:35.4757%
+
+Data Set Size:50000
+Build R-Tree Time:1039.69ms  Height=4 PointNum=50000 R-TREE Range:OK
+Build R*Tree Time:1958.43ms  Height=4 PointNum=50000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:235 Points Time:329.63us
+    R*Tree:235 Points Time:1958.43us Percentage:20.6813%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:99 Points Time:65.7924us
+    R*Tree:99 Points Time:1958.43us Percentage:38.3406%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:32 Points Time:28.4166us
+    R*Tree:32 Points Time:1958.43us Percentage:29.3427%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:156 Points Time:42.4619us
+    R*Tree:156 Points Time:1958.43us Percentage:47.4721%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:123 Points Time:45.687us
+    R*Tree:123 Points Time:1958.43us Percentage:46.9923%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:69 Points Time:56.8978us
+    R*Tree:69 Points Time:1958.43us Percentage:25.695%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:190 Points Time:46.8038us
+    R*Tree:190 Points Time:1958.43us Percentage:61.7595%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:10 Points Time:24.3756us
+    R*Tree:10 Points Time:1958.43us Percentage:22.0851%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:206 Points Time:57.2809us
+    R*Tree:206 Points Time:1958.43us Percentage:53.2853%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:86 Points Time:35.037us
+    R*Tree:86 Points Time:1958.43us Percentage:34.6352%
+
+Data Set Size:60000
+Build R-Tree Time:1258.78ms  Height=4 PointNum=60000 R-TREE Range:OK
+Build R*Tree Time:2385.11ms  Height=4 PointNum=60000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:287 Points Time:259.221us
+    R*Tree:287 Points Time:2385.11us Percentage:32.03%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:114 Points Time:72.1528us
+    R*Tree:114 Points Time:2385.11us Percentage:36.769%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:33 Points Time:30.8642us
+    R*Tree:33 Points Time:2385.11us Percentage:29.2814%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:187 Points Time:46.1496us
+    R*Tree:187 Points Time:2385.11us Percentage:48.4034%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:145 Points Time:51.9125us
+    R*Tree:145 Points Time:2385.11us Percentage:43.1391%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:84 Points Time:60.356us
+    R*Tree:84 Points Time:2385.11us Percentage:26.2159%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:227 Points Time:55.9576us
+    R*Tree:227 Points Time:2385.11us Percentage:57.4943%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:11 Points Time:25.7966us
+    R*Tree:11 Points Time:2385.11us Percentage:22.1801%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:240 Points Time:66.1157us
+    R*Tree:240 Points Time:2385.11us Percentage:52.9935%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:97 Points Time:38.9618us
+    R*Tree:97 Points Time:2385.11us Percentage:34.4269%
+
+Data Set Size:70000
+Build R-Tree Time:1481.14ms  Height=4 PointNum=70000 R-TREE Range:OK
+Build R*Tree Time:2803.38ms  Height=4 PointNum=70000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:330 Points Time:288.176us
+    R*Tree:330 Points Time:2803.38us Percentage:30.7399%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:132 Points Time:76.1116us
+    R*Tree:132 Points Time:2803.38us Percentage:37.2268%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:40 Points Time:32.2251us
+    R*Tree:40 Points Time:2803.38us Percentage:27.8581%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:214 Points Time:50.4804us
+    R*Tree:214 Points Time:2803.38us Percentage:45.919%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:165 Points Time:234.241us
+    R*Tree:165 Points Time:2803.38us Percentage:124.144%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:101 Points Time:87.8783us
+    R*Tree:101 Points Time:2803.38us Percentage:25.8087%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:255 Points Time:71.5066us
+    R*Tree:255 Points Time:2803.38us Percentage:63.2247%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:12 Points Time:26.9881us
+    R*Tree:12 Points Time:2803.38us Percentage:22.7478%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:280 Points Time:89.6678us
+    R*Tree:280 Points Time:2803.38us Percentage:59.8105%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:108 Points Time:41.2926us
+    R*Tree:108 Points Time:2803.38us Percentage:32.2469%
+
+Data Set Size:80000
+Build R-Tree Time:1726.18ms  Height=4 PointNum=80000 R-TREE Range:OK
+Build R*Tree Time:3217.05ms  Height=4 PointNum=80000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:378 Points Time:310.664us
+    R*Tree:378 Points Time:3217.05us Percentage:32.692%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:151 Points Time:80.5365us
+    R*Tree:151 Points Time:3217.05us Percentage:37.6181%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:45 Points Time:34.413us
+    R*Tree:45 Points Time:3217.05us Percentage:25.9122%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:249 Points Time:57.7209us
+    R*Tree:249 Points Time:3217.05us Percentage:43.3372%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:191 Points Time:61.627us
+    R*Tree:191 Points Time:3217.05us Percentage:44%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:116 Points Time:72.4836us
+    R*Tree:116 Points Time:3217.05us Percentage:26.9904%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:293 Points Time:66.232us
+    R*Tree:293 Points Time:3217.05us Percentage:59.916%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:14 Points Time:27.0522us
+    R*Tree:14 Points Time:3217.05us Percentage:20.4836%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:320 Points Time:83.5361us
+    R*Tree:320 Points Time:3217.05us Percentage:54.5834%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:127 Points Time:43.0595us
+    R*Tree:127 Points Time:3217.05us Percentage:32.9575%
+
+Data Set Size:90000
+Build R-Tree Time:1955.94ms  Height=4 PointNum=90000 R-TREE Range:OK
+Build R*Tree Time:3640.52ms  Height=4 PointNum=90000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:425 Points Time:318.029us
+    R*Tree:425 Points Time:3640.52us Percentage:34.4255%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:178 Points Time:86.1526us
+    R*Tree:178 Points Time:3640.52us Percentage:37.4616%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:53 Points Time:37.1122us
+    R*Tree:53 Points Time:3640.52us Percentage:25.3241%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:284 Points Time:63.1755us
+    R*Tree:284 Points Time:3640.52us Percentage:44.3322%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:230 Points Time:76.1266us
+    R*Tree:230 Points Time:3640.52us Percentage:46.9728%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:140 Points Time:91.3104us
+    R*Tree:140 Points Time:3640.52us Percentage:28.2433%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:334 Points Time:77.6193us
+    R*Tree:334 Points Time:3640.52us Percentage:65.7818%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:17 Points Time:29.8116us
+    R*Tree:17 Points Time:3640.52us Percentage:19.8487%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:374 Points Time:106.013us
+    R*Tree:374 Points Time:3640.52us Percentage:59.1452%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:151 Points Time:49.2398us
+    R*Tree:151 Points Time:3640.52us Percentage:34.1579%
+
+Data Set Size:100000
+Build R-Tree Time:2211.29ms  Height=4 PointNum=100000 R-TREE Range:OK
+Build R*Tree Time:4073.96ms  Height=4 PointNum=100000 R*TREE Range:OK
+Range.No.0 [-1846.7,2650.02][-1572.46,2935.84]
+    R-Tree:473 Points Time:343.047us
+    R*Tree:473 Points Time:4073.96us Percentage:35.1181%
+Range.No.1 [-2446.48,2814.52][-1682.77,49.1304]
+    R-Tree:200 Points Time:96.1489us
+    R*Tree:200 Points Time:4073.96us Percentage:37.2146%
+Range.No.2 [-1194.21,543.615][-1460.5,15.3119]
+    R-Tree:60 Points Time:39.1688us
+    R*Tree:60 Points Time:4073.96us Percentage:25.3291%
+Range.No.3 [-1238.2,1871.65][-1989.56,2172.62]
+    R-Tree:311 Points Time:63.0552us
+    R*Tree:311 Points Time:4073.96us Percentage:49.598%
+Range.No.4 [-1153.85,1991.21][-2629.98,989.452]
+    R-Tree:257 Points Time:71.0891us
+    R*Tree:257 Points Time:4073.96us Percentage:47.6946%
+Range.No.5 [-2381.19,3033.4][-466.454,771.146]
+    R-Tree:158 Points Time:82.2017us
+    R*Tree:158 Points Time:4073.96us Percentage:32.2375%
+Range.No.6 [-686.886,2764.48][-3275.8,1285.96]
+    R-Tree:370 Points Time:81.95us
+    R*Tree:370 Points Time:4073.96us Percentage:59.9843%
+Range.No.7 [-974.127,77.884][-303.538,184.268]
+    R-Tree:18 Points Time:30.1835us
+    R*Tree:18 Points Time:4073.96us Percentage:20.177%
+Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
+    R-Tree:416 Points Time:97.9419us
+    R*Tree:416 Points Time:4073.96us Percentage:58.9952%
+Range.No.9 [-672.948,1535.07][-3110.15,354.874]
+    R-Tree:167 Points Time:49.0408us
+    R*Tree:167 Points Time:4073.96us Percentage:36.0443%

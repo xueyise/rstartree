@@ -1,0 +1,224 @@
+
+
+
+m=2 M=4
+
+Data Set Size:1000
+Build R-Tree Time:6.69771ms  Height=6 PointNum=1000 R-TREE Range:OK
+Build R*Tree Time:7.83333ms  Height=7 PointNum=1000 R*TREE Range:OK
+
+Data Set Size:2000
+Build R-Tree Time:15.3371ms  Height=7 PointNum=2000 R-TREE Range:OK
+Build R*Tree Time:16.8487ms  Height=7 PointNum=2000 R*TREE Range:OK
+
+Data Set Size:5000
+Build R-Tree Time:43.3573ms  Height=8 PointNum=5000 R-TREE Range:OK
+Build R*Tree Time:46.3984ms  Height=8 PointNum=5000 R*TREE Range:OK
+
+Data Set Size:10000
+Build R-Tree Time:93.5264ms  Height=9 PointNum=10000 R-TREE Range:OK
+Build R*Tree Time:99.454ms  Height=9 PointNum=10000 R*TREE Range:OK
+
+Data Set Size:20000
+Build R-Tree Time:199.157ms  Height=9 PointNum=20000 R-TREE Range:OK
+Build R*Tree Time:214.922ms  Height=9 PointNum=20000 R*TREE Range:OK
+
+Data Set Size:30000
+Build R-Tree Time:313.626ms  Height=10 PointNum=30000 R-TREE Range:OK
+Build R*Tree Time:338.701ms  Height=10 PointNum=30000 R*TREE Range:OK
+
+Data Set Size:40000
+Build R-Tree Time:435.331ms  Height=10 PointNum=40000 R-TREE Range:OK
+Build R*Tree Time:465.45ms  Height=10 PointNum=40000 R*TREE Range:OK
+
+Data Set Size:50000
+Build R-Tree Time:582.49ms  Height=10 PointNum=50000 R-TREE Range:OK
+Build R*Tree Time:597.271ms  Height=10 PointNum=50000 R*TREE Range:OK
+
+Data Set Size:60000
+Build R-Tree Time:742.974ms  Height=10 PointNum=60000 R-TREE Range:OK
+Build R*Tree Time:733.777ms  Height=10 PointNum=60000 R*TREE Range:OK
+
+Data Set Size:70000
+Build R-Tree Time:830.35ms  Height=10 PointNum=70000 R-TREE Range:OK
+Build R*Tree Time:873.199ms  Height=10 PointNum=70000 R*TREE Range:OK
+
+Data Set Size:80000
+Build R-Tree Time:1030.94ms  Height=11 PointNum=80000 R-TREE Range:OK
+Build R*Tree Time:1017.13ms  Height=10 PointNum=80000 R*TREE Range:OK
+
+Data Set Size:90000
+Build R-Tree Time:1216.56ms  Height=11 PointNum=90000 R-TREE Range:OK
+Build R*Tree Time:1162.56ms  Height=11 PointNum=90000 R*TREE Range:OK
+
+Data Set Size:100000
+Build R-Tree Time:1455.96ms  Height=11 PointNum=100000 R-TREE Range:OK
+Build R*Tree Time:1302.14ms  Height=11 PointNum=100000 R*TREE Range:OK
+
+
+
+m=4 M=8
+
+Data Set Size:1000
+Build R-Tree Time:7.05016ms  Height=4 PointNum=1000 R-TREE Range:OK
+Build R*Tree Time:8.4434ms  Height=4 PointNum=1000 R*TREE Range:OK
+
+Data Set Size:2000
+Build R-Tree Time:15.6818ms  Height=5 PointNum=2000 R-TREE Range:OK
+Build R*Tree Time:18.534ms  Height=5 PointNum=2000 R*TREE Range:OK
+
+Data Set Size:5000
+Build R-Tree Time:43.8957ms  Height=5 PointNum=5000 R-TREE Range:OK
+Build R*Tree Time:51.5164ms  Height=5 PointNum=5000 R*TREE Range:OK
+
+Data Set Size:10000
+Build R-Tree Time:96.1912ms  Height=6 PointNum=10000 R-TREE Range:OK
+Build R*Tree Time:112.405ms  Height=5 PointNum=10000 R*TREE Range:OK
+
+Data Set Size:20000
+Build R-Tree Time:211.291ms  Height=6 PointNum=20000 R-TREE Range:OK
+Build R*Tree Time:244.551ms  Height=6 PointNum=20000 R*TREE Range:OK
+
+Data Set Size:30000
+Build R-Tree Time:328.643ms  Height=6 PointNum=30000 R-TREE Range:OK
+Build R*Tree Time:370.751ms  Height=6 PointNum=30000 R*TREE Range:OK
+
+Data Set Size:40000
+Build R-Tree Time:451.479ms  Height=6 PointNum=40000 R-TREE Range:OK
+Build R*Tree Time:506.056ms  Height=6 PointNum=40000 R*TREE Range:OK
+
+Data Set Size:50000
+Build R-Tree Time:584.496ms  Height=6 PointNum=50000 R-TREE Range:OK
+Build R*Tree Time:652.28ms  Height=6 PointNum=50000 R*TREE Range:OK
+
+Data Set Size:60000
+Build R-Tree Time:711.931ms  Height=7 PointNum=60000 R-TREE Range:OK
+Build R*Tree Time:800.231ms  Height=6 PointNum=60000 R*TREE Range:OK
+
+Data Set Size:70000
+Build R-Tree Time:845.493ms  Height=7 PointNum=70000 R-TREE Range:OK
+Build R*Tree Time:954.702ms  Height=7 PointNum=70000 R*TREE Range:OK
+
+Data Set Size:80000
+Build R-Tree Time:984.106ms  Height=7 PointNum=80000 R-TREE Range:OK
+Build R*Tree Time:1104.65ms  Height=7 PointNum=80000 R*TREE Range:OK
+
+Data Set Size:90000
+Build R-Tree Time:1118.18ms  Height=7 PointNum=90000 R-TREE Range:OK
+Build R*Tree Time:1252.91ms  Height=7 PointNum=90000 R*TREE Range:OK
+
+Data Set Size:100000
+Build R-Tree Time:1389.89ms  Height=7 PointNum=100000 R-TREE Range:OK
+Build R*Tree Time:1460.06ms  Height=7 PointNum=100000 R*TREE Range:OK
+
+
+
+m=10 M=20
+
+Data Set Size:1000
+Build R-Tree Time:9.29371ms  Height=3 PointNum=1000 R-TREE Range:OK
+Build R*Tree Time:18.3244ms  Height=3 PointNum=1000 R*TREE Range:OK
+
+Data Set Size:2000
+Build R-Tree Time:21.5018ms  Height=3 PointNum=2000 R-TREE Range:OK
+Build R*Tree Time:41.019ms  Height=3 PointNum=2000 R*TREE Range:OK
+
+Data Set Size:5000
+Build R-Tree Time:61.2638ms  Height=4 PointNum=5000 R-TREE Range:OK
+Build R*Tree Time:115.863ms  Height=4 PointNum=5000 R*TREE Range:OK
+
+Data Set Size:10000
+Build R-Tree Time:135.278ms  Height=4 PointNum=10000 R-TREE Range:OK
+Build R*Tree Time:242.296ms  Height=4 PointNum=10000 R*TREE Range:OK
+
+Data Set Size:20000
+Build R-Tree Time:289.849ms  Height=4 PointNum=20000 R-TREE Range:OK
+Build R*Tree Time:505.993ms  Height=4 PointNum=20000 R*TREE Range:OK
+
+Data Set Size:30000
+Build R-Tree Time:462.038ms  Height=4 PointNum=30000 R-TREE Range:OK
+Build R*Tree Time:787.036ms  Height=4 PointNum=30000 R*TREE Range:OK
+
+Data Set Size:40000
+Build R-Tree Time:638.364ms  Height=4 PointNum=40000 R-TREE Range:OK
+Build R*Tree Time:1073.86ms  Height=4 PointNum=40000 R*TREE Range:OK
+
+Data Set Size:50000
+Build R-Tree Time:848.286ms  Height=5 PointNum=50000 R-TREE Range:OK
+Build R*Tree Time:1374ms  Height=4 PointNum=50000 R*TREE Range:OK
+
+Data Set Size:60000
+Build R-Tree Time:1006.24ms  Height=5 PointNum=60000 R-TREE Range:OK
+Build R*Tree Time:1689.08ms  Height=4 PointNum=60000 R*TREE Range:OK
+
+Data Set Size:70000
+Build R-Tree Time:1202.11ms  Height=5 PointNum=70000 R-TREE Range:OK
+Build R*Tree Time:1978.7ms  Height=5 PointNum=70000 R*TREE Range:OK
+
+Data Set Size:80000
+Build R-Tree Time:1387.98ms  Height=5 PointNum=80000 R-TREE Range:OK
+Build R*Tree Time:2286.31ms  Height=5 PointNum=80000 R*TREE Range:OK
+
+Data Set Size:90000
+Build R-Tree Time:1588.58ms  Height=5 PointNum=90000 R-TREE Range:OK
+Build R*Tree Time:2575.39ms  Height=5 PointNum=90000 R*TREE Range:OK
+
+Data Set Size:100000
+Build R-Tree Time:1793.46ms  Height=5 PointNum=100000 R-TREE Range:OK
+Build R*Tree Time:2886.9ms  Height=5 PointNum=100000 R*TREE Range:OK
+
+
+
+m=12 M=30
+
+Data Set Size:1000
+Build R-Tree Time:12.5704ms  Height=3 PointNum=1000 R-TREE Range:OK
+Build R*Tree Time:23.7222ms  Height=3 PointNum=1000 R*TREE Range:OK
+
+Data Set Size:2000
+Build R-Tree Time:26.9295ms  Height=3 PointNum=2000 R-TREE Range:OK
+Build R*Tree Time:54.4829ms  Height=3 PointNum=2000 R*TREE Range:OK
+
+Data Set Size:5000
+Build R-Tree Time:77.039ms  Height=3 PointNum=5000 R-TREE Range:OK
+Build R*Tree Time:156.8ms  Height=3 PointNum=5000 R*TREE Range:OK
+
+Data Set Size:10000
+Build R-Tree Time:173.8ms  Height=3 PointNum=10000 R-TREE Range:OK
+Build R*Tree Time:342.036ms  Height=3 PointNum=10000 R*TREE Range:OK
+
+Data Set Size:20000
+Build R-Tree Time:381.795ms  Height=4 PointNum=20000 R-TREE Range:OK
+Build R*Tree Time:734.517ms  Height=4 PointNum=20000 R*TREE Range:OK
+
+Data Set Size:30000
+Build R-Tree Time:599.956ms  Height=4 PointNum=30000 R-TREE Range:OK
+Build R*Tree Time:1137.8ms  Height=4 PointNum=30000 R*TREE Range:OK
+
+Data Set Size:40000
+Build R-Tree Time:812.804ms  Height=4 PointNum=40000 R-TREE Range:OK
+Build R*Tree Time:1535.91ms  Height=4 PointNum=40000 R*TREE Range:OK
+
+Data Set Size:50000
+Build R-Tree Time:1038.28ms  Height=4 PointNum=50000 R-TREE Range:OK
+Build R*Tree Time:1937.43ms  Height=4 PointNum=50000 R*TREE Range:OK
+
+Data Set Size:60000
+Build R-Tree Time:1258.98ms  Height=4 PointNum=60000 R-TREE Range:OK
+Build R*Tree Time:2349.78ms  Height=4 PointNum=60000 R*TREE Range:OK
+
+Data Set Size:70000
+Build R-Tree Time:1480.74ms  Height=4 PointNum=70000 R-TREE Range:OK
+Build R*Tree Time:2798.74ms  Height=4 PointNum=70000 R*TREE Range:OK
+
+Data Set Size:80000
+Build R-Tree Time:1721.78ms  Height=4 PointNum=80000 R-TREE Range:OK
+Build R*Tree Time:3178.42ms  Height=4 PointNum=80000 R*TREE Range:OK
+
+Data Set Size:90000
+Build R-Tree Time:1952.91ms  Height=4 PointNum=90000 R-TREE Range:OK
+Build R*Tree Time:3590.32ms  Height=4 PointNum=90000 R*TREE Range:OK
+
+Data Set Size:100000
+Build R-Tree Time:2202.45ms  Height=4 PointNum=100000 R-TREE Range:OK
+Build R*Tree Time:4017.48ms  Height=4 PointNum=100000 R*TREE Range:OK

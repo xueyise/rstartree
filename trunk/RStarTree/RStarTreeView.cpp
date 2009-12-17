@@ -191,41 +191,19 @@ void CRStarTreeView::OnTestBuildTree()
 	using std::endl;
 	using std::vector;
 
+
 	LARGE_INTEGER frequency;
 	LARGE_INTEGER beginCounter,endCounter;
 	double resultTime;
 	QueryPerformanceFrequency(&frequency);
-	//生成数据文件
-	
 
-	/*ofstream outFile("data.txt");
-	int N = 1000000;
-	srand(time(NULL));
-	outFile<<N<<endl;
-	for(int i=0;i<N;i++){
-		double x = rand()+(double)rand()/RAND_MAX;
-		double y = rand()+(double)rand()/RAND_MAX;
-		if(rand()%2==0)x = -x;
-		if(rand()%2==0)y = -y;
-
-		outFile<<x<<" "<<y<<endl;
-	}
-	outFile.close();*/
-
-
-	ifstream inFile("data.txt");
-	int N;
-	inFile>>N;
-	int m,M;
-	m=2;
-	M=4;
-	
+	//生成查询范围
 	double xMin = 65535,yMin = 65535;
 	double yMax = -65535,xMax = -65535;
 	
 	vector<RSTRange> ranges;
-	srand(unsigned(time(NULL)));
-	for(int i=0;i<5;i++){
+	/*srand(unsigned(time(NULL)));*/
+	for(int i=0;i<10;i++){
 		RSTRange range;
 		double xMin = rand()+(double)rand()/RAND_MAX;
 		xMin = -xMin;
@@ -244,165 +222,144 @@ void CRStarTreeView::OnTestBuildTree()
 		range.push_back(RSTInter(yMin,yMax));
 		ranges.push_back(range);
 	}
+
+	int N[13] = {1000, 2000, 5000, 10000, 20000,
+		30000, 40000, 50000, 60000,
+		70000, 80000, 90000, 100000};
+	/*int N[13] = {1000, 2000};*/
+	ofstream out("result-query-time.txt",ofstream::app);
+	int m=12;
+	int M=30;
+	RSTRTree* pRTree;
+	RSTRTree* pStarTree;
 	
-	/*RSTRange range1;
-	range1.push_back(RSTInter(-200,200));
-	range1.push_back(RSTInter(300,600));
-	ranges.push_back(range1);
-	RSTRange range2;
-	range2.push_back(RSTInter(500,600));
-	range2.push_back(RSTInter(-600,600));
-	ranges.push_back(range2);*/
-
-	RSTRStarTree starTree(2,m,M);
-	RSTRTree tree(2,m,M);
-	using std::pair;
-	using std::vector;
-	vector<RSTPoint2D*> inputVecTree;
-	vector<RSTPoint2D*> inputVecStarTree;
-	pair<int,int> p;
-	for(int i=0;i<N;i++){
-		double x,y;
-		inFile>>x>>y;
-
-		RSTPoint2D* p = new RSTPoint2D();
-		p->x = x;
-		p->y = y;
-		p->GenerateRange();
-		inputVecStarTree.push_back(p);
-
-		p = new RSTPoint2D();
-		p->x = x;
-		p->y = y;
-		p->GenerateRange();
-		inputVecTree.push_back(p);
-
-		if(x<xMin)
-			xMin = x;
-		if(x>xMax)
-			xMax = x;
-		if(y<yMin)
-			yMin = y;
-		if(y>yMax)
-			yMax = y;
-
+	//output 
+	out<<endl<<endl<<endl;
+	out<<"m="<<m<<" M="<<M<<endl;
+	for(int k=0;k<13;k++){
 		
-	}
-	inFile.close();
+		ifstream inFile("data.txt");
+		vector<RSTPoint2D*> inputVecTree;
+		vector<RSTPoint2D*> inputVecStarTree;
 		
-	::AfxMessageBox(_T("Data Read Complete"));
-	ofstream out("result.txt",ofstream::app);
-	QueryPerformanceCounter(&beginCounter);
-	for(int i=0;i<N;i++){
-		
-		tree.InsertData(inputVecTree[i]);
-	}
-	QueryPerformanceCounter(&endCounter);
-	resultTime = 
+
+		//
+		out<<endl;
+		out<<"Data Set Size:"<<N[k]<<endl;
+		//read in Data
+		for(int i=0;i<N[k];i++){
+			double x,y;
+			inFile>>x>>y;
+
+			RSTPoint2D* p = new RSTPoint2D();
+			p->x = x;
+			p->y = y;
+			p->GenerateRange();
+			inputVecStarTree.push_back(p);
+
+			p = new RSTPoint2D();
+			p->x = x;
+			p->y = y;
+			p->GenerateRange();
+			inputVecTree.push_back(p);
+
+			if(x<xMin)
+				xMin = x;
+			if(x>xMax)
+				xMax = x;
+			if(y<yMin)
+				yMin = y;
+			if(y>yMax)
+				yMax = y;
+		}
+		//read complete 
+		pRTree = new RSTRTree(2,m,M);
+		pStarTree = new RSTRStarTree(2,m,M);
+
+		//build R-Tree and output infomation
+		QueryPerformanceCounter(&beginCounter);
+		for(int i=0;i<N[k];i++){
+			pRTree->InsertData(inputVecTree[i]);
+		}
+		QueryPerformanceCounter(&endCounter);
+		resultTime = 
 			((double)endCounter.QuadPart-(double)beginCounter.QuadPart)
 			/
 			(frequency.QuadPart);
-	resultTime= resultTime*1000;
-	out<<endl<<"Build R-Tree time:"<<resultTime<<"ms"<<endl; 
-	QueryPerformanceCounter(&beginCounter);
-	for(int i=0;i<N;i++){
+		resultTime= resultTime*1000;
 		
-		starTree.InsertData(inputVecStarTree[i]);
-	}
-	QueryPerformanceCounter(&endCounter);
-	resultTime = 
+		out<<"Build R-Tree Time:"<<resultTime<<"ms "<<" Height="<<pRTree->height<<" PointNum="<<inputVecTree.size();
+		out<<" R-TREE Range:"<<(
+		(xMin==pRTree->Root->range[0].min&&
+		xMax==pRTree->Root->range[0].max&&
+		yMin==pRTree->Root->range[1].min&&
+		yMax==pRTree->Root->range[1].max)?"OK":"Error")<<endl;
+
+		//build R*Tree and output infomation
+		QueryPerformanceCounter(&beginCounter);
+		for(int i=0;i<N[k];i++){
+			pStarTree->InsertData(inputVecStarTree[i]);
+		}
+		QueryPerformanceCounter(&endCounter);
+		resultTime = 
 			((double)endCounter.QuadPart-(double)beginCounter.QuadPart)
 			/
 			(frequency.QuadPart);
-	resultTime= resultTime*1000;
-	out<<"Build R*Tree time:"<<resultTime<<"ms"<<endl;
+		resultTime= resultTime*1000;
+		
 
-	
+		out<<"Build R*Tree Time:"<<resultTime<<"ms "<<" Height="<<pStarTree->height<<" PointNum="<<inputVecTree.size();
+		out<<" R*TREE Range:"<<(
+		(xMin==pStarTree->Root->range[0].min&&
+		xMax==pStarTree->Root->range[0].max&&
+		yMin==pStarTree->Root->range[1].min&&
+		yMax==pStarTree->Root->range[1].max)?"OK":"Error")<<endl;
+
+
+		//query time
+		for(size_t i=0;i<ranges.size();i++){
+			RSTNodeSet rTreeSet,starTreeSet;
+			RSTRange& range = ranges[i];
+			double resultTime1,resultTime2;
+
+			out<<"Range.No."<<i<<" ["<<range[0].min<<","<<range[0].max<<"]["
+				<<range[1].min<<","<<range[1].max<<"]"<<endl;
+
+
+			QueryPerformanceCounter(&beginCounter);
+			pRTree->Search(range,rTreeSet,false);
+			QueryPerformanceCounter(&endCounter);
 			
-	
+			resultTime1 = 
+				((double)endCounter.QuadPart-(double)beginCounter.QuadPart)
+				/
+				(frequency.QuadPart);
+			resultTime1= resultTime1*1000*1000;
 
+			out<<"    "<<"R-Tree:"<<rTreeSet.size()<<" Points";
+			out<<" Time:"<<resultTime1<<"us"<<endl;
 
-//	print the tree
-	/*using std::deque;
-	deque<RSTNode*> que;
-	que.push_back(starTree.Root);
-	while(!que.empty()){
-		RSTNode* pNode = que.front();
-		out<<(void*)pNode<<":";
-		out<<"Parent:"<<(void*)pNode->parent;
-		for(int i=0;i<(int)pNode->range.size();i++){
-			out<<"("<<pNode->range[i].min<<","<<pNode->range[i].max<<")";	
+			
+			QueryPerformanceCounter(&beginCounter);
+			pStarTree->Search(range,starTreeSet,false);
+			QueryPerformanceCounter(&endCounter);
+			resultTime2 = 
+				((double)endCounter.QuadPart-(double)beginCounter.QuadPart)
+				/
+				(frequency.QuadPart);
+			resultTime2= resultTime2*1000*1000;
+			out<<"    "<<"R*Tree:"<<starTreeSet.size()<<" Points";
+			out<<" Time:"<<resultTime<<"us"<<" Percentage:"<<resultTime2*100/resultTime1<<"%"<<endl;
+			
+
 		}
-		out<<endl;		
-		que.pop_front();
-		if(pNode->type==Data)continue;
-		
-		else{
-			RSTNode* pRSTNode = (RSTNode*)pNode;
-			for(int i=0;i<pRSTNode->childNum;i++)
-				que.push_back(pRSTNode->childSet[i]);
-		}
-	}*/
-	
 
-	out<<N<<"Points in the Tree"<<endl;
-	out<<"m="<<tree.m<<" M="<<tree.M<<endl;
-	out<<"Height:"<<tree.height<<endl;
-	
-	
-	
-	RSTNodeSet rTreeSet,starTreeSet;
-
-	for(size_t i=0;i<ranges.size();i++){
-		RSTRange& range = ranges[i];
-		out<<"Range is x:"<<range[0].min<<"to"<<range[0].max;
-		out<<" y:"<<range[1].min<<"to"<<range[1].max<<endl;
-
-
-		QueryPerformanceCounter(&beginCounter);
-		tree.Search(range,rTreeSet,false);
-		QueryPerformanceCounter(&endCounter);
-		
-		resultTime = 
-			((double)endCounter.QuadPart-(double)beginCounter.QuadPart)
-			/
-			(frequency.QuadPart);
-		resultTime= resultTime*1000*1000;
-
-		out<<"RTree:"<<rTreeSet.size();
-		out<<" Time:"<<resultTime<<"us"<<endl;
-
-		
-		QueryPerformanceCounter(&beginCounter);
-		starTree.Search(range,starTreeSet,false);
-		QueryPerformanceCounter(&endCounter);
-
-
-
-		resultTime = 
-			((double)endCounter.QuadPart-(double)beginCounter.QuadPart)
-			/
-			(frequency.QuadPart);
-		resultTime= resultTime*1000*1000;
-		out<<"R*Tree:"<<starTreeSet.size();
-		out<<" Time:"<<resultTime<<"us"<<endl;
-
+		inFile.close();
+		delete pRTree;
+		delete pStarTree;
 	}
-	//check the bounding range
-	
-	out<<"R-TREE Range:"<<(
-		(xMin==tree.Root->range[0].min&&
-		xMax==tree.Root->range[0].max&&
-		yMin==tree.Root->range[1].min&&
-		yMax==tree.Root->range[1].max)?"OK":"Error")<<endl;
-
-	out<<"R*TREE Range:"<<(
-		(xMin==starTree.Root->range[0].min&&
-		xMax==starTree.Root->range[0].max&&
-		yMin==starTree.Root->range[1].min&&
-		yMax==starTree.Root->range[1].max)?"OK":"Error")<<endl;
-	
 	out.close();
+
 }
 
 void CRStarTreeView::OnLButtonDown(UINT nFlags, CPoint point)
@@ -1082,3 +1039,4 @@ void CRStarTreeView::OnAddData()
 	m_treeshow.setResultState(false);
 	Invalidate(TRUE);
 }
+
