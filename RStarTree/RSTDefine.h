@@ -15,7 +15,7 @@ using std::vector;
 #define DEFAULT_LITTLE_M 2
 #define DEFALUT_BIG_M 4
 
-#define PI 3.14159265
+#define PI 3.14159265358979
 
 
 ///////////////////////////////区间结构定义///////////////////////////////////////////
