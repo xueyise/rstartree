@@ -184,10 +184,8 @@ CRStarTreeDoc* CRStarTreeView::GetDocument() const // non-debug version is inlin
 
 
 // CRStarTreeView message handlers
-
-void CRStarTreeView::OnTestBuildTree()
-{
-	using std::ifstream;
+void CRStarTreeView::test2DPoint(){
+using std::ifstream;
 	using std::ofstream;
 	using std::endl;
 	using std::vector;
@@ -360,6 +358,10 @@ void CRStarTreeView::OnTestBuildTree()
 		delete pStarTree;
 	}
 	out.close();
+}
+void CRStarTreeView::OnTestBuildTree()
+{
+	test2DPoint();
 
 }
 
