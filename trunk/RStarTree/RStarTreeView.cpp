@@ -847,6 +847,7 @@ UINT CRStarTreeView::demothread(LPVOID param)
 			}
 		}
 		p->m_treeshow.setDemoCurrentLayer(treeheight+1);
+		p->m_treeshow.setResultState(true);
 		p->Invalidate(TRUE);
 		for(int i=0;i<40;++i)
 		{
@@ -873,10 +874,11 @@ void CRStarTreeView::OnDemoShow()
 		if(m_treeshow.setDemoShowState(true))
 		{
 			flagdemoshow = true;
+			m_treeshow.ResetPosition();
 			m_treeshow.setDemoShowState(true);
 			m_treeshow.setResultState(false);
 			m_treeshow.setAssistantObjectShowState(true);
-			m_treeshow.setPorjectionState(true);
+			m_treeshow.setProjectionState(true);
 			AfxBeginThread(demothread,this);
 			lbuttonflag = LBUTTONDISABLE;
 		}
