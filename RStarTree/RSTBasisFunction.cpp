@@ -13,9 +13,11 @@ static char THIS_FILE[] = __FILE__;
 bool IsJoin(RSTRange& range1, RSTRange& range2)
 {
 	for (int i = 0; i < (int)range1.size(); i++)
-		if (!((range1[i].max < range2[i].min) && (range1[i].min > range2[i].max)))
-			return true;
-	return false;
+	{
+		if (range1[i].max < range2[i].min || range2[i].max<range1[i].min)
+			return false;
+	}
+	return true;
 }
 
 // 判断区间2是否在区间1中
@@ -100,7 +102,7 @@ void GetCenter(RSTRange& range, RSTCPoint& cPoint)
 double GetDistance(RSTCPoint& p1, RSTCPoint& p2)
 {
 	double dis = 0;
-	for (int i = 0; i < p1.size(); i++)
+	for (size_t i = 0; i < p1.size(); i++)
 	{
 		dis += (p1[i] - p2[i]) * (p1[i] - p2[i]);
 	}
