@@ -26,6 +26,9 @@ CRStarTreeDoc::CRStarTreeDoc()
 	// TODO: add one-time construction code here
 	/*rtree = new RSTRTree(DEFAULT_DIMENTION, DEFAULT_LITTLE_M, DEFALUT_BIG_M);*/
 	this->rtree = NULL;
+	this->isRStarTree = true;
+	this->m = 2;
+	this->M = 4;
 #ifdef TEST
 	flag = DrawPoint;
 #endif

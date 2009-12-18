@@ -731,8 +731,16 @@ void CRStarTreeView::OnFileOpen()
 		}
 	}
 	delete this->GetDocument()->rtree;
-	this->GetDocument()->rtree = new RSTRStarTree(DEFAULT_DIMENTION, DEFAULT_LITTLE_M,
-		DEFALUT_BIG_M);
+	if(this->GetDocument()->isRStarTree){
+		this->GetDocument()->rtree = new RSTRStarTree(DEFAULT_DIMENTION,
+			this->GetDocument()->m,
+			this->GetDocument()->M);
+	}else{
+		this->GetDocument()->rtree = new RSTRTree(DEFAULT_DIMENTION, 
+			this->GetDocument()->m,
+			this->GetDocument()->M);
+	}
+	
 	RSTRTree* ptree = this->GetDocument()->rtree;
 	vector<RSTNode*> *pset = &(this->GetDocument()->dateset);
 	pset->clear();
@@ -791,18 +799,28 @@ void CRStarTreeView::OnResetPosition()
 
 void CRStarTreeView::OnDisplayOption()
 {
-	//TODO
+	//set current options 
 	DisplayOptionDialog dlg;
-	dlg.notDisplayDataNode = m_treeshow.getDataShowState()?false:true;
-	dlg.notDisplayRTreeEdge = m_treeshow.getBranchState()?false:true;
-	dlg.notDisplayLeafNodeEdge = m_treeshow.getNodeEdgeShowState()?false:true;
-	dlg.leafNodeNotObsolete = m_treeshow.getNodeFaceShowState()?false:true;
+	
+	dlg.displayDataLayer = m_treeshow.getDataShowState();
+	dlg.displayNodeFrame = m_treeshow.getNodeEdgeShowState();
+	dlg.displayNodeMask = m_treeshow.getNodeFaceShowState();
+	dlg.displayTreeBranch = m_treeshow.getBranchState();
+	dlg.isPerspectiveProjection =m_treeshow.getProjectionState();
+	dlg.isRStarTree = this->GetDocument()->isRStarTree;
+	dlg.m = this->GetDocument()->m;
+	dlg.M = this->GetDocument()->M;
+	//set new options
 	if(dlg.DoModal() == IDOK)
 	{
-		m_treeshow.setDataShowState(dlg.notDisplayDataNode?false:true);
-		m_treeshow.setBranchState(dlg.notDisplayRTreeEdge?false:true);
-		m_treeshow.setNodeEdgeShowState(dlg.notDisplayLeafNodeEdge?false:true);
-		m_treeshow.setNodeFaceShowState(dlg.leafNodeNotObsolete?false:true);
+		m_treeshow.setDataShowState(dlg.displayDataLayer);
+		m_treeshow.setBranchState(dlg.displayTreeBranch);
+		m_treeshow.setNodeEdgeShowState(dlg.displayNodeFrame);
+		m_treeshow.setNodeFaceShowState(dlg.displayNodeMask);
+		m_treeshow.setProjectionState(dlg.isPerspectiveProjection);
+		this->GetDocument()->isRStarTree = dlg.isRStarTree;
+		this->GetDocument()->m = dlg.m;
+		this->GetDocument()->M = dlg.M;
 	}
 }
 
