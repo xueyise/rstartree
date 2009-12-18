@@ -846,12 +846,12 @@ void CRStarTreeView::OnDisplayOption()
 	//set new options
 	if(dlg.DoModal() == IDOK)
 	{
-		m_treeshow.setDataShowState(dlg.displayDataLayer);
-		m_treeshow.setBranchState(dlg.displayTreeBranch);
-		m_treeshow.setNodeEdgeShowState(dlg.displayNodeFrame);
-		m_treeshow.setNodeFaceShowState(dlg.displayNodeMask);
-		m_treeshow.setProjectionState(dlg.isPerspectiveProjection);
-		this->GetDocument()->isRStarTree = dlg.isRStarTree;
+		m_treeshow.setDataShowState(dlg.displayDataLayer?true:false);
+		m_treeshow.setBranchState(dlg.displayTreeBranch?true:false);
+		m_treeshow.setNodeEdgeShowState(dlg.displayNodeFrame?true:false);
+		m_treeshow.setNodeFaceShowState(dlg.displayNodeMask?true:false);
+		m_treeshow.setProjectionState(dlg.isPerspectiveProjection?true:false);
+		this->GetDocument()->isRStarTree = dlg.isRStarTree?true:false;
 		this->GetDocument()->m = dlg.m;
 		this->GetDocument()->M = dlg.M;
 	}
