@@ -1782,3 +1782,98 @@ Range.No.8 [-3010.6,894.228][-2264.86,2380.58]
 Range.No.9 [-672.948,1535.07][-3110.15,354.874]
     R-Tree:167 Points Time:49.0408us
     R*Tree:167 Points Time:4073.96us Percentage:36.0443%
+
+
+
+m=12 M=30
+
+Data Set Size:1000
+Build R-Tree Time:13.323ms  Height=3 PointNum=1000 R-TREE Range:OK
+Build R*Tree Time:26.3902ms  Height=3 PointNum=1000 R*TREE Range:OK
+R-Tree average query time:5.24651us
+R*Tree average query time:2.76993us
+Average time ratio:52.7956%
+
+Data Set Size:2000
+Build R-Tree Time:28.6425ms  Height=3 PointNum=2000 R-TREE Range:OK
+Build R*Tree Time:60.0842ms  Height=3 PointNum=2000 R*TREE Range:OK
+R-Tree average query time:10.2213us
+R*Tree average query time:4.28044us
+Average time ratio:41.8777%
+
+Data Set Size:5000
+Build R-Tree Time:80.4294ms  Height=3 PointNum=5000 R-TREE Range:OK
+Build R*Tree Time:170.193ms  Height=3 PointNum=5000 R*TREE Range:OK
+R-Tree average query time:16.6505us
+R*Tree average query time:6.2909us
+Average time ratio:37.782%
+
+Data Set Size:10000
+Build R-Tree Time:181.459ms  Height=3 PointNum=10000 R-TREE Range:OK
+Build R*Tree Time:366.621ms  Height=3 PointNum=10000 R*TREE Range:OK
+R-Tree average query time:22.7039us
+R*Tree average query time:8.69083us
+Average time ratio:38.279%
+
+Data Set Size:20000
+Build R-Tree Time:414.086ms  Height=4 PointNum=20000 R-TREE Range:OK
+Build R*Tree Time:770.388ms  Height=4 PointNum=20000 R*TREE Range:OK
+R-Tree average query time:37.0551us
+R*Tree average query time:12.8754us
+Average time ratio:34.7467%
+
+Data Set Size:30000
+Build R-Tree Time:621.357ms  Height=4 PointNum=30000 R-TREE Range:OK
+Build R*Tree Time:1187.05ms  Height=4 PointNum=30000 R*TREE Range:OK
+R-Tree average query time:44.216us
+R*Tree average query time:15.8543us
+Average time ratio:35.8564%
+
+Data Set Size:40000
+Build R-Tree Time:862.347ms  Height=4 PointNum=40000 R-TREE Range:OK
+Build R*Tree Time:1627.58ms  Height=4 PointNum=40000 R*TREE Range:OK
+R-Tree average query time:53.1118us
+R*Tree average query time:21.8535us
+Average time ratio:41.1463%
+
+Data Set Size:50000
+Build R-Tree Time:1088.67ms  Height=4 PointNum=50000 R-TREE Range:OK
+Build R*Tree Time:2063.08ms  Height=4 PointNum=50000 R*TREE Range:OK
+R-Tree average query time:63.6391us
+R*Tree average query time:51.2821us
+Average time ratio:80.5826%
+
+Data Set Size:60000
+Build R-Tree Time:1319.89ms  Height=4 PointNum=60000 R-TREE Range:OK
+Build R*Tree Time:2513.84ms  Height=4 PointNum=60000 R*TREE Range:OK
+R-Tree average query time:68.5033us
+R*Tree average query time:26.8685us
+Average time ratio:39.2222%
+
+Data Set Size:70000
+Build R-Tree Time:1580.74ms  Height=4 PointNum=70000 R-TREE Range:OK
+Build R*Tree Time:2962.66ms  Height=4 PointNum=70000 R*TREE Range:OK
+R-Tree average query time:91.0302us
+R*Tree average query time:42.0321us
+Average time ratio:46.1738%
+
+Data Set Size:80000
+Build R-Tree Time:1803.27ms  Height=4 PointNum=80000 R-TREE Range:OK
+Build R*Tree Time:3388.42ms  Height=4 PointNum=80000 R*TREE Range:OK
+R-Tree average query time:79.9705us
+R*Tree average query time:33.0082us
+Average time ratio:41.2755%
+
+Data Set Size:90000
+Build R-Tree Time:2051.25ms  Height=4 PointNum=90000 R-TREE Range:OK
+Build R*Tree Time:3848.93ms  Height=4 PointNum=90000 R*TREE Range:OK
+R-Tree average query time:87.9318us
+R*Tree average query time:74.1506us
+Average time ratio:84.3275%
+
+Data Set Size:100000
+Build R-Tree Time:2311.43ms  Height=4 PointNum=100000 R-TREE Range:OK
+Build R*Tree Time:4265.4ms  Height=4 PointNum=100000 R*TREE Range:OK
+R-Tree average query time:94.9755us
+R*Tree average query time:39.4514us
+Average time ratio:41.5385%
