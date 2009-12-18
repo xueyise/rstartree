@@ -28,4 +28,5 @@ public:
 	int m;
 	int M;
 	afx_msg void OnBnClickedOk();
+	int timeUnit;
 };

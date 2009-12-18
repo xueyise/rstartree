@@ -66,6 +66,7 @@ END_MESSAGE_MAP()
 
 // CRStarTreeView construction/destruction
 
+int CRStarTreeView::timeUnit = 1;
 CRStarTreeView::CRStarTreeView()
 : lbuttonflag(0),flagdraging(false)
 , flagdemoshow(false)
@@ -73,6 +74,7 @@ CRStarTreeView::CRStarTreeView()
 	// TODO: add construction code here
 	m_aorectangle.z = 0;
 	m_aopoint.z = 0;
+	timeUnit = 1;
 }
 
 CRStarTreeView::~CRStarTreeView()
@@ -1096,6 +1098,7 @@ void CRStarTreeView::OnDisplayOption()
 	dlg.isRStarTree = this->GetDocument()->isRStarTree;
 	dlg.m = this->GetDocument()->m;
 	dlg.M = this->GetDocument()->M;
+	dlg.timeUnit = CRStarTreeView::timeUnit;
 	//set new options
 	if(dlg.DoModal() == IDOK)
 	{
@@ -1111,6 +1114,7 @@ void CRStarTreeView::OnDisplayOption()
 		}
 		this->GetDocument()->m = dlg.m;
 		this->GetDocument()->M = dlg.M;
+		CRStarTreeView::timeUnit = dlg.timeUnit;
 	}
 }
 
@@ -1203,7 +1207,7 @@ UINT CRStarTreeView::demothread(LPVOID param)
 
 
 	//time definition
-	long TIME_UNIT = 2;
+	long TIME_UNIT = CRStarTreeView::timeUnit;
 	
 	long  inclineTimes = 500;
 	long fullAroundTimes = 1000;

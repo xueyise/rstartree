@@ -182,7 +182,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
     LTEXT           "RStarTree Version 1.0",IDC_STATIC,40,10,119,8,SS_NOPREFIX
-    LTEXT           "Copyright (C) 2009",IDC_STATIC,40,25,119,8
+    LTEXT           "Copyright (C) 2009 MY&LCY&BYB",IDC_STATIC,40,25,119,8
     DEFPUSHBUTTON   "OK",IDOK,178,7,50,16,WS_GROUP
 END
 
@@ -191,23 +191,25 @@ STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSM
 CAPTION "设置选项"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "确定",IDOK,58,117,50,14
-    PUSHBUTTON      "取消",IDCANCEL,163,117,50,14
-    CONTROL         "显示节点边框",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,24,33,64,10
-    CONTROL         "显示节点半透膜",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,24,52,72,10
-    CONTROL         "显示树枝",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,24,70,48,10
-    CONTROL         "显示数据",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,24,87,48,10
-    GROUPBOX        "显示选项",IDC_STATIC,14,15,88,88
-    GROUPBOX        "树类型",IDC_STATIC,113,66,115,36
-    GROUPBOX        "投影方式",IDC_STATIC,113,15,116,33
-    CONTROL         "R树",IDC_DISPLAY_LEFF_EDGE3,"Button",BS_AUTORADIOBUTTON | WS_GROUP,123,79,29,10
-    CONTROL         "R*树",IDC_DISPLAY_LEFF_EDGE4,"Button",BS_AUTORADIOBUTTON,175,80,33,10
-    CONTROL         "正投影",IDC_LEAF_OBSELETE3,"Button",BS_AUTORADIOBUTTON | WS_GROUP,121,36,40,10
-    CONTROL         "透视投影",IDC_LEAF_OBSELETE4,"Button",BS_AUTORADIOBUTTON,175,36,48,10
+    DEFPUSHBUTTON   "确定",IDOK,53,117,50,14
+    PUSHBUTTON      "取消",IDCANCEL,158,117,50,14
+    CONTROL         "显示节点边框",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,33,64,10
+    CONTROL         "显示节点半透膜",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,52,72,10
+    CONTROL         "显示树枝",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,70,48,10
+    CONTROL         "显示数据",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,87,48,10
+    GROUPBOX        "显示选项",IDC_STATIC,9,15,88,88
+    GROUPBOX        "树类型",IDC_STATIC,108,66,115,36
+    GROUPBOX        "投影方式",IDC_STATIC,108,15,116,33
+    CONTROL         "R树",IDC_DISPLAY_LEFF_EDGE3,"Button",BS_AUTORADIOBUTTON | WS_GROUP,118,79,29,10
+    CONTROL         "R*树",IDC_DISPLAY_LEFF_EDGE4,"Button",BS_AUTORADIOBUTTON,170,80,33,10
+    CONTROL         "正投影",IDC_LEAF_OBSELETE3,"Button",BS_AUTORADIOBUTTON | WS_GROUP,116,36,40,10
+    CONTROL         "透视投影",IDC_LEAF_OBSELETE4,"Button",BS_AUTORADIOBUTTON,170,36,48,10
     EDITTEXT        IDC_EDIT1,259,27,40,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT2,259,79,40,14,ES_AUTOHSCROLL
-    LTEXT           "m值",IDC_STATIC,242,30,14,8
-    LTEXT           "M值",IDC_STATIC,241,82,14,8
+    EDITTEXT        IDC_EDIT2,259,57,40,14,ES_AUTOHSCROLL
+    LTEXT           "m值",IDC_STATIC,237,30,14,8
+    LTEXT           "M值",IDC_STATIC,236,60,14,8
+    EDITTEXT        IDC_EDIT3,259,85,40,14,ES_AUTOHSCROLL
+    LTEXT           "演示延迟",IDC_STATIC,224,86,37,12
 END
 
 
@@ -403,20 +405,22 @@ END
 
 STRINGTABLE 
 BEGIN
-    ID_DISPLAY_OPTION       "选项设置"
-    ID_RANGESEARCH          "多维区间查询"
-    ID_MOUSEDRAG            "鼠标左键拖动，右键旋转"
-    ID_ADDDATA              "手动加数据"
+    ID_DISPLAY_OPTION       "控制面板\n控制面板"
+    ID_RANGESEARCH          "矩形查询，按住鼠标左键拖动\n矩形查询，按住鼠标左键拖动"
+    ID_MOUSEDRAG            "鼠标左键拖动，右键旋转\n鼠标左键拖动，右键旋转"
+    ID_DEMOSHOW             "在举行查询基础上演示查询过程\n在举行查询基础上演示查询过程"
+    ID_ADDDATA              "手动加二维点和二维矩形数据\n手动加二维点和二维矩形数据"
 END
 
 STRINGTABLE 
 BEGIN
-    ID_SHOWEVERYTHING       "显示完整树"
+    ID_SHOWEVERYTHING       "显示完整树\n显示完整树"
+    ID_ENDDEMO              "停止演示当前查询过程\n停止演示当前查询过程"
 END
 
 STRINGTABLE 
 BEGIN
-    ID_DELETE               "删除数据"
+    ID_DELETE               "删除选定数据,按鼠标左键拖动，选择要删除数据\n删除选定数据,按鼠标左键拖动，选择要删除数据"
 END
 
 #endif    // 中文(中华人民共和国) resources

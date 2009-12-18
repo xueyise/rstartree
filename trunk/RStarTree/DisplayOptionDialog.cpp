@@ -20,6 +20,7 @@ DisplayOptionDialog::DisplayOptionDialog(CWnd* pParent /*=NULL*/)
 	, isRStarTree(FALSE)
 	, m(0)
 	, M(0)
+	, timeUnit(0)
 {
 
 }
@@ -41,6 +42,8 @@ void DisplayOptionDialog::DoDataExchange(CDataExchange* pDX)
 	DDV_MinMaxInt(pDX, m, 2, 25);
 	DDX_Text(pDX, IDC_EDIT2, M);
 	DDV_MinMaxInt(pDX, M, 4, 50);
+	DDX_Text(pDX, IDC_EDIT3, timeUnit);
+	DDV_MinMaxInt(pDX, timeUnit, 1, 20);
 }
 
 
