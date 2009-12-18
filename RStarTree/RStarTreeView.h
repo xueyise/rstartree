@@ -99,6 +99,7 @@ public:
 	afx_msg void OnFileSave();
 public://
 	void test2DPoint();
+	void test3DPoint();
 	afx_msg void OnPrintTree();
 };
 
