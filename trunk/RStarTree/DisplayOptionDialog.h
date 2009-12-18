@@ -9,8 +9,6 @@ class DisplayOptionDialog : public CDialog
 
 public:
 	DisplayOptionDialog(CWnd* pParent = NULL);   // 标准构造函数
-	DisplayOptionDialog(BOOL displayDataNode,BOOL displayRTreeEdge,
-		BOOL displayLeafNodeEdge,BOOL leafNodeObsolete,CWnd* pParent = NULL);
 	virtual ~DisplayOptionDialog();
 
 // 对话框数据
@@ -21,8 +19,13 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	BOOL notDisplayDataNode;
-	BOOL notDisplayRTreeEdge;
-	BOOL notDisplayLeafNodeEdge;
-	BOOL leafNodeNotObsolete;
+	BOOL displayNodeFrame;
+	BOOL displayNodeMask;
+	BOOL displayTreeBranch;
+	BOOL displayDataLayer;
+	BOOL isPerspectiveProjection;
+	BOOL isRStarTree;
+	int m;
+	int M;
+	afx_msg void OnBnClickedOk();
 };

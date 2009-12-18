@@ -22,6 +22,9 @@ protected: // create from serialization only
 // Attributes
 public:
 	RSTRTree* rtree;
+	bool isRStarTree;
+	int m;
+	int M;
 	vector<RSTNode*> dateset;
 	RSTNodeSet result;
 #ifdef TEST
