@@ -624,6 +624,20 @@ void CRStarTreeView::OnLButtonDown(UINT nFlags, CPoint point)
 		break;
 	case LBUTTONADDDATA:
 		m_treeshow.setAssistantObjectShowState(false);
+		if(this->GetDocument()->rtree==NULL)
+		{
+			if(this->GetDocument()->isRStarTree)
+			{
+				this->GetDocument()->rtree = new RSTRStarTree(DEFAULT_DIMENTION,
+					this->GetDocument()->m,this->GetDocument()->M);
+			}
+			else
+			{
+				this->GetDocument()->rtree = new RSTRTree(DEFAULT_DIMENTION, 
+					this->GetDocument()->m,this->GetDocument()->M);
+			}
+			m_treeshow.setTree(this->GetDocument()->rtree,&(this->GetDocument()->dateset));
+		}
 		m_treeshow.get2DCoordinateFromSCreenToWorld(beginpoint.x,beginpoint.y,
 			m_aorectangle.left,m_aorectangle.bottom);
 		m_treeshow.get2DCoordinateFromSCreenToWorld(beginpoint.x,beginpoint.y,
@@ -720,6 +734,19 @@ void CRStarTreeView::OnLButtonUp(UINT nFlags, CPoint point)
 			rstpoint->y = m_aorectangle.bottom;
 			rstpoint->GenerateRange();
 			this->GetDocument()->dateset.push_back(rstpoint);
+			if(this->GetDocument()->rtree==NULL)
+			{
+				if(this->GetDocument()->isRStarTree)
+				{
+					this->GetDocument()->rtree = new RSTRStarTree(DEFAULT_DIMENTION,
+						this->GetDocument()->m,this->GetDocument()->M);
+				}
+				else
+				{
+					this->GetDocument()->rtree = new RSTRTree(DEFAULT_DIMENTION, 
+						this->GetDocument()->m,this->GetDocument()->M);
+				}
+			}
 			this->GetDocument()->rtree->InsertData(rstpoint);
 			rstpoint = NULL;
 		}
@@ -735,6 +762,19 @@ void CRStarTreeView::OnLButtonUp(UINT nFlags, CPoint point)
 			rstrectangle->ymax = m_aorectangle.top;
 			rstrectangle->GenerateRange();
 			this->GetDocument()->dateset.push_back(rstrectangle);
+			if(this->GetDocument()->rtree==NULL)
+			{
+				if(this->GetDocument()->isRStarTree)
+				{
+					this->GetDocument()->rtree = new RSTRStarTree(DEFAULT_DIMENTION,
+						this->GetDocument()->m,this->GetDocument()->M);
+				}
+				else
+				{
+					this->GetDocument()->rtree = new RSTRTree(DEFAULT_DIMENTION, 
+						this->GetDocument()->m,this->GetDocument()->M);
+				}
+			}
 			this->GetDocument()->rtree->InsertData(rstrectangle);
 			rstrectangle = NULL;
 			m_treeshow.setAssistantObjectShowState(false);
@@ -1067,7 +1107,11 @@ void CRStarTreeView::OnDisplayOption()
 		m_treeshow.setNodeEdgeShowState(dlg.displayNodeFrame?true:false);
 		m_treeshow.setNodeFaceShowState(dlg.displayNodeMask?true:false);
 		m_treeshow.setProjectionState(dlg.isPerspectiveProjection?true:false);
-		this->GetDocument()->isRStarTree = dlg.isRStarTree?true:false;
+		if(this->GetDocument()->isRStarTree != (dlg.isRStarTree?true:false))
+		{
+			this->GetDocument()->isRStarTree = dlg.isRStarTree?true:false;
+			AfxMessageBox(_T("关于树类型的修改将在下一次建树的时候生效"));
+		}
 		this->GetDocument()->m = dlg.m;
 		this->GetDocument()->M = dlg.M;
 	}
@@ -1317,11 +1361,11 @@ void CRStarTreeView::OnDemoShow()
 void CRStarTreeView::OnAddData()
 {
 	// TODO: Add your command handler code here
-	if(this->GetDocument()->rtree == NULL)
+	/*if(this->GetDocument()->rtree == NULL)
 	{
 		MessageBox(_T("当前R树为空，不支持手动插入"),_T("错误操作提示"),MB_OK);
 		return;
-	}
+	}*/
 	lbuttonflag = LBUTTONADDDATA;
 	m_treeshow.ResetPosition();
 	m_treeshow.setProjectionState(false);
@@ -1359,6 +1403,8 @@ void CRStarTreeView::OnFileSave()
 	rectangleset.clear();
 	for(size_t i=0;i<pdata->size();++i)
 	{
+		if((*pdata)[i] == NULL)
+			continue;
 		if( (*pdata)[i]->GetDataType() == RSTPOINT2D)
 			pointset.push_back((*pdata)[i]);
 		else if((*pdata)[i]->GetDataType() == RSTRECTANGLE2D)
