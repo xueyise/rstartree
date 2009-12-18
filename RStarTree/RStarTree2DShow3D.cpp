@@ -264,6 +264,8 @@ void Tree2DShow3D::drawResult()
 	glLineWidth(1);
 	for(size_t i=0;i<m_result->size();++i)
 	{
+		if((*m_result)[i]==NULL)
+			continue;
 		(*m_result)[i]->GetDataPoints(vec);
 		if(vec.size() == 2)
 		{

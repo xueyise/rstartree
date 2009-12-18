@@ -104,6 +104,8 @@ public://
 	afx_msg void OnPrintTree();
 	afx_msg void OnShowEverything();
 	afx_msg void OnEndDemo();
+	// 真为线程正在进行，否为线程不在执行
+	bool flagdemothread;
 };
 
 
