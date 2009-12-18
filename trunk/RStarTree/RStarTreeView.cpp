@@ -531,13 +531,15 @@ using std::ifstream;
 
 
 		//query time
+		double rTreeQueryTime=  0;
+		double starTreeQueryTime = 0.0;
 		for(size_t i=0;i<ranges.size();i++){
 			RSTNodeSet rTreeSet,starTreeSet;
 			RSTRange& range = ranges[i];
 			double resultTime1,resultTime2;
 
-			out<<"Range.No."<<i<<" ["<<range[0].min<<","<<range[0].max<<"]["
-				<<range[1].min<<","<<range[1].max<<"]"<<endl;
+			/*out<<"Range.No."<<i<<" ["<<range[0].min<<","<<range[0].max<<"]["
+				<<range[1].min<<","<<range[1].max<<"]"<<endl;*/
 
 
 			QueryPerformanceCounter(&beginCounter);
@@ -549,9 +551,10 @@ using std::ifstream;
 				/
 				(frequency.QuadPart);
 			resultTime1= resultTime1*1000*1000;
+			rTreeQueryTime+=resultTime1;
 
-			out<<"    "<<"R-Tree:"<<rTreeSet.size()<<" Points";
-			out<<" Time:"<<resultTime1<<"us"<<endl;
+			/*out<<"    "<<"R-Tree:"<<rTreeSet.size()<<" Points";
+			out<<" Time:"<<resultTime1<<"us"<<endl;*/
 
 			
 			QueryPerformanceCounter(&beginCounter);
@@ -562,11 +565,14 @@ using std::ifstream;
 				/
 				(frequency.QuadPart);
 			resultTime2= resultTime2*1000*1000;
-			out<<"    "<<"R*Tree:"<<starTreeSet.size()<<" Points";
-			out<<" Time:"<<resultTime<<"us"<<" Percentage:"<<resultTime2*100/resultTime1<<"%"<<endl;
-			
+			starTreeQueryTime+=resultTime2;
+			/*out<<"    "<<"R*Tree:"<<starTreeSet.size()<<" Points";
+			out<<" Time:"<<resultTime2<<"us"<<" Percentage:"<<resultTime2*100/resultTime1<<"%"<<endl;*/
 
 		}
+		out<<"R-Tree average query time:"<<(rTreeQueryTime/ranges.size())<<"us"<<endl;
+		out<<"R*Tree average query time:"<<(starTreeQueryTime/ranges.size())<<"us"<<endl;
+		out<<"Average time ratio:"<<starTreeQueryTime*100/rTreeQueryTime<<"%"<<endl;
 
 		inFile.close();
 		delete pRTree;
@@ -576,8 +582,8 @@ using std::ifstream;
 }
 void CRStarTreeView::OnTestBuildTree()
 {
-	/*test2DPoint();*/
-	test3DPoint();
+	test2DPoint();
+	/*test3DPoint();*/
 
 }
 
