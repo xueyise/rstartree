@@ -20,7 +20,10 @@
 #define IDC_CHECK2                      1010
 #define IDC_CHECK3                      1011
 #define IDC_CHECK4                      1012
-#define IDC_CHECK5                      1013
+#define IDC_DISPLAY_LEFF_EDGE3          1017
+#define IDC_DISPLAY_LEFF_EDGE4          1018
+#define IDC_LEAF_OBSELETE3              1019
+#define IDC_LEAF_OBSELETE4              1020
 #define ID_TEST                         32771
 #define ID_Menu                         32772
 #define ID_TEST_BUILD_TREE              32773
