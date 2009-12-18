@@ -556,11 +556,13 @@ bool RSTRTree::Delete(RSTNode *data)
 	CondenseTree(pnode);
 
 	// 调整根节点
-	if(this->Root->childNum == 1) //如果只有一个孩子，就让这个孩子成为根
+	if((this->Root->childNum == 1)&&(this->Root->childSet[0]->type!=Data)) //如果只有一个孩子，就让这个孩子成为根
 	{
 		pnode = (RSTNode*)(this->Root->childSet[0]);
+		this->Root->childNum = 0;
 		delete this->Root;              //??????????????root是否是new出的????????????????
 		this->Root = pnode;
+		pnode->parent = NULL;
 		height--;
 	}
 	else if(this->Root->childNum == 0) //如果没有孩子，重置这个根的信息
@@ -572,6 +574,8 @@ bool RSTRTree::Delete(RSTNode *data)
 			(this->Root->range)[i].max = 0;
 		}
 	}
+	else
+		this->Root->UpdateRange();
 
 	return true;
 

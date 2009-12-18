@@ -99,6 +99,7 @@ public:
 	afx_msg void OnFileSave();
 public://
 	void test2DPoint();
+	afx_msg void OnPrintTree();
 };
 
 #ifndef _DEBUG  // debug version in RStarTreeView.cpp

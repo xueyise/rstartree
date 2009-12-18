@@ -55,14 +55,16 @@
 #define ID_DEMOSHOW                     32794
 #define ID_ADDDATA                      32795
 #define ID_32797                        32797
+#define ID_32798                        32798
+#define ID_PRINT_TREE                   32799
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        131
-#define _APS_NEXT_COMMAND_VALUE         32798
-#define _APS_NEXT_CONTROL_VALUE         1016
+#define _APS_NEXT_COMMAND_VALUE         32800
+#define _APS_NEXT_CONTROL_VALUE         1017
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
