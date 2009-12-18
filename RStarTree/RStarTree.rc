@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 中文(中华人民共和国) resources
+// Chinese (P.R.C.) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
 #ifdef _WIN32
@@ -124,12 +124,14 @@ BEGIN
         MENUITEM "设置选项",                        ID_DISPLAY_OPTION
         MENUITEM "重置位置",                        ID_RESETPOSITION
         MENUITEM "鼠标牵引",                        ID_MOUSEDRAG
+        MENUITEM "显示完整树",                       ID_SHOWEVERYTHING
     END
     POPUP "操作"
     BEGIN
         MENUITEM "手动插入数据",                      ID_ADDDATA
         MENUITEM "区域查询",                        ID_RANGESEARCH
         MENUITEM "演示区域查询",                      ID_DEMOSHOW
+        MENUITEM "结束演示",                        ID_ENDDEMO
         MENUITEM "区域定位",                        ID_RANGELOCATION
         MENUITEM "删除数据",                        ID_DELETE
     END
@@ -391,7 +393,7 @@ BEGIN
     AFX_IDS_PREVIEW_CLOSE   "Close print preview mode\nCancel Preview"
 END
 
-#endif    // 中文(中华人民共和国) resources
+#endif    // Chinese (P.R.C.) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
