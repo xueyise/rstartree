@@ -59,6 +59,7 @@ BEGIN_MESSAGE_MAP(CRStarTreeView, CView)
 	ON_COMMAND(ID_FILE_SAVE, &CRStarTreeView::OnFileSave)
 	
 	ON_COMMAND(ID_DELETE, &CRStarTreeView::OnDelete)
+	ON_COMMAND(ID_PRINT_TREE, &CRStarTreeView::OnPrintTree)
 END_MESSAGE_MAP()
 
 // CRStarTreeView construction/destruction
@@ -466,6 +467,7 @@ void CRStarTreeView::OnLButtonUp(UINT nFlags, CPoint point)
 	endpoint = point;
 	RSTPoint2D* rstpoint = NULL;
 	RSTRectangle2D* rstrectangle = NULL;
+	RSTNodeSet* pResultSet;
 	switch(lbuttonflag)
 	{
 	case LBUTTONDRAG:
@@ -535,8 +537,11 @@ void CRStarTreeView::OnLButtonUp(UINT nFlags, CPoint point)
 		m_range.clear();
 		m_range.push_back(RSTInter(m_aorectangle.left,m_aorectangle.right));
 		m_range.push_back(RSTInter(m_aorectangle.bottom,m_aorectangle.top));
+		
 		this->GetDocument()->result.clear();
+		
 		this->GetDocument()->rtree->Search(m_range,this->GetDocument()->result,false);
+		pResultSet = &(this->GetDocument()->result);
 		for(size_t i=0;i<this->GetDocument()->result.size();++i)
 		{
 			this->GetDocument()->rtree->Delete(this->GetDocument()->result[i]);
@@ -1184,4 +1189,35 @@ void CRStarTreeView::OnDelete()
 	m_treeshow.setNodeFaceShowState(false);
 	m_treeshow.setResultState(false);
 	Invalidate(TRUE);
+}
+
+void CRStarTreeView::OnPrintTree()
+{
+	
+	using std::ofstream;
+	using std::deque;
+	using std::endl;
+
+	ofstream out("treeData.txt");
+	deque<RSTNode*> que;
+	que.push_back(this->GetDocument()->rtree->Root);
+	while(!que.empty()){
+		RSTNode* pNode = que.front();
+		out<<(void*)pNode<<":";
+		out<<"Parent:"<<(void*)pNode->parent;
+		for(int i=0;i<(int)pNode->range.size();i++){
+			out<<"("<<pNode->range[i].min<<","<<pNode->range[i].max<<")";	
+		}
+		out<<endl;		
+		que.pop_front();
+		if(pNode->type==Data)continue;
+		
+		else{
+			RSTNode* pRSTNode = (RSTNode*)pNode;
+			for(int i=0;i<pRSTNode->childNum;i++)
+				que.push_back(pRSTNode->childSet[i]);
+		}
+	}
+	out.close();
+	
 }

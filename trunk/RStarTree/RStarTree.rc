@@ -117,6 +117,7 @@ BEGIN
         MENUITEM "矩形框区域查询",                     ID_TESTRANGESEARCH
         MENUITEM "点点操作",                        ID_ADDPOINT
         MENUITEM "通过文件建树",                      ID_TEST_BUILD_TREE_FROM_FILE
+        MENUITEM "打印数据",                        ID_PRINT_TREE
     END
     POPUP "视图控制"
     BEGIN
