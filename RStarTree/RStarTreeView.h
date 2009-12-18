@@ -76,6 +76,7 @@ protected:
 	static const int LBUTTONPOINTLOCATION = 3;
 	static const int LBUTTONDISABLE = 4;
 	static const int LBUTTONADDDATA = 5;
+	static const int LBUTTONDELETE = 6;
 public:
 	afx_msg void OnDestroy();
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
@@ -91,6 +92,7 @@ public:
 	afx_msg void OnTestBuildTreeFromFile();
 	afx_msg void OnRangeLocation();
 	afx_msg void OnDemoShow();
+	afx_msg void OnDelete();
 	static UINT demothread(LPVOID param);
 	bool flagdemoshow;
 	afx_msg void OnAddData();

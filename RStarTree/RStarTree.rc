@@ -116,7 +116,7 @@ BEGIN
         MENUITEM "测试建树",                        ID_TEST_BUILD_TREE
         MENUITEM "矩形框区域查询",                     ID_TESTRANGESEARCH
         MENUITEM "点点操作",                        ID_ADDPOINT
-        MENUITEM "通过文件建树",                      ID_32786
+        MENUITEM "通过文件建树",                      ID_TEST_BUILD_TREE_FROM_FILE
     END
     POPUP "视图控制"
     BEGIN
@@ -129,7 +129,8 @@ BEGIN
         MENUITEM "手动插入数据",                      ID_ADDDATA
         MENUITEM "区域查询",                        ID_RANGESEARCH
         MENUITEM "演示区域查询",                      ID_DEMOSHOW
-        MENUITEM "区域定位",                        ID_32787
+        MENUITEM "区域定位",                        ID_RANGELOCATION
+        MENUITEM "删除数据",                        ID_DELETE
     END
 END
 
