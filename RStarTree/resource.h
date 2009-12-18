@@ -26,6 +26,7 @@
 #define IDC_DISPLAY_LEFF_EDGE4          1018
 #define IDC_LEAF_OBSELETE3              1019
 #define IDC_LEAF_OBSELETE4              1020
+#define IDC_EDIT3                       1021
 #define ID_TEST                         32771
 #define ID_Menu                         32772
 #define ID_TEST_BUILD_TREE              32773
@@ -61,7 +62,6 @@
 #define ID_SHOWEVERYTHING               32801
 #define ID_32802                        32802
 #define ID_ENDDEMO                      32803
-#define ID_BUTTON32811                  32811
 
 // Next default values for new objects
 // 
@@ -69,7 +69,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        131
 #define _APS_NEXT_COMMAND_VALUE         32812
-#define _APS_NEXT_CONTROL_VALUE         1017
+#define _APS_NEXT_CONTROL_VALUE         1022
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

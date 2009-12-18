@@ -77,6 +77,7 @@ protected:
 	static const int LBUTTONDISABLE = 4;
 	static const int LBUTTONADDDATA = 5;
 	static const int LBUTTONDELETE = 6;
+	static int timeUnit;
 public:
 	afx_msg void OnDestroy();
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
@@ -104,6 +105,7 @@ public://
 	afx_msg void OnShowEverything();
 	afx_msg void OnEndDemo();
 };
+
 
 #ifndef _DEBUG  // debug version in RStarTreeView.cpp
 inline CRStarTreeDoc* CRStarTreeView::GetDocument() const
