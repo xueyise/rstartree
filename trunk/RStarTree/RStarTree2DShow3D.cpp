@@ -232,6 +232,8 @@ void Tree2DShow3D::drawData()
 	glLineWidth(1);
 	for(size_t i=0;i<m_dataset->size();++i)
 	{
+		if((*m_dataset)[i]==NULL)
+			continue;
 		(*m_dataset)[i]->GetDataPoints(vec);
 		if(vec.size() == 2)
 		{

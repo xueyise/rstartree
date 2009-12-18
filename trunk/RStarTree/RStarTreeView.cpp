@@ -57,6 +57,8 @@ BEGIN_MESSAGE_MAP(CRStarTreeView, CView)
 	ON_COMMAND(ID_DEMOSHOW, &CRStarTreeView::OnDemoShow)
 	ON_COMMAND(ID_ADDDATA, &CRStarTreeView::OnAddData)
 	ON_COMMAND(ID_FILE_SAVE, &CRStarTreeView::OnFileSave)
+	
+	ON_COMMAND(ID_DELETE, &CRStarTreeView::OnDelete)
 END_MESSAGE_MAP()
 
 // CRStarTreeView construction/destruction
@@ -415,6 +417,12 @@ void CRStarTreeView::OnLButtonDown(UINT nFlags, CPoint point)
 		m_treeshow.get2DCoordinateFromSCreenToWorld(beginpoint.x,beginpoint.y,
 			m_aorectangle.left,m_aorectangle.bottom);
 		break;
+	case LBUTTONDELETE:
+		m_treeshow.get2DCoordinateFromSCreenToWorld(beginpoint.x,beginpoint.y,
+			m_aorectangle.left,m_aorectangle.bottom);
+		m_treeshow.get2DCoordinateFromSCreenToWorld(beginpoint.x,beginpoint.y,
+			m_aorectangle.left,m_aorectangle.bottom);
+		break;
 	default:
 		break;
 	}
@@ -520,6 +528,27 @@ void CRStarTreeView::OnLButtonUp(UINT nFlags, CPoint point)
 		}
 		m_treeshow.Reset();
 		break;
+	case LBUTTONDELETE:
+		m_treeshow.get2DCoordinateFromSCreenToWorld(endpoint.x,endpoint.y,
+			m_aorectangle.right,m_aorectangle.top);
+		m_aorectangle.adjustRange();
+		m_range.clear();
+		m_range.push_back(RSTInter(m_aorectangle.left,m_aorectangle.right));
+		m_range.push_back(RSTInter(m_aorectangle.bottom,m_aorectangle.top));
+		this->GetDocument()->result.clear();
+		this->GetDocument()->rtree->Search(m_range,this->GetDocument()->result,false);
+		for(size_t i=0;i<this->GetDocument()->result.size();++i)
+		{
+			this->GetDocument()->rtree->Delete(this->GetDocument()->result[i]);
+			for(vector<RSTNode*>::iterator p=this->GetDocument()->dateset.begin();
+				p<this->GetDocument()->dateset.end();++p)
+			{
+				if((*p) == this->GetDocument()->result[i])
+					(*p) = NULL;
+			}
+		}
+		m_treeshow.Reset();
+		break;
 	default:
 		break;
 	}
@@ -561,6 +590,10 @@ void CRStarTreeView::OnMouseMove(UINT nFlags, CPoint point)
 			m_treeshow.get2DCoordinateFromSCreenToWorld(endpoint.x,endpoint.y,
 					m_aorectangle.right,m_aorectangle.top);
 			m_treeshow.setAssistantObjectShowState(true);
+			break;
+		case LBUTTONDELETE:
+			m_treeshow.get2DCoordinateFromSCreenToWorld(endpoint.x,endpoint.y,
+					m_aorectangle.right,m_aorectangle.top);
 			break;
 		default:
 			break;
@@ -1128,4 +1161,27 @@ void CRStarTreeView::OnFileSave()
 		rectangleset[i]->OutPutData(outfile);
 	outfile<<"dataend"<<std::endl;
 	outfile.close();
+}
+
+void CRStarTreeView::OnDelete()
+{
+	// TODO: Add your command handler code here
+	if(this->GetDocument()->rtree == NULL)
+	{
+		MessageBox(_T("当前R树为空，能删除"),_T("错误操作提示"),MB_OK);
+		return;
+	}
+	if(m_treeshow.getDemoShowState())
+		m_treeshow.Reset();
+	lbuttonflag = LBUTTONDELETE;
+	m_treeshow.ResetPosition();
+	m_treeshow.setProjectionState(false);
+	m_treeshow.setAssistantObject((AssistantObject *)(&m_aorectangle));
+	m_treeshow.setAssistantObjectShowState(true);
+	m_treeshow.setBranchState(false);
+	m_treeshow.setNodeEdgeShowState(false);
+	m_treeshow.setDataShowState(true);
+	m_treeshow.setNodeFaceShowState(false);
+	m_treeshow.setResultState(false);
+	Invalidate(TRUE);
 }
