@@ -441,7 +441,7 @@ using std::ifstream;
 		30000, 40000, 50000, 60000,
 		70000, 80000, 90000, 100000};
 	/*int N[13] = {1000, 2000};*/
-	ofstream out("result-query-time.txt",ofstream::app);
+	ofstream out("result-query-time-average.txt",ofstream::app);
 	int m=12;
 	int M=30;
 	RSTRTree* pRTree;
