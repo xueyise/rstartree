@@ -60,6 +60,8 @@ BEGIN_MESSAGE_MAP(CRStarTreeView, CView)
 	
 	ON_COMMAND(ID_DELETE, &CRStarTreeView::OnDelete)
 	ON_COMMAND(ID_PRINT_TREE, &CRStarTreeView::OnPrintTree)
+	ON_COMMAND(ID_SHOWEVERYTHING, &CRStarTreeView::OnShowEverything)
+	ON_COMMAND(ID_ENDDEMO, &CRStarTreeView::OnEndDemo)
 END_MESSAGE_MAP()
 
 // CRStarTreeView construction/destruction
@@ -626,6 +628,7 @@ void CRStarTreeView::OnLButtonDown(UINT nFlags, CPoint point)
 		m_treeshow.setAssistantObjectShowState(false);
 		if(this->GetDocument()->rtree==NULL)
 		{
+			this->GetDocument()->dateset.clear();
 			if(this->GetDocument()->isRStarTree)
 			{
 				this->GetDocument()->rtree = new RSTRStarTree(DEFAULT_DIMENTION,
@@ -727,6 +730,20 @@ void CRStarTreeView::OnLButtonUp(UINT nFlags, CPoint point)
 	case LBUTTONPOINTLOCATION:
 		break;
 	case LBUTTONADDDATA:
+		if(this->GetDocument()->rtree==NULL)
+		{
+			this->GetDocument()->dateset.clear();
+			if(this->GetDocument()->isRStarTree)
+			{
+				this->GetDocument()->rtree = new RSTRStarTree(DEFAULT_DIMENTION,
+					this->GetDocument()->m,this->GetDocument()->M);
+			}
+			else
+			{
+				this->GetDocument()->rtree = new RSTRTree(DEFAULT_DIMENTION, 
+					this->GetDocument()->m,this->GetDocument()->M);
+			}
+		}
 		if(pow(beginpoint.x - endpoint.x,2.0)+pow(beginpoint.y-endpoint.y,2.0)<20)
 		{
 			rstpoint = new RSTPoint2D;
@@ -734,19 +751,6 @@ void CRStarTreeView::OnLButtonUp(UINT nFlags, CPoint point)
 			rstpoint->y = m_aorectangle.bottom;
 			rstpoint->GenerateRange();
 			this->GetDocument()->dateset.push_back(rstpoint);
-			if(this->GetDocument()->rtree==NULL)
-			{
-				if(this->GetDocument()->isRStarTree)
-				{
-					this->GetDocument()->rtree = new RSTRStarTree(DEFAULT_DIMENTION,
-						this->GetDocument()->m,this->GetDocument()->M);
-				}
-				else
-				{
-					this->GetDocument()->rtree = new RSTRTree(DEFAULT_DIMENTION, 
-						this->GetDocument()->m,this->GetDocument()->M);
-				}
-			}
 			this->GetDocument()->rtree->InsertData(rstpoint);
 			rstpoint = NULL;
 		}
@@ -762,19 +766,6 @@ void CRStarTreeView::OnLButtonUp(UINT nFlags, CPoint point)
 			rstrectangle->ymax = m_aorectangle.top;
 			rstrectangle->GenerateRange();
 			this->GetDocument()->dateset.push_back(rstrectangle);
-			if(this->GetDocument()->rtree==NULL)
-			{
-				if(this->GetDocument()->isRStarTree)
-				{
-					this->GetDocument()->rtree = new RSTRStarTree(DEFAULT_DIMENTION,
-						this->GetDocument()->m,this->GetDocument()->M);
-				}
-				else
-				{
-					this->GetDocument()->rtree = new RSTRTree(DEFAULT_DIMENTION, 
-						this->GetDocument()->m,this->GetDocument()->M);
-				}
-			}
 			this->GetDocument()->rtree->InsertData(rstrectangle);
 			rstrectangle = NULL;
 			m_treeshow.setAssistantObjectShowState(false);
@@ -1477,4 +1468,20 @@ void CRStarTreeView::OnPrintTree()
 	}
 	out.close();
 	
+}
+
+void CRStarTreeView::OnShowEverything()
+{
+	// TODO: Add your command handler code here
+	m_treeshow.setBranchState(true);
+	m_treeshow.setNodeEdgeShowState(true);
+	m_treeshow.setDataShowState(true);
+	m_treeshow.setNodeFaceShowState(true);
+	lbuttonflag = LBUTTONDRAG;
+	Invalidate(TRUE);
+}
+
+void CRStarTreeView::OnEndDemo()
+{
+	// TODO: Add your command handler code here
 }

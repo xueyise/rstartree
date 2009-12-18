@@ -57,13 +57,17 @@
 #define ID_32797                        32797
 #define ID_32798                        32798
 #define ID_PRINT_TREE                   32799
+#define ID_32800                        32800
+#define ID_SHOWEVERYTHING               32801
+#define ID_32802                        32802
+#define ID_ENDDEMO                      32803
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        131
-#define _APS_NEXT_COMMAND_VALUE         32800
+#define _APS_NEXT_COMMAND_VALUE         32804
 #define _APS_NEXT_CONTROL_VALUE         1017
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

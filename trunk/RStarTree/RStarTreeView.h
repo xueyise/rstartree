@@ -101,6 +101,8 @@ public://
 	void test2DPoint();
 	void test3DPoint();
 	afx_msg void OnPrintTree();
+	afx_msg void OnShowEverything();
+	afx_msg void OnEndDemo();
 };
 
 #ifndef _DEBUG  // debug version in RStarTreeView.cpp
