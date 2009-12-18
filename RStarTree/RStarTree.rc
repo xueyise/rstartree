@@ -120,21 +120,16 @@ BEGIN
     END
     POPUP "视图控制"
     BEGIN
-        POPUP "投影方式"
-        BEGIN
-            MENUITEM "正投影",                         ID_32780
-            MENUITEM "透视投影",                        ID_32781
-        END
+        MENUITEM "设置选项",                        ID_DISPLAY_OPTION
         MENUITEM "重置位置",                        ID_RESETPOSITION
-        MENUITEM "显示选项",                        ID_DISPLAY_OPTION
         MENUITEM "鼠标牵引",                        ID_MOUSEDRAG
     END
     POPUP "操作"
     BEGIN
+        MENUITEM "手动插入数据",                      ID_ADDDATA
         MENUITEM "区域查询",                        ID_RANGESEARCH
+        MENUITEM "演示区域查询",                      ID_DEMOSHOW
         MENUITEM "区域定位",                        ID_32787
-        MENUITEM "演示",                          ID_DEMOSHOW
-        MENUITEM "手动添加数据",                      ID_ADDDATA
     END
 END
 
