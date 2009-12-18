@@ -70,6 +70,7 @@ int CRStarTreeView::timeUnit = 1;
 CRStarTreeView::CRStarTreeView()
 : lbuttonflag(0),flagdraging(false)
 , flagdemoshow(false)
+, flagdemothread(false)
 {
 	// TODO: add construction code here
 	m_aorectangle.z = 0;
@@ -901,6 +902,10 @@ void CRStarTreeView::OnDestroy()
 	CView::OnDestroy();
 
 	// TODO: Add your message handler code here
+	while(flagdemothread)
+	{
+		flagdemoshow = false;
+	}
 	m_treeshow.Destroy();
 }
 
@@ -977,6 +982,11 @@ BOOL CRStarTreeView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 void CRStarTreeView::OnFileOpen()
 {
 	// TODO: Add your command handler code here
+	while(flagdemothread)
+	{
+		flagdemoshow = false;
+	}
+	m_treeshow.setDemoShowState(false);
 	CFileDialog mydlg(true,_T("*.txt"),_T("*.txt"),NULL,_T("(*.txt)|*.txt||"),
 		this,NULL);
 	if(mydlg.DoModal()!=IDOK)
@@ -1075,12 +1085,25 @@ void CRStarTreeView::OnFileOpen()
 	}
 	infile.close();
 	m_treeshow.setTree(ptree,pset);
+	m_treeshow.setBranchState(true);
+	m_treeshow.setNodeEdgeShowState(true);
+	m_treeshow.setNodeFaceShowState(true);
+	m_treeshow.setDataShowState(true);
+	m_treeshow.setAssistantObjectShowState(false);
+	m_treeshow.setResult(false);
+	lbuttonflag = LBUTTONDRAG;
 	Invalidate(TRUE);
 }
 
 void CRStarTreeView::OnResetPosition()
 {
 	// TODO: Add your command handler code here
+	while(flagdemothread)
+	{
+		flagdemoshow = false;
+	}
+	m_treeshow.setDemoShowState(false);
+	lbuttonflag = LBUTTONDRAG;
 	m_treeshow.ResetPosition();
 	Invalidate(TRUE);
 }
@@ -1089,7 +1112,14 @@ void CRStarTreeView::OnDisplayOption()
 {
 	//set current options 
 	DisplayOptionDialog dlg;
-	
+
+	while(flagdemothread)
+	{
+		flagdemoshow = false;
+	}
+	m_treeshow.setDemoShowState(false);
+	lbuttonflag = LBUTTONDRAG;
+
 	dlg.displayDataLayer = m_treeshow.getDataShowState();
 	dlg.displayNodeFrame = m_treeshow.getNodeEdgeShowState();
 	dlg.displayNodeMask = m_treeshow.getNodeFaceShowState();
@@ -1116,6 +1146,7 @@ void CRStarTreeView::OnDisplayOption()
 		this->GetDocument()->M = dlg.M;
 		CRStarTreeView::timeUnit = dlg.timeUnit;
 	}
+	m_treeshow.demoSetAssistantObjectHeight(0);
 }
 
 void CRStarTreeView::OnTestBuildTreeFromFile()
@@ -1132,6 +1163,11 @@ void CRStarTreeView::OnRangeSearch()
 		MessageBox(_T("当前R树为空，不能查询，请输入数据再试。"),_T("错误操作提示"),MB_OK);
 		return;
 	}
+	while(flagdemothread)
+	{
+		flagdemoshow = false;
+	}
+	m_treeshow.setDemoShowState(false);
 	lbuttonflag = LBUTTONRANGESEARCH;
 	m_treeshow.ResetPosition();
 	m_treeshow.setProjectionState(false);
@@ -1142,12 +1178,17 @@ void CRStarTreeView::OnRangeSearch()
 	m_treeshow.setDataShowState(true);
 	m_treeshow.setNodeFaceShowState(false);
 	m_treeshow.setResultState(true);
+	m_treeshow.setDataShowState(true);
 	Invalidate(TRUE);
 }
 
 void CRStarTreeView::OnMouseDrag()
 {
 	// TODO: Add your command handler code here
+	while(flagdemothread)
+	{
+		flagdemoshow = false;
+	}
 	lbuttonflag = LBUTTONDRAG;
 }
 
@@ -1159,6 +1200,11 @@ void CRStarTreeView::OnRangeLocation()
 		MessageBox(_T("当前R树为空，不能定位，请输入数据再试。"),_T("错误操作提示"),MB_OK);
 		return;
 	}
+	while(flagdemothread)
+	{
+		flagdemoshow = false;
+	}
+	m_treeshow.setDemoShowState(false);
 	lbuttonflag = LBUTTONRANGELOCATION;
 	m_treeshow.ResetPosition();
 	m_treeshow.setProjectionState(false);
@@ -1175,6 +1221,7 @@ void CRStarTreeView::OnRangeLocation()
 UINT CRStarTreeView::demothread(LPVOID param)
 {
 	CRStarTreeView* p = (CRStarTreeView*)param;
+	p->flagdemothread = true;
 	int treeHeight = p->GetDocument()->rtree->height;
 	/*p->m_treeshow.demoXRotate(-1.57);
 	p->m_treeshow.demoMove(0,0,-0.5);
@@ -1254,6 +1301,11 @@ UINT CRStarTreeView::demothread(LPVOID param)
 			p->m_treeshow.demoXRotate(inclineAnglePerOnceForward);
 			p->Invalidate(TRUE);
 			Sleep(TIME_UNIT);
+			if(p->flagdemoshow==false)
+			{
+				p->flagdemothread = false;
+				return 0;
+			}
 		}
 		//rotate full around 
 		for(int i=0;i<fullAroundTimes;i++){
@@ -1261,6 +1313,11 @@ UINT CRStarTreeView::demothread(LPVOID param)
 			p->m_treeshow.demoZRotate(zFullAroundAngleOnce);
 			p->Invalidate(TRUE);
 			Sleep(TIME_UNIT);
+			if(p->flagdemoshow==false)
+			{
+				p->flagdemothread = false;
+				return 0;
+			}
 		}
 
 		//incline backward
@@ -1268,6 +1325,11 @@ UINT CRStarTreeView::demothread(LPVOID param)
 			p->m_treeshow.demoXRotate(inclineAnglePerOnceBackward);
 			p->Invalidate(TRUE);
 			Sleep(TIME_UNIT);
+			if(p->flagdemoshow==false)
+			{
+				p->flagdemothread = false;
+				return 0;
+			}
 		}
 
 
@@ -1279,6 +1341,11 @@ UINT CRStarTreeView::demothread(LPVOID param)
 			p->m_treeshow.demoSetAssistantObjectHeight(aoht);
 			p->Invalidate(TRUE);
 			Sleep(TIME_UNIT);
+			if(p->flagdemoshow==false)
+			{
+				p->flagdemothread = false;
+				return 0;
+			}
 		}
 
 		//display the next layer
@@ -1291,21 +1358,35 @@ UINT CRStarTreeView::demothread(LPVOID param)
 
 	//Move down and incline forward
 	
-	for(int i=0;i<downTimes;i++){
-		
+	for(int i=0;i<downTimes;i++){	
 		p->m_treeshow.demoMove(xMove,yMove,percentagePerMoveDown);
 		p->Invalidate(TRUE);
 		Sleep(TIME_UNIT);
+		if(p->flagdemoshow==false)
+		{
+			p->flagdemothread = false;
+			return 0;
+		}
 	}
 	for(int i=0;i<inclineTimes;i++){
 		p->m_treeshow.demoXRotate(inclineAnglePerOnceForward);
 		p->Invalidate(TRUE);
 		Sleep(TIME_UNIT);
+		if(p->flagdemoshow==false)
+		{
+			p->flagdemothread = false;
+			return 0;
+		}
 	}
 	for(int i=0;i<inclineTimes;i++){
 		p->m_treeshow.demoXRotate(inclineAnglePerOnceForward);
 		p->Invalidate(TRUE);
 		Sleep(TIME_UNIT);
+		if(p->flagdemoshow==false)
+		{
+			p->flagdemothread = false;
+			return 0;
+		}
 	}
 		
 
@@ -1316,6 +1397,7 @@ UINT CRStarTreeView::demothread(LPVOID param)
 	p->m_treeshow.setProjectionState(true);
 	p->Invalidate(TRUE);
 
+	p->flagdemothread = false;
 	return 0;
 }
 
@@ -1334,8 +1416,8 @@ void CRStarTreeView::OnDemoShow()
 	}
 	if(flagdemoshow)
 	{
-		flagdemoshow = false;
-		m_treeshow.setTree(this->GetDocument()->rtree,&(this->GetDocument()->result));
+		AfxMessageBox(_T("演示正在进行"));
+		return;
 	}
 	else
 	{
@@ -1347,13 +1429,13 @@ void CRStarTreeView::OnDemoShow()
 			m_treeshow.setResultState(false);
 			m_treeshow.setAssistantObjectShowState(true);
 			m_treeshow.setProjectionState(true);
+			m_treeshow.setDataShowState(true);
 			AfxBeginThread(demothread,this);
 			lbuttonflag = LBUTTONDISABLE;
 		}
 		else
 		{
 			AfxMessageBox(_T("演示条件不足：\n\r1-数据不为空\n\r2-有查询框"));
-			flagdemoshow = false;
 			m_treeshow.setTree(this->GetDocument()->rtree,&(this->GetDocument()->dateset));
 		}
 	}
@@ -1362,11 +1444,11 @@ void CRStarTreeView::OnDemoShow()
 void CRStarTreeView::OnAddData()
 {
 	// TODO: Add your command handler code here
-	/*if(this->GetDocument()->rtree == NULL)
+	while(flagdemothread)
 	{
-		MessageBox(_T("当前R树为空，不支持手动插入"),_T("错误操作提示"),MB_OK);
-		return;
-	}*/
+		flagdemoshow = false;
+	}
+	m_treeshow.setDemoShowState(false);
 	lbuttonflag = LBUTTONADDDATA;
 	m_treeshow.ResetPosition();
 	m_treeshow.setProjectionState(false);
@@ -1377,6 +1459,7 @@ void CRStarTreeView::OnAddData()
 	m_treeshow.setDataShowState(true);
 	m_treeshow.setNodeFaceShowState(false);
 	m_treeshow.setResultState(false);
+	m_treeshow.setDataShowState(true);
 	Invalidate(TRUE);
 }
 
@@ -1388,6 +1471,11 @@ void CRStarTreeView::OnFileSave()
 		MessageBox(_T("当前R树为空，不能保存"),_T("错误操作提示"),MB_OK);
 		return;
 	}
+	while(flagdemothread)
+	{
+		flagdemoshow = false;
+	}
+	m_treeshow.setDemoShowState(false);
 	CFileDialog mydlg(false,_T("*.txt"),_T("*.txt"),NULL,_T("(*.txt)|*.txt||"),this,NULL);
 	if(mydlg.DoModal()!=IDOK)
 		return;
@@ -1434,8 +1522,11 @@ void CRStarTreeView::OnDelete()
 		MessageBox(_T("当前R树为空，能删除"),_T("错误操作提示"),MB_OK);
 		return;
 	}
-	if(m_treeshow.getDemoShowState())
-		m_treeshow.Reset();
+	while(flagdemothread)
+	{
+		flagdemoshow = false;
+	}
+	m_treeshow.setDemoShowState(false);
 	lbuttonflag = LBUTTONDELETE;
 	m_treeshow.ResetPosition();
 	m_treeshow.setProjectionState(false);
@@ -1483,10 +1574,17 @@ void CRStarTreeView::OnPrintTree()
 void CRStarTreeView::OnShowEverything()
 {
 	// TODO: Add your command handler code here
+	while(flagdemothread)
+	{
+		flagdemoshow = false;
+	}
+	m_treeshow.setDemoShowState(false);
 	m_treeshow.setBranchState(true);
 	m_treeshow.setNodeEdgeShowState(true);
 	m_treeshow.setDataShowState(true);
 	m_treeshow.setNodeFaceShowState(true);
+	m_treeshow.setAssistantObjectShowState(false);
+	m_treeshow.setResultState(false);
 	lbuttonflag = LBUTTONDRAG;
 	Invalidate(TRUE);
 }
@@ -1494,4 +1592,8 @@ void CRStarTreeView::OnShowEverything()
 void CRStarTreeView::OnEndDemo()
 {
 	// TODO: Add your command handler code here
+	while(flagdemothread)
+	{
+		flagdemoshow = false;
+	}
 }
