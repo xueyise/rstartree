@@ -492,7 +492,7 @@ void CRStarTreeView::OnLButtonUp(UINT nFlags, CPoint point)
 	case LBUTTONPOINTLOCATION:
 		break;
 	case LBUTTONADDDATA:
-		if(beginpoint == endpoint)
+		if(pow(beginpoint.x - endpoint.x,2.0)+pow(beginpoint.y-endpoint.y,2.0)<20)
 		{
 			rstpoint = new RSTPoint2D;
 			rstpoint->x = m_aorectangle.left;
