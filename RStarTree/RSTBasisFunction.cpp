@@ -123,6 +123,11 @@ RSTNode::RSTNode(int dim, int M)
 	type = NonLeafNode;
 	parent = NULL;
 	range.resize(dim);
+	for(size_t i=0;i<range.size();++i)
+	{
+		range[i].max = 0;
+		range[i].min = 0;
+	}
 	childSet = new RSTNode*[M + 1];
 }
 
@@ -131,6 +136,11 @@ RSTNode::RSTNode(int type_, int dim, int M) : childNum(0)
 	type = type_;
 	parent = NULL;
 	range.resize(dim);
+	for(size_t i=0;i<range.size();++i)
+	{
+		range[i].max = 0;
+		range[i].min = 0;
+	}
 	childSet = new RSTNode*[M + 1];
 }
 
