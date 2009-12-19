@@ -1174,6 +1174,7 @@ void CRStarTreeView::OnRangeSearch()
 	}
 	m_treeshow.setDemoShowState(false);
 	lbuttonflag = LBUTTONRANGESEARCH;
+	this->GetDocument()->result.clear();
 	m_treeshow.ResetPosition();
 	m_treeshow.setProjectionState(false);
 	m_treeshow.setAssistantObject((AssistantObject *)(&m_aorectangle));
@@ -1213,6 +1214,7 @@ void CRStarTreeView::OnRangeLocation()
 	}
 	m_treeshow.setDemoShowState(false);
 	lbuttonflag = LBUTTONRANGELOCATION;
+	this->GetDocument()->result.clear();
 	m_treeshow.ResetPosition();
 	m_treeshow.setProjectionState(false);
 	m_treeshow.setAssistantObject((AssistantObject *)(&m_aorectangle));
