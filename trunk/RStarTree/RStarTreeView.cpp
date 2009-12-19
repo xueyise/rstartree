@@ -1093,6 +1093,7 @@ void CRStarTreeView::OnFileOpen()
 	m_treeshow.setAssistantObjectShowState(false);
 	m_treeshow.setResult(false);
 	lbuttonflag = LBUTTONDRAG;
+	m_treeshow.ResetPosition();
 	Invalidate(TRUE);
 }
 
