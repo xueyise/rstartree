@@ -2,7 +2,6 @@ testdata2d
 rectanglenumber:
 35
 databegin
-pointdata:
 rectangledata:
 601.326 237.96 883.65 402.504
 625.803 260.094 857.019 382.524
