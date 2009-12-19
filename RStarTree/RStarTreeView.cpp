@@ -982,6 +982,7 @@ BOOL CRStarTreeView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 void CRStarTreeView::OnFileOpen()
 {
 	// TODO: Add your command handler code here
+	flagdemoshow = false;
 	while(flagdemothread)
 	{
 		flagdemoshow = false;
@@ -1098,6 +1099,7 @@ void CRStarTreeView::OnFileOpen()
 void CRStarTreeView::OnResetPosition()
 {
 	// TODO: Add your command handler code here
+	flagdemoshow = false;
 	while(flagdemothread)
 	{
 		flagdemoshow = false;
@@ -1113,6 +1115,7 @@ void CRStarTreeView::OnDisplayOption()
 	//set current options 
 	DisplayOptionDialog dlg;
 
+	flagdemoshow = false;
 	while(flagdemothread)
 	{
 		flagdemoshow = false;
@@ -1163,6 +1166,7 @@ void CRStarTreeView::OnRangeSearch()
 		MessageBox(_T("当前R树为空，不能查询，请输入数据再试。"),_T("错误操作提示"),MB_OK);
 		return;
 	}
+	flagdemoshow = false;
 	while(flagdemothread)
 	{
 		flagdemoshow = false;
@@ -1185,6 +1189,7 @@ void CRStarTreeView::OnRangeSearch()
 void CRStarTreeView::OnMouseDrag()
 {
 	// TODO: Add your command handler code here
+	flagdemoshow = false;
 	while(flagdemothread)
 	{
 		flagdemoshow = false;
@@ -1200,6 +1205,7 @@ void CRStarTreeView::OnRangeLocation()
 		MessageBox(_T("当前R树为空，不能定位，请输入数据再试。"),_T("错误操作提示"),MB_OK);
 		return;
 	}
+	flagdemoshow = false;
 	while(flagdemothread)
 	{
 		flagdemoshow = false;
@@ -1444,6 +1450,7 @@ void CRStarTreeView::OnDemoShow()
 void CRStarTreeView::OnAddData()
 {
 	// TODO: Add your command handler code here
+	flagdemoshow = false;
 	while(flagdemothread)
 	{
 		flagdemoshow = false;
@@ -1471,6 +1478,7 @@ void CRStarTreeView::OnFileSave()
 		MessageBox(_T("当前R树为空，不能保存"),_T("错误操作提示"),MB_OK);
 		return;
 	}
+	flagdemoshow = false;
 	while(flagdemothread)
 	{
 		flagdemoshow = false;
@@ -1504,10 +1512,13 @@ void CRStarTreeView::OnFileSave()
 		outfile<<"pointnumber:"<<std::endl<<pointset.size()<<std::endl;
 	if(!(rectangleset.empty()))
 		outfile<<"rectanglenumber:"<<std::endl<<rectangleset.size()<<std::endl;
-	outfile<<"databegin"<<std::endl<<"pointdata:"<<std::endl;
+	outfile<<"databegin"<<std::endl;
+	if(!(pointset.empty()))
+		outfile<<"pointdata:"<<std::endl;
 	for(size_t i=0;i<pointset.size();++i)
 		pointset[i]->OutPutData(outfile);
-	outfile<<"rectangledata:"<<std::endl;
+	if(!(rectangleset.empty()))
+		outfile<<"rectangledata:"<<std::endl;
 	for(size_t i=0;i<rectangleset.size();++i)
 		rectangleset[i]->OutPutData(outfile);
 	outfile<<"dataend"<<std::endl;
@@ -1522,6 +1533,7 @@ void CRStarTreeView::OnDelete()
 		MessageBox(_T("当前R树为空，能删除"),_T("错误操作提示"),MB_OK);
 		return;
 	}
+	flagdemoshow = false;
 	while(flagdemothread)
 	{
 		flagdemoshow = false;
@@ -1574,6 +1586,7 @@ void CRStarTreeView::OnPrintTree()
 void CRStarTreeView::OnShowEverything()
 {
 	// TODO: Add your command handler code here
+	flagdemoshow = false;
 	while(flagdemothread)
 	{
 		flagdemoshow = false;
@@ -1592,6 +1605,7 @@ void CRStarTreeView::OnShowEverything()
 void CRStarTreeView::OnEndDemo()
 {
 	// TODO: Add your command handler code here
+	flagdemoshow = false;
 	while(flagdemothread)
 	{
 		flagdemoshow = false;
