@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 中文(中华人民共和国) resources
+// Chinese (P.R.C.) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
 #ifdef _WIN32
@@ -118,14 +118,6 @@ BEGIN
     POPUP "&Help"
     BEGIN
         MENUITEM "&About RStarTree...",         ID_APP_ABOUT
-    END
-    POPUP "测试用"
-    BEGIN
-        MENUITEM "测试建树",                        ID_TEST_BUILD_TREE
-        MENUITEM "矩形框区域查询",                     ID_TESTRANGESEARCH
-        MENUITEM "点点操作",                        ID_ADDPOINT
-        MENUITEM "通过文件建树",                      ID_TEST_BUILD_TREE_FROM_FILE
-        MENUITEM "打印数据",                        ID_PRINT_TREE
     END
     POPUP "视图控制"
     BEGIN
@@ -423,7 +415,7 @@ BEGIN
     ID_DELETE               "删除选定数据,按鼠标左键拖动，选择要删除数据\n删除选定数据,按鼠标左键拖动，选择要删除数据"
 END
 
-#endif    // 中文(中华人民共和国) resources
+#endif    // Chinese (P.R.C.) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
