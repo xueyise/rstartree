@@ -297,11 +297,16 @@ bool Tree2DShow3D::updateTreeData()
 		return false;
 	double range[2];
 	int canvas[2] = {0,0};
-	range[0] = m_tree->Root->range[0].max - m_tree->Root->range[0].min;
-	range[1] = m_tree->Root->range[1].max - m_tree->Root->range[1].min;
-	if(range[0]<range[1])
-		range[0] = range[1];
-	rangeperlayer = range[0]/m_tree->height;
+	if(m_tree->Root !=NULL)
+	{
+		range[0] = m_tree->Root->range[0].max - m_tree->Root->range[0].min;
+		range[1] = m_tree->Root->range[1].max - m_tree->Root->range[1].min;
+		if(range[0]<range[1])
+			range[0] = range[1];
+		rangeperlayer = range[0]/m_tree->height;
+	}
+	else
+		range[0] = 0.0;
 	if(range[0]<0.0000000001)
 	{
 		m_gls3d.GetCanvasRange(canvas[0],canvas[1]);
